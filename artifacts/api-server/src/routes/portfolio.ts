@@ -36,8 +36,15 @@ router.post("/utilities",async(req,res)=>{
   const u=await db.transaction(tx=>createUtilityRecord(tx,p,input));
   res.json(api.CreateUtilityResponse.parse((await utilityRows(p)).find(r=>r.id===u.id)));
 });
-router.get("/utilities/:id",async(req,res)=>{
-  const p=await actor(req);const id=uuid(req.params.id);await accessibleUtility(p,id);
+router.get(["/utilities/:id","/plans/:planId"],async(req,res)=>{
+  const p=await actor(req);
+  let id:string;
+  if(req.params.planId){
+    const [plan]=await db.select().from(plans).where(eq(plans.id,uuid(req.params.planId)));
+    if(!plan)throw new HttpError(404,"Plan not found.");
+    id=plan.utilityId;
+  }else id=uuid(req.params.id);
+  await accessibleUtility(p,id);
   const utility=(await utilityRows(p)).find(r=>r.id===id)!;
   const a=await db.select({row:planActivities,def:activities}).from(planActivities).innerJoin(activities,eq(activities.code,planActivities.activityCode)).where(eq(planActivities.planId,utility.planId)).orderBy(activities.code);
   const team=await db.select({id:members.id,fullName:people.fullName,email:people.email,memberRole:members.memberRole}).from(members).innerJoin(people,eq(people.id,members.userId)).where(eq(members.utilityId,id));

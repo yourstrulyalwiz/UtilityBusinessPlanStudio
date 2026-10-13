@@ -81,6 +81,148 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   return result;
 };
 
+export const getGetPlanUrl = (id: string,) => {
+
+
+
+
+  return `/api/plans/${id}`
+}
+
+export const getPlan = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<UtilityDetail> => {
+
+  return customFetch<UtilityDetail>(getGetPlanUrl(id),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetPlanQueryKey = (id: string,) => {
+    return [
+    `/api/plans/${id}`
+    ] as const;
+    }
+
+
+export const getGetPlanQueryOptions = <TData = Awaited<ReturnType<typeof getPlan>>, TError = ErrorType<unknown>>(id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getPlan>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetPlanQueryKey(id);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPlan>>> = ({ signal }) => getPlan(id, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: id !== null && id !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getPlan>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetPlanQueryResult = NonNullable<Awaited<ReturnType<typeof getPlan>>>
+export type GetPlanQueryError = ErrorType<unknown>
+
+
+
+export function useGetPlan<TData = Awaited<ReturnType<typeof getPlan>>, TError = ErrorType<unknown>>(
+ id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getPlan>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetPlanQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getDownloadPlanDeckUrl = (id: string,) => {
+
+
+
+
+  return `/api/plans/${id}/deck`
+}
+
+export const downloadPlanDeck = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<Blob> => {
+
+  return customFetch<Blob>(getDownloadPlanDeckUrl(id),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getDownloadPlanDeckQueryKey = (id: string,) => {
+    return [
+    `/api/plans/${id}/deck`
+    ] as const;
+    }
+
+
+export const getDownloadPlanDeckQueryOptions = <TData = Awaited<ReturnType<typeof downloadPlanDeck>>, TError = ErrorType<unknown>>(id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof downloadPlanDeck>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getDownloadPlanDeckQueryKey(id);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof downloadPlanDeck>>> = ({ signal }) => downloadPlanDeck(id, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: id !== null && id !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof downloadPlanDeck>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type DownloadPlanDeckQueryResult = NonNullable<Awaited<ReturnType<typeof downloadPlanDeck>>>
+export type DownloadPlanDeckQueryError = ErrorType<unknown>
+
+
+
+export function useDownloadPlanDeck<TData = Awaited<ReturnType<typeof downloadPlanDeck>>, TError = ErrorType<unknown>>(
+ id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof downloadPlanDeck>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getDownloadPlanDeckQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
 export const getGetTestModeUrl = () => {
 
 

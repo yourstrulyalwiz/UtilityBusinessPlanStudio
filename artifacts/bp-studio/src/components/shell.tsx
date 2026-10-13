@@ -70,7 +70,8 @@ export function Shell({ children }: { children: ReactNode }) {
     { href: "/users", label: "People & roles", icon: Users, show: canPeople },
     { href: "/audit", label: "Audit history", icon: History, show: canPeople },
   ].filter((n) => n.show);
-  const active = (h: string) => (h === "/" ? loc === "/" || loc.startsWith("/utilities") : loc.startsWith(h) || (h === "/admin" && loc.startsWith("/utilities")));
+  const inWorkspace = loc.startsWith("/utilities/") || loc.startsWith("/plans/");
+  const active = (h: string) => (h === "/" ? loc === "/" || inWorkspace : loc.startsWith(h) || (h === "/admin" && inWorkspace));
 
   const sidebar = (
     <aside className="flex h-full w-64 flex-col bg-[#002244] text-white">

@@ -44,6 +44,7 @@ function Router() {
             <Route path="/" component={Home} />
             <Route path="/admin" component={AdminRoute} />
             <Route path="/utilities/:id" component={UtilityPage} />
+            <Route path="/plans/:planId" component={UtilityPage} />
             <Route path="/requests">{() => <Restricted><Requests /></Restricted>}</Route>
             <Route path="/users">{() => <Restricted><UsersPage /></Restricted>}</Route>
             <Route path="/audit">{() => <Restricted><AuditPage /></Restricted>}</Route>

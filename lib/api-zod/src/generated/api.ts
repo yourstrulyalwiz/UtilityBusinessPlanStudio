@@ -7,6 +7,67 @@
 import * as zod from 'zod';
 
 
+export const GetPlanParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+export const GetPlanResponse = zod.object({
+  "utility": zod.object({
+  "id": zod.string(),
+  "name": zod.string(),
+  "shortName": zod.string(),
+  "countryIso3": zod.string(),
+  "countryName": zod.string(),
+  "region": zod.string(),
+  "serviceArea": zod.string(),
+  "ttlUserId": zod.string(),
+  "ttlName": zod.string(),
+  "planId": zod.string(),
+  "planYear": zod.number(),
+  "currency": zod.string(),
+  "status": zod.string(),
+  "planStatus": zod.string(),
+  "progress": zod.number(),
+  "currentPhase": zod.string(),
+  "createdAt": zod.string(),
+  "uofCompletionDate": zod.string().nullable(),
+  "wbProjectId": zod.string(),
+  "logoPath": zod.string().nullable()
+}),
+  "activities": zod.array(zod.object({
+  "code": zod.string(),
+  "phaseCode": zod.string(),
+  "name": zod.string(),
+  "days": zod.number(),
+  "milestone": zod.string(),
+  "status": zod.string(),
+  "ownerName": zod.string().nullable(),
+  "dueDate": zod.string().nullable()
+})),
+  "members": zod.array(zod.object({
+  "id": zod.string(),
+  "fullName": zod.string(),
+  "email": zod.string(),
+  "memberRole": zod.string()
+})),
+  "audit": zod.array(zod.object({
+  "id": zod.string(),
+  "actor": zod.string(),
+  "action": zod.string(),
+  "entity": zod.string(),
+  "entityId": zod.string(),
+  "createdAt": zod.string()
+}))
+})
+
+
+export const DownloadPlanDeckParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+export const DownloadPlanDeckResponse = zod.unknown()
+
+
 export const GetTestModeResponse = zod.object({
   "openAccess": zod.boolean(),
   "role": zod.string().nullable()

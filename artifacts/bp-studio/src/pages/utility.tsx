@@ -3,6 +3,7 @@ import { Link, useParams } from "wouter";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   useGetUtility, getGetUtilityQueryKey, useUpdateUtility, useAddMember, useRemoveMember, useListUsers, getListUsersQueryKey,
+  useGetPlan, getGetPlanQueryKey,
   getListUtilitiesQueryKey, getGetSummaryQueryKey, getListAuditQueryKey, type MemberInputMemberRole, type UtilityUpdate,
 } from "@workspace/api-client-react";
 import { ArrowLeft, FileText, Lock, Pencil, Trash2, UserPlus, Users } from "lucide-react";
@@ -14,11 +15,14 @@ import { useMe, errMsg, phaseColor, logoUrl, initials, humanize, fmtDate, fmtDat
 import { useToast } from "@/hooks/use-toast";
 
 export default function UtilityPage() {
-  const { id = "" } = useParams<{ id: string }>();
+  const { id: routeId = "", planId = "" } = useParams<{ id?: string; planId?: string }>();
   const me = useMe();
   const qc = useQueryClient();
   const { toast } = useToast();
-  const q = useGetUtility(id, { query: { enabled: !!id, queryKey: getGetUtilityQueryKey(id) } });
+  const planQuery = useGetPlan(planId, { query: { enabled: !!planId, queryKey: getGetPlanQueryKey(planId) } });
+  const utilityQuery = useGetUtility(routeId, { query: { enabled: !!routeId, queryKey: getGetUtilityQueryKey(routeId) } });
+  const q = planId ? planQuery : utilityQuery;
+  const id = routeId || q.data?.utility.id || "";
   const canManage = me.role === "admin" || me.role === "ttl";
   const users = useListUsers({ query: { enabled: canManage, queryKey: getListUsersQueryKey() } });
   const [editing, setEditing] = useState(false);
@@ -28,6 +32,7 @@ export default function UtilityPage() {
 
   const refresh = () => {
     qc.invalidateQueries({ queryKey: getGetUtilityQueryKey(id) });
+    qc.invalidateQueries({ queryKey: getGetPlanQueryKey(planId || q.data?.utility.planId || "") });
     qc.invalidateQueries({ queryKey: getListUtilitiesQueryKey() });
     qc.invalidateQueries({ queryKey: getGetSummaryQueryKey() });
     qc.invalidateQueries({ queryKey: getListAuditQueryKey() });
@@ -72,8 +77,8 @@ export default function UtilityPage() {
               <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white"><div className="h-full rounded-full bg-[#009FDA]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div>
             </div>
             <Tooltip>
-              <TooltipTrigger asChild><span tabIndex={0}><Btn variant="outline" disabled className="w-full" data-testid="button-deck"><FileText className="h-4 w-4" /> Generate deck</Btn></span></TooltipTrigger>
-              <TooltipContent>Deck generation becomes available in a later increment.</TooltipContent>
+              <TooltipTrigger asChild><a href={`/api/plans/${u.planId}/deck`} className="flex h-10 w-full items-center justify-center gap-2 rounded-lg border bg-white text-sm font-medium text-[#002244] hover:bg-muted" data-testid="button-deck"><FileText className="h-4 w-4" /> Download draft deck</a></TooltipTrigger>
+              <TooltipContent>Step 0 preview: registry information only. Full business-plan output arrives in Step 4.</TooltipContent>
             </Tooltip>
             {me.role === "admin" && <Btn variant="navy" onClick={() => { setForm({ name: u.name, shortName: u.shortName, serviceArea: u.serviceArea, ttlUserId: u.ttlUserId, wbProjectId: u.wbProjectId, status: u.status === "archived" ? "archived" : "active", logoPath: u.logoPath }); setEditing(true); }} data-testid="button-edit-utility"><Pencil className="h-4 w-4" /> Edit details</Btn>}
           </div>

@@ -10,6 +10,20 @@
     }
   ],
   "paths": {
+    "/plans/{id}": {
+      "get": {
+        "operationId": "getPlan",
+        "parameters": [{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
+        "responses": {"200":{"description":"Plan workspace","content":{"application/json":{"schema":{"$ref":"#/components/schemas/UtilityDetail"}}}}}
+      }
+    },
+    "/plans/{id}/deck": {
+      "get": {
+        "operationId": "downloadPlanDeck",
+        "parameters": [{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
+        "responses": {"200":{"description":"Step 0 draft PowerPoint; not the final business plan","content":{"application/vnd.openxmlformats-officedocument.presentationml.presentation":{"schema":{"type":"string","format":"binary"}}}}}
+      }
+    },
     "/test-mode": {
       "get": {
         "operationId": "getTestMode",

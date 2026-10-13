@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   useGetSummary, getGetSummaryQueryKey, useListUtilities, getListUtilitiesQueryKey, useGetMetadata, useListUsers, getListUsersQueryKey,
   useListViews, getListViewsQueryKey, useSaveView, useDeleteView, useCreateUtility, type ListUtilitiesParams, type Bucket,
 } from "@workspace/api-client-react";
 import { ArrowDown, ArrowUp, Bookmark, ChevronLeft, ChevronRight, Download, Droplets, Plus, Search, Trash2, X } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Card, PageHeader, Empty, ErrorState, SkeletonRows, Pill, statusTone, inputCls, Btn } from "@/components/kit";
 import { UtilityForm, PLAN_YEARS } from "@/components/utility-form";
@@ -60,6 +60,7 @@ function Bars({ title, data, colorFor, onPick, empty }: { title: string; data: B
 }
 
 export default function Portfolio({ admin }: { admin: boolean }) {
+  const [, navigate] = useLocation();
   const me = useMe();
   const qc = useQueryClient();
   const { toast } = useToast();
@@ -119,7 +120,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
     <div>
       <PageHeader eyebrow={admin ? "Administration" : "Workspace"} title={admin ? "Portfolio" : "Utilities"}
         description={admin ? "Every registered utility and the state of its business plan." : "Utilities you lead or are a member of."}
-        actions={admin && <Btn onClick={() => setCreating(true)} data-testid="button-new-utility"><Plus className="h-4 w-4" /> Register utility</Btn>} />
+        actions={admin && <Btn onClick={() => setCreating(true)} data-testid="button-new-utility"><Plus className="h-4 w-4" /> New utility</Btn>} />
 
       {admin && (
         <section className="mb-8">
@@ -228,9 +229,9 @@ export default function Portfolio({ admin }: { admin: boolean }) {
               </thead>
               <tbody className="divide-y">
                 {items.map((u) => (
-                  <tr key={u.id} className="group hover:bg-[#009FDA]/[.035]" data-testid={`row-utility-${u.id}`}>
+                  <tr key={u.id} className="group cursor-pointer hover:bg-[#009FDA]/[.035] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#009FDA]" tabIndex={0} aria-label={`Open plan for ${u.name}`} onClick={() => navigate(`/plans/${u.planId}`)} onKeyDown={e=>{if(e.target===e.currentTarget&&(e.key==="Enter"||e.key===" ")){e.preventDefault();navigate(`/plans/${u.planId}`);}}} data-testid={`row-utility-${u.id}`}>
                     <td className="px-4 py-3">
-                      <Link href={`/utilities/${u.id}`} className="flex items-center gap-3">
+                      <Link href={`/plans/${u.planId}`} onClick={e=>e.stopPropagation()} className="flex items-center gap-3">
                         <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg border bg-white text-[10px] font-semibold text-[#002244]">
                           {u.logoPath ? <img src={logoUrl(u.logoPath)!} alt="" className="h-full w-full object-contain p-0.5" /> : initials(u.shortName || u.name)}
                         </div>
@@ -262,12 +263,12 @@ export default function Portfolio({ admin }: { admin: boolean }) {
       </Card>
       {!admin && <div className="mt-3 text-[11px] text-muted-foreground">Source: Utility registry (user-entered data)</div>}
 
-      <Dialog open={creating} onOpenChange={setCreating}>
-        <DialogContent className="max-h-[90dvh] max-w-2xl overflow-auto rounded-xl">
-          <DialogHeader><DialogTitle className="text-[#002244]">Register a utility</DialogTitle><DialogDescription>Creates the utility and its business plan with the 20 standard activities.</DialogDescription></DialogHeader>
+      <Sheet open={creating} onOpenChange={setCreating}>
+        <SheetContent side="right" className="w-full overflow-y-auto sm:max-w-2xl">
+          <SheetHeader className="mb-6"><SheetTitle className="text-[#002244]">Create utility</SheetTitle><SheetDescription>Creates the utility and its business plan with the 20 standard activities.</SheetDescription></SheetHeader>
           {creating && <UtilityForm submitLabel="Register utility" pending={create.isPending} onCancel={() => setCreating(false)} onSubmit={(data) => create.mutate({ data })} />}
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }

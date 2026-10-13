@@ -40,7 +40,7 @@ A secure registry for water utility Business & Investment Plans following the Ut
 
 - Initial foundation: role-scoped registry, create/edit/archive utilities, user provisioning, TTL requests and decisions, team membership, saved views, CSV export, notifications, audit history, protected logo uploads.
 - Creating a utility initializes its annual plan and all 20 activities (108 working days).
-- Workflow forms, activity approvals, financial model, Excel compatibility, and PowerPoint generation belong to later increments and are not implemented.
+- Workflow forms, activity approvals, financial model, Excel compatibility, and full business-plan PowerPoint generation belong to later increments. Step 0 provides only a clearly labelled registry-overview draft PPTX.
 - Email delivery is not configured; invitation UI provides an app link and clearly says no email was sent. Decisions notify in-app.
 - Country reference currently includes 217 economies from World Bank Data360 WDI metadata. That response does not supply region mappings or national currencies: region is explicitly Unclassified and USD is the business-plan default, not an assertion about national currency. Complete ISO coverage and authoritative region mappings remain outstanding.
 
@@ -50,7 +50,7 @@ Use the supplied technical specification and its institutional brand. The approv
 
 ## Gotchas
 
-- The screenshot browser is signed out; the authenticated dashboard has not been visually verified.
+- Open-mode creation, plan navigation, unchanged detail saving, and draft PPTX download have been verified in a fresh browser. Normal-mode protection has API regression coverage; real signed-in role journeys still need browser verification.
 - Run `pnpm --filter @workspace/api-server test:access` to verify open, closed, unset, invalid flag values and forged role-cookie handling.
 - Reference-data initialization inserts definitions only, never startup DDL.
 
