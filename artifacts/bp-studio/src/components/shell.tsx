@@ -4,7 +4,7 @@ import { useAuth } from "@workspace/replit-auth-web";
 import { RoleSwitcher } from "@/lib/test-mode";
 import { useQueryClient } from "@tanstack/react-query";
 import { useListNotifications, getListNotificationsQueryKey, useReadNotification } from "@workspace/api-client-react";
-import { Bell, ClipboardList, History, LayoutGrid, LogOut, Menu, Users, X } from "lucide-react";
+import { Bell, CircleHelp, ClipboardList, History, LayoutGrid, LogOut, Menu, Users, X } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Glyph } from "@/components/kit";
 import { useMe, ROLE_LABEL, initials, fmtDateTime } from "@/lib/app";
@@ -69,6 +69,7 @@ export function Shell({ children }: { children: ReactNode }) {
     { href: "/requests", label: "Requests", icon: ClipboardList, show: isAdmin || me.role === "ttl" },
     { href: "/users", label: "People & roles", icon: Users, show: canPeople },
     { href: "/audit", label: "Audit history", icon: History, show: canPeople },
+    { href: "/help", label: "Help center", icon: CircleHelp, show: true },
   ].filter((n) => n.show);
   const inWorkspace = loc.startsWith("/utilities/") || loc.startsWith("/plans/");
   const active = (h: string) => (h === "/" ? loc === "/" || inWorkspace : loc.startsWith(h) || (h === "/admin" && inWorkspace));
@@ -121,7 +122,7 @@ export function Shell({ children }: { children: ReactNode }) {
         <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background/90 px-4 backdrop-blur md:px-8">
           <button className="rounded-lg p-2 md:hidden" onClick={() => setOpen(true)} aria-label="Open menu" data-testid="button-menu"><Menu className="h-5 w-5" /></button>
           <div className="hidden text-xs text-muted-foreground md:block">{me.organization || "World Bank"} · signed in as {me.email}</div>
-          <div className="flex items-center gap-3"><RoleSwitcher /><Notifications /></div>
+          <div className="flex items-center gap-3"><RoleSwitcher /><Link href="/help" className="rounded-lg p-2 text-[#002244]/70 hover:bg-muted hover:text-[#002244]" aria-label="Help center" data-testid="button-topbar-help"><CircleHelp className="h-5 w-5" /></Link><Notifications /></div>
         </header>
         <main className="mx-auto w-full max-w-[1280px] flex-1 px-4 py-8 md:px-8">{children}</main>
       </div>

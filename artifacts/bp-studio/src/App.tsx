@@ -11,6 +11,8 @@ import { Card, Empty } from '@/components/kit';
 import { useMe } from '@/lib/app';
 import Portfolio from '@/pages/portfolio';
 import UtilityPage from '@/pages/utility';
+import ActivityPage from '@/pages/activity';
+import { HelpCenter, HelpTopic } from '@/pages/help';
 import Requests from '@/pages/requests';
 import UsersPage from '@/pages/users';
 import AuditPage from '@/pages/audit';
@@ -44,7 +46,10 @@ function Router() {
             <Route path="/" component={Home} />
             <Route path="/admin" component={AdminRoute} />
             <Route path="/utilities/:id" component={UtilityPage} />
+            <Route path="/plans/:planId/activities/:code" component={ActivityPage} />
             <Route path="/plans/:planId" component={UtilityPage} />
+            <Route path="/help/:topicId" component={HelpTopic} />
+            <Route path="/help" component={HelpCenter} />
             <Route path="/requests">{() => <Restricted><Requests /></Restricted>}</Route>
             <Route path="/users">{() => <Restricted><UsersPage /></Restricted>}</Route>
             <Route path="/audit">{() => <Restricted><AuditPage /></Restricted>}</Route>

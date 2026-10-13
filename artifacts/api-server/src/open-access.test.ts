@@ -26,6 +26,12 @@ test("open access is opt-in; closed mode ignores preview cookies and restores AP
       for(const path of ["utilities","admin/summary","users","audit","utility-requests","notifications","views"]){
         assert.equal((await fetch(`${base}/${path}`,{headers:{Cookie:"studio_test_role=viewer"}})).status,enabled?200:401,path);
       }
+      const absentPlan="00000000-0000-4000-8000-000000000000";
+      assert.equal((await fetch(`${base}/plans/${absentPlan}/workflow`)).status,enabled?404:401);
+      assert.equal((await fetch(`${base}/plans/${absentPlan}/activities/A1.1`,{
+        method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({action:"save",updatedAt:new Date().toISOString(),data:{}}),
+      })).status,enabled?404:401);
       const switchRole=await fetch(`${base}/test-mode/role`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({role:"ttl"})});
       assert.equal(switchRole.status,enabled?200:404);
       const auth=await fetch(`${base}/auth/user`).then(r=>r.json()) as {user:unknown};

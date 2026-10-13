@@ -7,6 +7,87 @@
 import * as zod from 'zod';
 
 
+export const GetWorkflowParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+export const GetWorkflowResponse = zod.object({
+  "planId": zod.string(),
+  "utilityName": zod.string(),
+  "progress": zod.number(),
+  "status": zod.string(),
+  "source": zod.string(),
+  "activities": zod.array(zod.object({
+  "code": zod.string(),
+  "name": zod.string(),
+  "phaseCode": zod.string(),
+  "days": zod.number(),
+  "status": zod.string(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "example": zod.record(zod.string(), zod.unknown()),
+  "required": zod.array(zod.string()),
+  "locked": zod.boolean(),
+  "lockReason": zod.string(),
+  "updatedAt": zod.string(),
+  "instructions": zod.string(),
+  "needs": zod.array(zod.string()),
+  "feedback": zod.string().optional()
+})),
+  "nextCode": zod.string(),
+  "canEdit": zod.boolean(),
+  "canReview": zod.boolean()
+})
+
+
+export const UpdateActivityParams = zod.object({
+  "id": zod.coerce.string(),
+  "code": zod.coerce.string()
+})
+
+export const UpdateActivityBody = zod.object({
+  "action": zod.enum(['save', 'submit', 'approve', 'return', 'reopen']),
+  "updatedAt": zod.string(),
+  "data": zod.record(zod.string(), zod.unknown()).optional(),
+  "comment": zod.string().optional()
+})
+
+export const UpdateActivityResponse = zod.object({
+  "planId": zod.string(),
+  "utilityName": zod.string(),
+  "progress": zod.number(),
+  "status": zod.string(),
+  "source": zod.string(),
+  "activities": zod.array(zod.object({
+  "code": zod.string(),
+  "name": zod.string(),
+  "phaseCode": zod.string(),
+  "days": zod.number(),
+  "status": zod.string(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "example": zod.record(zod.string(), zod.unknown()),
+  "required": zod.array(zod.string()),
+  "locked": zod.boolean(),
+  "lockReason": zod.string(),
+  "updatedAt": zod.string(),
+  "instructions": zod.string(),
+  "needs": zod.array(zod.string()),
+  "feedback": zod.string().optional()
+})),
+  "nextCode": zod.string(),
+  "canEdit": zod.boolean(),
+  "canReview": zod.boolean()
+})
+
+
+export const LoadDemoPlanBody = zod.object({
+  "mode": zod.enum(['complete', 'midway'])
+})
+
+export const LoadDemoPlanResponse = zod.object({
+  "planId": zod.string()
+})
+
+
 export const GetPlanParams = zod.object({
   "id": zod.coerce.string()
 })

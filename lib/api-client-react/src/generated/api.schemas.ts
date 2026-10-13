@@ -4,6 +4,75 @@
  * Api
  * OpenAPI spec version: 1.0.0
  */
+export type DemoInputMode = typeof DemoInputMode[keyof typeof DemoInputMode];
+
+
+export const DemoInputMode = {
+  complete: 'complete',
+  midway: 'midway',
+} as const;
+
+export interface DemoInput {
+  mode: DemoInputMode;
+}
+
+export interface DemoResult {
+  planId: string;
+}
+
+export type ActivityActionAction = typeof ActivityActionAction[keyof typeof ActivityActionAction];
+
+
+export const ActivityActionAction = {
+  save: 'save',
+  submit: 'submit',
+  approve: 'approve',
+  return: 'return',
+  reopen: 'reopen',
+} as const;
+
+export type ActivityActionData = {[key: string]: unknown};
+
+export interface ActivityAction {
+  action: ActivityActionAction;
+  updatedAt: string;
+  data?: ActivityActionData;
+  comment?: string;
+}
+
+export type WorkflowActivityData = {[key: string]: unknown};
+
+export type WorkflowActivityExample = {[key: string]: unknown};
+
+export interface WorkflowActivity {
+  code: string;
+  name: string;
+  phaseCode: string;
+  days: number;
+  status: string;
+  data: WorkflowActivityData;
+  example: WorkflowActivityExample;
+  required: string[];
+  locked: boolean;
+  lockReason: string;
+  updatedAt: string;
+  instructions: string;
+  needs: string[];
+  feedback?: string;
+}
+
+export interface Workflow {
+  planId: string;
+  utilityName: string;
+  progress: number;
+  status: string;
+  source: string;
+  activities: WorkflowActivity[];
+  nextCode: string;
+  canEdit: boolean;
+  canReview: boolean;
+}
+
 export type TestRoleInputRole = typeof TestRoleInputRole[keyof typeof TestRoleInputRole];
 
 

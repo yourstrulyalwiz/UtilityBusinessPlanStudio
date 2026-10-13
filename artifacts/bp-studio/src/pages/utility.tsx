@@ -3,10 +3,10 @@ import { Link, useParams } from "wouter";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   useGetUtility, getGetUtilityQueryKey, useUpdateUtility, useAddMember, useRemoveMember, useListUsers, getListUsersQueryKey,
-  useGetPlan, getGetPlanQueryKey,
+  useGetPlan, getGetPlanQueryKey, useGetWorkflow, getGetWorkflowQueryKey,
   getListUtilitiesQueryKey, getGetSummaryQueryKey, getListAuditQueryKey, type MemberInputMemberRole, type UtilityUpdate,
 } from "@workspace/api-client-react";
-import { ArrowLeft, FileText, Lock, Pencil, Trash2, UserPlus, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, FileText, Lock, Pencil, Trash2, UserPlus, Users } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, Empty, ErrorState, Pill, statusTone, Btn, Field, inputCls, Wave } from "@/components/kit";
@@ -25,6 +25,8 @@ export default function UtilityPage() {
   const id = routeId || q.data?.utility.id || "";
   const canManage = me.role === "admin" || me.role === "ttl";
   const users = useListUsers({ query: { enabled: canManage, queryKey: getListUsersQueryKey() } });
+  const wfPlanId = planId || q.data?.utility.planId || "";
+  const wf = useGetWorkflow(wfPlanId, { query: { enabled: !!wfPlanId, queryKey: getGetWorkflowQueryKey(wfPlanId) } });
   const [editing, setEditing] = useState(false);
   const [adding, setAdding] = useState(false);
   const [newMember, setNewMember] = useState<{ userId: string; memberRole: MemberInputMemberRole }>({ userId: "", memberRole: "team" });
@@ -87,9 +89,27 @@ export default function UtilityPage() {
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
         <div>
+          {(() => {
+            const w = wf.data; const nxt = w?.activities.find((a) => a.code === w.nextCode);
+            if (wf.isLoading) return <div className="mb-6 h-28 animate-pulse rounded-xl border bg-card" />;
+            if (!w) return wf.isError ? <Card className="mb-6"><ErrorState message={errMsg(wf.error, "Workflow unavailable.")} onRetry={() => wf.refetch()} /></Card> : null;
+            const done = !nxt;
+            return (
+              <Card className="rise mb-6 overflow-hidden" data-testid="card-continue">
+                <div className="flex flex-col gap-4 bg-[#002244] p-5 text-white sm:flex-row sm:items-center">
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7FD3F2]">{done ? "All steps complete" : `Next up · step ${w.activities.indexOf(nxt) + 1} of ${w.activities.length}`}</div>
+                    <div className="mt-1 text-lg font-semibold" data-testid="text-next-activity">{done ? "Every activity is approved." : <><span className="mr-2 font-mono text-sm text-white/60">{nxt.code}</span>{nxt.name}</>}</div>
+                    {!done && <div className="mt-1 text-xs text-white/70">{nxt.phaseCode} · {nxt.days} days · {humanize(nxt.status)}{!w.canEdit ? " · read-only for your role" : ""}</div>}
+                  </div>
+                  {done ? <CheckCircle2 className="h-8 w-8 text-[#7FD3F2]" /> : <Link href={`/plans/${w.planId}/activities/${nxt.code}`} className="inline-flex h-10 items-center gap-2 rounded-lg bg-[#009FDA] px-4 text-sm font-medium text-white hover:bg-[#0089bd]" data-testid="button-continue">{nxt.status === "not_started" ? "Start step" : "Continue"} <ArrowRight className="h-4 w-4" /></Link>}
+                </div>
+              </Card>
+            );
+          })()}
           <div className="mb-3 flex items-center justify-between">
             <h2 className="text-base font-semibold text-[#002244]">Business plan activities</h2>
-            <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground"><Lock className="h-3.5 w-3.5" /> Read-only · workflow forms arrive next increment</span>
+            <span className="text-xs text-muted-foreground">Open any step to work or preview</span>
           </div>
           {activities.length === 0 ? <Card><Empty icon={<FileText className="h-6 w-6" />} title="No activities yet" body="The plan's activities will appear here once the plan is initialised." /></Card> : (
             <div className="space-y-4">
@@ -105,14 +125,14 @@ export default function UtilityPage() {
                     </div>
                     <ul className="divide-y">
                       {acts.map((a) => (
-                        <li key={a.code} className="flex items-start gap-4 px-5 py-3" data-testid={`activity-${a.code}`}>
+                        <li key={a.code}><Link href={`/plans/${u.planId}/activities/${a.code}`} className="flex items-start gap-4 px-5 py-3 transition hover:bg-[#009FDA]/[.04]" data-testid={`activity-${a.code}`}>
                           <span className="mt-0.5 w-10 shrink-0 font-mono text-[11px] text-muted-foreground">{a.code}</span>
                           <div className="min-w-0 flex-1">
                             <div className="text-sm font-medium text-[#002244]">{a.name}</div>
                             <div className="mt-0.5 text-xs text-muted-foreground">{a.milestone ? `Milestone: ${a.milestone} · ` : ""}{a.days} days{a.ownerName ? ` · ${a.ownerName}` : ""}{a.dueDate ? ` · due ${fmtDate(a.dueDate)}` : ""}</div>
                           </div>
-                          <Pill tone={statusTone(a.status)}>{humanize(a.status)}</Pill>
-                        </li>
+                          {wf.data?.activities.find((x) => x.code === a.code)?.locked && <Lock className="mt-1 h-3.5 w-3.5 text-muted-foreground" />}<Pill tone={statusTone(a.status)}>{humanize(a.status)}</Pill>
+                        </Link></li>
                       ))}
                     </ul>
                   </Card>

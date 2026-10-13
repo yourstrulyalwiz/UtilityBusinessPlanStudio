@@ -6,12 +6,18 @@
  */
 
 export * from './activity';
+export * from './activityAction';
+export * from './activityActionAction';
+export * from './activityActionData';
 export * from './auditEntry';
 export * from './authUser';
 export * from './authUserEnvelope';
 export * from './beginBrowserLoginParams';
 export * from './bucket';
 export * from './country';
+export * from './demoInput';
+export * from './demoInputMode';
+export * from './demoResult';
 export * from './errorEnvelope';
 export * from './getTestMode200';
 export * from './healthStatus';
@@ -56,3 +62,7 @@ export * from './utilityUpdate';
 export * from './utilityUpdateStatus';
 export * from './viewInput';
 export * from './viewInputFilters';
+export * from './workflow';
+export * from './workflowActivity';
+export * from './workflowActivityData';
+export * from './workflowActivityExample';

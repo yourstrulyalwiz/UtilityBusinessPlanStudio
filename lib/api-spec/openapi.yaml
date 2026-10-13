@@ -10,6 +10,28 @@
     }
   ],
   "paths": {
+    "/plans/{id}/workflow": {
+      "get": {
+        "operationId":"getWorkflow",
+        "parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
+        "responses":{"200":{"description":"Guided workflow and supplied examples","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Workflow"}}}}}
+      }
+    },
+    "/plans/{id}/activities/{code}": {
+      "post": {
+        "operationId":"updateActivity",
+        "parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"code","in":"path","required":true,"schema":{"type":"string"}}],
+        "requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/ActivityAction"}}}},
+        "responses":{"200":{"description":"Updated workflow","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Workflow"}}}}}
+      }
+    },
+    "/demo-plan": {
+      "post": {
+        "operationId":"loadDemoPlan",
+        "requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/DemoInput"}}}},
+        "responses":{"200":{"description":"Existing or newly imported supplied demo","content":{"application/json":{"schema":{"$ref":"#/components/schemas/DemoResult"}}}}}
+      }
+    },
     "/plans/{id}": {
       "get": {
         "operationId": "getPlan",
@@ -850,6 +872,18 @@
   },
   "components": {
     "schemas": {
+      "DemoInput":{"type":"object","required":["mode"],"properties":{"mode":{"type":"string","enum":["complete","midway"]}}},
+      "DemoResult":{"type":"object","required":["planId"],"properties":{"planId":{"type":"string"}}},
+      "ActivityAction":{"type":"object","required":["action","updatedAt"],"properties":{"action":{"type":"string","enum":["save","submit","approve","return","reopen"]},"updatedAt":{"type":"string"},"data":{"type":"object","additionalProperties":{}},"comment":{"type":"string"}}},
+      "WorkflowActivity":{"type":"object","required":["code","name","phaseCode","days","status","data","example","required","locked","lockReason","updatedAt","instructions","needs"],"properties":{
+        "code":{"type":"string"},"name":{"type":"string"},"phaseCode":{"type":"string"},"days":{"type":"number"},"status":{"type":"string"},
+        "data":{"type":"object","additionalProperties":{}},"example":{"type":"object","additionalProperties":{}},"required":{"type":"array","items":{"type":"string"}},
+        "locked":{"type":"boolean"},"lockReason":{"type":"string"},"updatedAt":{"type":"string"},"instructions":{"type":"string"},"needs":{"type":"array","items":{"type":"string"}},"feedback":{"type":"string"}
+      }},
+      "Workflow":{"type":"object","required":["planId","utilityName","progress","status","source","activities","nextCode","canEdit","canReview"],"properties":{
+        "planId":{"type":"string"},"utilityName":{"type":"string"},"progress":{"type":"number"},"status":{"type":"string"},"source":{"type":"string"},
+        "activities":{"type":"array","items":{"$ref":"#/components/schemas/WorkflowActivity"}},"nextCode":{"type":"string"},"canEdit":{"type":"boolean"},"canReview":{"type":"boolean"}
+      }},
       "TestRoleInput": {
         "type": "object",
         "required": ["role"],

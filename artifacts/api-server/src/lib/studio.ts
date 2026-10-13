@@ -46,10 +46,13 @@ export async function utilityRows(p:StudioPerson){
     const assignments=await db.select({id:members.utilityId}).from(members).where(eq(members.userId,p.id));
     const ids=new Set(assignments.map(m=>m.id)); rows=rows.filter(r=>ids.has(r.u.id));
   }
+  const stateRows=rows.length?await db.select({planId:planActivities.planId,code:planActivities.activityCode,status:planActivities.status})
+    .from(planActivities).where(inArray(planActivities.planId,rows.map(r=>r.p.id))):[];
   return rows.map(({u,p:plan,c,t})=>({
     id:u.id,name:u.name,shortName:u.shortName,countryIso3:u.countryIso3,countryName:c.name,region:c.region,
     serviceArea:u.serviceArea,ttlUserId:t.id,ttlName:t.fullName,planId:plan.id,planYear:plan.planYear,currency:plan.currency,
-    status:u.status,planStatus:plan.status,progress:Number(plan.progress),currentPhase:"P1",createdAt:u.createdAt.toISOString(),
+    status:u.status,planStatus:plan.status,progress:Number(plan.progress),currentPhase:
+      activitySeed.find(a=>stateRows.some(r=>r.planId===plan.id&&r.code===a.code&&r.status!=="approved"))?.phaseCode??"P4",createdAt:u.createdAt.toISOString(),
     uofCompletionDate:plan.uofCompletionDate,wbProjectId:u.wbProjectId,logoPath:u.logoPath,
   }));
 }

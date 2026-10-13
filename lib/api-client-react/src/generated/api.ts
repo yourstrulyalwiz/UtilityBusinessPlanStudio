@@ -19,9 +19,12 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ActivityAction,
   AuditEntry,
   AuthUserEnvelope,
   BeginBrowserLoginParams,
+  DemoInput,
+  DemoResult,
   GetTestMode200,
   HealthStatus,
   ListUtilitiesParams,
@@ -51,7 +54,8 @@ import type {
   UtilityList,
   UtilityRequest,
   UtilityUpdate,
-  ViewInput
+  ViewInput,
+  Workflow
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -80,6 +84,244 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export const getGetWorkflowUrl = (id: string,) => {
+
+
+
+
+  return `/api/plans/${id}/workflow`
+}
+
+export const getWorkflow = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<Workflow> => {
+
+  return customFetch<Workflow>(getGetWorkflowUrl(id),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetWorkflowQueryKey = (id: string,) => {
+    return [
+    `/api/plans/${id}/workflow`
+    ] as const;
+    }
+
+
+export const getGetWorkflowQueryOptions = <TData = Awaited<ReturnType<typeof getWorkflow>>, TError = ErrorType<unknown>>(id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getWorkflow>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetWorkflowQueryKey(id);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getWorkflow>>> = ({ signal }) => getWorkflow(id, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: id !== null && id !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getWorkflow>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetWorkflowQueryResult = NonNullable<Awaited<ReturnType<typeof getWorkflow>>>
+export type GetWorkflowQueryError = ErrorType<unknown>
+
+
+
+export function useGetWorkflow<TData = Awaited<ReturnType<typeof getWorkflow>>, TError = ErrorType<unknown>>(
+ id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getWorkflow>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetWorkflowQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getUpdateActivityUrl = (id: string,
+    code: string,) => {
+
+
+
+
+  return `/api/plans/${id}/activities/${code}`
+}
+
+export const updateActivity = async (id: string,
+    code: string,
+    activityAction: ActivityAction, options?: Parameters<typeof customFetch>[1]): Promise<Workflow> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<Workflow>(getUpdateActivityUrl(id,code),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(activityAction)
+  }
+);}
+
+
+
+
+
+export const getUpdateActivityMutationKey = () => ['updateActivity'] as const;
+
+export const getUpdateActivityMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateActivity>>, TError,UpdateActivityMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateActivity>>, TError,UpdateActivityMutationVariables, TContext> => {
+
+const mutationKey = getUpdateActivityMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateActivity>>, UpdateActivityMutationVariables> = (props) => {
+          const {id,code,data} = props ?? {};
+
+          return  updateActivity(id,code,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateActivityMutationResult = NonNullable<Awaited<ReturnType<typeof updateActivity>>>
+    export type UpdateActivityMutationBody = BodyType<ActivityAction>
+    export type UpdateActivityMutationError = ErrorType<unknown>
+    export type UpdateActivityMutationVariables = {id: string;code: string;data: BodyType<ActivityAction>}
+
+    export const useUpdateActivity = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateActivity>>, TError,UpdateActivityMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateActivity>>,
+        TError,
+        UpdateActivityMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUpdateActivityMutationOptions(options));
+    }
+
+export const getLoadDemoPlanUrl = () => {
+
+
+
+
+  return `/api/demo-plan`
+}
+
+export const loadDemoPlan = async (demoInput: DemoInput, options?: Parameters<typeof customFetch>[1]): Promise<DemoResult> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<DemoResult>(getLoadDemoPlanUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(demoInput)
+  }
+);}
+
+
+
+
+
+export const getLoadDemoPlanMutationKey = () => ['loadDemoPlan'] as const;
+
+export const getLoadDemoPlanMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof loadDemoPlan>>, TError,LoadDemoPlanMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof loadDemoPlan>>, TError,LoadDemoPlanMutationVariables, TContext> => {
+
+const mutationKey = getLoadDemoPlanMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof loadDemoPlan>>, LoadDemoPlanMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  loadDemoPlan(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type LoadDemoPlanMutationResult = NonNullable<Awaited<ReturnType<typeof loadDemoPlan>>>
+    export type LoadDemoPlanMutationBody = BodyType<DemoInput>
+    export type LoadDemoPlanMutationError = ErrorType<unknown>
+    export type LoadDemoPlanMutationVariables = {data: BodyType<DemoInput>}
+
+    export const useLoadDemoPlan = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof loadDemoPlan>>, TError,LoadDemoPlanMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof loadDemoPlan>>,
+        TError,
+        LoadDemoPlanMutationVariables,
+        TContext
+      > => {
+      return useMutation(getLoadDemoPlanMutationOptions(options));
+    }
 
 export const getGetPlanUrl = (id: string,) => {
 

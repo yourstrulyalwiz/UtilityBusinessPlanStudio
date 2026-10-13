@@ -1,0 +1,4063 @@
+{
+  "_meta": {
+    "description": "FICTIONAL demo utility for testing UoF Business Plan Studio (Option A, playbook activities). Same utility and numbers as the Option B demo (Improvement scenario = the plan). All names and figures are invented.",
+    "version": "1.0",
+    "currency": "USD",
+    "generated": "2026-10-13",
+    "states": {
+      "complete": "all 20 activities Approved, plan Completed",
+      "midway": "A1.1-A1.7 Approved, A2.1-A2.3 Submitted, A2.4 In progress, rest Not started; full data kept as examples for 'Fill with example'"
+    }
+  },
+  "utility": {
+    "name": "Valle Verde Water and Sanitation Company (DEMO)",
+    "short_name": "VVWSC",
+    "country_iso3": "PER",
+    "city_service_area": "Valle Verde metropolitan area (fictional)",
+    "ttl": {
+      "name": "Demo TTL",
+      "email": "ttl.demo@example.org"
+    },
+    "wb_project_id": "P000000",
+    "status": "active"
+  },
+  "plan": {
+    "plan_year": 2026,
+    "base_year": 2025,
+    "horizon_start": 2026,
+    "horizon_end": 2030,
+    "actual_years": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "currency": "USD",
+    "uof_completion_date": "2025-11-28",
+    "start_date": "2026-01-12",
+    "board_approval_target": "2026-12-15",
+    "publication_target": "2027-01-31",
+    "target_end_date": "2026-06-30"
+  },
+  "preparation": {
+    "implementation_strategy": "TTL-led with a local consultant; plan starts 6 weeks after UoF completion.",
+    "wb_project_link": "Valle Verde Water Security Project (fictional)",
+    "resources": "Local consultant 4 months; utility project team of 6",
+    "uof_completion_date": "2025-11-28",
+    "utility_team_on_board": true,
+    "local_consultant_on_board": true,
+    "uof_final_documents": [
+      "UoF B-Report (fictional).pdf"
+    ]
+  },
+  "activities": {
+    "A1.1": {
+      "focal_point": {
+        "name": "Ana Torres",
+        "position": "Head of Strategic Planning",
+        "role": "Focal point",
+        "uof_element": "Organization & Strategy"
+      },
+      "team_members": [
+        {
+          "name": "Luis Mendoza",
+          "position": "Commercial Director",
+          "uof_element": "Commercial Management"
+        },
+        {
+          "name": "Carla Rojas",
+          "position": "Operations Director",
+          "uof_element": "Technical Operations"
+        },
+        {
+          "name": "Jorge Salas",
+          "position": "CFO",
+          "uof_element": "Financial Management"
+        },
+        {
+          "name": "Rosa Quispe",
+          "position": "HR Manager",
+          "uof_element": "Human Talent"
+        },
+        {
+          "name": "Marco Vega",
+          "position": "Planning Director",
+          "uof_element": "Organization & Strategy"
+        }
+      ],
+      "local_consultant": {
+        "name": "Demo Consulting SAC (fictional)",
+        "position": "Local advisor"
+      },
+      "kickoff_date": "2026-01-12"
+    },
+    "A1.2": {
+      "years": [
+        2023,
+        2025
+      ],
+      "indicators": [
+        {
+          "indicator": "Collection rate",
+          "unit": "%",
+          "group": "Commercial Management",
+          "values": {
+            "2023": 81.0,
+            "2024": 82.0,
+            "2025": 83.0
+          }
+        },
+        {
+          "indicator": "Metered connections",
+          "unit": "%",
+          "group": "Commercial Management",
+          "values": {
+            "2023": 61,
+            "2024": 64,
+            "2025": 66
+          }
+        },
+        {
+          "indicator": "Water connections",
+          "unit": "#",
+          "group": "Commercial Management",
+          "values": {
+            "2023": 119000,
+            "2024": 121900,
+            "2025": 124800
+          }
+        },
+        {
+          "indicator": "Billed volume",
+          "unit": "m3",
+          "group": "Commercial Management",
+          "values": {
+            "2023": 25693200.0,
+            "2024": 26656000.0,
+            "2025": 27588000.0
+          }
+        },
+        {
+          "indicator": "Water produced",
+          "unit": "m3",
+          "group": "Technical Operations",
+          "values": {
+            "2023": 46800000.0,
+            "2024": 47600000.0,
+            "2025": 48400000.0
+          }
+        },
+        {
+          "indicator": "Non-revenue water",
+          "unit": "%",
+          "group": "Technical Operations",
+          "values": {
+            "2023": 45.1,
+            "2024": 44.0,
+            "2025": 43.0
+          }
+        },
+        {
+          "indicator": "Continuity",
+          "unit": "hours/day",
+          "group": "Technical Operations",
+          "values": {
+            "2023": 18.0,
+            "2024": 18.5,
+            "2025": 19.0
+          }
+        },
+        {
+          "indicator": "Water quality compliance",
+          "unit": "%",
+          "group": "Technical Operations",
+          "values": {
+            "2023": 96.8,
+            "2024": 97.4,
+            "2025": 97.9
+          }
+        },
+        {
+          "indicator": "Total revenue",
+          "unit": "USD",
+          "group": "Financial Management",
+          "values": {
+            "2023": 17219295.0,
+            "2024": 18907508.0,
+            "2025": 20833865.0
+          }
+        },
+        {
+          "indicator": "Operating costs",
+          "unit": "USD",
+          "group": "Financial Management",
+          "values": {
+            "2023": 14449977.0,
+            "2024": 15676105.0,
+            "2025": 17049919.0
+          }
+        },
+        {
+          "indicator": "OCCR",
+          "unit": "ratio",
+          "group": "Financial Management",
+          "values": {
+            "2023": 1.19,
+            "2024": 1.21,
+            "2025": 1.22
+          }
+        },
+        {
+          "indicator": "EBITDA margin",
+          "unit": "%",
+          "group": "Financial Management",
+          "values": {
+            "2023": 16.1,
+            "2024": 17.1,
+            "2025": 18.2
+          }
+        },
+        {
+          "indicator": "Staff",
+          "unit": "#",
+          "group": "Human Talent",
+          "values": {
+            "2023": 795,
+            "2024": 788,
+            "2025": 780
+          }
+        },
+        {
+          "indicator": "Staff per 1,000 connections",
+          "unit": "#",
+          "group": "Human Talent",
+          "values": {
+            "2023": 6.7,
+            "2024": 6.5,
+            "2025": 6.2
+          }
+        },
+        {
+          "indicator": "Water coverage",
+          "unit": "%",
+          "group": "Coverage",
+          "values": {
+            "2023": 87.7,
+            "2024": 88.3,
+            "2025": 88.8
+          }
+        },
+        {
+          "indicator": "Sewer coverage",
+          "unit": "%",
+          "group": "Coverage",
+          "values": {
+            "2023": 66.6,
+            "2024": 67.1,
+            "2025": 67.6
+          }
+        },
+        {
+          "indicator": "Wastewater treated",
+          "unit": "%",
+          "group": "Coverage",
+          "values": {
+            "2023": 59,
+            "2024": 60,
+            "2025": 60
+          }
+        }
+      ],
+      "narratives": {
+        "Commercial Management": "Collection rose from 81% to 83% after the 100-day door-to-door campaign; metering grew to 66% but 34% of connections remain unmetered.",
+        "Technical Operations": "NRW fell slowly from 45.1% to 43.0% through reactive leak repair only; continuity improved to 19 h/day.",
+        "Financial Management": "Revenue grew 21% (2023-2025) with yearly tariff indexation; EBITDA margin improved to 18.2% and net income turned positive in 2025.",
+        "Human Talent": "Staff fell from 795 to 780 by attrition; no structured training program.",
+        "Organization & Strategy": "No strategic plan before the UoF; the UoF 100-day plan created a planning unit."
+      },
+      "sources": [
+        "Audited financial statements 2023-2025 (fictional)",
+        "UoF B-Report (fictional)"
+      ]
+    },
+    "A1.3": {
+      "maturity_scores": {
+        "Commercial Management": 42,
+        "Technical Operations": 48,
+        "Financial Management": 55,
+        "Human Talent": 39,
+        "Organization & Strategy": 51
+      },
+      "strengths": [
+        {
+          "text": "Water quality compliance near 98%",
+          "uof_element": "Technical Operations",
+          "evidence": "Regulator reports 2025"
+        },
+        {
+          "text": "Audited financial statements since 2019",
+          "uof_element": "Financial Management",
+          "evidence": "External audit"
+        },
+        {
+          "text": "Committed management team after UoF 100-day plan",
+          "uof_element": "Organization & Strategy",
+          "evidence": "100-day evaluation"
+        }
+      ],
+      "weaknesses": [
+        {
+          "text": "NRW of 43% with 34% of connections unmetered",
+          "uof_element": "Technical Operations",
+          "evidence": "Water balance 2025"
+        },
+        {
+          "text": "Legacy billing system and 83% collection",
+          "uof_element": "Commercial Management",
+          "evidence": "Billing records"
+        },
+        {
+          "text": "No asset register or asset management plan",
+          "uof_element": "Organization & Strategy",
+          "evidence": "UoF assessment"
+        },
+        {
+          "text": "No structured training program",
+          "uof_element": "Human Talent",
+          "evidence": "HR records"
+        }
+      ],
+      "management_discussion": "Management agreed that losses and commercial efficiency explain most of the financial gap; human talent is the enabler for every other improvement."
+    },
+    "A1.4": {
+      "impact": "Collection rose 1.5 points in 100 days after a door-to-door campaign in two districts; 1,200 illegal connections regularized.",
+      "case_study": "Door-to-door collection campaign in districts 3 and 7: 4,100 visits, 1,200 illegal connections regularized, USD 310,000 recovered.",
+      "staff_engagement": "High in commercial teams; field crews engaged once results were shared weekly.",
+      "success_factors": [
+        "CEO sponsorship",
+        "Weekly results meetings",
+        "Simple targets per district"
+      ],
+      "lessons": [
+        "Quick wins build staff commitment",
+        "Field data quality is the main bottleneck"
+      ],
+      "high_performing_staff": [
+        {
+          "name": "Luis Mendoza",
+          "position": "Commercial Director"
+        }
+      ],
+      "high_performing_teams": [
+        "District 3 commercial team"
+      ],
+      "long_term_priorities": [
+        "Replace meters",
+        "Modern billing system",
+        "Asset management plan",
+        "Training program for supervisors"
+      ]
+    },
+    "A1.5": {
+      "service_area": "Valle Verde metropolitan area (fictional)",
+      "sources": [
+        "National census 2015, 2020 (fictional values)",
+        "Municipal urban plan"
+      ],
+      "population": [
+        {
+          "year": 2015,
+          "population": 470000
+        },
+        {
+          "year": 2020,
+          "population": 510000
+        },
+        {
+          "year": 2025,
+          "population": 548000
+        },
+        {
+          "year": 2030,
+          "population": 610990
+        }
+      ],
+      "density_people_km2": 1820,
+      "households": [
+        {
+          "year": 2015,
+          "households": 118000,
+          "occupants_per_household": 3.98
+        },
+        {
+          "year": 2020,
+          "households": 132000,
+          "occupants_per_household": 3.86
+        },
+        {
+          "year": 2025,
+          "households": 146000,
+          "occupants_per_household": 3.75
+        }
+      ],
+      "piped_water_pct": [
+        {
+          "year": 2015,
+          "pct": 89.0
+        },
+        {
+          "year": 2020,
+          "pct": 91.8
+        },
+        {
+          "year": 2025,
+          "pct": 93.4
+        }
+      ],
+      "migration": {
+        "people": 31000,
+        "period": "2020-2025",
+        "origins": [
+          {
+            "origin": "Rural districts of the region",
+            "pct": 55
+          },
+          {
+            "origin": "Other regions",
+            "pct": 35
+          },
+          {
+            "origin": "Abroad",
+            "pct": 10
+          }
+        ]
+      },
+      "age_distribution": [
+        {
+          "band": "0-14",
+          "pct": 24.0
+        },
+        {
+          "band": "15-29",
+          "pct": 26.5
+        },
+        {
+          "band": "30-44",
+          "pct": 22.0
+        },
+        {
+          "band": "45-64",
+          "pct": 19.5
+        },
+        {
+          "band": "65+",
+          "pct": 8.0
+        }
+      ],
+      "industrial_dynamics": "Agro-processing park in the south adds 2 large industrial clients by 2027.",
+      "infrastructure_development": "Southern ring road opens new peri-urban settlements (about 8,000 households unserved).",
+      "implications": "Households grow faster than population (smaller households), so connections grow ~2.3%/yr; peri-urban growth to the south requires network expansion."
+    },
+    "A1.6": {
+      "pillars": [
+        {
+          "pillar": "Policy",
+          "rating": 3,
+          "assessment": "National water law sets cost-recovery principle; municipal politics delay decisions.",
+          "opportunities": [
+            "National law supports cost recovery"
+          ],
+          "threats": [
+            "Municipal politics delay decisions"
+          ]
+        },
+        {
+          "pillar": "Sector Institutions",
+          "rating": 3,
+          "assessment": "Regulator active but understaffed.",
+          "opportunities": [
+            "Regulator benchmarking motivates performance"
+          ],
+          "threats": [
+            "Regulator understaffed"
+          ]
+        },
+        {
+          "pillar": "Intergovernmental Relations",
+          "rating": 2,
+          "assessment": "Weak coordination between municipality and region on peri-urban expansion.",
+          "opportunities": [
+            "Regional plan for peri-urban areas"
+          ],
+          "threats": [
+            "Weak coordination with region"
+          ]
+        },
+        {
+          "pillar": "Financing",
+          "rating": 3,
+          "assessment": "Tariff indexation allowed up to inflation; access to national fund and IFI loans with sovereign guarantee.",
+          "opportunities": [
+            "Tariff indexation; World Bank and national fund financing"
+          ],
+          "threats": [
+            "Political pressure against tariff increases"
+          ]
+        },
+        {
+          "pillar": "Regulation",
+          "rating": 3,
+          "assessment": "Quality standards enforced; performance benchmarking published yearly.",
+          "opportunities": [
+            "Clear quality standards"
+          ],
+          "threats": [
+            "Stricter wastewater discharge rules from 2028"
+          ]
+        }
+      ]
+    },
+    "A1.7": {
+      "swot": {
+        "strengths": [
+          {
+            "text": "Water quality compliance near 98%",
+            "priority": 1,
+            "evidence": "See A1.2/A1.6"
+          },
+          {
+            "text": "Audited financial statements",
+            "priority": 2,
+            "evidence": "See A1.2/A1.6"
+          },
+          {
+            "text": "Experienced operations staff",
+            "priority": 2,
+            "evidence": "See A1.2/A1.6"
+          }
+        ],
+        "weaknesses": [
+          {
+            "text": "High NRW (43%) and 34% unmetered connections",
+            "priority": 1,
+            "evidence": "See A1.2/A1.6"
+          },
+          {
+            "text": "Collection ratio of 83% and legacy billing system",
+            "priority": 1,
+            "evidence": "See A1.2/A1.6"
+          },
+          {
+            "text": "No asset management plan",
+            "priority": 2,
+            "evidence": "See A1.2/A1.6"
+          },
+          {
+            "text": "High energy cost at pumping stations",
+            "priority": 2,
+            "evidence": "See A1.2/A1.6"
+          }
+        ],
+        "opportunities": [
+          {
+            "text": "World Bank financing for NRW and sanitation",
+            "priority": 1,
+            "evidence": "See A1.2/A1.6"
+          },
+          {
+            "text": "Tariff indexation to inflation allowed by regulator",
+            "priority": 1,
+            "evidence": "See A1.2/A1.6"
+          },
+          {
+            "text": "Growing peri-urban demand",
+            "priority": 2,
+            "evidence": "See A1.2/A1.6"
+          }
+        ],
+        "threats": [
+          {
+            "text": "Drought periods reducing raw water availability",
+            "priority": 1,
+            "evidence": "See A1.2/A1.6"
+          },
+          {
+            "text": "Political pressure against tariff increases",
+            "priority": 1,
+            "evidence": "See A1.2/A1.6"
+          },
+          {
+            "text": "Rising energy prices",
+            "priority": 2,
+            "evidence": "See A1.2/A1.6"
+          }
+        ]
+      },
+      "management_discussion": "Strategic workshop (2026-02-26): priorities are losses, collection and financing; drought risk handled through loss reduction rather than new sources.",
+      "workshop_date": "2026-02-26"
+    },
+    "A2.1": {
+      "mission": "Provide safe, reliable and affordable water and sanitation services to every household in Valle Verde, every day.",
+      "vision": "By 2035, to be the most efficient and trusted water utility in the region, with universal access and full cost recovery.",
+      "objectives": [
+        {
+          "code": "OBJ-1",
+          "title": "Reduce non-revenue water",
+          "specific": "Reduce physical and apparent water losses across the network; Operations and Commercial departments.",
+          "measurable": "NRW (%) from water balance: 43.0% in 2025 to 33.0% in 2030.",
+          "achievable": "Funded by the World Bank loan; DMAs and meter replacement are proven in similar utilities.",
+          "relevant": "Losses are the largest weakness in the SWOT and drive production cost and revenue.",
+          "time_bound": "Yearly milestones 2027-2030; final target December 2030.",
+          "swot_links": []
+        },
+        {
+          "code": "OBJ-2",
+          "title": "Improve commercial efficiency",
+          "specific": "Modernize billing and collection; Commercial department.",
+          "measurable": "Collection ratio from 83% to 93%.",
+          "achievable": "New CIS live by June 2027 and campaign proven in the 100-day plan (+1.5 points).",
+          "relevant": "Supports financial sustainability and the mission of affordable service.",
+          "time_bound": "+2.5 points per year 2027-2030; December 2030.",
+          "swot_links": []
+        },
+        {
+          "code": "OBJ-3",
+          "title": "Strengthen financial sustainability",
+          "specific": "Improve margins and keep debt service covered; Finance and Operations.",
+          "measurable": "EBITDA margin 18.2% to at least 23%; DSCR above 1.5 every year; production cost per m3 8% below Baseline from 2028.",
+          "achievable": "Driven by loss reduction, collection and efficient pumps.",
+          "relevant": "Financial sustainability is a condition of the World Bank loan.",
+          "time_bound": "Annual review; 2030 target.",
+          "swot_links": []
+        },
+        {
+          "code": "OBJ-4",
+          "title": "Expand access to services",
+          "specific": "Extend water and sewer service to peri-urban areas; Planning department.",
+          "measurable": "+8,000 water connections (2027-2030) and +3,000 sewer connections (2029-2030).",
+          "achievable": "Network expansion and North WWTP rehabilitation financed by the loan.",
+          "relevant": "Directly serves the mission of service for every household.",
+          "time_bound": "December 2030.",
+          "swot_links": []
+        },
+        {
+          "code": "OBJ-5",
+          "title": "Develop human talent",
+          "specific": "Train supervisors and technical staff in leadership and asset management; HR.",
+          "measurable": "100% of 64 supervisors and 120 technical staff trained.",
+          "achievable": "USD 0.12 M per year program with a local university.",
+          "relevant": "Human Talent is the lowest UoF maturity score (39/100).",
+          "time_bound": "December 2028.",
+          "swot_links": []
+        }
+      ]
+    },
+    "A2.2": {
+      "kpis": [
+        {
+          "code": "nrw",
+          "name": "Non-Revenue Water",
+          "formula": "(water produced - water billed) / water produced",
+          "unit": "%",
+          "direction": "down",
+          "objective": "OBJ-1",
+          "is_core": true,
+          "baseline_year": 2025,
+          "baseline_value": 43.0,
+          "annual_targets_improvement": {
+            "2026": 43.0,
+            "2027": 40.5,
+            "2028": 37.5,
+            "2029": 34.5,
+            "2030": 33.0
+          },
+          "annual_projection_baseline": {
+            "2026": 43.3,
+            "2027": 43.6,
+            "2028": 43.9,
+            "2029": 44.2,
+            "2030": 44.5
+          },
+          "quarterly_targets": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 43.0
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 43.0
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 43.0
+            },
+            {
+              "year": 2026,
+              "quarter": 4,
+              "value": 43.0
+            },
+            {
+              "year": 2027,
+              "quarter": 1,
+              "value": 42.38
+            },
+            {
+              "year": 2027,
+              "quarter": 2,
+              "value": 41.75
+            },
+            {
+              "year": 2027,
+              "quarter": 3,
+              "value": 41.12
+            },
+            {
+              "year": 2027,
+              "quarter": 4,
+              "value": 40.5
+            },
+            {
+              "year": 2028,
+              "quarter": 1,
+              "value": 39.75
+            },
+            {
+              "year": 2028,
+              "quarter": 2,
+              "value": 39.0
+            },
+            {
+              "year": 2028,
+              "quarter": 3,
+              "value": 38.25
+            },
+            {
+              "year": 2028,
+              "quarter": 4,
+              "value": 37.5
+            },
+            {
+              "year": 2029,
+              "quarter": 1,
+              "value": 36.75
+            },
+            {
+              "year": 2029,
+              "quarter": 2,
+              "value": 36.0
+            },
+            {
+              "year": 2029,
+              "quarter": 3,
+              "value": 35.25
+            },
+            {
+              "year": 2029,
+              "quarter": 4,
+              "value": 34.5
+            },
+            {
+              "year": 2030,
+              "quarter": 1,
+              "value": 34.12
+            },
+            {
+              "year": 2030,
+              "quarter": 2,
+              "value": 33.75
+            },
+            {
+              "year": 2030,
+              "quarter": 3,
+              "value": 33.38
+            },
+            {
+              "year": 2030,
+              "quarter": 4,
+              "value": 33.0
+            }
+          ],
+          "actuals": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 43.4
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 43.2
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 43.1
+            }
+          ]
+        },
+        {
+          "code": "collection",
+          "name": "Collection ratio",
+          "formula": "collections from customers / billed customer revenue",
+          "unit": "%",
+          "direction": "up",
+          "objective": "OBJ-2",
+          "is_core": true,
+          "baseline_year": 2025,
+          "baseline_value": 83.0,
+          "annual_targets_improvement": {
+            "2026": 83.0,
+            "2027": 85.5,
+            "2028": 88.0,
+            "2029": 90.5,
+            "2030": 93.0
+          },
+          "annual_projection_baseline": {
+            "2026": 83.0,
+            "2027": 83.0,
+            "2028": 83.0,
+            "2029": 83.0,
+            "2030": 83.0
+          },
+          "quarterly_targets": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 83.0
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 83.0
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 83.0
+            },
+            {
+              "year": 2026,
+              "quarter": 4,
+              "value": 83.0
+            },
+            {
+              "year": 2027,
+              "quarter": 1,
+              "value": 83.62
+            },
+            {
+              "year": 2027,
+              "quarter": 2,
+              "value": 84.25
+            },
+            {
+              "year": 2027,
+              "quarter": 3,
+              "value": 84.88
+            },
+            {
+              "year": 2027,
+              "quarter": 4,
+              "value": 85.5
+            },
+            {
+              "year": 2028,
+              "quarter": 1,
+              "value": 86.12
+            },
+            {
+              "year": 2028,
+              "quarter": 2,
+              "value": 86.75
+            },
+            {
+              "year": 2028,
+              "quarter": 3,
+              "value": 87.38
+            },
+            {
+              "year": 2028,
+              "quarter": 4,
+              "value": 88.0
+            },
+            {
+              "year": 2029,
+              "quarter": 1,
+              "value": 88.62
+            },
+            {
+              "year": 2029,
+              "quarter": 2,
+              "value": 89.25
+            },
+            {
+              "year": 2029,
+              "quarter": 3,
+              "value": 89.88
+            },
+            {
+              "year": 2029,
+              "quarter": 4,
+              "value": 90.5
+            },
+            {
+              "year": 2030,
+              "quarter": 1,
+              "value": 91.12
+            },
+            {
+              "year": 2030,
+              "quarter": 2,
+              "value": 91.75
+            },
+            {
+              "year": 2030,
+              "quarter": 3,
+              "value": 92.38
+            },
+            {
+              "year": 2030,
+              "quarter": 4,
+              "value": 93.0
+            }
+          ],
+          "actuals": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 82.6
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 83.1
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 83.4
+            }
+          ]
+        },
+        {
+          "code": "occr",
+          "name": "Operating Cost Coverage Ratio",
+          "formula": "operating revenue / operating costs",
+          "unit": "ratio",
+          "direction": "up",
+          "objective": "OBJ-2",
+          "is_core": true,
+          "baseline_year": 2025,
+          "baseline_value": 1.22,
+          "annual_targets_improvement": {
+            "2026": 1.21,
+            "2027": 1.23,
+            "2028": 1.28,
+            "2029": 1.3,
+            "2030": 1.31
+          },
+          "annual_projection_baseline": {
+            "2026": 1.22,
+            "2027": 1.22,
+            "2028": 1.21,
+            "2029": 1.21,
+            "2030": 1.21
+          },
+          "quarterly_targets": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 1.22
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 1.21
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 1.21
+            },
+            {
+              "year": 2026,
+              "quarter": 4,
+              "value": 1.21
+            },
+            {
+              "year": 2027,
+              "quarter": 1,
+              "value": 1.21
+            },
+            {
+              "year": 2027,
+              "quarter": 2,
+              "value": 1.22
+            },
+            {
+              "year": 2027,
+              "quarter": 3,
+              "value": 1.23
+            },
+            {
+              "year": 2027,
+              "quarter": 4,
+              "value": 1.23
+            },
+            {
+              "year": 2028,
+              "quarter": 1,
+              "value": 1.24
+            },
+            {
+              "year": 2028,
+              "quarter": 2,
+              "value": 1.25
+            },
+            {
+              "year": 2028,
+              "quarter": 3,
+              "value": 1.27
+            },
+            {
+              "year": 2028,
+              "quarter": 4,
+              "value": 1.28
+            },
+            {
+              "year": 2029,
+              "quarter": 1,
+              "value": 1.29
+            },
+            {
+              "year": 2029,
+              "quarter": 2,
+              "value": 1.29
+            },
+            {
+              "year": 2029,
+              "quarter": 3,
+              "value": 1.29
+            },
+            {
+              "year": 2029,
+              "quarter": 4,
+              "value": 1.3
+            },
+            {
+              "year": 2030,
+              "quarter": 1,
+              "value": 1.3
+            },
+            {
+              "year": 2030,
+              "quarter": 2,
+              "value": 1.31
+            },
+            {
+              "year": 2030,
+              "quarter": 3,
+              "value": 1.31
+            },
+            {
+              "year": 2030,
+              "quarter": 4,
+              "value": 1.31
+            }
+          ],
+          "actuals": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 1.19
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 1.21
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 1.22
+            }
+          ]
+        },
+        {
+          "code": "ebitda_margin",
+          "name": "EBITDA margin",
+          "formula": "EBITDA / total revenue",
+          "unit": "%",
+          "direction": "up",
+          "objective": "OBJ-3",
+          "is_core": true,
+          "baseline_year": 2025,
+          "baseline_value": 18.2,
+          "annual_targets_improvement": {
+            "2026": 17.6,
+            "2027": 19.0,
+            "2028": 22.0,
+            "2029": 23.2,
+            "2030": 23.8
+          },
+          "annual_projection_baseline": {
+            "2026": 18.0,
+            "2027": 17.8,
+            "2028": 17.7,
+            "2029": 17.5,
+            "2030": 17.3
+          },
+          "quarterly_targets": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 18.05
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 17.9
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 17.75
+            },
+            {
+              "year": 2026,
+              "quarter": 4,
+              "value": 17.6
+            },
+            {
+              "year": 2027,
+              "quarter": 1,
+              "value": 17.95
+            },
+            {
+              "year": 2027,
+              "quarter": 2,
+              "value": 18.3
+            },
+            {
+              "year": 2027,
+              "quarter": 3,
+              "value": 18.65
+            },
+            {
+              "year": 2027,
+              "quarter": 4,
+              "value": 19.0
+            },
+            {
+              "year": 2028,
+              "quarter": 1,
+              "value": 19.75
+            },
+            {
+              "year": 2028,
+              "quarter": 2,
+              "value": 20.5
+            },
+            {
+              "year": 2028,
+              "quarter": 3,
+              "value": 21.25
+            },
+            {
+              "year": 2028,
+              "quarter": 4,
+              "value": 22.0
+            },
+            {
+              "year": 2029,
+              "quarter": 1,
+              "value": 22.3
+            },
+            {
+              "year": 2029,
+              "quarter": 2,
+              "value": 22.6
+            },
+            {
+              "year": 2029,
+              "quarter": 3,
+              "value": 22.9
+            },
+            {
+              "year": 2029,
+              "quarter": 4,
+              "value": 23.2
+            },
+            {
+              "year": 2030,
+              "quarter": 1,
+              "value": 23.35
+            },
+            {
+              "year": 2030,
+              "quarter": 2,
+              "value": 23.5
+            },
+            {
+              "year": 2030,
+              "quarter": 3,
+              "value": 23.65
+            },
+            {
+              "year": 2030,
+              "quarter": 4,
+              "value": 23.8
+            }
+          ],
+          "actuals": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 16.8
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 17.3
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 17.5
+            }
+          ]
+        },
+        {
+          "code": "dscr",
+          "name": "Debt Service Coverage Ratio",
+          "formula": "cash from operations / (principal + interest)",
+          "unit": "ratio",
+          "direction": "up",
+          "objective": "OBJ-3",
+          "is_core": true,
+          "baseline_year": 2025,
+          "baseline_value": 1.55,
+          "annual_targets_improvement": {
+            "2026": 1.63,
+            "2027": 1.93,
+            "2028": 2.43,
+            "2029": 2.04,
+            "2030": 2.37
+          },
+          "annual_projection_baseline": {
+            "2026": 1.7,
+            "2027": 1.88,
+            "2028": 2.07,
+            "2029": 2.3,
+            "2030": 2.55
+          },
+          "quarterly_targets": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 1.57
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 1.59
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 1.61
+            },
+            {
+              "year": 2026,
+              "quarter": 4,
+              "value": 1.63
+            },
+            {
+              "year": 2027,
+              "quarter": 1,
+              "value": 1.7
+            },
+            {
+              "year": 2027,
+              "quarter": 2,
+              "value": 1.78
+            },
+            {
+              "year": 2027,
+              "quarter": 3,
+              "value": 1.85
+            },
+            {
+              "year": 2027,
+              "quarter": 4,
+              "value": 1.93
+            },
+            {
+              "year": 2028,
+              "quarter": 1,
+              "value": 2.06
+            },
+            {
+              "year": 2028,
+              "quarter": 2,
+              "value": 2.18
+            },
+            {
+              "year": 2028,
+              "quarter": 3,
+              "value": 2.31
+            },
+            {
+              "year": 2028,
+              "quarter": 4,
+              "value": 2.43
+            },
+            {
+              "year": 2029,
+              "quarter": 1,
+              "value": 2.33
+            },
+            {
+              "year": 2029,
+              "quarter": 2,
+              "value": 2.24
+            },
+            {
+              "year": 2029,
+              "quarter": 3,
+              "value": 2.14
+            },
+            {
+              "year": 2029,
+              "quarter": 4,
+              "value": 2.04
+            },
+            {
+              "year": 2030,
+              "quarter": 1,
+              "value": 2.12
+            },
+            {
+              "year": 2030,
+              "quarter": 2,
+              "value": 2.21
+            },
+            {
+              "year": 2030,
+              "quarter": 3,
+              "value": 2.29
+            },
+            {
+              "year": 2030,
+              "quarter": 4,
+              "value": 2.37
+            }
+          ],
+          "actuals": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 1.52
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 1.58
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 1.61
+            }
+          ]
+        },
+        {
+          "code": "water_coverage",
+          "name": "Water coverage",
+          "formula": "population served with water / population in service area",
+          "unit": "%",
+          "direction": "up",
+          "objective": "OBJ-4",
+          "is_core": false,
+          "baseline_year": 2025,
+          "baseline_value": 88.8,
+          "annual_targets_improvement": {
+            "2026": 88.9,
+            "2027": 90.4,
+            "2028": 91.8,
+            "2029": 93.2,
+            "2030": 94.5
+          },
+          "annual_projection_baseline": {
+            "2026": 88.9,
+            "2027": 89.0,
+            "2028": 89.1,
+            "2029": 89.2,
+            "2030": 89.3
+          },
+          "quarterly_targets": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 88.83
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 88.85
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 88.88
+            },
+            {
+              "year": 2026,
+              "quarter": 4,
+              "value": 88.9
+            },
+            {
+              "year": 2027,
+              "quarter": 1,
+              "value": 89.28
+            },
+            {
+              "year": 2027,
+              "quarter": 2,
+              "value": 89.65
+            },
+            {
+              "year": 2027,
+              "quarter": 3,
+              "value": 90.03
+            },
+            {
+              "year": 2027,
+              "quarter": 4,
+              "value": 90.4
+            },
+            {
+              "year": 2028,
+              "quarter": 1,
+              "value": 90.75
+            },
+            {
+              "year": 2028,
+              "quarter": 2,
+              "value": 91.1
+            },
+            {
+              "year": 2028,
+              "quarter": 3,
+              "value": 91.45
+            },
+            {
+              "year": 2028,
+              "quarter": 4,
+              "value": 91.8
+            },
+            {
+              "year": 2029,
+              "quarter": 1,
+              "value": 92.15
+            },
+            {
+              "year": 2029,
+              "quarter": 2,
+              "value": 92.5
+            },
+            {
+              "year": 2029,
+              "quarter": 3,
+              "value": 92.85
+            },
+            {
+              "year": 2029,
+              "quarter": 4,
+              "value": 93.2
+            },
+            {
+              "year": 2030,
+              "quarter": 1,
+              "value": 93.53
+            },
+            {
+              "year": 2030,
+              "quarter": 2,
+              "value": 93.85
+            },
+            {
+              "year": 2030,
+              "quarter": 3,
+              "value": 94.17
+            },
+            {
+              "year": 2030,
+              "quarter": 4,
+              "value": 94.5
+            }
+          ],
+          "actuals": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 93.5
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 93.6
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 93.7
+            }
+          ]
+        },
+        {
+          "code": "energy_cost_m3",
+          "name": "Production cost per m3",
+          "formula": "water production cost / m3 produced",
+          "unit": "USD/m3",
+          "direction": "down",
+          "objective": "OBJ-3",
+          "is_core": false,
+          "baseline_year": 2025,
+          "baseline_value": 0.094,
+          "annual_targets_improvement": {
+            "2026": 0.098,
+            "2027": 0.102,
+            "2028": 0.097,
+            "2029": 0.101,
+            "2030": 0.105
+          },
+          "annual_projection_baseline": {
+            "2026": 0.098,
+            "2027": 0.102,
+            "2028": 0.106,
+            "2029": 0.11,
+            "2030": 0.114
+          },
+          "quarterly_targets": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 0.1
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 0.1
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 0.1
+            },
+            {
+              "year": 2026,
+              "quarter": 4,
+              "value": 0.1
+            },
+            {
+              "year": 2027,
+              "quarter": 1,
+              "value": 0.1
+            },
+            {
+              "year": 2027,
+              "quarter": 2,
+              "value": 0.1
+            },
+            {
+              "year": 2027,
+              "quarter": 3,
+              "value": 0.1
+            },
+            {
+              "year": 2027,
+              "quarter": 4,
+              "value": 0.1
+            },
+            {
+              "year": 2028,
+              "quarter": 1,
+              "value": 0.1
+            },
+            {
+              "year": 2028,
+              "quarter": 2,
+              "value": 0.1
+            },
+            {
+              "year": 2028,
+              "quarter": 3,
+              "value": 0.1
+            },
+            {
+              "year": 2028,
+              "quarter": 4,
+              "value": 0.1
+            },
+            {
+              "year": 2029,
+              "quarter": 1,
+              "value": 0.1
+            },
+            {
+              "year": 2029,
+              "quarter": 2,
+              "value": 0.1
+            },
+            {
+              "year": 2029,
+              "quarter": 3,
+              "value": 0.1
+            },
+            {
+              "year": 2029,
+              "quarter": 4,
+              "value": 0.1
+            },
+            {
+              "year": 2030,
+              "quarter": 1,
+              "value": 0.1
+            },
+            {
+              "year": 2030,
+              "quarter": 2,
+              "value": 0.1
+            },
+            {
+              "year": 2030,
+              "quarter": 3,
+              "value": 0.1
+            },
+            {
+              "year": 2030,
+              "quarter": 4,
+              "value": 0.1
+            }
+          ],
+          "actuals": [
+            {
+              "year": 2026,
+              "quarter": 1,
+              "value": 0.099
+            },
+            {
+              "year": 2026,
+              "quarter": 2,
+              "value": 0.098
+            },
+            {
+              "year": 2026,
+              "quarter": 3,
+              "value": 0.098
+            }
+          ]
+        }
+      ]
+    },
+    "A2.3": {
+      "priorities": [
+        {
+          "priority": "Replace meters",
+          "decision": "include as initiative"
+        },
+        {
+          "priority": "Modern billing system",
+          "decision": "include as initiative"
+        },
+        {
+          "priority": "Asset management plan",
+          "decision": "defer"
+        },
+        {
+          "priority": "Training program for supervisors",
+          "decision": "include as objective"
+        }
+      ]
+    },
+    "A2.4": {
+      "meeting_date": "2026-05-20",
+      "attendees": [
+        "CEO",
+        "Board representative",
+        "Demo TTL",
+        "Project team"
+      ],
+      "agenda": [
+        "Introduction",
+        "Review of current state",
+        "Proposed strategic objectives",
+        "KPIs",
+        "Alignment and discussion",
+        "Formal sign-off"
+      ],
+      "decision": "approved",
+      "changes_requested": "",
+      "signed_minutes": "Minutes_signoff_2026-05-20 (fictional).pdf"
+    },
+    "A2.5": {
+      "owners": [
+        {
+          "objective": "OBJ-1",
+          "title": "Reduce non-revenue water",
+          "owner": "Carla Rojas, Operations Director",
+          "backup": "Ana Torres, Head of Strategic Planning"
+        },
+        {
+          "objective": "OBJ-2",
+          "title": "Improve commercial efficiency",
+          "owner": "Luis Mendoza, Commercial Director",
+          "backup": "Ana Torres, Head of Strategic Planning"
+        },
+        {
+          "objective": "OBJ-3",
+          "title": "Strengthen financial sustainability",
+          "owner": "Jorge Salas, CFO",
+          "backup": "Ana Torres, Head of Strategic Planning"
+        },
+        {
+          "objective": "OBJ-4",
+          "title": "Expand access to services",
+          "owner": "Marco Vega, Planning Director",
+          "backup": "Ana Torres, Head of Strategic Planning"
+        },
+        {
+          "objective": "OBJ-5",
+          "title": "Develop human talent",
+          "owner": "Rosa Quispe, HR Manager",
+          "backup": "Ana Torres, Head of Strategic Planning"
+        }
+      ]
+    },
+    "A2.6": {
+      "initiatives": [
+        {
+          "code": "INI-01",
+          "objective": "OBJ-1",
+          "name": "District metered areas and pressure management",
+          "description": "District metered areas and pressure management",
+          "source": "UoF long-term action",
+          "lead": "Operations Director",
+          "budget_usd": 3600000.0
+        },
+        {
+          "code": "INI-02",
+          "objective": "OBJ-1",
+          "name": "Customer meter replacement (60,000 meters)",
+          "description": "Customer meter replacement (60,000 meters)",
+          "source": "UoF long-term action",
+          "lead": "Commercial Director",
+          "budget_usd": 4500000.0
+        },
+        {
+          "code": "INI-03",
+          "objective": "OBJ-2",
+          "name": "New commercial and billing system (CIS) and collection campaign",
+          "description": "New commercial and billing system (CIS) and collection campaign",
+          "source": "UoF long-term action",
+          "lead": "Commercial Director",
+          "budget_usd": 1200000.0
+        },
+        {
+          "code": "INI-04",
+          "objective": "OBJ-3",
+          "name": "High-efficiency pumps at 3 pumping stations",
+          "description": "High-efficiency pumps at 3 pumping stations",
+          "source": "New",
+          "lead": "Operations Director",
+          "budget_usd": 900000.0
+        },
+        {
+          "code": "INI-05",
+          "objective": "OBJ-4",
+          "name": "Rehabilitation of the North wastewater treatment plant",
+          "description": "Rehabilitation of the North wastewater treatment plant",
+          "source": "New",
+          "lead": "Wastewater Manager",
+          "budget_usd": 4500000.0
+        },
+        {
+          "code": "INI-06",
+          "objective": "OBJ-4",
+          "name": "Network expansion to peri-urban neighborhoods (8,000 connections)",
+          "description": "Network expansion to peri-urban neighborhoods (8,000 connections)",
+          "source": "New",
+          "lead": "Planning Director",
+          "budget_usd": 4000000.0
+        },
+        {
+          "code": "INI-07",
+          "objective": "OBJ-5",
+          "name": "Leadership and technical capacity-building program",
+          "description": "Leadership and technical capacity-building program",
+          "source": "New",
+          "lead": "HR Manager",
+          "budget_usd": 600000.0
+        }
+      ]
+    },
+    "A3.1": {
+      "charters": [
+        {
+          "initiative": "INI-01",
+          "strategic_objective": "Reduce non-revenue water",
+          "project_name": "DMA and Pressure Management Program",
+          "project_manager": "Carla Rojas",
+          "project_sponsor": "CEO",
+          "mission": "Cut physical losses by sectorizing the network into 24 district metered areas with pressure control.",
+          "goals": [
+            "24 DMAs operating by Dec 2028",
+            "NRW -6.5 points by 2030"
+          ],
+          "scope": "Design and install 24 DMAs, 40 pressure-reducing valves, flow meters and SCADA links.",
+          "dependencies": [
+            "World Bank loan effectiveness"
+          ],
+          "risks": [
+            "Unknown network condition",
+            "Contractor delays"
+          ],
+          "assumptions": [
+            "Prices as of 2026 plus 4% inflation"
+          ],
+          "milestones": [
+            {
+              "milestone": "Design approved",
+              "date": "2026-06-30"
+            },
+            {
+              "milestone": "First 8 DMAs",
+              "date": "2027-06-30"
+            },
+            {
+              "milestone": "All 24 DMAs",
+              "date": "2028-12-31"
+            }
+          ],
+          "team": [
+            {
+              "name": "Carla Rojas",
+              "role": "Project manager"
+            }
+          ],
+          "total_budget": 3600000.0,
+          "budget_breakdown": [
+            {
+              "item": "CAPEX",
+              "year": 2026,
+              "amount": 1200000.0
+            },
+            {
+              "item": "CAPEX",
+              "year": 2027,
+              "amount": 1600000.0
+            },
+            {
+              "item": "CAPEX",
+              "year": 2028,
+              "amount": 800000.0
+            }
+          ],
+          "completion_date": "2028-12-31",
+          "approvals": {
+            "sponsor": "CEO (2026-07-10)",
+            "project_manager": "Carla Rojas (2026-07-10)",
+            "finance_manager": "Jorge Salas, CFO (2026-07-12)"
+          }
+        },
+        {
+          "initiative": "INI-02",
+          "strategic_objective": "Reduce non-revenue water",
+          "project_name": "Universal Metering Program",
+          "project_manager": "Luis Mendoza",
+          "project_sponsor": "CEO",
+          "mission": "Meter every connection accurately to bill real consumption.",
+          "goals": [
+            "60,000 meters replaced or installed by 2028",
+            "Metered connections 100%"
+          ],
+          "scope": "Procure and install 60,000 class C meters; update customer database.",
+          "dependencies": [
+            "World Bank loan effectiveness"
+          ],
+          "risks": [
+            "Customer resistance",
+            "Meter supply delays"
+          ],
+          "assumptions": [
+            "Prices as of 2026 plus 4% inflation"
+          ],
+          "milestones": [
+            {
+              "milestone": "Procurement awarded",
+              "date": "2026-07-31"
+            },
+            {
+              "milestone": "30,000 installed",
+              "date": "2027-09-30"
+            },
+            {
+              "milestone": "60,000 installed",
+              "date": "2028-12-31"
+            }
+          ],
+          "team": [
+            {
+              "name": "Luis Mendoza",
+              "role": "Project manager"
+            }
+          ],
+          "total_budget": 4500000.0,
+          "budget_breakdown": [
+            {
+              "item": "CAPEX",
+              "year": 2026,
+              "amount": 1500000.0
+            },
+            {
+              "item": "CAPEX",
+              "year": 2027,
+              "amount": 1500000.0
+            },
+            {
+              "item": "CAPEX",
+              "year": 2028,
+              "amount": 1500000.0
+            }
+          ],
+          "completion_date": "2028-12-31",
+          "approvals": {
+            "sponsor": "CEO (2026-07-10)",
+            "project_manager": "Luis Mendoza (2026-07-10)",
+            "finance_manager": "Jorge Salas, CFO (2026-07-12)"
+          }
+        },
+        {
+          "initiative": "INI-03",
+          "strategic_objective": "Improve commercial efficiency",
+          "project_name": "Commercial Information System",
+          "project_manager": "Luis Mendoza",
+          "project_sponsor": "CEO",
+          "mission": "Replace the 2004 billing system and raise collection.",
+          "goals": [
+            "CIS live by June 2027",
+            "Collection 93% by 2030"
+          ],
+          "scope": "CIS implementation, data migration, mobile collection, campaign.",
+          "dependencies": [
+            "Annual budget approval"
+          ],
+          "risks": [
+            "Data migration quality"
+          ],
+          "assumptions": [
+            "Prices as of 2026 plus 4% inflation"
+          ],
+          "milestones": [
+            {
+              "milestone": "Vendor selected",
+              "date": "2026-05-31"
+            },
+            {
+              "milestone": "Go-live",
+              "date": "2027-06-30"
+            }
+          ],
+          "team": [
+            {
+              "name": "Luis Mendoza",
+              "role": "Project manager"
+            }
+          ],
+          "total_budget": 1200000.0,
+          "budget_breakdown": [
+            {
+              "item": "CAPEX",
+              "year": 2026,
+              "amount": 800000.0
+            },
+            {
+              "item": "CAPEX",
+              "year": 2027,
+              "amount": 400000.0
+            }
+          ],
+          "completion_date": "2027-06-30",
+          "approvals": {
+            "sponsor": "CEO (2026-07-10)",
+            "project_manager": "Luis Mendoza (2026-07-10)",
+            "finance_manager": "Jorge Salas, CFO (2026-07-12)"
+          }
+        },
+        {
+          "initiative": "INI-04",
+          "strategic_objective": "Strengthen financial sustainability",
+          "project_name": "Pumping Energy Efficiency",
+          "project_manager": "Carla Rojas",
+          "project_sponsor": "CEO",
+          "mission": "Cut energy use in pumping with high-efficiency pumps and variable speed drives.",
+          "goals": [
+            "Production cost per m3 8% below Baseline from 2028"
+          ],
+          "scope": "Replace 9 pumps at 3 stations; install VFDs; energy monitoring.",
+          "dependencies": [
+            "Annual budget approval"
+          ],
+          "risks": [
+            "Supplier delays"
+          ],
+          "assumptions": [
+            "Prices as of 2026 plus 4% inflation"
+          ],
+          "milestones": [
+            {
+              "milestone": "Tender awarded",
+              "date": "2027-04-30"
+            },
+            {
+              "milestone": "Commissioning",
+              "date": "2027-12-15"
+            }
+          ],
+          "team": [
+            {
+              "name": "Carla Rojas",
+              "role": "Project manager"
+            }
+          ],
+          "total_budget": 900000.0,
+          "budget_breakdown": [
+            {
+              "item": "CAPEX",
+              "year": 2027,
+              "amount": 900000.0
+            }
+          ],
+          "completion_date": "2027-12-15",
+          "approvals": {
+            "sponsor": "CEO (2026-07-10)",
+            "project_manager": "Carla Rojas (2026-07-10)",
+            "finance_manager": "Jorge Salas, CFO (2026-07-12)"
+          }
+        },
+        {
+          "initiative": "INI-05",
+          "strategic_objective": "Expand access to services",
+          "project_name": "North WWTP Rehabilitation",
+          "project_manager": "Wastewater Manager",
+          "project_sponsor": "CEO",
+          "mission": "Restore treatment capacity to enable 3,000 new sewer connections.",
+          "goals": [
+            "Treated wastewater from 60% to 75%"
+          ],
+          "scope": "Civil, mechanical and electrical rehabilitation.",
+          "dependencies": [
+            "World Bank loan effectiveness"
+          ],
+          "risks": [
+            "Environmental permit timing"
+          ],
+          "assumptions": [
+            "Prices as of 2026 plus 4% inflation"
+          ],
+          "milestones": [
+            {
+              "milestone": "Works start",
+              "date": "2028-03-01"
+            },
+            {
+              "milestone": "Commissioning",
+              "date": "2029-12-15"
+            }
+          ],
+          "team": [
+            {
+              "name": "Wastewater Manager",
+              "role": "Project manager"
+            }
+          ],
+          "total_budget": 4500000.0,
+          "budget_breakdown": [
+            {
+              "item": "CAPEX",
+              "year": 2028,
+              "amount": 2000000.0
+            },
+            {
+              "item": "CAPEX",
+              "year": 2029,
+              "amount": 2500000.0
+            }
+          ],
+          "completion_date": "2029-12-15",
+          "approvals": {
+            "sponsor": "CEO (2026-07-10)",
+            "project_manager": "Wastewater Manager (2026-07-10)",
+            "finance_manager": "Jorge Salas, CFO (2026-07-12)"
+          }
+        },
+        {
+          "initiative": "INI-06",
+          "strategic_objective": "Expand access to services",
+          "project_name": "Peri-urban Network Expansion",
+          "project_manager": "Marco Vega",
+          "project_sponsor": "CEO",
+          "mission": "Connect 8,000 households in unserved southern neighborhoods.",
+          "goals": [
+            "2,000 connections per year 2027-2030"
+          ],
+          "scope": "Secondary networks and household connections.",
+          "dependencies": [
+            "World Bank loan effectiveness"
+          ],
+          "risks": [
+            "Land tenure issues"
+          ],
+          "assumptions": [
+            "Prices as of 2026 plus 4% inflation"
+          ],
+          "milestones": [
+            {
+              "milestone": "Phase 1 complete",
+              "date": "2027-12-15"
+            },
+            {
+              "milestone": "Phase 4 complete",
+              "date": "2030-12-15"
+            }
+          ],
+          "team": [
+            {
+              "name": "Marco Vega",
+              "role": "Project manager"
+            }
+          ],
+          "total_budget": 4000000.0,
+          "budget_breakdown": [
+            {
+              "item": "CAPEX",
+              "year": 2027,
+              "amount": 1000000.0
+            },
+            {
+              "item": "CAPEX",
+              "year": 2028,
+              "amount": 1000000.0
+            },
+            {
+              "item": "CAPEX",
+              "year": 2029,
+              "amount": 1000000.0
+            },
+            {
+              "item": "CAPEX",
+              "year": 2030,
+              "amount": 1000000.0
+            }
+          ],
+          "completion_date": "2030-12-15",
+          "approvals": {
+            "sponsor": "CEO (2026-07-10)",
+            "project_manager": "Marco Vega (2026-07-10)",
+            "finance_manager": "Jorge Salas, CFO (2026-07-12)"
+          }
+        },
+        {
+          "initiative": "INI-07",
+          "strategic_objective": "Develop human talent",
+          "project_name": "Leadership and Technical Academy",
+          "project_manager": "Rosa Quispe",
+          "project_sponsor": "CEO",
+          "mission": "Build leadership and asset management skills in supervisors and technical staff.",
+          "goals": [
+            "100% of supervisors trained by 2028"
+          ],
+          "scope": "Training curriculum with a local university; 184 participants.",
+          "dependencies": [
+            "Annual budget approval"
+          ],
+          "risks": [
+            "Staff availability"
+          ],
+          "assumptions": [
+            "Prices as of 2026 plus 4% inflation"
+          ],
+          "milestones": [
+            {
+              "milestone": "Curriculum approved",
+              "date": "2026-06-30"
+            },
+            {
+              "milestone": "All supervisors trained",
+              "date": "2028-12-15"
+            }
+          ],
+          "team": [
+            {
+              "name": "Rosa Quispe",
+              "role": "Project manager"
+            }
+          ],
+          "total_budget": 600000.0,
+          "budget_breakdown": [
+            {
+              "item": "OPEX",
+              "year": 2026,
+              "amount": 120000.0
+            },
+            {
+              "item": "OPEX",
+              "year": 2027,
+              "amount": 120000.0
+            },
+            {
+              "item": "OPEX",
+              "year": 2028,
+              "amount": 120000.0
+            },
+            {
+              "item": "OPEX",
+              "year": 2029,
+              "amount": 120000.0
+            },
+            {
+              "item": "OPEX",
+              "year": 2030,
+              "amount": 120000.0
+            }
+          ],
+          "completion_date": "2030-12-15",
+          "approvals": {
+            "sponsor": "CEO (2026-07-10)",
+            "project_manager": "Rosa Quispe (2026-07-10)",
+            "finance_manager": "Jorge Salas, CFO (2026-07-12)"
+          }
+        }
+      ]
+    },
+    "A3.2": {
+      "actual_years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "proforma_years": [
+        2026,
+        2027,
+        2028,
+        2029,
+        2030
+      ],
+      "assumptions": [
+        {
+          "year": 2026,
+          "connections_water": 127670,
+          "connections_sewer": 96900,
+          "avg_consumption_m3_per_conn_yr": 221.1,
+          "tariff_water_usd_m3": 0.666,
+          "tariff_sewer_usd_m3": 0.312,
+          "collection_rate": 0.83,
+          "water_produced_m3": 49513200.0,
+          "billed_m3": 28222524.0,
+          "nrw": 0.43,
+          "production_cost_usd_m3": 0.0978,
+          "distribution_cost_pct": 0.2,
+          "other_opex_pct": 0.15,
+          "sga_pct": 0.18,
+          "bad_debt_pct": 0.03,
+          "other_admin_pct": 0.04,
+          "tax_rate": 0.0
+        },
+        {
+          "year": 2027,
+          "connections_water": 132607,
+          "connections_sewer": 98838,
+          "avg_consumption_m3_per_conn_yr": 221.1,
+          "tariff_water_usd_m3": 0.692,
+          "tariff_sewer_usd_m3": 0.324,
+          "collection_rate": 0.855,
+          "water_produced_m3": 49266819.0,
+          "billed_m3": 29313757.0,
+          "nrw": 0.405,
+          "production_cost_usd_m3": 0.1017,
+          "distribution_cost_pct": 0.2,
+          "other_opex_pct": 0.15,
+          "sga_pct": 0.18,
+          "bad_debt_pct": 0.03,
+          "other_admin_pct": 0.04,
+          "tax_rate": 0.0
+        },
+        {
+          "year": 2028,
+          "connections_water": 137657,
+          "connections_sewer": 100815,
+          "avg_consumption_m3_per_conn_yr": 221.1,
+          "tariff_water_usd_m3": 0.72,
+          "tariff_sewer_usd_m3": 0.337,
+          "collection_rate": 0.88,
+          "water_produced_m3": 48688143.0,
+          "billed_m3": 30430089.0,
+          "nrw": 0.375,
+          "production_cost_usd_m3": 0.0973,
+          "distribution_cost_pct": 0.2,
+          "other_opex_pct": 0.15,
+          "sga_pct": 0.18,
+          "bad_debt_pct": 0.03,
+          "other_admin_pct": 0.04,
+          "tax_rate": 0.0
+        },
+        {
+          "year": 2029,
+          "connections_water": 142823,
+          "connections_sewer": 104331,
+          "avg_consumption_m3_per_conn_yr": 221.1,
+          "tariff_water_usd_m3": 0.749,
+          "tariff_sewer_usd_m3": 0.351,
+          "collection_rate": 0.905,
+          "water_produced_m3": 48201674.0,
+          "billed_m3": 31572097.0,
+          "nrw": 0.345,
+          "production_cost_usd_m3": 0.1012,
+          "distribution_cost_pct": 0.2,
+          "other_opex_pct": 0.15,
+          "sga_pct": 0.18,
+          "bad_debt_pct": 0.03,
+          "other_admin_pct": 0.04,
+          "tax_rate": 0.0
+        },
+        {
+          "year": 2030,
+          "connections_water": 148108,
+          "connections_sewer": 107918,
+          "avg_consumption_m3_per_conn_yr": 221.1,
+          "tariff_water_usd_m3": 0.779,
+          "tariff_sewer_usd_m3": 0.365,
+          "collection_rate": 0.93,
+          "water_produced_m3": 48866224.0,
+          "billed_m3": 32740370.0,
+          "nrw": 0.33,
+          "production_cost_usd_m3": 0.1052,
+          "distribution_cost_pct": 0.2,
+          "other_opex_pct": 0.15,
+          "sga_pct": 0.18,
+          "bad_debt_pct": 0.03,
+          "other_admin_pct": 0.04,
+          "tax_rate": 0.0
+        }
+      ],
+      "actual_assumptions": [
+        {
+          "year": 2022,
+          "connections_water": 116200,
+          "connections_sewer": 88000,
+          "avg_consumption_m3_per_conn_yr": 213.8,
+          "tariff_water_usd_m3": 0.56,
+          "tariff_sewer_usd_m3": 0.26,
+          "collection_rate": 0.8,
+          "water_produced_m3": 46000000.0,
+          "billed_m3": 24840000.0,
+          "nrw": 0.46,
+          "production_cost_usd_m3": 0.085,
+          "distribution_cost_pct": 0.2,
+          "other_opex_pct": 0.15,
+          "sga_pct": 0.18,
+          "bad_debt_pct": 0.03,
+          "other_admin_pct": 0.04,
+          "tax_rate": 0.0
+        },
+        {
+          "year": 2023,
+          "connections_water": 119000,
+          "connections_sewer": 90400,
+          "avg_consumption_m3_per_conn_yr": 215.9,
+          "tariff_water_usd_m3": 0.58,
+          "tariff_sewer_usd_m3": 0.27,
+          "collection_rate": 0.81,
+          "water_produced_m3": 46800000.0,
+          "billed_m3": 25693200.0,
+          "nrw": 0.451,
+          "production_cost_usd_m3": 0.088,
+          "distribution_cost_pct": 0.2,
+          "other_opex_pct": 0.15,
+          "sga_pct": 0.18,
+          "bad_debt_pct": 0.03,
+          "other_admin_pct": 0.04,
+          "tax_rate": 0.0
+        },
+        {
+          "year": 2024,
+          "connections_water": 121900,
+          "connections_sewer": 92700,
+          "avg_consumption_m3_per_conn_yr": 218.7,
+          "tariff_water_usd_m3": 0.61,
+          "tariff_sewer_usd_m3": 0.28,
+          "collection_rate": 0.82,
+          "water_produced_m3": 47600000.0,
+          "billed_m3": 26656000.0,
+          "nrw": 0.44,
+          "production_cost_usd_m3": 0.091,
+          "distribution_cost_pct": 0.2,
+          "other_opex_pct": 0.15,
+          "sga_pct": 0.18,
+          "bad_debt_pct": 0.03,
+          "other_admin_pct": 0.04,
+          "tax_rate": 0.0
+        },
+        {
+          "year": 2025,
+          "connections_water": 124800,
+          "connections_sewer": 95000,
+          "avg_consumption_m3_per_conn_yr": 221.1,
+          "tariff_water_usd_m3": 0.64,
+          "tariff_sewer_usd_m3": 0.3,
+          "collection_rate": 0.83,
+          "water_produced_m3": 48400000.0,
+          "billed_m3": 27588000.0,
+          "nrw": 0.43,
+          "production_cost_usd_m3": 0.094,
+          "distribution_cost_pct": 0.2,
+          "other_opex_pct": 0.15,
+          "sga_pct": 0.18,
+          "bad_debt_pct": 0.03,
+          "other_admin_pct": 0.04,
+          "tax_rate": 0.0
+        }
+      ],
+      "pl_actuals": [
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "water_charges",
+          "value": 11128320.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "sewage_charges",
+          "value": 3912834.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "other_revenue",
+          "value": 850000.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "total_revenue",
+          "value": 15891154.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "production_cost",
+          "value": 3910000.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "distribution_cost",
+          "value": 3178231.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "other_operating_expense",
+          "value": 2383673.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "total_cost_of_operations",
+          "value": 9471904.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "gross_profit",
+          "value": 6419250.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "sga",
+          "value": 2860408.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "bad_debt",
+          "value": 476735.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "other_admin_expense",
+          "value": 635646.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "total_admin",
+          "value": 3972789.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "ebitda",
+          "value": 2446462.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "depreciation",
+          "value": 2450000.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "ebit",
+          "value": -3538.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "interest",
+          "value": 972000.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "ebt",
+          "value": -975538.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "income_tax",
+          "value": 0.0
+        },
+        {
+          "year": 2022,
+          "category": "pl",
+          "line_code": "net_income",
+          "value": -975538.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "water_charges",
+          "value": 12070665.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "sewage_charges",
+          "value": 4268629.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "other_revenue",
+          "value": 880000.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "total_revenue",
+          "value": 17219295.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "production_cost",
+          "value": 4118400.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "distribution_cost",
+          "value": 3443859.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "other_operating_expense",
+          "value": 2582894.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "total_cost_of_operations",
+          "value": 10145153.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "gross_profit",
+          "value": 7074142.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "sga",
+          "value": 3099473.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "bad_debt",
+          "value": 516579.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "other_admin_expense",
+          "value": 688772.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "total_admin",
+          "value": 4304824.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "ebitda",
+          "value": 2769318.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "depreciation",
+          "value": 2520000.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "ebit",
+          "value": 249318.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "interest",
+          "value": 864000.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "ebt",
+          "value": -614682.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "income_tax",
+          "value": 0.0
+        },
+        {
+          "year": 2023,
+          "category": "pl",
+          "line_code": "net_income",
+          "value": -614682.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "water_charges",
+          "value": 13333331.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "sewage_charges",
+          "value": 4654177.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "other_revenue",
+          "value": 920000.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "total_revenue",
+          "value": 18907508.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "production_cost",
+          "value": 4331600.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "distribution_cost",
+          "value": 3781502.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "other_operating_expense",
+          "value": 2836126.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "total_cost_of_operations",
+          "value": 10949228.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "gross_profit",
+          "value": 7958280.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "sga",
+          "value": 3403351.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "bad_debt",
+          "value": 567225.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "other_admin_expense",
+          "value": 756300.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "total_admin",
+          "value": 4726877.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "ebitda",
+          "value": 3231403.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "depreciation",
+          "value": 2580000.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "ebit",
+          "value": 651403.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "interest",
+          "value": 756000.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "ebt",
+          "value": -104597.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "income_tax",
+          "value": 0.0
+        },
+        {
+          "year": 2024,
+          "category": "pl",
+          "line_code": "net_income",
+          "value": -104597.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "water_charges",
+          "value": 14654746.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "sewage_charges",
+          "value": 5229120.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "other_revenue",
+          "value": 950000.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "total_revenue",
+          "value": 20833865.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "production_cost",
+          "value": 4549600.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "distribution_cost",
+          "value": 4166773.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "other_operating_expense",
+          "value": 3125080.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "total_cost_of_operations",
+          "value": 11841453.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "gross_profit",
+          "value": 8992412.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "sga",
+          "value": 3750096.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "bad_debt",
+          "value": 625016.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "other_admin_expense",
+          "value": 833355.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "total_admin",
+          "value": 5208466.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "ebitda",
+          "value": 3783946.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "depreciation",
+          "value": 2650000.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "ebit",
+          "value": 1133946.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "interest",
+          "value": 648000.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "ebt",
+          "value": 485946.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "income_tax",
+          "value": 0.0
+        },
+        {
+          "year": 2025,
+          "category": "pl",
+          "line_code": "net_income",
+          "value": 485946.0
+        }
+      ],
+      "pl_forecast": [
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "water_charges",
+          "value": 15591477.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "sewage_charges",
+          "value": 5547050.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "other_revenue",
+          "value": 978500.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "total_revenue",
+          "value": 22117027.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "production_cost",
+          "value": 4840410.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "distribution_cost",
+          "value": 4423405.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "other_operating_expense",
+          "value": 3317554.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "total_cost_of_operations",
+          "value": 12581370.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "gross_profit",
+          "value": 9535657.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "sga",
+          "value": 4101065.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "bad_debt",
+          "value": 663511.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "other_admin_expense",
+          "value": 884681.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "total_admin",
+          "value": 5649257.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "ebitda",
+          "value": 3886400.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "depreciation",
+          "value": 2703000.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "ebit",
+          "value": 1183400.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "interest",
+          "value": 583750.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "ebt",
+          "value": 599650.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "income_tax",
+          "value": 0.0
+        },
+        {
+          "year": 2026,
+          "category": "pl",
+          "line_code": "net_income",
+          "value": 599650.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "water_charges",
+          "value": 17349392.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "sewage_charges",
+          "value": 6061549.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "other_revenue",
+          "value": 1007855.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "total_revenue",
+          "value": 24418796.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "production_cost",
+          "value": 5008977.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "distribution_cost",
+          "value": 4883759.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "other_operating_expense",
+          "value": 3662819.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "total_cost_of_operations",
+          "value": 13555556.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "gross_profit",
+          "value": 10863240.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "sga",
+          "value": 4515383.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "bad_debt",
+          "value": 732564.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "other_admin_expense",
+          "value": 976752.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "total_admin",
+          "value": 6224699.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "ebitda",
+          "value": 4638541.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "depreciation",
+          "value": 2897060.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "ebit",
+          "value": 1741481.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "interest",
+          "value": 598250.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "ebt",
+          "value": 1143231.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "income_tax",
+          "value": 0.0
+        },
+        {
+          "year": 2027,
+          "category": "pl",
+          "line_code": "net_income",
+          "value": 1143231.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "water_charges",
+          "value": 19278174.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "sewage_charges",
+          "value": 6618106.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "other_revenue",
+          "value": 1038091.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "total_revenue",
+          "value": 26934370.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "production_cost",
+          "value": 4736297.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "distribution_cost",
+          "value": 5386874.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "other_operating_expense",
+          "value": 4040156.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "total_cost_of_operations",
+          "value": 14163326.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "gross_profit",
+          "value": 12771044.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "sga",
+          "value": 4968187.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "bad_debt",
+          "value": 808031.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "other_admin_expense",
+          "value": 1077375.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "total_admin",
+          "value": 6853593.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "ebitda",
+          "value": 5917451.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "depreciation",
+          "value": 3168201.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "ebit",
+          "value": 2749250.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "interest",
+          "value": 639000.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "ebt",
+          "value": 2110250.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "income_tax",
+          "value": 0.0
+        },
+        {
+          "year": 2028,
+          "category": "pl",
+          "line_code": "net_income",
+          "value": 2110250.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "water_charges",
+          "value": 21392687.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "sewage_charges",
+          "value": 7325250.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "other_revenue",
+          "value": 1069233.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "total_revenue",
+          "value": 29787170.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "production_cost",
+          "value": 4876533.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "distribution_cost",
+          "value": 5957434.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "other_operating_expense",
+          "value": 4468075.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "total_cost_of_operations",
+          "value": 15302042.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "gross_profit",
+          "value": 14485127.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "sga",
+          "value": 5481691.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "bad_debt",
+          "value": 893615.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "other_admin_expense",
+          "value": 1191487.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "total_admin",
+          "value": 7566792.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "ebitda",
+          "value": 6918335.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "depreciation",
+          "value": 3436445.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "ebit",
+          "value": 3481890.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "interest",
+          "value": 653500.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "ebt",
+          "value": 2828390.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "income_tax",
+          "value": 0.0
+        },
+        {
+          "year": 2029,
+          "category": "pl",
+          "line_code": "net_income",
+          "value": 2828390.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "water_charges",
+          "value": 23708998.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "sewage_charges",
+          "value": 8097839.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "other_revenue",
+          "value": 1101310.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "total_revenue",
+          "value": 32908147.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "production_cost",
+          "value": 5141516.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "distribution_cost",
+          "value": 6581629.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "other_operating_expense",
+          "value": 4936222.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "total_cost_of_operations",
+          "value": 16659367.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "gross_profit",
+          "value": 16248780.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "sga",
+          "value": 6123467.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "bad_debt",
+          "value": 987244.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "other_admin_expense",
+          "value": 1316326.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "total_admin",
+          "value": 8427037.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "ebitda",
+          "value": 7821743.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "depreciation",
+          "value": 3633814.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "ebit",
+          "value": 4187929.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "interest",
+          "value": 565333.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "ebt",
+          "value": 3622596.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "income_tax",
+          "value": 0.0
+        },
+        {
+          "year": 2030,
+          "category": "pl",
+          "line_code": "net_income",
+          "value": 3622596.0
+        }
+      ],
+      "capital_investment_plan": [
+        {
+          "year": 2026,
+          "total_water_investments": 2700000.0,
+          "total_sanitation_investments": 0.0,
+          "other_capital_expenditure": 2300000.0,
+          "total_investment": 5000000.0,
+          "long_term_loans_received": 2500000.0,
+          "short_term_loans_received": 0,
+          "own_funds": 2500000.0,
+          "total_principal_repayment": 1800000.0,
+          "total_interest_payment": 583750.0,
+          "total_debt_service": 2383750.0,
+          "estimated_incremental_depreciation": 0.0,
+          "net_cashflow_operating_activities": 3886400.0,
+          "dscr": 1.63
+        },
+        {
+          "year": 2027,
+          "total_water_investments": 5000000.0,
+          "total_sanitation_investments": 0.0,
+          "other_capital_expenditure": 1900000.0,
+          "total_investment": 6900000.0,
+          "long_term_loans_received": 4500000.0,
+          "short_term_loans_received": 0,
+          "own_funds": 2400000.0,
+          "total_principal_repayment": 1800000.0,
+          "total_interest_payment": 598250.0,
+          "total_debt_service": 2398250.0,
+          "estimated_incremental_depreciation": 140000.0,
+          "net_cashflow_operating_activities": 4638541.0,
+          "dscr": 1.93
+        },
+        {
+          "year": 2028,
+          "total_water_investments": 3300000.0,
+          "total_sanitation_investments": 2000000.0,
+          "other_capital_expenditure": 1500000.0,
+          "total_investment": 6800000.0,
+          "long_term_loans_received": 4000000.0,
+          "short_term_loans_received": 0,
+          "own_funds": 2800000.0,
+          "total_principal_repayment": 1800000.0,
+          "total_interest_payment": 639000.0,
+          "total_debt_service": 2439000.0,
+          "estimated_incremental_depreciation": 356000.0,
+          "net_cashflow_operating_activities": 5917451.0,
+          "dscr": 2.43
+        },
+        {
+          "year": 2029,
+          "total_water_investments": 1000000.0,
+          "total_sanitation_investments": 2500000.0,
+          "other_capital_expenditure": 1500000.0,
+          "total_investment": 5000000.0,
+          "long_term_loans_received": 3000000.0,
+          "short_term_loans_received": 0,
+          "own_funds": 2000000.0,
+          "total_principal_repayment": 2733333.0,
+          "total_interest_payment": 653500.0,
+          "total_debt_service": 3386833.0,
+          "estimated_incremental_depreciation": 568000.0,
+          "net_cashflow_operating_activities": 6918335.0,
+          "dscr": 2.04
+        },
+        {
+          "year": 2030,
+          "total_water_investments": 1000000.0,
+          "total_sanitation_investments": 0.0,
+          "other_capital_expenditure": 1500000.0,
+          "total_investment": 2500000.0,
+          "long_term_loans_received": 0.0,
+          "short_term_loans_received": 0,
+          "own_funds": 2500000.0,
+          "total_principal_repayment": 2733333.0,
+          "total_interest_payment": 565333.0,
+          "total_debt_service": 3298667.0,
+          "estimated_incremental_depreciation": 708000.0,
+          "net_cashflow_operating_activities": 7821743.0,
+          "dscr": 2.37
+        }
+      ],
+      "loan": {
+        "lender": "World Bank (IBRD loan, fictional)",
+        "amount": 14000000.0,
+        "interest_rate": 0.035,
+        "disbursement": {
+          "2026": 2500000.0,
+          "2027": 4500000.0,
+          "2028": 4000000.0,
+          "2029": 3000000.0
+        },
+        "grace_years": 3,
+        "repayment_years": 15
+      },
+      "note": "Proforma assumptions already include the effects of the initiatives (NRW, collection, connections, production cost)."
+    },
+    "A3.3": {
+      "scenarios": [
+        {
+          "name": "Plan",
+          "water_tariff_change_pct": 0,
+          "sewer_tariff_change_pct": 0,
+          "results": [
+            {
+              "year": 2026,
+              "total_revenue": 22117027.0,
+              "ebitda": 3886400.0,
+              "net_income": 599650.0,
+              "dscr": 1.63
+            },
+            {
+              "year": 2027,
+              "total_revenue": 24418796.0,
+              "ebitda": 4638541.0,
+              "net_income": 1143231.0,
+              "dscr": 1.93
+            },
+            {
+              "year": 2028,
+              "total_revenue": 26934370.0,
+              "ebitda": 5917451.0,
+              "net_income": 2110250.0,
+              "dscr": 2.43
+            },
+            {
+              "year": 2029,
+              "total_revenue": 29787170.0,
+              "ebitda": 6918335.0,
+              "net_income": 2828390.0,
+              "dscr": 2.04
+            },
+            {
+              "year": 2030,
+              "total_revenue": 32908147.0,
+              "ebitda": 7821743.0,
+              "net_income": 3622596.0,
+              "dscr": 2.37
+            }
+          ]
+        },
+        {
+          "name": "Tariff freeze risk (-10%)",
+          "water_tariff_change_pct": -10,
+          "sewer_tariff_change_pct": -10,
+          "results": [
+            {
+              "year": 2026,
+              "total_revenue": 20003174.0,
+              "ebitda": 3040859.0,
+              "net_income": -245891.0,
+              "dscr": 1.28
+            },
+            {
+              "year": 2027,
+              "total_revenue": 22077702.0,
+              "ebitda": 3702104.0,
+              "net_income": 206794.0,
+              "dscr": 1.54
+            },
+            {
+              "year": 2028,
+              "total_revenue": 24344742.0,
+              "ebitda": 4881600.0,
+              "net_income": 1074399.0,
+              "dscr": 2.0
+            },
+            {
+              "year": 2029,
+              "total_revenue": 26915376.0,
+              "ebitda": 5769618.0,
+              "net_income": 1679672.0,
+              "dscr": 1.7
+            },
+            {
+              "year": 2030,
+              "total_revenue": 29727464.0,
+              "ebitda": 6549470.0,
+              "net_income": 2350322.0,
+              "dscr": 1.99
+            }
+          ]
+        },
+        {
+          "name": "Severe shock (-20%)",
+          "water_tariff_change_pct": -20,
+          "sewer_tariff_change_pct": -20,
+          "results": [
+            {
+              "year": 2026,
+              "total_revenue": 17889322.0,
+              "ebitda": 2195318.0,
+              "net_income": -1091432.0,
+              "dscr": 0.92
+            },
+            {
+              "year": 2027,
+              "total_revenue": 19736608.0,
+              "ebitda": 2765666.0,
+              "net_income": -729644.0,
+              "dscr": 1.15
+            },
+            {
+              "year": 2028,
+              "total_revenue": 21755114.0,
+              "ebitda": 3845749.0,
+              "net_income": 38548.0,
+              "dscr": 1.58
+            },
+            {
+              "year": 2029,
+              "total_revenue": 24043582.0,
+              "ebitda": 4620900.0,
+              "net_income": 530955.0,
+              "dscr": 1.36
+            },
+            {
+              "year": 2030,
+              "total_revenue": 26546780.0,
+              "ebitda": 5277196.0,
+              "net_income": 1078049.0,
+              "dscr": 1.6
+            }
+          ]
+        },
+        {
+          "name": "Regulatory approval +10%",
+          "water_tariff_change_pct": 10,
+          "sewer_tariff_change_pct": 10,
+          "results": [
+            {
+              "year": 2026,
+              "total_revenue": 24230880.0,
+              "ebitda": 4731942.0,
+              "net_income": 1445192.0,
+              "dscr": 1.99
+            },
+            {
+              "year": 2027,
+              "total_revenue": 26759890.0,
+              "ebitda": 5574979.0,
+              "net_income": 2079669.0,
+              "dscr": 2.32
+            },
+            {
+              "year": 2028,
+              "total_revenue": 29523998.0,
+              "ebitda": 6953302.0,
+              "net_income": 3146101.0,
+              "dscr": 2.85
+            },
+            {
+              "year": 2029,
+              "total_revenue": 32658963.0,
+              "ebitda": 8067052.0,
+              "net_income": 3977107.0,
+              "dscr": 2.38
+            },
+            {
+              "year": 2030,
+              "total_revenue": 36088831.0,
+              "ebitda": 9094017.0,
+              "net_income": 4894869.0,
+              "dscr": 2.76
+            }
+          ]
+        }
+      ],
+      "conclusions": "Tariffs are the critical variable: a 10% tariff shortfall lowers 2030 EBITDA by about USD 1.3 M and DSCR stays at 1.28 or more; a 20% shock pushes DSCR below 1.0 in 2026 (0.92), the year with the highest debt service relative to cash. The utility will request yearly indexation and protect collection gains."
+    },
+    "A3.4": {
+      "executive_summary": "Valle Verde (fictional) serves about 487,000 people with water (89% coverage) and 370,000 with sewerage. NRW of 43% and collection of 83% limit its finances. The plan invests USD 18.7 M in seven actions (2026-2030), financed with a USD 14 M World Bank loan and own funds. By 2030 it targets NRW 33%, collection 93%, EBITDA margin about 24% and DSCR above 1.5, while lowering the tariff needed for cost recovery compared with the Baseline.",
+      "water_balance_discussion": "Production can stay nearly flat to 2030 despite 19% more connections because losses fall 10 points.",
+      "asset_management_plan": "Asset register to be built in 2027 (deferred priority); investment plan focuses on DMAs, meters, pumps, WWTP and expansion."
+    },
+    "A4.1": {
+      "agenda": [
+        "Previous quarter highlights",
+        "KPI review vs targets",
+        "Optimization opportunities and owners",
+        "Closing remarks"
+      ],
+      "dashboard_rules": "Commercial and Operations upload quarter data by the 10th working day; Planning unit validates by the 15th.",
+      "quarterly_inputs": [
+        {
+          "year": 2026,
+          "quarter": 1,
+          "water_billed_m3": 7006118.0,
+          "water_produced_m3": 12378300.0,
+          "collections": 5529257.0,
+          "billed_revenue": 6694015.0,
+          "operating_revenue": 5529257.0,
+          "operating_costs": 4646434.0,
+          "ebitda": 928915.0,
+          "total_revenue": 5529257.0,
+          "cash_from_operations": 928915.0,
+          "principal_interest": 611128.0
+        },
+        {
+          "year": 2026,
+          "quarter": 2,
+          "water_billed_m3": 7030874.0,
+          "water_produced_m3": 12378300.0,
+          "collections": 5529257.0,
+          "billed_revenue": 6653739.0,
+          "operating_revenue": 5529257.0,
+          "operating_costs": 4569634.0,
+          "ebitda": 956561.0,
+          "total_revenue": 5529257.0,
+          "cash_from_operations": 956561.0,
+          "principal_interest": 605419.0
+        },
+        {
+          "year": 2026,
+          "quarter": 3,
+          "water_billed_m3": 7043253.0,
+          "water_produced_m3": 12378300.0,
+          "collections": 5529257.0,
+          "billed_revenue": 6629804.0,
+          "operating_revenue": 5529257.0,
+          "operating_costs": 4532178.0,
+          "ebitda": 967620.0,
+          "total_revenue": 5529257.0,
+          "cash_from_operations": 967620.0,
+          "principal_interest": 601006.0
+        }
+      ],
+      "kpi_actuals": {
+        "nrw": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "value": 43.4
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "value": 43.2
+          },
+          {
+            "year": 2026,
+            "quarter": 3,
+            "value": 43.1
+          }
+        ],
+        "collection": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "value": 82.6
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "value": 83.1
+          },
+          {
+            "year": 2026,
+            "quarter": 3,
+            "value": 83.4
+          }
+        ],
+        "occr": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "value": 1.19
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "value": 1.21
+          },
+          {
+            "year": 2026,
+            "quarter": 3,
+            "value": 1.22
+          }
+        ],
+        "ebitda_margin": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "value": 16.8
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "value": 17.3
+          },
+          {
+            "year": 2026,
+            "quarter": 3,
+            "value": 17.5
+          }
+        ],
+        "dscr": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "value": 1.52
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "value": 1.58
+          },
+          {
+            "year": 2026,
+            "quarter": 3,
+            "value": 1.61
+          }
+        ],
+        "water_coverage": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "value": 93.5
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "value": 93.6
+          },
+          {
+            "year": 2026,
+            "quarter": 3,
+            "value": 93.7
+          }
+        ],
+        "energy_cost_m3": [
+          {
+            "year": 2026,
+            "quarter": 1,
+            "value": 0.099
+          },
+          {
+            "year": 2026,
+            "quarter": 2,
+            "value": 0.098
+          },
+          {
+            "year": 2026,
+            "quarter": 3,
+            "value": 0.098
+          }
+        ]
+      }
+    },
+    "A4.2": {
+      "team": [
+        {
+          "name": "CEO",
+          "area": "strategy"
+        },
+        {
+          "name": "Jorge Salas",
+          "area": "finance"
+        },
+        {
+          "name": "Carla Rojas",
+          "area": "operations"
+        },
+        {
+          "name": "Luis Mendoza",
+          "area": "operations"
+        },
+        {
+          "name": "Ana Torres",
+          "area": "strategy"
+        }
+      ],
+      "cadence": "quarterly",
+      "first_meeting": "2026-07-15",
+      "transition": "Consultant handed over on 2026-06-30; planning unit owns the tracking.",
+      "meeting_log": [
+        {
+          "date": "2026-07-15",
+          "decisions": [
+            "Accelerate meter procurement (at risk)"
+          ]
+        },
+        {
+          "date": "2026-10-14",
+          "decisions": [
+            "Review Q3 NRW variance"
+          ]
+        }
+      ]
+    },
+    "A4.3": {
+      "events": [
+        {
+          "date": "2026-07-02",
+          "audience": "staff",
+          "format": "town hall",
+          "participants": 420
+        },
+        {
+          "date": "2026-07-09",
+          "audience": "board",
+          "format": "presentation",
+          "participants": 9
+        },
+        {
+          "date": "2026-07-23",
+          "audience": "regulator",
+          "format": "presentation",
+          "participants": 6
+        },
+        {
+          "date": "2026-08-05",
+          "audience": "customers",
+          "format": "website",
+          "participants": null
+        }
+      ],
+      "summary": "Plan shared with staff, board, regulator and the public between July and August 2026."
+    }
+  },
+  "milestones_status": [
+    {
+      "action": "ACT-03",
+      "milestone": "Vendor selected",
+      "due": "2026-05-31",
+      "done": "2026-06-20",
+      "status": "late"
+    },
+    {
+      "action": "ACT-01",
+      "milestone": "Design approved",
+      "due": "2026-06-30",
+      "done": "2026-06-28",
+      "status": "done"
+    },
+    {
+      "action": "ACT-02",
+      "milestone": "Procurement awarded",
+      "due": "2026-07-31",
+      "done": null,
+      "status": "at_risk"
+    }
+  ]
+}

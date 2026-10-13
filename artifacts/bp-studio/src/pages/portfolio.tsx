@@ -3,15 +3,16 @@ import { Link, useLocation } from "wouter";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   useGetSummary, getGetSummaryQueryKey, useListUtilities, getListUtilitiesQueryKey, useGetMetadata, useListUsers, getListUsersQueryKey,
-  useListViews, getListViewsQueryKey, useSaveView, useDeleteView, useCreateUtility, type ListUtilitiesParams, type Bucket,
+  useListViews, getListViewsQueryKey, useSaveView, useDeleteView, useCreateUtility, useLoadDemoPlan, type ListUtilitiesParams, type Bucket,
 } from "@workspace/api-client-react";
-import { ArrowDown, ArrowUp, Bookmark, ChevronLeft, ChevronRight, Download, Droplets, Plus, Search, Trash2, X } from "lucide-react";
+import { ArrowDown, ArrowUp, BookOpen, Bookmark, PlayCircle, ChevronLeft, ChevronRight, Download, Droplets, Plus, Search, Trash2, X } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Card, PageHeader, Empty, ErrorState, SkeletonRows, Pill, statusTone, inputCls, Btn } from "@/components/kit";
 import { UtilityForm, PLAN_YEARS } from "@/components/utility-form";
 import { useMe, errMsg, phaseColor, logoUrl, initials, humanize } from "@/lib/app";
 import { useToast } from "@/hooks/use-toast";
+import { useTestMode } from "@/lib/test-mode";
 import { cn } from "@/lib/utils";
 
 type Filters = { q: string; country: string; region: string; ttl: string; year: string; status: string; sort: string; direction: string };
@@ -90,6 +91,11 @@ export default function Portfolio({ admin }: { admin: boolean }) {
     },
   });
 
+  const openAccess = !!useTestMode().data?.openAccess;
+  const demo = useLoadDemoPlan({ mutation: {
+    onSuccess: (r) => { qc.invalidateQueries({ queryKey: getListUtilitiesQueryKey() }); qc.invalidateQueries({ queryKey: getGetSummaryQueryKey() }); navigate(`/plans/${r.planId}`); },
+    onError: (e) => toast({ title: "Could not open demo plan", description: errMsg(e), variant: "destructive" }),
+  } });
   useEffect(() => () => window.clearTimeout(timer.current), []);
   const update = (patch: Partial<Filters>) => { setF((s) => ({ ...s, ...patch })); setPage(1); };
   const onSearch = (v: string) => { setQInput(v); window.clearTimeout(timer.current); timer.current = window.setTimeout(() => update({ q: v.trim() }), 300); };
@@ -118,9 +124,68 @@ export default function Portfolio({ admin }: { admin: boolean }) {
 
   return (
     <div>
-      <PageHeader eyebrow={admin ? "Administration" : "Workspace"} title={admin ? "Portfolio" : "Utilities"}
-        description={admin ? "Every registered utility and the state of its business plan." : "Utilities you lead or are a member of."}
-        actions={admin && <Btn onClick={() => setCreating(true)} data-testid="button-new-utility"><Plus className="h-4 w-4" /> New utility</Btn>} />
+      <PageHeader eyebrow={admin ? "Portfolio administration" : me.role === "ttl" ? "Task Team Leader" : "Workspace"} title={admin ? "Global team workspace" : "My utility plans"}
+        description={admin ? "Provision people and utilities, follow every plan's progress and review submitted steps." : me.role === "viewer" ? "Plans you can read. Editing is not available for your role." : "The utility business plans you lead or contribute to."}
+        actions={admin && <div className="flex flex-wrap gap-2">
+          {openAccess && <>
+            <Btn variant="outline" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "complete" } })} data-testid="button-demo-complete"><BookOpen className="h-4 w-4" /> Open worked example (complete)</Btn>
+            <Btn variant="outline" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "midway" } })} data-testid="button-demo-midway"><PlayCircle className="h-4 w-4" /> Start midway demo</Btn>
+          </>}
+          <Btn onClick={() => setCreating(true)} data-testid="button-new-utility"><Plus className="h-4 w-4" /> New utility</Btn>
+        </div>} />
+
+      {admin ? (
+        <Card className="rise mb-6 overflow-hidden" data-testid="card-admin-onboarding">
+          <div className="grid gap-0 md:grid-cols-[1.1fr_2fr]">
+            <div className="bg-[#002244] p-5 text-white">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7FD3F2]">Your role</div>
+              <p className="mt-2 text-sm leading-relaxed text-white/85">The global team sets up the Studio: people, utilities and teams. TTLs then populate each plan step by step, and you review what they submit.</p>
+              <Link href="/help" className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#7FD3F2] hover:underline" data-testid="link-admin-help">Read the global team guide <ChevronRight className="h-3.5 w-3.5" /></Link>
+            </div>
+            <div className="grid gap-px bg-border sm:grid-cols-2">
+              {[
+                { n: "1", t: "Manage people", d: "Invite TTLs, editors and viewers and set roles.", el: <Link href="/users" className="text-[#009FDA] hover:underline" data-testid="link-onboard-people">Open People & roles</Link> },
+                { n: "2", t: "Create a utility", d: "Registers the utility and its 20-step plan.", el: <button type="button" onClick={() => setCreating(true)} className="text-[#009FDA] hover:underline" data-testid="button-onboard-create">Register utility</button> },
+                { n: "3", t: "View progress", d: "Tiles and the registry show every plan's status.", el: <button type="button" onClick={toTable} className="text-[#009FDA] hover:underline" data-testid="button-onboard-progress">Go to registry</button> },
+                openAccess
+                  ? { n: "4", t: "See a worked example", d: "A fictional, fully completed demo plan.", el: <button type="button" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "complete" } })} className="text-[#009FDA] hover:underline" data-testid="button-onboard-example">Open worked example</button> }
+                  : { n: "4", t: "Review utility requests", d: "Approve or decline requests to register utilities.", el: <Link href="/requests" className="text-[#009FDA] hover:underline" data-testid="link-onboard-requests">Utility requests</Link> },
+              ].map((x) => (
+                <div key={x.n} className="bg-card p-4">
+                  <div className="flex items-center gap-2 text-sm font-semibold text-[#002244]"><span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E6F5FB] text-[11px] text-[#009FDA]">{x.n}</span>{x.t}</div>
+                  <p className="mt-1 text-xs text-muted-foreground">{x.d}</p>
+                  <div className="mt-2 text-xs font-medium">{x.el}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
+      ) : (
+        <Card className="rise mb-6 p-5" data-testid="card-getting-started">
+          <div className="flex flex-col gap-4 md:flex-row md:items-start">
+            <div className="min-w-0 flex-1">
+              <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#009FDA]">Getting started</div>
+              <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-[#002244]">
+                <li>Open a plan and press Continue to reach the next step.</li>
+                {me.role === "viewer" ? <li>Read each step and its guidance; ask your TTL for changes.</li> : <>
+                  <li>Save draft keeps work private; Submit sends the step for review.</li>
+                  <li>Returned steps show the reviewer's comment. Revise and submit again.</li>
+                  <li>Examples are fictional drafts. Replace them with your utility's data.</li>
+                </>}
+              </ol>
+              <Link href="/help" className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-[#009FDA] hover:underline" data-testid="link-ttl-help">Full guide <ChevronRight className="h-3.5 w-3.5" /></Link>
+            </div>
+            <div className="w-full space-y-2 md:w-72">
+              {list.isLoading ? <div className="h-10 animate-pulse rounded-lg bg-muted" /> : items.length === 0 ? <p className="text-xs text-muted-foreground">No plans assigned yet. A TTL or administrator can add you to a team.</p> :
+                items.slice(0, 3).map((u) => (
+                  <Link key={u.id} href={`/plans/${u.planId}`} className="flex items-center justify-between gap-2 rounded-lg bg-[#002244] px-3 py-2.5 text-sm text-white hover:bg-[#003366]" data-testid={`link-continue-plan-${u.id}`}>
+                    <span className="min-w-0 truncate">{me.role === "viewer" ? "Open" : "Continue my plan"}: {u.shortName || u.name}</span><ChevronRight className="h-4 w-4 shrink-0" />
+                  </Link>
+                ))}
+            </div>
+          </div>
+        </Card>
+      )}
 
       {admin && (
         <section className="mb-8">

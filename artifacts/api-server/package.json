@@ -8,7 +8,8 @@
     "build": "node ./build.mjs",
     "start": "node --enable-source-maps ./dist/index.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test:access": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/src/open-access.test.ts"
+    "test:access": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/src/open-access.test.ts",
+    "test:workflow": "pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/src/workflow.test.ts"
   },
   "dependencies": {
     "@google-cloud/storage": "^8.4.0",

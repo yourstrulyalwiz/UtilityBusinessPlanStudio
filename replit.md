@@ -40,18 +40,24 @@ A secure registry for water utility Business & Investment Plans following the Ut
 
 - Initial foundation: role-scoped registry, create/edit/archive utilities, user provisioning, TTL requests and decisions, team membership, saved views, CSV export, notifications, audit history, protected logo uploads.
 - Creating a utility initializes its annual plan and all 20 activities (108 working days).
-- Workflow forms, activity approvals, financial model, Excel compatibility, and full business-plan PowerPoint generation belong to later increments. Step 0 provides only a clearly labelled registry-overview draft PPTX.
+- All 20 activities now have example-shaped editable forms, per-step instructions, sequential locks, saving with conflict detection, submission, approval, return comments and reopening. Progress is weighted by activity days.
+- Role-specific onboarding separates global-team administration from TTL authoring. A searchable Help Center and accessible activity/field dialogs cover 21 guidance topics. Cross-sector qualitative illustrations are labelled separately from uploaded examples and never populate financial data.
+- The supplied fictional Valle Verde file provides read-only examples and separate complete/midway plans in open test mode. Reopening a demo never resets existing edits. Test Utility and other existing plans are not overwritten.
+- Financial entries and scenarios are stored as entered, not recalculated. Cross-activity structured relationships, automatic financial modelling, Excel compatibility and final Word/PPT generation remain outstanding. The download still provides only a labelled registry-overview draft PPTX.
 - Email delivery is not configured; invitation UI provides an app link and clearly says no email was sent. Decisions notify in-app.
 - Country reference currently includes 217 economies from World Bank Data360 WDI metadata. That response does not supply region mappings or national currencies: region is explicitly Unclassified and USD is the business-plan default, not an assertion about national currency. Complete ISO coverage and authoritative region mappings remain outstanding.
 
 ## User preferences
 
-Use the supplied technical specification and its institutional brand. The approved first build is foundation and admin panel, not the full four-increment platform.
+Use the supplied technical specification and its institutional brand. The user corrected the foundation-only scope: they expect populated examples and a usable step-by-step plan authoring tool, not a blank registry with read-only activity names.
+
+The user wants two clear perspectives: the global team manages the tool; the TTL is the primary user who develops and populates plans. Explanatory popups should include practical recommendations and examples from different sectors. Keep instructional illustrations separate from entered utility data.
 
 ## Gotchas
 
 - Open-mode creation, plan navigation, unchanged detail saving, and draft PPTX download have been verified in a fresh browser. Normal-mode protection has API regression coverage; real signed-in role journeys still need browser verification.
 - Run `pnpm --filter @workspace/api-server test:access` to verify open, closed, unset, invalid flag values and forged role-cookie handling.
+- Run `pnpm --filter @workspace/api-server test:workflow` for supplied example field validation, sequential/phase gates and weighted progress.
 - Reference-data initialization inserts definitions only, never startup DDL.
 
 ## Pointers
