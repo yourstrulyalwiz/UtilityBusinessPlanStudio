@@ -10,6 +10,37 @@
     }
   ],
   "paths": {
+    "/test-mode": {
+      "get": {
+        "operationId": "getTestMode",
+        "responses": {
+          "200": {
+            "description": "Public test-mode configuration",
+            "content": {"application/json": {"schema": {
+              "type": "object",
+              "required": ["openAccess", "role"],
+              "properties": {
+                "openAccess": {"type": "boolean"},
+                "role": {"type": ["string", "null"]}
+              }
+            }}}
+          }
+        }
+      }
+    },
+    "/test-mode/role": {
+      "post": {
+        "operationId": "setTestRole",
+        "requestBody": {
+          "required": true,
+          "content": {"application/json": {"schema": {"$ref":"#/components/schemas/TestRoleInput"}}}
+        },
+        "responses": {
+          "200": {"description": "Session preview role changed"},
+          "404": {"description": "Open access is disabled"}
+        }
+      }
+    },
     "/healthz": {
       "get": {
         "operationId": "healthCheck",
@@ -805,6 +836,11 @@
   },
   "components": {
     "schemas": {
+      "TestRoleInput": {
+        "type": "object",
+        "required": ["role"],
+        "properties": {"role": {"type": "string", "enum": ["admin", "ttl", "editor", "viewer"]}}
+      },
       "HealthStatus": {
         "type": "object",
         "properties": {

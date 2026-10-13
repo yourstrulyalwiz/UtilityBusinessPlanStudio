@@ -4,6 +4,7 @@ import { eq, and } from "drizzle-orm";
 import * as api from "@workspace/api-zod";
 import { actor, accessibleUtility, utilityRows, filterUtilities, uuid, createUtilityRecord, writeAudit, notify, validateLogo, auditRows, HttpError } from "../lib/studio";
 import countryReference from "../lib/country-reference.json";
+import { openAccessEnabled } from "../lib/open-access";
 const router:IRouter=Router();
 router.get("/metadata",async(_req,res)=>{
   res.json(api.GetMetadataResponse.parse({countries:await db.select().from(countries).orderBy(countries.name),countrySource:countryReference.source,phases:await db.select().from(phases).orderBy(phases.code),activities:await db.select().from(activities).orderBy(activities.code)}));
@@ -48,7 +49,7 @@ router.patch("/utilities/:id",async(req,res)=>{
   if(data.name!==undefined&&!data.name.trim()||data.serviceArea!==undefined&&!data.serviceArea.trim())throw new HttpError(400,"Name and service area cannot be blank.");
   await db.transaction(async tx=>{
     if(data.ttlUserId){
-      const [ttl]=await tx.select().from(people).where(and(eq(people.id,uuid(data.ttlUserId)),eq(people.role,"ttl"),eq(people.isActive,true)));
+      const [ttl]=await tx.select().from(people).where(and(eq(people.id,uuid(data.ttlUserId)),openAccessEnabled()?undefined:and(eq(people.role,"ttl"),eq(people.isActive,true))));
       if(!ttl)throw new HttpError(400,"Select an active TTL.");
       if(ttl.id!==before.ttlUserId){
         await tx.delete(members).where(and(eq(members.utilityId,id),eq(members.userId,before.ttlUserId)));
@@ -67,7 +68,7 @@ router.post("/utilities/:id/members",async(req,res)=>{
   if(u.status==="archived")throw new HttpError(400,"Restore the utility before editing its team.");
   const data=api.AddMemberBody.parse(req.body);const userId=uuid(data.userId);
   const [person]=await db.select().from(people).where(eq(people.id,userId));
-  if(!person?.isActive)throw new HttpError(400,"Select an active user.");
+  if(!person || (!openAccessEnabled()&&!person.isActive))throw new HttpError(400,"Select an active user.");
   if(p.role==="ttl"&&person.invitedBy!==p.id&&person.id!==p.id)throw new HttpError(403,"Select a user you invited.");
   await db.transaction(async tx=>{
     await tx.insert(members).values({utilityId:id,userId,memberRole:data.memberRole}).onConflictDoUpdate({target:[members.utilityId,members.userId],set:{memberRole:data.memberRole}});

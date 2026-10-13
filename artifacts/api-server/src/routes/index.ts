@@ -5,10 +5,12 @@ import portfolioRouter from "./portfolio";
 import peopleRouter from "./people";
 import requestsRouter from "./requests";
 import storageRouter from "./storage";
+import testModeRouter from "./test-mode";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
+router.use(testModeRouter);
 router.use(authRouter);
 router.use(portfolioRouter);
 router.use(peopleRouter);

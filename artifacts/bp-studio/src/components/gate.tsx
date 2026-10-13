@@ -6,6 +6,7 @@ import { ArrowRight, KeyRound, LockKeyhole, ShieldCheck, UserRoundX } from "luci
 import { Glyph, Wave, Btn, Card } from "@/components/kit";
 import { ProfileContext, errMsg, phaseColor } from "@/lib/app";
 import { useToast } from "@/hooks/use-toast";
+import { TestBanner } from "@/lib/test-mode";
 
 function Endorsement({ light }: { light?: boolean }) {
   return (
@@ -144,5 +145,5 @@ export function Gate({ children }: { children: ReactNode }) {
   if (!p.person.isActive) {
     return <Notice logout={logout} icon={<UserRoundX className="h-5 w-5" />} title="Access deactivated" body="Your Studio access is currently inactive. Contact a Studio administrator if you believe this is a mistake." />;
   }
-  return <ProfileContext.Provider value={p}>{children}</ProfileContext.Provider>;
+  return <ProfileContext.Provider value={p}><TestBanner />{children}</ProfileContext.Provider>;
 }

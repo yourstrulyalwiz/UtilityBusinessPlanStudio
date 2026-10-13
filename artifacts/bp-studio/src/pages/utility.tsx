@@ -43,7 +43,7 @@ export default function UtilityPage() {
   const phases = Array.from(new Set(activities.map((a) => a.phaseCode)));
   const memberEmails = new Set(members.map((m) => m.email));
   const candidates = (users.data ?? []).filter((p) => p.isActive && !memberEmails.has(p.email));
-  const ttls = (users.data ?? []).filter((p) => p.role === "ttl" && p.isActive);
+  const ttls = (users.data ?? []).filter((p) => (p.role === "ttl" || p.id === "00000000-0000-4000-8000-000000000001") && p.isActive);
 
   return (
     <div>

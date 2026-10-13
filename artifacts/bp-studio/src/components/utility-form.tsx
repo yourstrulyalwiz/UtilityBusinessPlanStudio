@@ -61,7 +61,7 @@ export function UtilityForm({ initial, submitLabel, pending, onSubmit, onCancel 
 }) {
   const meta = useGetMetadata();
   const users = useListUsers({ query: { queryKey: getListUsersQueryKey() } });
-  const ttls = (users.data ?? []).filter((u) => u.role === "ttl" && u.isActive);
+  const ttls = (users.data ?? []).filter((u) => (u.role === "ttl" || u.id === "00000000-0000-4000-8000-000000000001") && u.isActive);
   const [v, setV] = useState<UtilityInput>({
     name: "", shortName: "", countryIso3: "", serviceArea: "", ttlUserId: "", planYear: YEAR, currency: "USD", uofCompletionDate: null, wbProjectId: "", logoPath: null, ...initial,
   });

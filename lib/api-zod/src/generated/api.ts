@@ -7,6 +7,19 @@
 import * as zod from 'zod';
 
 
+export const GetTestModeResponse = zod.object({
+  "openAccess": zod.boolean(),
+  "role": zod.string().nullable()
+})
+
+
+export const SetTestRoleBody = zod.object({
+  "role": zod.enum(['admin', 'ttl', 'editor', 'viewer'])
+})
+
+export const SetTestRoleResponse = zod.unknown()
+
+
 export const HealthCheckResponse = zod.object({
   "status": zod.string()
 })

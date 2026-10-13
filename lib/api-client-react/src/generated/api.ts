@@ -22,6 +22,7 @@ import type {
   AuditEntry,
   AuthUserEnvelope,
   BeginBrowserLoginParams,
+  GetTestMode200,
   HealthStatus,
   ListUtilitiesParams,
   LogoutBrowserSessionParams,
@@ -40,6 +41,7 @@ import type {
   SavedView,
   Success,
   Summary,
+  TestRoleInput,
   UploadConfirmation,
   UploadInput,
   UploadResult,
@@ -78,6 +80,159 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export const getGetTestModeUrl = () => {
+
+
+
+
+  return `/api/test-mode`
+}
+
+export const getTestMode = async ( options?: Parameters<typeof customFetch>[1]): Promise<GetTestMode200> => {
+
+  return customFetch<GetTestMode200>(getGetTestModeUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetTestModeQueryKey = () => {
+    return [
+    `/api/test-mode`
+    ] as const;
+    }
+
+
+export const getGetTestModeQueryOptions = <TData = Awaited<ReturnType<typeof getTestMode>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getTestMode>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetTestModeQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getTestMode>>> = ({ signal }) => getTestMode({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getTestMode>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetTestModeQueryResult = NonNullable<Awaited<ReturnType<typeof getTestMode>>>
+export type GetTestModeQueryError = ErrorType<unknown>
+
+
+
+export function useGetTestMode<TData = Awaited<ReturnType<typeof getTestMode>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getTestMode>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetTestModeQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getSetTestRoleUrl = () => {
+
+
+
+
+  return `/api/test-mode/role`
+}
+
+export const setTestRole = async (testRoleInput: TestRoleInput, options?: Parameters<typeof customFetch>[1]): Promise<void> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<void>(getSetTestRoleUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(testRoleInput)
+  }
+);}
+
+
+
+
+
+export const getSetTestRoleMutationKey = () => ['setTestRole'] as const;
+
+export const getSetTestRoleMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof setTestRole>>, TError,SetTestRoleMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof setTestRole>>, TError,SetTestRoleMutationVariables, TContext> => {
+
+const mutationKey = getSetTestRoleMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof setTestRole>>, SetTestRoleMutationVariables> = (props) => {
+          const {data} = props ?? {};
+
+          return  setTestRole(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SetTestRoleMutationResult = NonNullable<Awaited<ReturnType<typeof setTestRole>>>
+    export type SetTestRoleMutationBody = BodyType<TestRoleInput>
+    export type SetTestRoleMutationError = ErrorType<void>
+    export type SetTestRoleMutationVariables = {data: BodyType<TestRoleInput>}
+
+    export const useSetTestRole = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof setTestRole>>, TError,SetTestRoleMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof setTestRole>>,
+        TError,
+        SetTestRoleMutationVariables,
+        TContext
+      > => {
+      return useMutation(getSetTestRoleMutationOptions(options));
+    }
 
 export const getHealthCheckUrl = () => {
 

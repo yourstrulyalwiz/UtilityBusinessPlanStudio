@@ -31,6 +31,7 @@ A secure registry for water utility Business & Investment Plans following the Ut
 ## Architecture decisions
 
 - Never grant administration to the first public visitor. A project owner must designate the initial authenticated account with `INITIAL_ADMIN_REPLIT_ID`, or explicitly authorize a database role assignment after that person signs in. This avoids a first-visitor privilege takeover.
+- Temporary exception: explicit `OPEN_ACCESS=true` bypasses authentication/authorization as Test Admin. The session cookie selects UI role only, not API restrictions. Missing/false flags retain normal security. Test Admin has no persisted administrative grant. Do not publish with this flag unless public write access is intentional.
 - Reference data can be seeded, but utility and user records must never be fabricated.
 - Existing workspace runtime versions were retained rather than downgrading the supplied toolchain.
 - Invitations link to an identity only when its provider-verified email matches. A session is not, by itself, authorization to see the portfolio.
@@ -50,6 +51,7 @@ Use the supplied technical specification and its institutional brand. The approv
 ## Gotchas
 
 - The screenshot browser is signed out; the authenticated dashboard has not been visually verified.
+- Run `pnpm --filter @workspace/api-server test:access` to verify open, closed, unset, invalid flag values and forged role-cookie handling.
 - Reference-data initialization inserts definitions only, never startup DDL.
 
 ## Pointers

@@ -1,6 +1,7 @@
 import type { AuthUser } from '@workspace/api-zod';
 import { type NextFunction, type Request, type Response } from 'express';
 import * as oidc from 'openid-client';
+import { openAccessEnabled } from '../lib/open-access';
 
 import {
   clearSession,
@@ -56,6 +57,12 @@ export async function authMiddleware(
   res: Response,
   next: NextFunction,
 ) {
+  if (openAccessEnabled()) {
+    req.user = { id: "studio-open-access", email: "test-admin@invalid.local", firstName: "Test", lastName: "Admin", profileImageUrl: null };
+    req.isAuthenticated = (() => true) as Request['isAuthenticated'];
+    next();
+    return;
+  }
   req.isAuthenticated = function (this: Request) {
     return this.user != null;
   } as Request['isAuthenticated'];

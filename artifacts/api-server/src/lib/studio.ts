@@ -4,6 +4,7 @@ import { z } from "zod/v4";
 import type { Request, Response, NextFunction } from "express";
 import type { UtilityInput } from "@workspace/api-zod";
 import { activitySeed } from "./playbook";
+import { openAccessEnabled, testActor } from "./open-access";
 
 export class HttpError extends Error {
   constructor(public status:number,message:string){super(message);}
@@ -11,6 +12,7 @@ export class HttpError extends Error {
 export const uuid=(value:unknown)=>z.string().uuid().parse(value);
 export type Tx=Parameters<Parameters<typeof db.transaction>[0]>[0];
 export async function actor(req:Request, roles?:string[]):Promise<StudioPerson>{
+  if(openAccessEnabled())return testActor();
   if(!req.user) throw new HttpError(401,"Sign in to continue.");
   const [p]=await db.select().from(people).where(eq(people.authId,req.user.id));
   if(!p?.isActive) throw new HttpError(403,"Your account is awaiting access from an administrator.");
@@ -29,7 +31,7 @@ export async function notify(tx:Tx,userId:string,title:string,body:string){
 export async function accessibleUtility(p:StudioPerson,id:string,writeTeam=false){
   const [u]=await db.select().from(utilities).where(eq(utilities.id,id));
   if(!u) throw new HttpError(404,"Utility not found.");
-  if(p.role==="admin" || (p.role==="ttl"&&u.ttlUserId===p.id)) return u;
+  if(openAccessEnabled() || p.role==="admin" || (p.role==="ttl"&&u.ttlUserId===p.id)) return u;
   if(writeTeam) throw new HttpError(403,"Only the responsible TTL or an administrator can manage the team.");
   const [m]=await db.select().from(members).where(and(eq(members.utilityId,id),eq(members.userId,p.id)));
   if(!m || p.role==="ttl") throw new HttpError(403,"This utility is not assigned to you.");
@@ -75,7 +77,8 @@ export async function createUtilityRecord(tx:Tx,p:StudioPerson,input:UtilityInpu
   validateYear(input.planYear);
   const [country]=await tx.select().from(countries).where(eq(countries.iso3,input.countryIso3));
   if(!country) throw new HttpError(400,"Select a country from the reference list.");
-  const [ttl]=await tx.select().from(people).where(and(eq(people.id,uuid(input.ttlUserId)),eq(people.role,"ttl"),eq(people.isActive,true)));
+  const [storedTtl]=await tx.select().from(people).where(eq(people.id,uuid(input.ttlUserId)));
+  const ttl=openAccessEnabled()?storedTtl:storedTtl?.role==="ttl"&&storedTtl.isActive?storedTtl:undefined;
   if(!ttl)throw new HttpError(400,"Select an active TTL.");
   if(!input.name.trim()||!input.serviceArea.trim())throw new HttpError(400,"Utility name and service area are required.");
   if(input.uofCompletionDate)z.iso.date().parse(input.uofCompletionDate);

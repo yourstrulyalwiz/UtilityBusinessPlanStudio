@@ -3,6 +3,7 @@ import { db, people, utilities, requests, notifications, savedViews } from "@wor
 import { eq, and, or, sql, desc } from "drizzle-orm";
 import * as api from "@workspace/api-zod";
 import { actor, personDto, HttpError, uuid, writeAudit, auditRows } from "../lib/studio";
+import { openAccessEnabled, previewRole, testActor, TEST_ADMIN_ID } from "../lib/open-access";
 const router:IRouter=Router();
 const canBootstrap=(authId:string)=>Boolean(process.env.INITIAL_ADMIN_REPLIT_ID&&process.env.INITIAL_ADMIN_REPLIT_ID===authId);
 async function profile(authId:string){
@@ -12,6 +13,11 @@ async function profile(authId:string){
   return {person:personDto(p),setupRequired:!admins.length,canBootstrap:!admins.length&&canBootstrap(authId)};
 }
 router.get("/profile",async(req,res)=>{
+  if(openAccessEnabled()){
+    const p=await testActor();
+    res.json({person:{...personDto(p),role:previewRole(req)},setupRequired:false,canBootstrap:false});
+    return;
+  }
   if(!req.user)throw new HttpError(401,"Sign in to continue.");
   res.json(api.GetProfileResponse.parse(await profile(req.user.id)));
 });
@@ -32,7 +38,9 @@ router.post("/setup",async(req,res)=>{
 router.get("/users",async(req,res)=>{
   const p=await actor(req,["admin","ttl"]);
   const rows=await db.select().from(people).where(p.role==="admin"?undefined:or(eq(people.invitedBy,p.id),eq(people.id,p.id))).orderBy(people.fullName);
-  res.json(api.ListUsersResponse.parse(rows.map(personDto)));
+  const visible=rows.filter(r=>r.id!==TEST_ADMIN_ID);
+  if(openAccessEnabled())visible.unshift(await testActor());
+  res.json(api.ListUsersResponse.parse(visible.map(personDto)));
 });
 router.post("/users",async(req,res)=>{
   const p=await actor(req,["admin","ttl"]);const data=api.InviteUserBody.parse(req.body);
@@ -56,6 +64,7 @@ router.post("/users",async(req,res)=>{
 });
 router.patch("/users/:id",async(req,res)=>{
   const p=await actor(req,["admin"]);const id=uuid(req.params.id);const data=api.UpdateUserBody.parse(req.body);
+  if(id===TEST_ADMIN_ID)throw new HttpError(400,"The test identity is managed by OPEN_ACCESS and cannot be edited.");
   const updated=await db.transaction(async tx=>{
     await tx.execute(sql`SELECT pg_advisory_xact_lock(84721501)`);
     const [before]=await tx.select().from(people).where(eq(people.id,id));

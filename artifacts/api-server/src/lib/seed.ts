@@ -1,6 +1,7 @@
 import { db, countries, phases, activities } from "@workspace/db";
 import countryReference from "./country-reference.json";
 import { phaseSeed, activitySeed } from "./playbook";
+import { seedTestIdentity } from "./open-access";
 
 // Reference definitions only. Never create example users or utility records.
 export async function seedReferenceData(){
@@ -9,4 +10,5 @@ export async function seedReferenceData(){
     await tx.insert(phases).values(phaseSeed).onConflictDoNothing();
     await tx.insert(activities).values(activitySeed).onConflictDoNothing();
   });
+  await seedTestIdentity();
 }

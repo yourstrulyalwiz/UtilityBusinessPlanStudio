@@ -4,6 +4,20 @@
  * Api
  * OpenAPI spec version: 1.0.0
  */
+export type TestRoleInputRole = typeof TestRoleInputRole[keyof typeof TestRoleInputRole];
+
+
+export const TestRoleInputRole = {
+  admin: 'admin',
+  ttl: 'ttl',
+  editor: 'editor',
+  viewer: 'viewer',
+} as const;
+
+export interface TestRoleInput {
+  role: TestRoleInputRole;
+}
+
 export interface HealthStatus {
   status: string;
 }
@@ -393,6 +407,12 @@ export interface ViewInput {
   name: string;
   filters: ViewInputFilters;
 }
+
+export type GetTestMode200 = {
+  openAccess: boolean;
+  /** @nullable */
+  role: string | null;
+};
 
 export type BeginBrowserLoginParams = {
 returnTo?: string;

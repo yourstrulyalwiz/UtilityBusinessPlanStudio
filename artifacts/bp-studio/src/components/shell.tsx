@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "@workspace/replit-auth-web";
+import { RoleSwitcher } from "@/lib/test-mode";
 import { useQueryClient } from "@tanstack/react-query";
 import { useListNotifications, getListNotificationsQueryKey, useReadNotification } from "@workspace/api-client-react";
 import { Bell, ClipboardList, History, LayoutGrid, LogOut, Menu, Users, X } from "lucide-react";
@@ -119,7 +120,7 @@ export function Shell({ children }: { children: ReactNode }) {
         <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background/90 px-4 backdrop-blur md:px-8">
           <button className="rounded-lg p-2 md:hidden" onClick={() => setOpen(true)} aria-label="Open menu" data-testid="button-menu"><Menu className="h-5 w-5" /></button>
           <div className="hidden text-xs text-muted-foreground md:block">{me.organization || "World Bank"} · signed in as {me.email}</div>
-          <Notifications />
+          <div className="flex items-center gap-3"><RoleSwitcher /><Notifications /></div>
         </header>
         <main className="mx-auto w-full max-w-[1280px] flex-1 px-4 py-8 md:px-8">{children}</main>
       </div>
