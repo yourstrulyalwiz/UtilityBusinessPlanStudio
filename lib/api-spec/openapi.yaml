@@ -1,36 +1,1805 @@
-openapi: 3.1.0
-info:
-  # Do not change the title, if the title changes, the import paths will be broken
-  title: Api
-  version: 0.1.0
-  description: API specification
-servers:
-  - url: /api
-    description: Base API path
-tags:
-  - name: health
-    description: Health operations
-paths:
-  /healthz:
-    get:
-      operationId: healthCheck
-      tags: [health]
-      summary: Health check
-      description: Returns server health status
-      responses:
-        "200":
-          description: Healthy
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/HealthStatus"
-components:
-  schemas:
-    HealthStatus:
-      type: object
-      properties:
-        status:
-          type: string
-      required:
-        - status
-
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Api",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/api"
+    }
+  ],
+  "paths": {
+    "/healthz": {
+      "get": {
+        "operationId": "healthCheck",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/user": {
+      "get": {
+        "operationId": "getCurrentAuthUser",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthUserEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "operationId": "beginBrowserLogin",
+        "parameters": [
+          {
+            "name": "returnTo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/callback": {
+      "get": {
+        "operationId": "handleBrowserLoginCallback",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "operationId": "logoutBrowserSession",
+        "parameters": [
+          {
+            "name": "returnTo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/mobile-auth/token-exchange": {
+      "post": {
+        "operationId": "exchangeMobileAuthorizationCode",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MobileTokenExchangeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MobileTokenExchangeSuccess"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mobile-auth/logout": {
+      "post": {
+        "operationId": "logoutMobileSession",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogoutSuccess"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile": {
+      "get": {
+        "operationId": "getProfile",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/setup": {
+      "post": {
+        "operationId": "bootstrapAdmin",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/metadata": {
+      "get": {
+        "operationId": "getMetadata",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Metadata"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/summary": {
+      "get": {
+        "operationId": "getSummary",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Summary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/utilities": {
+      "get": {
+        "operationId": "listUtilities",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ttl",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UtilityList"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createUtility",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UtilityInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Utility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/utilities/{id}": {
+      "get": {
+        "operationId": "getUtility",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UtilityDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateUtility",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UtilityUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Utility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/utilities/{id}/members": {
+      "post": {
+        "operationId": "addMember",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/utilities/{id}/members/{memberId}": {
+      "delete": {
+        "operationId": "removeMember",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "memberId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "operationId": "listUsers",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Person"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "inviteUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "patch": {
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/utility-requests": {
+      "get": {
+        "operationId": "listRequests",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UtilityRequest"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createRequest",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UtilityRequest"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/utility-requests/{id}/decision": {
+      "post": {
+        "operationId": "decideRequest",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestDecision"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/audit": {
+      "get": {
+        "operationId": "listAudit",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuditEntry"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications": {
+      "get": {
+        "operationId": "listNotifications",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Notification"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/{id}/read": {
+      "post": {
+        "operationId": "readNotification",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/views": {
+      "get": {
+        "operationId": "listViews",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SavedView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "saveView",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ViewInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedView"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/views/{id}": {
+      "delete": {
+        "operationId": "deleteView",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/storage/uploads/request-url": {
+      "post": {
+        "operationId": "requestUploadUrl",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/storage/uploads/confirm": {
+      "post": {
+        "operationId": "confirmUpload",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadConfirmation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HealthStatus": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "AuthUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "firstName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "profileImageUrl": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "firstName",
+          "lastName",
+          "profileImageUrl"
+        ]
+      },
+      "AuthUserEnvelope": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/AuthUser"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "user"
+        ]
+      },
+      "MobileTokenExchangeRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "code_verifier": {
+            "type": "string"
+          },
+          "redirect_uri": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "nonce": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "code_verifier",
+          "redirect_uri",
+          "state"
+        ]
+      },
+      "MobileTokenExchangeSuccess": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "LogoutSuccess": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "const": true
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
+      "ErrorEnvelope": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error"
+        ]
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "ttl",
+              "editor",
+              "viewer"
+            ]
+          },
+          "organization": {
+            "type": "string"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "invited": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "fullName",
+          "email",
+          "role",
+          "organization",
+          "isActive",
+          "invited"
+        ]
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "person": {
+            "$ref": "#/components/schemas/Person"
+          },
+          "setupRequired": {
+            "type": "boolean"
+          },
+          "canBootstrap": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "person",
+          "setupRequired",
+          "canBootstrap"
+        ]
+      },
+      "PersonInput": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "ttl",
+              "editor",
+              "viewer"
+            ]
+          },
+          "organization": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fullName",
+          "email",
+          "role"
+        ]
+      },
+      "PersonUpdate": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "admin",
+              "ttl",
+              "editor",
+              "viewer"
+            ]
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "required": []
+      },
+      "Country": {
+        "type": "object",
+        "properties": {
+          "iso3": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "currencyCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "iso3",
+          "name",
+          "region",
+          "currencyCode"
+        ]
+      },
+      "Metadata": {
+        "type": "object",
+        "properties": {
+          "countries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Country"
+            }
+          },
+          "countrySource": {
+            "type": "string"
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Phase"
+            }
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Activity"
+            }
+          }
+        },
+        "required": [
+          "countries",
+          "countrySource",
+          "phases",
+          "activities"
+        ]
+      },
+      "Phase": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "days": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "days"
+        ]
+      },
+      "Activity": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "phaseCode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "days": {
+            "type": "number"
+          },
+          "milestone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "phaseCode",
+          "name",
+          "days",
+          "milestone"
+        ]
+      },
+      "UtilityInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "shortName": {
+            "type": "string",
+            "maxLength": 12
+          },
+          "countryIso3": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 3
+          },
+          "serviceArea": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "ttlUserId": {
+            "type": "string"
+          },
+          "planYear": {
+            "type": "integer"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "uofCompletionDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "wbProjectId": {
+            "type": "string",
+            "pattern": "^(P[0-9]{6})?$"
+          },
+          "logoPath": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "countryIso3",
+          "serviceArea",
+          "ttlUserId",
+          "planYear"
+        ]
+      },
+      "UtilityUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "shortName": {
+            "type": "string",
+            "maxLength": 12
+          },
+          "serviceArea": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "ttlUserId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "archived"
+            ]
+          },
+          "wbProjectId": {
+            "type": "string",
+            "pattern": "^(P[0-9]{6})?$"
+          },
+          "logoPath": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": []
+      },
+      "Utility": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "shortName": {
+            "type": "string"
+          },
+          "countryIso3": {
+            "type": "string"
+          },
+          "countryName": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "serviceArea": {
+            "type": "string"
+          },
+          "ttlUserId": {
+            "type": "string"
+          },
+          "ttlName": {
+            "type": "string"
+          },
+          "planId": {
+            "type": "string"
+          },
+          "planYear": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "planStatus": {
+            "type": "string"
+          },
+          "progress": {
+            "type": "number"
+          },
+          "currentPhase": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "uofCompletionDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "wbProjectId": {
+            "type": "string"
+          },
+          "logoPath": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "shortName",
+          "countryIso3",
+          "countryName",
+          "region",
+          "serviceArea",
+          "ttlUserId",
+          "ttlName",
+          "planId",
+          "planYear",
+          "currency",
+          "status",
+          "planStatus",
+          "progress",
+          "currentPhase",
+          "createdAt",
+          "uofCompletionDate",
+          "wbProjectId",
+          "logoPath"
+        ]
+      },
+      "UtilityList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Utility"
+            }
+          },
+          "total": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "items",
+          "total"
+        ]
+      },
+      "PlanActivity": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "phaseCode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "days": {
+            "type": "number"
+          },
+          "milestone": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "ownerName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dueDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "code",
+          "phaseCode",
+          "name",
+          "days",
+          "milestone",
+          "status",
+          "ownerName",
+          "dueDate"
+        ]
+      },
+      "Member": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fullName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "memberRole": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "fullName",
+          "email",
+          "memberRole"
+        ]
+      },
+      "MemberInput": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "memberRole": {
+            "type": "string",
+            "enum": [
+              "focal_point",
+              "team",
+              "consultant",
+              "viewer"
+            ]
+          }
+        },
+        "required": [
+          "userId",
+          "memberRole"
+        ]
+      },
+      "UtilityDetail": {
+        "type": "object",
+        "properties": {
+          "utility": {
+            "$ref": "#/components/schemas/Utility"
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanActivity"
+            }
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Member"
+            }
+          },
+          "audit": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AuditEntry"
+            }
+          }
+        },
+        "required": [
+          "utility",
+          "activities",
+          "members",
+          "audit"
+        ]
+      },
+      "Bucket": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "label",
+          "value"
+        ]
+      },
+      "Summary": {
+        "type": "object",
+        "properties": {
+          "utilities": {
+            "type": "number"
+          },
+          "countries": {
+            "type": "number"
+          },
+          "averageProgress": {
+            "type": "number"
+          },
+          "completed": {
+            "type": "number"
+          },
+          "pendingRequests": {
+            "type": "number"
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bucket"
+            }
+          },
+          "regions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bucket"
+            }
+          }
+        },
+        "required": [
+          "utilities",
+          "countries",
+          "averageProgress",
+          "completed",
+          "pendingRequests",
+          "phases",
+          "regions"
+        ]
+      },
+      "RequestInput": {
+        "type": "object",
+        "properties": {
+          "utilityName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "countryIso3": {
+            "type": "string"
+          },
+          "serviceArea": {
+            "type": "string",
+            "minLength": 1
+          },
+          "planYear": {
+            "type": "integer"
+          },
+          "justification": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "utilityName",
+          "countryIso3",
+          "serviceArea",
+          "planYear",
+          "justification"
+        ]
+      },
+      "UtilityRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "requestedBy": {
+            "type": "string"
+          },
+          "ttlName": {
+            "type": "string"
+          },
+          "countryIso3": {
+            "type": "string"
+          },
+          "countryName": {
+            "type": "string"
+          },
+          "utilityName": {
+            "type": "string"
+          },
+          "serviceArea": {
+            "type": "string"
+          },
+          "planYear": {
+            "type": "number"
+          },
+          "justification": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "decisionNote": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "requestedBy",
+          "ttlName",
+          "countryIso3",
+          "countryName",
+          "utilityName",
+          "serviceArea",
+          "planYear",
+          "justification",
+          "status",
+          "decisionNote",
+          "createdAt"
+        ]
+      },
+      "RequestDecision": {
+        "type": "object",
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "approve",
+              "decline"
+            ]
+          },
+          "note": {
+            "type": "string"
+          },
+          "utility": {
+            "$ref": "#/components/schemas/UtilityInput"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "AuditEntry": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "actor": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "entity": {
+            "type": "string"
+          },
+          "entityId": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "actor",
+          "action",
+          "entity",
+          "entityId",
+          "createdAt"
+        ]
+      },
+      "Notification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "read": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "body",
+          "read",
+          "createdAt"
+        ]
+      },
+      "Success": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ]
+      },
+      "UploadInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer",
+            "maximum": 2097152,
+            "minimum": 1
+          },
+          "contentType": {
+            "type": "string",
+            "enum": [
+              "image/png",
+              "image/svg+xml"
+            ]
+          }
+        },
+        "required": [
+          "name",
+          "size",
+          "contentType"
+        ]
+      },
+      "UploadResult": {
+        "type": "object",
+        "properties": {
+          "uploadURL": {
+            "type": "string"
+          },
+          "objectPath": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "uploadURL",
+          "objectPath"
+        ]
+      },
+      "UploadConfirmation": {
+        "type": "object",
+        "properties": {
+          "objectPath": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "objectPath"
+        ]
+      },
+      "SavedView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "filters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "filters"
+        ]
+      },
+      "ViewInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "filters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "filters"
+        ]
+      }
+    }
+  }
+}

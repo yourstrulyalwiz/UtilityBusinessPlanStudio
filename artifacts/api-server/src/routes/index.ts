@@ -1,8 +1,18 @@
 import { Router, type IRouter } from "express";
 import healthRouter from "./health";
+import authRouter from "./auth";
+import portfolioRouter from "./portfolio";
+import peopleRouter from "./people";
+import requestsRouter from "./requests";
+import storageRouter from "./storage";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
+router.use(authRouter);
+router.use(portfolioRouter);
+router.use(peopleRouter);
+router.use(requestsRouter);
+router.use(storageRouter);
 
 export default router;

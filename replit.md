@@ -1,10 +1,10 @@
-# [Project name]
+# UoF Business Plan Studio
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A secure registry for water utility Business & Investment Plans following the Utility of the Future playbook.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- Use the managed `artifacts/api-server: API Server` and `artifacts/bp-studio: web` workflows.
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
@@ -22,23 +22,35 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/bp-studio`: web frontend.
+- `artifacts/api-server/src/routes`: authentication, portfolio, people, requests, and protected logos.
+- `lib/db/src/schema`: auth and Studio tables.
+- `lib/api-spec/openapi.yaml`: API contract; regenerate clients after changes.
+- The uploaded technical specification is preserved under `.local/conversation-workspace/files/attached_assets/`.
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Never grant administration to the first public visitor. A project owner must designate the initial authenticated account with `INITIAL_ADMIN_REPLIT_ID`, or explicitly authorize a database role assignment after that person signs in. This avoids a first-visitor privilege takeover.
+- Reference data can be seeded, but utility and user records must never be fabricated.
+- Existing workspace runtime versions were retained rather than downgrading the supplied toolchain.
+- Invitations link to an identity only when its provider-verified email matches. A session is not, by itself, authorization to see the portfolio.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Initial foundation: role-scoped registry, create/edit/archive utilities, user provisioning, TTL requests and decisions, team membership, saved views, CSV export, notifications, audit history, protected logo uploads.
+- Creating a utility initializes its annual plan and all 20 activities (108 working days).
+- Workflow forms, activity approvals, financial model, Excel compatibility, and PowerPoint generation belong to later increments and are not implemented.
+- Email delivery is not configured; invitation UI provides an app link and clearly says no email was sent. Decisions notify in-app.
+- Country reference currently includes 217 economies from World Bank Data360 WDI metadata. That response does not supply region mappings or national currencies: region is explicitly Unclassified and USD is the business-plan default, not an assertion about national currency. Complete ISO coverage and authoritative region mappings remain outstanding.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+Use the supplied technical specification and its institutional brand. The approved first build is foundation and admin panel, not the full four-increment platform.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- The screenshot browser is signed out; the authenticated dashboard has not been visually verified.
+- Reference-data initialization inserts definitions only, never startup DDL.
 
 ## Pointers
 

@@ -1,0 +1,1 @@
+- [Data360 metadata boundaries](data360-reference.md) — country metadata is not a complete region/currency directory; do not infer missing classifications.
