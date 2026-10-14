@@ -19,16 +19,16 @@ function Notifications() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="relative flex h-9 w-9 items-center justify-center rounded-lg border bg-white/80 text-[#002244] hover:bg-white" data-testid="button-notifications" aria-label="Notifications">
+        <button className="relative flex h-11 w-11 items-center justify-center rounded-lg border border-white/15 bg-white/[.06] text-[#EEF2F6] hover:bg-white/[.12]" data-testid="button-notifications" aria-label="Notifications">
           <Bell className="h-4 w-4" />
-          {unread.length > 0 && <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#D9622B] px-1 text-[10px] font-semibold text-white tnum">{unread.length}</span>}
+          {unread.length > 0 && <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#FF6A0D] px-1 text-[10px] font-semibold text-[#29323F] tnum">{unread.length}</span>}
         </button>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-[360px] rounded-xl p-0">
         <div className="flex items-center justify-between border-b px-4 py-3">
-          <div className="text-sm font-semibold text-[#002244]">Notifications</div>
+          <div className="text-sm font-semibold text-[#323D4F]">Notifications</div>
           {unread.length > 0 && (
-            <button className="text-xs font-medium text-[#009FDA] hover:underline" data-testid="button-read-all" onClick={() => unread.forEach((n) => read.mutate({ id: n.id }))}>Mark all read</button>
+            <button className="text-xs font-medium text-[#127A80] hover:underline" data-testid="button-read-all" onClick={() => unread.forEach((n) => read.mutate({ id: n.id }))}>Mark all read</button>
           )}
         </div>
         <div className="max-h-[380px] overflow-auto">
@@ -39,11 +39,11 @@ function Notifications() {
           ) : (
             items.map((n) => (
               <button key={n.id} data-testid={`notification-${n.id}`} onClick={() => !n.read && read.mutate({ id: n.id })}
-                className={cn("block w-full border-b px-4 py-3 text-left last:border-0 hover:bg-muted/60", !n.read && "bg-[#009FDA]/[.05]")}>
+                className={cn("block w-full border-b px-4 py-3 text-left last:border-0 hover:bg-muted/60", !n.read && "bg-[#1ED3D9]/[.05]")}>
                 <div className="flex items-start gap-2">
-                  <span className={cn("mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full", n.read ? "bg-transparent" : "bg-[#009FDA]")} />
+                  <span className={cn("mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full", n.read ? "bg-transparent" : "bg-[#1ED3D9]")} />
                   <div className="min-w-0">
-                    <div className="text-[13px] font-medium text-[#002244]">{n.title}</div>
+                    <div className="text-[13px] font-medium text-[#323D4F]">{n.title}</div>
                     <div className="mt-0.5 text-xs text-muted-foreground">{n.body}</div>
                     <div className="mt-1 text-[11px] text-muted-foreground/80">{fmtDateTime(n.createdAt)}</div>
                   </div>
@@ -75,20 +75,20 @@ export function Shell({ children }: { children: ReactNode }) {
   const active = (h: string) => (h === "/" ? loc === "/" || inWorkspace : loc.startsWith(h) || (h === "/admin" && inWorkspace));
 
   const sidebar = (
-    <aside className="sidebar-depth flex h-full w-64 flex-col text-white">
+    <aside className="sidebar-depth flex h-full w-64 flex-col text-[#EEF2F6]">
       <div className="flex items-center gap-3 px-5 pb-6 pt-6">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow-[0_6px_18px_-6px_rgba(0,159,218,.6)]"><Glyph className="h-6 w-6" /></div>
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#4A5770] bg-[#29323F]/60"><Glyph className="h-8 w-8" /></div>
         <div className="leading-tight">
-          <div className="text-[13px] font-semibold">Urban Water and Sanitation Service Optimization</div>
-          <div className="mt-1 text-[11px] text-white/70">- Digital Transformation - Business Plan Studio</div>
+          <div className="text-[13px] font-semibold text-[#EEF2F6]">Urban Water and Sanitation Service Optimization</div>
+          <div className="mt-1 text-[11px] font-medium text-[#1ED3D9]">Business Plan Studio</div>
         </div>
       </div>
       <nav className="flex-1 space-y-0.5 px-3">
         {nav.map((n) => (
           <Link key={n.href} href={n.href} onClick={() => setOpen(false)} data-testid={`link-${n.label.toLowerCase().replace(/\W+/g, "-")}`}
-            className={cn("group relative flex items-center gap-3 rounded-lg px-3 py-2 text-[13.5px] transition",
-              active(n.href) ? "bg-white/[.12] font-medium text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,.08)]" : "text-white/70 hover:bg-white/5 hover:text-white")}>
-            {active(n.href) && <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r bg-[#009FDA]" />}
+            className={cn("group relative flex items-center gap-3 min-h-[44px] rounded-lg px-3 py-2 text-[13.5px] transition",
+              active(n.href) ? "bg-white/[.12] font-medium text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,.08)]" : "text-[#AEB8C6] hover:bg-white/5 hover:text-white")}>
+            {active(n.href) && <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r bg-[#1ED3D9]" />}
             <n.icon className="h-4 w-4" /> {n.label}
           </Link>
         ))}
@@ -96,14 +96,13 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="px-5 pb-3"><div className="wave-line opacity-50" /></div>
       <div className="border-t border-white/10 p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#009FDA] text-xs font-semibold">{initials(me.fullName)}</div>
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1ED3D9] text-xs font-semibold text-[#29323F]">{initials(me.fullName)}</div>
           <div className="min-w-0 flex-1">
             <div className="truncate text-[13px] font-medium" data-testid="text-user-name">{me.fullName}</div>
-            <div className="truncate text-[11px] text-white/55">{ROLE_LABEL[me.role]}</div>
+            <div className="truncate text-[11px] text-[#AEB8C6]">{ROLE_LABEL[me.role]}</div>
           </div>
-          <button onClick={logout} className="rounded-md p-1.5 text-white/60 hover:bg-white/10 hover:text-white" aria-label="Log out" data-testid="button-logout"><LogOut className="h-4 w-4" /></button>
+          <button onClick={logout} className="flex h-11 w-11 items-center justify-center rounded-md text-[#AEB8C6] hover:bg-white/10 hover:text-white" aria-label="Log out" data-testid="button-logout"><LogOut className="h-4 w-4" /></button>
         </div>
-        <div className="mt-3 text-[10.5px] text-white/40">Urban Water and Sanitation · Digital Transformation</div>
       </div>
     </aside>
   );
@@ -113,16 +112,16 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="sticky top-0 hidden h-[100dvh] md:block">{sidebar}</div>
       {open && (
         <div className="fixed inset-0 z-50 md:hidden">
-          <div className="absolute inset-0 bg-[#002244]/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div className="absolute inset-0 bg-[#29323F]/70 backdrop-blur-sm" onClick={() => setOpen(false)} />
           <div className="relative h-full w-64">{sidebar}</div>
-          <button className="absolute left-[270px] top-4 rounded-lg bg-white p-2" onClick={() => setOpen(false)} aria-label="Close menu"><X className="h-4 w-4" /></button>
+          <button className="absolute left-[270px] top-4 flex h-11 w-11 items-center justify-center rounded-lg bg-[#F7F9FB] text-[#323D4F]" onClick={() => setOpen(false)} aria-label="Close menu"><X className="h-4 w-4" /></button>
         </div>
       )}
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-between glass-bar border-b border-[#002244]/[.06] px-4 md:px-8">
-          <button className="rounded-lg p-2 md:hidden" onClick={() => setOpen(true)} aria-label="Open menu" data-testid="button-menu"><Menu className="h-5 w-5" /></button>
-          <div className="hidden text-xs text-muted-foreground md:block">{me.organization || "World Bank"} · signed in as {me.email}</div>
-          <div className="flex items-center gap-3"><RoleSwitcher /><Link href="/help" className="rounded-lg p-2 text-[#002244]/70 hover:bg-muted hover:text-[#002244]" aria-label="Help center" data-testid="button-topbar-help"><CircleHelp className="h-5 w-5" /></Link><Notifications /></div>
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between glass-bar border-b border-white/[.08] text-[#EEF2F6] px-4 md:px-8">
+          <button className="flex h-11 w-11 items-center justify-center rounded-lg hover:bg-white/10 md:hidden" onClick={() => setOpen(true)} aria-label="Open menu" data-testid="button-menu"><Menu className="h-5 w-5" /></button>
+          <div className="hidden text-xs text-[#AEB8C6] md:block">{me.organization ? `${me.organization} · ` : ""}signed in as {me.email}</div>
+          <div className="flex items-center gap-3"><RoleSwitcher /><Link href="/help" className="flex h-11 w-11 items-center justify-center rounded-lg text-[#AEB8C6] hover:bg-white/10 hover:text-[#EEF2F6]" aria-label="Help center" data-testid="button-topbar-help"><CircleHelp className="h-5 w-5" /></Link><Notifications /></div>
         </header>
         <main className="mx-auto w-full max-w-[1280px] flex-1 px-4 py-8 md:px-8">{children}</main>
       </div>

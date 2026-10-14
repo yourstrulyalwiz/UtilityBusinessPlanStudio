@@ -5,7 +5,7 @@ import { FieldEditor, type Json } from "./field-editor";
 export function ImportContext({context,source}:{context:Record<string,unknown>;source:string}) {
   const issues=Array.isArray(context.issues)?context.issues as string[]:[];
   return <Card className="mb-5 min-w-0 p-5 text-sm">
-    <h2 className="font-semibold text-[#002244]">Imported TCWS preliminary plan</h2>
+    <h2 className="font-semibold text-[#323D4F]">Imported TCWS preliminary plan</h2>
     <p className="mt-1 text-muted-foreground">Real utility data supplied by the user, not the fictional Valle Verde example. Null values mean information is missing. Source figures and indicative tariffs have not been independently verified or recalculated.</p>
     <p className="mt-2 break-words text-xs">{source}</p>
     <details className="mt-3 rounded border border-amber-200 bg-amber-50 p-3">

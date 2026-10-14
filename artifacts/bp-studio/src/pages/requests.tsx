@@ -45,7 +45,7 @@ export default function Requests() {
         actions={me.role === "ttl" && <Btn onClick={() => setCreating(true)} data-testid="button-new-request"><Plus className="h-4 w-4" /> Request a utility</Btn>} />
       <div className="mb-4 inline-flex rounded-lg border bg-card p-1">
         {(["pending", "all"] as const).map((t) => (
-          <button key={t} onClick={() => setTab(t)} data-testid={`tab-${t}`} className={"rounded-md px-3 py-1.5 text-sm transition " + (tab === t ? "bg-[#002244] text-white" : "text-muted-foreground hover:text-[#002244]")}>
+          <button key={t} onClick={() => setTab(t)} data-testid={`tab-${t}`} className={"rounded-md px-3 py-1.5 text-sm transition " + (tab === t ? "bg-[#323D4F] text-white" : "text-muted-foreground hover:text-[#323D4F]")}>
             {t === "pending" ? `Pending (${items.filter((r) => r.status === "pending").length})` : `All (${items.length})`}
           </button>
         ))}
@@ -60,9 +60,9 @@ export default function Requests() {
             {shown.map((r) => (
               <li key={r.id} className="flex flex-col gap-3 px-5 py-4 md:flex-row md:items-start" data-testid={`row-request-${r.id}`}>
                 <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2"><span className="font-medium text-[#002244]">{r.utilityName}</span><Pill tone={statusTone(r.status)}>{humanize(r.status)}</Pill></div>
+                  <div className="flex flex-wrap items-center gap-2"><span className="font-medium text-[#323D4F]">{r.utilityName}</span><Pill tone={statusTone(r.status)}>{humanize(r.status)}</Pill></div>
                   <div className="mt-0.5 text-xs text-muted-foreground">{r.serviceArea} · {r.countryName} · plan {r.planYear} · by {r.ttlName} on {fmtDate(r.createdAt)}</div>
-                  <p className="mt-2 max-w-2xl whitespace-pre-line text-sm text-[#002244]/85">{r.justification}</p>
+                  <p className="mt-2 max-w-2xl whitespace-pre-line text-sm text-[#323D4F]/85">{r.justification}</p>
                   {r.decisionNote && <p className="mt-2 rounded-md bg-muted/70 px-3 py-2 text-xs text-muted-foreground">Decision note: {r.decisionNote}</p>}
                 </div>
                 {admin && r.status === "pending" && (
@@ -79,7 +79,7 @@ export default function Requests() {
 
       <Dialog open={creating} onOpenChange={setCreating}>
         <DialogContent className="max-w-lg rounded-xl">
-          <DialogHeader><DialogTitle className="text-[#002244]">Request a utility</DialogTitle><DialogDescription>An administrator reviews the request. You will be notified in-app of the decision.</DialogDescription></DialogHeader>
+          <DialogHeader><DialogTitle className="text-[#323D4F]">Request a utility</DialogTitle><DialogDescription>An administrator reviews the request. You will be notified in-app of the decision.</DialogDescription></DialogHeader>
           <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); create.mutate({ data: { ...form, utilityName: form.utilityName.trim(), serviceArea: form.serviceArea.trim(), justification: form.justification.trim() } }); }}>
             <Field label="Utility name" required><input required maxLength={200} className={inputCls} value={form.utilityName} onChange={(e) => setForm((s) => ({ ...s, utilityName: e.target.value }))} data-testid="input-request-name" /></Field>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -103,13 +103,13 @@ export default function Requests() {
         <DialogContent className="max-h-[90dvh] max-w-2xl overflow-auto rounded-xl">
           {deciding && (deciding.mode === "decline" ? (
             <>
-              <DialogHeader><DialogTitle className="text-[#002244]">Decline “{deciding.r.utilityName}”</DialogTitle><DialogDescription>{deciding.r.ttlName} will see this note in their notifications.</DialogDescription></DialogHeader>
+              <DialogHeader><DialogTitle className="text-[#323D4F]">Decline “{deciding.r.utilityName}”</DialogTitle><DialogDescription>{deciding.r.ttlName} will see this note in their notifications.</DialogDescription></DialogHeader>
               <Field label="Reason"><textarea rows={4} className={inputCls + " h-auto py-2"} value={note} onChange={(e) => setNote(e.target.value)} data-testid="input-decline-note" /></Field>
               <div className="flex justify-end gap-2"><Btn variant="ghost" onClick={() => setDeciding(null)}>Cancel</Btn><Btn variant="danger" disabled={decide.isPending} onClick={() => decide.mutate({ id: deciding.r.id, data: { decision: "decline", note: note.trim() || undefined } })} data-testid="button-confirm-decline">{decide.isPending ? "Declining…" : "Decline request"}</Btn></div>
             </>
           ) : (
             <>
-              <DialogHeader><DialogTitle className="text-[#002244]">Approve and register</DialogTitle><DialogDescription>Confirm the registry details. The requester is notified in-app once saved.</DialogDescription></DialogHeader>
+              <DialogHeader><DialogTitle className="text-[#323D4F]">Approve and register</DialogTitle><DialogDescription>Confirm the registry details. The requester is notified in-app once saved.</DialogDescription></DialogHeader>
               <Field label="Note to requester (optional)"><input className={inputCls} value={note} onChange={(e) => setNote(e.target.value)} data-testid="input-approve-note" /></Field>
               <div className="mt-2" />
               <UtilityForm submitLabel="Approve & register" pending={decide.isPending} onCancel={() => setDeciding(null)}

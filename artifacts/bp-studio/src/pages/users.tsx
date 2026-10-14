@@ -46,8 +46,8 @@ export default function UsersPage() {
                   const self = p.id === me.id;
                   return (
                     <tr key={p.id} className={p.isActive ? "" : "opacity-60"} data-testid={`row-user-${p.id}`}>
-                      <td className="px-4 py-3"><div className="flex items-center gap-3"><div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#002244]/[.07] text-[11px] font-semibold text-[#002244]">{initials(p.fullName)}</div><div><div className="font-medium text-[#002244]">{p.fullName}{self && <span className="ml-1.5 text-xs font-normal text-muted-foreground">(you)</span>}</div><div className="text-xs text-muted-foreground">{p.email}</div></div></div></td>
-                      <td className="px-4 py-3 text-[#002244]">{p.organization || "—"}</td>
+                      <td className="px-4 py-3"><div className="flex items-center gap-3"><div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#323D4F]/[.07] text-[11px] font-semibold text-[#323D4F]">{initials(p.fullName)}</div><div><div className="font-medium text-[#323D4F]">{p.fullName}{self && <span className="ml-1.5 text-xs font-normal text-muted-foreground">(you)</span>}</div><div className="text-xs text-muted-foreground">{p.email}</div></div></div></td>
+                      <td className="px-4 py-3 text-[#323D4F]">{p.organization || "—"}</td>
                       <td className="px-4 py-3">
                         {admin && !self ? (
                           <select className={inputCls + " h-8 w-40"} value={p.role} onChange={(e) => upd.mutate({ id: p.id, data: { role: e.target.value as PersonUpdateRole } })} data-testid={`select-role-${p.id}`}>
@@ -70,16 +70,16 @@ export default function UsersPage() {
         <DialogContent className="max-w-md rounded-xl">
           {invited ? (
             <div className="text-center">
-              <CheckCircle2 className="mx-auto mb-3 h-10 w-10 text-[#5B8C1F]" />
-              <DialogTitle className="text-[#002244]">Access provisioned for {invited.fullName}</DialogTitle>
+              <CheckCircle2 className="mx-auto mb-3 h-10 w-10 text-[#3F6E22]" />
+              <DialogTitle className="text-[#323D4F]">Access provisioned for {invited.fullName}</DialogTitle>
               <DialogDescription className="mt-2">They can sign in as <strong>{invited.email}</strong> with the role {ROLE_LABEL[invited.role]}.</DialogDescription>
-              <div className="mt-5 flex items-center gap-2 rounded-lg border bg-muted/50 p-2 text-left"><code className="flex-1 truncate px-1 text-xs text-[#002244]" data-testid="text-app-link">{appLink()}</code><Btn variant="outline" className="h-8" onClick={copy} data-testid="button-copy-link"><Copy className="h-3.5 w-3.5" /> Copy</Btn></div>
-              <div className="mt-4 flex gap-2 rounded-lg bg-[#D9622B]/10 p-3 text-left text-xs text-[#8a3d16]"><Info className="h-4 w-4 shrink-0" />Email delivery is not configured. No message has been sent — share this link with them yourself.</div>
+              <div className="mt-5 flex items-center gap-2 rounded-lg border bg-muted/50 p-2 text-left"><code className="flex-1 truncate px-1 text-xs text-[#323D4F]" data-testid="text-app-link">{appLink()}</code><Btn variant="outline" className="h-8" onClick={copy} data-testid="button-copy-link"><Copy className="h-3.5 w-3.5" /> Copy</Btn></div>
+              <div className="mt-4 flex gap-2 rounded-lg bg-[#FF6A0D]/10 p-3 text-left text-xs text-[#9A3A05]"><Info className="h-4 w-4 shrink-0" />Email delivery is not configured. No message has been sent — share this link with them yourself.</div>
               <Btn className="mt-5 w-full" onClick={close} data-testid="button-done">Done</Btn>
             </div>
           ) : (
             <>
-              <DialogHeader><DialogTitle className="text-[#002244]">Invite a person</DialogTitle><DialogDescription>Creates provisioned access tied to their sign-in email. No email is sent.</DialogDescription></DialogHeader>
+              <DialogHeader><DialogTitle className="text-[#323D4F]">Invite a person</DialogTitle><DialogDescription>Creates provisioned access tied to their sign-in email. No email is sent.</DialogDescription></DialogHeader>
               <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); invite.mutate({ data: { ...form, fullName: form.fullName.trim(), email: form.email.trim(), organization: form.organization?.trim() || undefined } }); }}>
                 <Field label="Full name" required><input required maxLength={120} className={inputCls} value={form.fullName} onChange={(e) => setForm((s) => ({ ...s, fullName: e.target.value }))} data-testid="input-invite-name" /></Field>
                 <Field label="Email" required><input required type="email" className={inputCls} value={form.email} onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))} data-testid="input-invite-email" /></Field>

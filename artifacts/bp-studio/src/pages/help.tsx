@@ -34,10 +34,10 @@ function RoleGuides() {
   return (
     <div className="grid gap-4 lg:grid-cols-3">
       {order.map((id, i) => { const g = ROLE_GUIDES.find((r) => r.id === id)!; return (
-        <Card key={id} className={cn("p-5", i === 0 && "border-[#009FDA]/50 ring-1 ring-[#009FDA]/20")} data-testid={`card-role-guide-${id}`}>
+        <Card key={id} className={cn("p-5", i === 0 && "border-[#1ED3D9]/50 ring-1 ring-[#1ED3D9]/20")} data-testid={`card-role-guide-${id}`}>
           <div className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{g.who}{i === 0 && " · your role"}</div>
-          <h3 className="mt-1 font-semibold text-[#002244]">{g.title}</h3>
-          <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm text-[#002244]">{g.steps.map((s) => <li key={s}>{s}</li>)}</ol>
+          <h3 className="mt-1 font-semibold text-[#323D4F]">{g.title}</h3>
+          <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm text-[#323D4F]">{g.steps.map((s) => <li key={s}>{s}</li>)}</ol>
         </Card>
       ); })}
     </div>
@@ -52,15 +52,15 @@ export function HelpCenter() {
   return (
     <div>
       <PageHeader eyebrow="Help center" title="How to build a business plan" description="Role guides, the 21 guidance topics behind the 20 activities, and sector perspectives." />
-      <section className="mb-8"><h2 className="mb-3 text-sm font-semibold text-[#002244]">Getting started by role</h2><RoleGuides /></section>
+      <section className="mb-8"><h2 className="mb-3 text-sm font-semibold text-[#323D4F]">Getting started by role</h2><RoleGuides /></section>
 
       <section className="mb-8">
         <Card className="p-5">
-          <h2 className="text-sm font-semibold text-[#002244]">Across sectors</h2>
+          <h2 className="text-sm font-semibold text-[#323D4F]">Across sectors</h2>
           <p className="mt-1 text-xs text-muted-foreground">The same planning logic applies beyond water. Choose a sector to read each phase through that lens.</p>
           <div className="mt-3"><SectorPicker value={sector} onChange={setSector} /></div>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
-            {phases.map((p) => <div key={p} className="rounded-lg border p-3" style={{ borderLeft: `3px solid ${phaseColor(p)}` }}><div className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: phaseColor(p) }}>{p} · {PHASE_NAMES[p]}</div><p className="mt-1 text-sm text-[#002244]" data-testid={`text-help-lens-${p}`}>{sectorLens(sector, p)}</p></div>)}
+            {phases.map((p) => <div key={p} className="rounded-lg border p-3" style={{ borderLeft: `3px solid ${phaseColor(p)}` }}><div className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: phaseColor(p) }}>{p} · {PHASE_NAMES[p]}</div><p className="mt-1 text-sm text-[#323D4F]" data-testid={`text-help-lens-${p}`}>{sectorLens(sector, p)}</p></div>)}
           </div>
           <p className="mt-3 text-[11px] font-medium text-amber-800">{ILLUSTRATIVE}</p>
         </Card>
@@ -78,8 +78,8 @@ export function HelpCenter() {
                 <div className="mb-2 text-xs font-semibold uppercase tracking-wider" style={{ color: phaseColor(p) }}>{p} · {PHASE_NAMES[p]}</div>
                 <Card className="divide-y overflow-hidden">
                   {ts.map((t) => { const codes = Object.entries(ACTIVITY_GUIDANCE).filter(([, ids]) => ids.includes(t.id)).map(([c]) => c); return (
-                    <Link key={t.id} href={`/help/${t.id}`} className="flex items-center gap-3 px-5 py-3 hover:bg-[#E6F5FB]/60" data-testid={`link-topic-${t.id}`}>
-                      <div className="min-w-0 flex-1"><div className="text-sm font-medium text-[#002244]">{t.title}</div><div className="truncate text-xs text-muted-foreground">{t.definition[0]}</div></div>
+                    <Link key={t.id} href={`/help/${t.id}`} className="flex items-center gap-3 px-5 py-3 hover:bg-[#E4F8F9]/60" data-testid={`link-topic-${t.id}`}>
+                      <div className="min-w-0 flex-1"><div className="text-sm font-medium text-[#323D4F]">{t.title}</div><div className="truncate text-xs text-muted-foreground">{t.definition[0]}</div></div>
                       <span className="hidden font-mono text-[11px] text-muted-foreground sm:block">{codes.join(" · ")}</span><ChevronRight className="h-4 w-4 text-muted-foreground" />
                     </Link>
                   ); })}
@@ -97,14 +97,14 @@ export function HelpCenter() {
 export function HelpTopic() {
   const { topicId = "" } = useParams<{ topicId: string }>();
   const t = GUIDANCE[topicId];
-  if (!t) return <Card><Empty icon={<Search className="h-6 w-6" />} title="Topic not found" body={<Link href="/help" className="text-[#009FDA] hover:underline">Back to Help center</Link>} /></Card>;
+  if (!t) return <Card><Empty icon={<Search className="h-6 w-6" />} title="Topic not found" body={<Link href="/help" className="text-[#127A80] hover:underline">Back to Help center</Link>} /></Card>;
   const codes = Object.entries(ACTIVITY_GUIDANCE).filter(([, ids]) => ids.includes(t.id)).map(([c]) => c);
   return (
     <div className="max-w-3xl">
-      <Link href="/help" className="mb-5 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[#002244]" data-testid="link-back-help"><ArrowLeft className="h-4 w-4" /> Help center</Link>
+      <Link href="/help" className="mb-5 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[#323D4F]" data-testid="link-back-help"><ArrowLeft className="h-4 w-4" /> Help center</Link>
       <Card className="p-6">
         <TopicHeader topic={t} />
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-[#002244]" data-testid="text-topic-title">{t.title}</h1>
+        <h1 className="mt-2 text-2xl font-semibold tracking-tight text-[#323D4F]" data-testid="text-topic-title">{t.title}</h1>
         <p className="mt-1 text-xs text-muted-foreground">Used in activities {codes.join(", ")}</p>
         <div className="mt-5"><TopicBody topic={t} /></div>
       </Card>

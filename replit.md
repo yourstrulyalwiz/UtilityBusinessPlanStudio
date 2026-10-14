@@ -1,10 +1,10 @@
-# Urban Water and Sanitation Service Optimization - Digital Transformation - Business Plan Studio
+# Urban Water and Sanitation Service Optimization - Business Plan Studio
 
 A secure registry for water utility Business & Investment Plans following the Utility of the Future playbook.
 
 ## Visual direction
 
-The user wants a visually striking interface with transparencies while maintaining the existing brand. Preserve navy/cyan identity and prioritize readable data and forms over decorative effects.
+The user wants a visually striking, modern interface with transparencies, following the supplied `attached_assets/BRAND_GUIDE_1792020370048.md` and hub symbol `attached_assets/download_1792020363915.svg`. This guide supersedes the earlier navy/cyan palette: slate navy dominates, with cyan, lime and orange accents. Keep readable data and forms, and do not imply institutional affiliation. The product name excludes “Digital Transformation”.
 
 ## Supplied real-utility case
 

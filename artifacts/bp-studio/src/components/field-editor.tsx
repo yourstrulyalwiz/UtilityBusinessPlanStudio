@@ -63,13 +63,13 @@ export function FieldEditor({ value, example, onChange, readOnly, path, depth = 
           const topic = depth <= 2 ? topicForField(k,path) : undefined;
           const help = topic && <HelpDot topicId={topic.id} label={label(k)} hint={hintForField(k, topic)} testid={`button-field-help-${tid}-${k}`.replace(/[^a-zA-Z0-9-]+/g, "-")} />;
           return complex ? (
-            <fieldset key={k} className="col-span-full min-w-0 rounded-lg border border-[#002244]/10 bg-[#002244]/[.015] p-4" style={{ borderLeft: `3px solid ${depth % 2 ? "#0E7C86" : "#009FDA"}` }}>
-              <legend className="flex items-center gap-1 px-1.5 text-[12px] font-semibold uppercase tracking-wider text-[#002244]">{label(k)}{help}</legend>
+            <fieldset key={k} className="col-span-full min-w-0 rounded-lg border border-[#323D4F]/10 bg-[#323D4F]/[.015] p-4" style={{ borderLeft: `3px solid ${depth % 2 ? "#127A80" : "#1ED3D9"}` }}>
+              <legend className="flex items-center gap-1 px-1.5 text-[12px] font-semibold uppercase tracking-wider text-[#323D4F]">{label(k)}{help}</legend>
               {node}
             </fieldset>
           ) : (
             <div key={k} className="min-w-0">
-              <div className="mb-1 flex min-h-6 items-center gap-1"><span className="text-xs font-medium text-[#002244]/80">{label(k)}</span>{help}</div>
+              <div className="mb-1 flex min-h-6 items-center gap-1"><span className="text-xs font-medium text-[#323D4F]/80">{label(k)}</span>{help}</div>
               {node}
             </div>
           );
@@ -86,21 +86,21 @@ export function FieldEditor({ value, example, onChange, readOnly, path, depth = 
       <div className="space-y-2">
         {arr.length === 0 && <div className="rounded-md border border-dashed px-3 py-3 text-xs text-muted-foreground">{readOnly ? "No entries." : "No entries yet. Add a row to begin."}</div>}
         {arr.map((item, i) => (
-          <div key={i} className="flex items-start gap-2 rounded-md bg-white/70 p-2 ring-1 ring-[#002244]/[.06]">
+          <div key={i} className="flex items-start gap-2 rounded-md bg-white/70 p-2 ring-1 ring-[#323D4F]/[.06]">
             <span className="mt-2 w-6 shrink-0 text-right font-mono text-[10px] text-muted-foreground">{i + 1}</span>
             <div className="min-w-0 flex-1"><FieldEditor value={item} example={itemEx} readOnly={readOnly} path={`${path}.${i}`} depth={depth + 1} onChange={(nv) => onChange?.(arr.map((x, j) => (j === i ? nv : x)))} /></div>
             {!readOnly && <button type="button" onClick={() => onChange?.(arr.filter((_, j) => j !== i))} className="mt-1.5 rounded p-1 text-muted-foreground hover:text-destructive" aria-label="Remove row" data-testid={`button-remove-${tid}-${i}`}><Trash2 className="h-4 w-4" /></button>}
           </div>
         ))}
-        {!readOnly && <button type="button" onClick={() => onChange?.([...arr, blankFrom(itemEx)])} className="inline-flex items-center gap-1 text-xs font-medium text-[#009FDA] hover:underline" data-testid={`button-add-${tid}`}><Plus className="h-3.5 w-3.5" /> Add row</button>}
+        {!readOnly && <button type="button" onClick={() => onChange?.([...arr, blankFrom(itemEx)])} className="inline-flex items-center gap-1 text-xs font-medium text-[#127A80] hover:underline" data-testid={`button-add-${tid}`}><Plus className="h-3.5 w-3.5" /> Add row</button>}
       </div>
     );
   }
   // Primitives
   if (typeof example === "boolean" || typeof value === "boolean") {
     return (
-      <span className="inline-flex h-9 items-center gap-2 text-sm text-[#002244]">
-        <input type="checkbox" className="h-4 w-4 accent-[#009FDA]" disabled={readOnly} checked={value === true} onChange={(e) => onChange?.(e.target.checked)} aria-label={label(path.split(".").pop() ?? "")} data-testid={`input-${tid}`} />
+      <span className="inline-flex h-9 items-center gap-2 text-sm text-[#323D4F]">
+        <input type="checkbox" className="h-4 w-4 accent-[#1ED3D9]" disabled={readOnly} checked={value === true} onChange={(e) => onChange?.(e.target.checked)} aria-label={label(path.split(".").pop() ?? "")} data-testid={`input-${tid}`} />
         {value === true ? "Yes" : "No"}
       </span>
     );

@@ -11,7 +11,7 @@ export function useMe(): Person {
   return useProfile().person;
 }
 
-export const PHASE_COLORS = ["#0E7C86", "#1F5FAD", "#5B8C1F", "#D9622B"];
+export const PHASE_COLORS = ["#1ED3D9", "#5A6780", "#D9E950", "#FF6A0D"];
 export function phaseColor(code: string, index?: number) {
   const m = code.match(/(\d)/);
   const i = m ? Number(m[1]) - 1 : index ?? 0;

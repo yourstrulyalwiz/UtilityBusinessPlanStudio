@@ -54,32 +54,32 @@ export default function UtilityPage() {
 
   return (
     <div>
-      <Link href={me.role === "admin" ? "/admin" : "/"} className="mb-5 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[#002244]" data-testid="link-back"><ArrowLeft className="h-4 w-4" /> Back to registry</Link>
+      <Link href={me.role === "admin" ? "/admin" : "/"} className="mb-5 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[#323D4F]" data-testid="link-back"><ArrowLeft className="h-4 w-4" /> Back to registry</Link>
       <Card className="rise mb-6 p-6">
         <div className="flex flex-col gap-5 md:flex-row md:items-start">
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border bg-white text-lg font-semibold text-[#002244]">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border bg-white text-lg font-semibold text-[#323D4F]">
             {u.logoPath ? <img src={logoUrl(u.logoPath)!} alt={`${u.name} logo`} className="h-full w-full object-contain p-1.5" /> : initials(u.shortName || u.name)}
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-2xl font-semibold tracking-tight text-[#002244]" data-testid="text-utility-name">{u.name}</h1>
+              <h1 className="text-2xl font-semibold tracking-tight text-[#323D4F]" data-testid="text-utility-name">{u.name}</h1>
               {u.shortName && <Pill tone="navy">{u.shortName}</Pill>}
               <Pill tone={statusTone(u.status)}>{humanize(u.status)}</Pill>
             </div>
             <div className="mt-1 text-sm text-muted-foreground">{u.serviceArea} · {u.countryName} · {u.region}</div>
             <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 text-sm sm:grid-cols-4">
               {[["TTL", u.ttlName], ["Plan year", String(u.planYear)], ["Currency", u.currency], ["WB project", u.wbProjectId || "—"], ["UoF completion", fmtDate(u.uofCompletionDate)], ["Plan status", humanize(u.planStatus)], ["Current phase", u.currentPhase || "—"], ["Registered", fmtDate(u.createdAt)]].map(([k, v]) => (
-                <div key={k}><dt className="text-[11px] uppercase tracking-wider text-muted-foreground">{k}</dt><dd className="mt-0.5 font-medium text-[#002244]">{v}</dd></div>
+                <div key={k}><dt className="text-[11px] uppercase tracking-wider text-muted-foreground">{k}</dt><dd className="mt-0.5 font-medium text-[#323D4F]">{v}</dd></div>
               ))}
             </dl>
           </div>
           <div className="flex shrink-0 flex-col items-stretch gap-2 md:w-48">
-            <div className="rounded-lg border border-[#009FDA]/15 bg-[#E6F5FB]/60 p-3">
-              <div className="flex justify-between text-xs"><span className="text-muted-foreground">Progress</span><span className="font-semibold text-[#002244] tnum">{Math.round(u.progress)}%</span></div>
-              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white"><div className="h-full rounded-full bg-gradient-to-r from-[#0077b3] to-[#009FDA]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div>
+            <div className="rounded-lg border border-[#1ED3D9]/15 bg-[#E4F8F9]/60 p-3">
+              <div className="flex justify-between text-xs"><span className="text-muted-foreground">Progress</span><span className="font-semibold text-[#323D4F] tnum">{Math.round(u.progress)}%</span></div>
+              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white"><div className="h-full rounded-full bg-gradient-to-r from-[#127A80] to-[#1ED3D9]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div>
             </div>
             <Tooltip>
-              <TooltipTrigger asChild><a href={`/api/plans/${u.planId}/deck`} className="flex h-10 w-full items-center justify-center gap-2 rounded-lg border bg-white text-sm font-medium text-[#002244] hover:bg-muted" data-testid="button-deck"><FileText className="h-4 w-4" /> Download draft deck</a></TooltipTrigger>
+              <TooltipTrigger asChild><a href={`/api/plans/${u.planId}/deck`} className="flex h-10 w-full items-center justify-center gap-2 rounded-lg border bg-white text-sm font-medium text-[#323D4F] hover:bg-muted" data-testid="button-deck"><FileText className="h-4 w-4" /> Download draft deck</a></TooltipTrigger>
               <TooltipContent>Step 0 preview: registry information only. Full business-plan output arrives in Step 4.</TooltipContent>
             </Tooltip>
             {me.role === "admin" && <Btn variant="navy" onClick={() => { setForm({ name: u.name, shortName: u.shortName, serviceArea: u.serviceArea, ttlUserId: u.ttlUserId, wbProjectId: u.wbProjectId, status: u.status === "archived" ? "archived" : "active", logoPath: u.logoPath }); setEditing(true); }} data-testid="button-edit-utility"><Pencil className="h-4 w-4" /> Edit details</Btn>}
@@ -98,17 +98,17 @@ export default function UtilityPage() {
               <Card className="rise mb-6 overflow-hidden" data-testid="card-continue">
                 <div className="navy-depth flex flex-col gap-4 p-5 text-white sm:flex-row sm:items-center">
                   <div className="min-w-0 flex-1">
-                    <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7FD3F2]">{done ? "All steps complete" : `Next up · step ${w.activities.indexOf(nxt) + 1} of ${w.activities.length}`}</div>
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1ED3D9]">{done ? "All steps complete" : `Next up · step ${w.activities.indexOf(nxt) + 1} of ${w.activities.length}`}</div>
                     <div className="mt-1 text-lg font-semibold" data-testid="text-next-activity">{done ? "Every activity is approved." : <><span className="mr-2 font-mono text-sm text-white/60">{nxt.code}</span>{nxt.name}</>}</div>
                     {!done && <div className="mt-1 text-xs text-white/70">{nxt.phaseCode} · {nxt.days} days · {humanize(nxt.status)}{!w.canEdit ? " · read-only for your role" : ""}</div>}
                   </div>
-                  {done ? <CheckCircle2 className="h-8 w-8 text-[#7FD3F2]" /> : <Link href={`/plans/${w.planId}/activities/${nxt.code}`} className="inline-flex h-10 items-center gap-2 rounded-lg btn-glow bg-[#009FDA] px-4 text-sm font-medium text-white hover:bg-[#0089bd]" data-testid="button-continue">{nxt.status === "not_started" ? "Start step" : "Continue"} <ArrowRight className="h-4 w-4" /></Link>}
+                  {done ? <CheckCircle2 className="h-8 w-8 text-[#1ED3D9]" /> : <Link href={`/plans/${w.planId}/activities/${nxt.code}`} className="inline-flex h-10 items-center gap-2 rounded-lg btn-glow bg-[#1ED3D9] px-4 text-sm font-medium text-[#29323F] hover:bg-[#17BFC5]" data-testid="button-continue">{nxt.status === "not_started" ? "Start step" : "Continue"} <ArrowRight className="h-4 w-4" /></Link>}
                 </div>
               </Card>
             );
           })()}
           <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-base font-semibold text-[#002244]">Business plan activities</h2>
+            <h2 className="text-base font-semibold text-[#323D4F]">Business plan activities</h2>
             <span className="text-xs text-muted-foreground">Open any step to work or preview</span>
           </div>
           {activities.length === 0 ? <Card><Empty icon={<FileText className="h-6 w-6" />} title="No activities yet" body="The plan's activities will appear here once the plan is initialised." /></Card> : (
@@ -125,10 +125,10 @@ export default function UtilityPage() {
                     </div>
                     <ul className="divide-y">
                       {acts.map((a) => (
-                        <li key={a.code}><Link href={`/plans/${u.planId}/activities/${a.code}`} className="flex items-start gap-4 px-5 py-3 transition hover:bg-[#009FDA]/[.04]" data-testid={`activity-${a.code}`}>
+                        <li key={a.code}><Link href={`/plans/${u.planId}/activities/${a.code}`} className="flex items-start gap-4 px-5 py-3 transition hover:bg-[#1ED3D9]/[.04]" data-testid={`activity-${a.code}`}>
                           <span className="mt-0.5 w-10 shrink-0 font-mono text-[11px] text-muted-foreground">{a.code}</span>
                           <div className="min-w-0 flex-1">
-                            <div className="text-sm font-medium text-[#002244]">{a.name}</div>
+                            <div className="text-sm font-medium text-[#323D4F]">{a.name}</div>
                             <div className="mt-0.5 text-xs text-muted-foreground">{a.milestone ? `Milestone: ${a.milestone} · ` : ""}{a.days} days{a.ownerName ? ` · ${a.ownerName}` : ""}{a.dueDate ? ` · due ${fmtDate(a.dueDate)}` : ""}</div>
                           </div>
                           {wf.data?.activities.find((x) => x.code === a.code)?.locked && <Lock className="mt-1 h-3.5 w-3.5 text-muted-foreground" />}<Pill tone={statusTone(a.status)}>{humanize(a.status)}</Pill>
@@ -145,15 +145,15 @@ export default function UtilityPage() {
         <div className="space-y-6">
           <Card>
             <div className="flex items-center justify-between border-b px-5 py-3">
-              <h2 className="text-sm font-semibold text-[#002244]">Team</h2>
-              {canManage && <Btn variant="ghost" className="h-8 px-2 text-[#009FDA]" onClick={() => setAdding(true)} data-testid="button-add-member"><UserPlus className="h-4 w-4" /> Add</Btn>}
+              <h2 className="text-sm font-semibold text-[#323D4F]">Team</h2>
+              {canManage && <Btn variant="ghost" className="h-8 px-2 text-[#127A80]" onClick={() => setAdding(true)} data-testid="button-add-member"><UserPlus className="h-4 w-4" /> Add</Btn>}
             </div>
             {members.length === 0 ? <Empty icon={<Users className="h-5 w-5" />} title="No team members" body={canManage ? "Add the utility focal point, team members and consultants." : "No one has been assigned yet."} /> : (
               <ul className="divide-y">
                 {members.map((m) => (
                   <li key={m.id} className="group flex items-center gap-3 px-5 py-3" data-testid={`member-${m.id}`}>
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#002244]/[.07] text-[11px] font-semibold text-[#002244]">{initials(m.fullName)}</div>
-                    <div className="min-w-0 flex-1"><div className="truncate text-sm font-medium text-[#002244]">{m.fullName}</div><div className="truncate text-xs text-muted-foreground">{MEMBER_ROLE_LABEL[m.memberRole] ?? humanize(m.memberRole)}</div></div>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#323D4F]/[.07] text-[11px] font-semibold text-[#323D4F]">{initials(m.fullName)}</div>
+                    <div className="min-w-0 flex-1"><div className="truncate text-sm font-medium text-[#323D4F]">{m.fullName}</div><div className="truncate text-xs text-muted-foreground">{MEMBER_ROLE_LABEL[m.memberRole] ?? humanize(m.memberRole)}</div></div>
                     {canManage && <button disabled={remove.isPending} onClick={() => { if (confirm(`Remove ${m.fullName} from this team?`)) remove.mutate({ id, memberId: m.id }); }} className="rounded p-1 text-muted-foreground opacity-0 hover:text-destructive group-hover:opacity-100" aria-label="Remove member" data-testid={`button-remove-member-${m.id}`}><Trash2 className="h-4 w-4" /></button>}
                   </li>
                 ))}
@@ -161,12 +161,12 @@ export default function UtilityPage() {
             )}
           </Card>
           <Card>
-            <div className="border-b px-5 py-3"><h2 className="text-sm font-semibold text-[#002244]">Recent history</h2></div>
+            <div className="border-b px-5 py-3"><h2 className="text-sm font-semibold text-[#323D4F]">Recent history</h2></div>
             {audit.length === 0 ? <div className="px-5 py-8 text-center text-xs text-muted-foreground">No recorded changes yet.</div> : (
               <ol className="relative space-y-4 px-5 py-4">
                 {audit.slice(0, 12).map((a) => (
-                  <li key={a.id} className="relative pl-5"><span className="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-[#009FDA]" />
-                    <div className="text-[13px] text-[#002244]"><strong className="font-medium">{a.actor}</strong> {humanize(a.action).toLowerCase()}</div>
+                  <li key={a.id} className="relative pl-5"><span className="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-[#1ED3D9]" />
+                    <div className="text-[13px] text-[#323D4F]"><strong className="font-medium">{a.actor}</strong> {humanize(a.action).toLowerCase()}</div>
                     <div className="text-[11px] text-muted-foreground">{fmtDateTime(a.createdAt)}</div>
                   </li>
                 ))}
@@ -179,7 +179,7 @@ export default function UtilityPage() {
 
       <Dialog open={adding} onOpenChange={setAdding}>
         <DialogContent className="max-w-md rounded-xl">
-          <DialogHeader><DialogTitle className="text-[#002244]">Add team member</DialogTitle><DialogDescription>Only people with Studio access can be assigned. Invite new people from People &amp; roles.</DialogDescription></DialogHeader>
+          <DialogHeader><DialogTitle className="text-[#323D4F]">Add team member</DialogTitle><DialogDescription>Only people with Studio access can be assigned. Invite new people from People &amp; roles.</DialogDescription></DialogHeader>
           <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); if (newMember.userId) add.mutate({ id, data: newMember }); }}>
             <Field label="Person" required>
               <select className={inputCls} value={newMember.userId} onChange={(e) => setNewMember((s) => ({ ...s, userId: e.target.value }))} data-testid="select-member">
@@ -199,7 +199,7 @@ export default function UtilityPage() {
 
       <Dialog open={editing} onOpenChange={setEditing}>
         <DialogContent className="max-h-[90dvh] max-w-lg overflow-auto rounded-xl">
-          <DialogHeader><DialogTitle className="text-[#002244]">Edit utility</DialogTitle><DialogDescription>Country and plan year are fixed once registered.</DialogDescription></DialogHeader>
+          <DialogHeader><DialogTitle className="text-[#323D4F]">Edit utility</DialogTitle><DialogDescription>Country and plan year are fixed once registered.</DialogDescription></DialogHeader>
           <form className="space-y-4" onSubmit={(e) => {
             e.preventDefault();
             if (form.wbProjectId && !/^P\d{6}$/.test(form.wbProjectId)) { toast({ title: "WB project ID must be P followed by 6 digits", variant: "destructive" }); return; }

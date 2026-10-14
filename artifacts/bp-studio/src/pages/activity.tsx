@@ -127,15 +127,15 @@ export default function ActivityPage() {
 
   return (
     <div>
-      <button onClick={() => go(base)} className="mb-5 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[#002244]" data-testid="link-back-workspace"><ArrowLeft className="h-4 w-4" /> {wf.data.utilityName}</button>
+      <button onClick={() => go(base)} className="mb-5 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[#323D4F]" data-testid="link-back-workspace"><ArrowLeft className="h-4 w-4" /> {wf.data.utilityName}</button>
 
       <div className="grid gap-6 lg:grid-cols-[230px_1fr]">
         <nav className="hidden lg:block">
           <div className="sticky top-20 max-h-[calc(100dvh-6rem)] glass overflow-auto rounded-xl border p-2">
             {acts.map((a, i) => (
               <button key={a.code} onClick={() => go(`${base}/activities/${a.code}`)} data-testid={`nav-activity-${a.code}`}
-                className={cn("flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-xs", a.code === act.code ? "navy-depth text-white shadow-[0_6px_14px_-8px_rgba(0,34,68,.6)]" : "text-[#002244] hover:bg-muted")}>
-                {a.status === "approved" ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#5B8C1F]" /> : a.locked ? <Lock className="h-3.5 w-3.5 shrink-0 opacity-50" /> : <Circle className="h-3.5 w-3.5 shrink-0" style={{ color: phaseColor(a.phaseCode, i) }} />}
+                className={cn("flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-xs", a.code === act.code ? "navy-depth text-white shadow-[0_6px_14px_-8px_rgba(0,34,68,.6)]" : "text-[#323D4F] hover:bg-muted")}>
+                {a.status === "approved" ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#3F6E22]" /> : a.locked ? <Lock className="h-3.5 w-3.5 shrink-0 opacity-50" /> : <Circle className="h-3.5 w-3.5 shrink-0" style={{ color: phaseColor(a.phaseCode, i) }} />}
                 <span className="font-mono opacity-70">{a.code}</span><span className="truncate">{a.name}</span>
               </button>
             ))}
@@ -151,10 +151,10 @@ export default function ActivityPage() {
                 <span>·</span><span>{act.phaseCode}</span><span>·</span><span className="tnum">{act.days} days</span>
                 <span className="ml-auto"><Pill tone={statusTone(status)}>{humanize(status)}</Pill></span>
               </div>
-              <h1 className="mt-2 text-2xl font-semibold tracking-tight text-[#002244]" data-testid="text-activity-name"><span className="mr-2 font-mono text-lg text-muted-foreground">{act.code}</span>{act.name}</h1>
-              <button type="button" onClick={() => setHowOpen(true)} className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-[#009FDA]/40 bg-[#E6F5FB] px-3 py-1.5 text-sm font-medium text-[#002244] hover:border-[#009FDA]" data-testid="button-how-to-complete"><CircleHelp className="h-4 w-4 text-[#009FDA]" /> How to complete this step</button>
+              <h1 className="mt-2 text-2xl font-semibold tracking-tight text-[#323D4F]" data-testid="text-activity-name"><span className="mr-2 font-mono text-lg text-muted-foreground">{act.code}</span>{act.name}</h1>
+              <button type="button" onClick={() => setHowOpen(true)} className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-[#1ED3D9]/40 bg-[#E4F8F9] px-3 py-1.5 text-sm font-medium text-[#323D4F] hover:border-[#1ED3D9]" data-testid="button-how-to-complete"><CircleHelp className="h-4 w-4 text-[#127A80]" /> How to complete this step</button>
               <GuidanceDialog open={howOpen} onOpenChange={setHowOpen} topics={topicsFor(act.code)} title={`How to complete ${act.code} ${act.name}`} intro={
-                <ol className="list-decimal space-y-1 rounded-lg border p-3 pl-7 text-sm text-[#002244]">
+                <ol className="list-decimal space-y-1 rounded-lg border p-3 pl-7 text-sm text-[#323D4F]">
                   <li>Read the instructions{act.needs.length ? " and gather what you will need" : ""}.</li>
                   <li>Fill the form; use the ? buttons next to field names for definitions and examples.</li>
                   <li>Save draft as often as you like. Submit when every required item is checked; the step then becomes read-only until review.</li>
@@ -163,16 +163,16 @@ export default function ActivityPage() {
               {act.locked && <div className="mt-4 flex items-start gap-2 rounded-lg border border-amber-300/60 bg-amber-50 px-4 py-3 text-sm text-amber-900" data-testid="text-lock-reason"><Lock className="mt-0.5 h-4 w-4 shrink-0" /> <span><strong>Preview only.</strong> {act.lockReason || "Earlier steps must be completed first."}</span></div>}
               {!canEdit && !act.locked && <div className="mt-4 rounded-lg bg-muted/60 px-4 py-2.5 text-xs text-muted-foreground">Your role has read-only access to this step.</div>}
               <div className="mt-5 grid gap-4 md:grid-cols-[1.4fr_1fr]">
-                <div className="rounded-lg border border-[#009FDA]/15 bg-gradient-to-br from-[#009FDA]/[.09] to-[#009FDA]/[.03] p-4">
-                  <div className="mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#002244]"><BookOpen className="h-3.5 w-3.5" /> Instructions</div>
-                  <p className="whitespace-pre-line text-sm leading-relaxed text-[#002244]" data-testid="text-instructions">{act.instructions || "No instructions supplied for this step."}</p>
+                <div className="rounded-lg border border-[#1ED3D9]/15 bg-gradient-to-br from-[#1ED3D9]/[.09] to-[#1ED3D9]/[.03] p-4">
+                  <div className="mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#323D4F]"><BookOpen className="h-3.5 w-3.5" /> Instructions</div>
+                  <p className="whitespace-pre-line text-sm leading-relaxed text-[#323D4F]" data-testid="text-instructions">{act.instructions || "No instructions supplied for this step."}</p>
                 </div>
                 <div className="rounded-lg border bg-white/60 p-4">
-                  <div className="mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#002244]"><ClipboardList className="h-3.5 w-3.5" /> You will need</div>
-                  {act.needs.length ? <ul className="space-y-1 text-sm text-[#002244]">{act.needs.map((n) => <li key={n} className="flex gap-2"><span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#009FDA]" />{n}</li>)}</ul> : <p className="text-xs text-muted-foreground">Nothing specific listed.</p>}
+                  <div className="mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#323D4F]"><ClipboardList className="h-3.5 w-3.5" /> You will need</div>
+                  {act.needs.length ? <ul className="space-y-1 text-sm text-[#323D4F]">{act.needs.map((n) => <li key={n} className="flex gap-2"><span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#1ED3D9]" />{n}</li>)}</ul> : <p className="text-xs text-muted-foreground">Nothing specific listed.</p>}
                 </div>
               </div>
-              {isPhase3 && <p className="mt-4 rounded-lg border-l-4 border-[#5B8C1F] bg-[#5B8C1F]/[.06] px-4 py-2.5 text-xs text-[#002244]">Phase 3 values are editable supplied planning inputs. The Studio stores them as entered; it does not recalculate forecasts or produce financial models.</p>}
+              {isPhase3 && <p className="mt-4 rounded-lg border-l-4 border-[#70AD47] bg-[#70AD47]/[.06] px-4 py-2.5 text-xs text-[#323D4F]">Phase 3 values are editable supplied planning inputs. The Studio stores them as entered; it does not recalculate forecasts or produce financial models.</p>}
               {act.feedback && <p className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"><strong>Latest review comment:</strong> {act.feedback}</p>}
             </div>
           </Card>
@@ -181,9 +181,9 @@ export default function ActivityPage() {
           <div className="grid gap-5 xl:grid-cols-[1fr_260px]">
             <Card className="p-5">
               <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-                <div className="flex rounded-lg bg-[#002244]/[.06] p-0.5 text-sm">
-                  <button onClick={() => setShowEx(false)} className={cn("rounded-md px-3 py-1.5", !showEx && "bg-white font-medium text-[#002244] shadow-sm")} data-testid="tab-form">Your form</button>
-                  <button onClick={() => setShowEx(true)} className={cn("rounded-md px-3 py-1.5", showEx && "bg-white font-medium text-[#002244] shadow-sm")} data-testid="tab-example">{wf.data.importContext ? "Original source" : "Example"}</button>
+                <div className="flex rounded-lg bg-[#323D4F]/[.06] p-0.5 text-sm">
+                  <button onClick={() => setShowEx(false)} className={cn("rounded-md px-3 py-1.5", !showEx && "bg-white font-medium text-[#323D4F] shadow-sm")} data-testid="tab-form">Your form</button>
+                  <button onClick={() => setShowEx(true)} className={cn("rounded-md px-3 py-1.5", showEx && "bg-white font-medium text-[#323D4F] shadow-sm")} data-testid="tab-example">{wf.data.importContext ? "Original source" : "Example"}</button>
                 </div>
                 {editable && !showEx && !wf.data.importContext && <Btn variant="outline" className="h-8" onClick={() => (meaningful(draft) ? setConfirmFill(true) : (setDraft(mergeShape(act.example, act.example)), setDirty(true)))} data-testid="button-fill-example">Fill with example</Btn>}
               </div>
@@ -199,15 +199,15 @@ export default function ActivityPage() {
 
             <div className="space-y-4">
               <Card className="sticky top-20 p-4">
-                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-[#002244]">Required</div>
+                <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-[#323D4F]">Required</div>
                 {req.length === 0 ? <p className="text-xs text-muted-foreground">No required fields.</p> : (
                   <ul className="space-y-1.5">{req.map((r) => (
-                    <li key={r.k} className={cn("flex items-center gap-2 text-xs", r.ok ? "text-[#5B8C1F]" : missing.includes(r.k) ? "text-destructive" : "text-muted-foreground")} data-testid={`req-${r.k}`}>
+                    <li key={r.k} className={cn("flex items-center gap-2 text-xs", r.ok ? "text-[#3F6E22]" : missing.includes(r.k) ? "text-destructive" : "text-muted-foreground")} data-testid={`req-${r.k}`}>
                       {r.ok ? <Check className="h-3.5 w-3.5" /> : <Circle className="h-3.5 w-3.5" />}{label(r.k)}
                     </li>))}</ul>
                 )}
                 <div className="mt-4 border-t pt-3 text-xs" data-testid="status-save">
-                  {update.isPending ? <span className="text-[#009FDA]">Saving...</span> : dirty ? <span className="font-medium text-amber-700">Unsaved changes</span> : savedAt ? <span className="text-[#5B8C1F]">Saved {fmtDateTime(savedAt)}</span> : <span className="text-muted-foreground">Last updated {fmtDateTime(stamp)}</span>}
+                  {update.isPending ? <span className="text-[#127A80]">Saving...</span> : dirty ? <span className="font-medium text-amber-700">Unsaved changes</span> : savedAt ? <span className="text-[#3F6E22]">Saved {fmtDateTime(savedAt)}</span> : <span className="text-muted-foreground">Last updated {fmtDateTime(stamp)}</span>}
                 </div>
                 {editable && (
                   <div className="mt-3 space-y-2">
@@ -233,7 +233,7 @@ export default function ActivityPage() {
 
           <div className="flex items-center justify-between">
             <Btn variant="ghost" disabled={!prev} onClick={() => prev && go(`${base}/activities/${prev.code}`)} data-testid="button-prev"><ChevronLeft className="h-4 w-4" /> {prev ? prev.code : "Previous"}</Btn>
-            <Link href={base} onClick={(e) => { if (dirty) { e.preventDefault(); setPendingNav(base); } }} className="text-xs text-muted-foreground hover:text-[#002244]" data-testid="link-workspace">All activities</Link>
+            <Link href={base} onClick={(e) => { if (dirty) { e.preventDefault(); setPendingNav(base); } }} className="text-xs text-muted-foreground hover:text-[#323D4F]" data-testid="link-workspace">All activities</Link>
             <Btn variant="ghost" disabled={!next} onClick={() => next && go(`${base}/activities/${next.code}`)} data-testid="button-next">{next ? next.code : "Next"}{next?.locked && <Lock className="h-3 w-3" />} <ChevronRight className="h-4 w-4" /></Btn>
           </div>
         </div>
@@ -241,13 +241,13 @@ export default function ActivityPage() {
 
       <Dialog open={confirmFill} onOpenChange={setConfirmFill}>
         <DialogContent className="max-w-md rounded-xl">
-          <DialogHeader><DialogTitle className="text-[#002244]">Replace your draft?</DialogTitle><DialogDescription>Filling with the fictional example overwrites what you have entered in this step. Nothing is saved until you click Save draft.</DialogDescription></DialogHeader>
+          <DialogHeader><DialogTitle className="text-[#323D4F]">Replace your draft?</DialogTitle><DialogDescription>Filling with the fictional example overwrites what you have entered in this step. Nothing is saved until you click Save draft.</DialogDescription></DialogHeader>
           <div className="flex justify-end gap-2"><Btn variant="ghost" onClick={() => setConfirmFill(false)}>Cancel</Btn><Btn onClick={() => { setDraft(mergeShape(act.example, act.example)); setDirty(true); setConfirmFill(false); }} data-testid="button-confirm-fill">Overwrite with example</Btn></div>
         </DialogContent>
       </Dialog>
       <Dialog open={!!pendingNav} onOpenChange={(o) => !o && setPendingNav(null)}>
         <DialogContent className="max-w-md rounded-xl">
-          <DialogHeader><DialogTitle className="text-[#002244]">Unsaved changes</DialogTitle><DialogDescription>You have edits in this step that are not saved yet.</DialogDescription></DialogHeader>
+          <DialogHeader><DialogTitle className="text-[#323D4F]">Unsaved changes</DialogTitle><DialogDescription>You have edits in this step that are not saved yet.</DialogDescription></DialogHeader>
           <div className="flex flex-wrap justify-end gap-2">
             <Btn variant="ghost" onClick={() => setPendingNav(null)} data-testid="button-stay">Stay</Btn>
             <Btn variant="outline" onClick={() => { const h = pendingNav!; setDirty(false); setPendingNav(null); navigate(h); }} data-testid="button-discard">Discard and leave</Btn>

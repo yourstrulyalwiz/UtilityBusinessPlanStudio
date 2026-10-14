@@ -14,7 +14,7 @@ router.get("/plans/:id/deck",async(req,res)=>{
   if(!u)throw new HttpError(404,"Plan not found.");
   const deck=new PptxGenJS();
   deck.layout="LAYOUT_WIDE";
-  deck.author="Urban Water and Sanitation Service Optimization - Digital Transformation - Business Plan Studio";
+  deck.author="Urban Water and Sanitation Service Optimization - Business Plan Studio";
   deck.subject="Step 0 draft export — registry information only";
   deck.title=`${u.name} — draft plan overview`;
   deck.theme={headFontFace:"Aptos Display",bodyFontFace:"Aptos"};

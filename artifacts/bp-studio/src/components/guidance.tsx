@@ -23,7 +23,7 @@ export function SectorPicker({ value, onChange }: { value: Sector; onChange: (s:
       }}>
       {SECTORS.map((s) => (
         <button key={s.id} type="button" role="radio" tabIndex={value===s.id?0:-1} aria-checked={value === s.id} onClick={() => onChange(s.id)} data-testid={`sector-${s.id}`}
-          className={cn("rounded-full border px-3 py-1 text-xs transition", value === s.id ? "border-[#002244] bg-[#002244] text-white" : "bg-white text-[#002244] hover:border-[#009FDA]")}>{s.label}</button>
+          className={cn("rounded-full border px-3 py-1 text-xs transition", value === s.id ? "border-[#323D4F] bg-[#323D4F] text-white" : "bg-white text-[#323D4F] hover:border-[#1ED3D9]")}>{s.label}</button>
       ))}
     </div>
   );
@@ -35,7 +35,7 @@ export function TopicBody({ topic, initialTab = "definition", hint }: { topic: G
   const id = `t-${topic.id}`;
   return (
     <div className="min-w-0 [overflow-wrap:anywhere]">
-      {hint && <div className="mb-3 rounded-lg border-l-4 border-[#009FDA] bg-[#E6F5FB] px-3 py-2 text-sm text-[#002244]" data-testid="text-field-hint"><strong>Field hint:</strong> {hint}</div>}
+      {hint && <div className="mb-3 rounded-lg border-l-4 border-[#1ED3D9] bg-[#E4F8F9] px-3 py-2 text-sm text-[#323D4F]" data-testid="text-field-hint"><strong>Field hint:</strong> {hint}</div>}
       <div role="tablist" aria-label={`${topic.title} guidance`} className="grid min-w-0 grid-cols-2 gap-0.5 rounded-lg bg-muted p-0.5 sm:grid-cols-4"
         onKeyDown={(e) => {
           const i=TABS.indexOf(tab);
@@ -44,25 +44,25 @@ export function TopicBody({ topic, initialTab = "definition", hint }: { topic: G
         }}>
         {TABS.map((t) => (
           <button key={t} type="button" role="tab" id={`${id}-${t}`} aria-selected={tab === t} aria-controls={`${id}-panel`} tabIndex={tab === t ? 0 : -1} onClick={() => setTab(t)} data-testid={`tab-guide-${t}`}
-            className={cn("shrink-0 rounded-md px-3 py-1.5 text-xs", tab === t ? "bg-white font-medium text-[#002244] shadow-sm" : "text-muted-foreground hover:text-[#002244]")}>{TAB_LABEL[t]}</button>
+            className={cn("shrink-0 rounded-md px-3 py-1.5 text-xs", tab === t ? "bg-white font-medium text-[#323D4F] shadow-sm" : "text-muted-foreground hover:text-[#323D4F]")}>{TAB_LABEL[t]}</button>
         ))}
       </div>
-      <div role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-${tab}`} className="mt-4 space-y-3 text-sm leading-relaxed text-[#002244]" data-testid={`panel-guide-${tab}`}>
+      <div role="tabpanel" id={`${id}-panel`} aria-labelledby={`${id}-${tab}`} className="mt-4 space-y-3 text-sm leading-relaxed text-[#323D4F]" data-testid={`panel-guide-${tab}`}>
         {tab === "definition" && topic.definition.map((p, i) => <p key={i}>{p}</p>)}
-        {tab === "why" && <ul className="space-y-1.5">{topic.whyItMatters.map((w) => <li key={w} className="flex gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#009FDA]" />{w}</li>)}</ul>}
+        {tab === "why" && <ul className="space-y-1.5">{topic.whyItMatters.map((w) => <li key={w} className="flex gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#1ED3D9]" />{w}</li>)}</ul>}
         {tab === "examples" && <>
           {topic.examples.map((ex, i) => (
-            <figure key={i} className="rounded-lg bg-[#E6F5FB] p-3">
-              <figcaption className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-[#002244]/70">Example · {ex.label}</figcaption>
-              {ex.text && <blockquote className="border-l-2 border-[#009FDA] pl-3">{ex.text}</blockquote>}
-              {ex.table && <div className="overflow-x-auto"><table className="w-full min-w-[420px] text-xs"><thead><tr>{ex.table.headers.map((h) => <th key={h} className="border-b border-[#002244]/15 px-2 py-1 text-left font-semibold">{h}</th>)}</tr></thead>
-                <tbody>{ex.table.rows.map((r, j) => <tr key={j}>{r.map((c, k) => <td key={k} className="border-b border-[#002244]/5 px-2 py-1 align-top">{c}</td>)}</tr>)}</tbody></table></div>}
+            <figure key={i} className="rounded-lg bg-[#E4F8F9] p-3">
+              <figcaption className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-[#323D4F]/70">Example · {ex.label}</figcaption>
+              {ex.text && <blockquote className="border-l-2 border-[#1ED3D9] pl-3">{ex.text}</blockquote>}
+              {ex.table && <div className="overflow-x-auto"><table className="w-full min-w-[420px] text-xs"><thead><tr>{ex.table.headers.map((h) => <th key={h} className="border-b border-[#323D4F]/15 px-2 py-1 text-left font-semibold">{h}</th>)}</tr></thead>
+                <tbody>{ex.table.rows.map((r, j) => <tr key={j}>{r.map((c, k) => <td key={k} className="border-b border-[#323D4F]/5 px-2 py-1 align-top">{c}</td>)}</tr>)}</tbody></table></div>}
             </figure>
           ))}
           <p className="text-[11px] text-muted-foreground" data-testid="text-guide-source">Source: {topic.source}. Examples from the supplied document; not independently verified as current.</p>
         </>}
         {tab === "recommendations" && <>
-          <ul className="space-y-1.5">{topic.tips.do.map((d) => <li key={d} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#5B8C1F]" />{d}</li>)}</ul>
+          <ul className="space-y-1.5">{topic.tips.do.map((d) => <li key={d} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#3F6E22]" />{d}</li>)}</ul>
           <ul className="space-y-1.5">{topic.tips.avoid.map((d) => <li key={d} className="flex gap-2"><TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />Avoid: {d}</li>)}</ul>
           {topic.guidingQuestions && <div className="rounded-lg border p-3"><div className="mb-1 text-[11px] font-semibold uppercase tracking-wider">Guiding questions</div><ul className="list-disc space-y-1 pl-5">{topic.guidingQuestions.map((q) => <li key={q}>{q}</li>)}</ul></div>}
           <p className="text-[11px] text-muted-foreground">Source: {topic.source}</p>
@@ -81,7 +81,7 @@ export function TopicBody({ topic, initialTab = "definition", hint }: { topic: G
 export function TopicHeader({ topic }: { topic: GuidanceTopic }) {
   return (
     <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wider" style={{ color: phaseColor(topic.phase) }}>
-      <span className="rounded px-1.5 py-0.5 text-white" style={{ background: phaseColor(topic.phase) }}>{topic.phase}</span>{PHASE_NAMES[topic.phase]}
+      <span className="rounded px-1.5 py-0.5 font-semibold text-[#29323F]" style={{ background: phaseColor(topic.phase) }}>{topic.phase}</span>{PHASE_NAMES[topic.phase]}
     </span>
   );
 }
@@ -98,18 +98,18 @@ export function GuidanceDialog({ open, onOpenChange, topics, title, intro, hint,
         onCloseAutoFocus={e=>{if(returnFocus.current?.isConnected){e.preventDefault();returnFocus.current.focus();}}}>
         <DialogHeader>
           {topic && <TopicHeader topic={topic} />}
-          <DialogTitle className="text-[#002244]">{title}</DialogTitle>
+          <DialogTitle className="text-[#323D4F]">{title}</DialogTitle>
           <DialogDescription>Guidance for this step. Examples are references, not your utility's data.</DialogDescription>
         </DialogHeader>
         {intro}
         {topics.length > 1 && (
           <div className="flex flex-wrap gap-1.5" aria-label="Topics">
             {topics.map((t, i) => <button key={t.id} type="button" aria-pressed={i === active} onClick={() => setActive(i)} data-testid={`button-topic-${t.id}`}
-              className={cn("rounded-md border px-2.5 py-1 text-xs", i === active ? "border-[#009FDA] bg-[#E6F5FB] font-medium text-[#002244]" : "text-muted-foreground")}>{t.title}</button>)}
+              className={cn("rounded-md border px-2.5 py-1 text-xs", i === active ? "border-[#1ED3D9] bg-[#E4F8F9] font-medium text-[#323D4F]" : "text-muted-foreground")}>{t.title}</button>)}
           </div>
         )}
         {topic ? <TopicBody key={topic.id} topic={topic} hint={hint} initialTab={initialTab} /> : <p className="text-sm text-muted-foreground">No guidance topic is mapped to this item yet.</p>}
-        {topic && <Link href={`/help/${topic.id}`} onClick={() => onOpenChange(false)} className="text-xs font-medium text-[#009FDA] hover:underline" data-testid="link-full-guide">Open full guide in Help center</Link>}
+        {topic && <Link href={`/help/${topic.id}`} onClick={() => onOpenChange(false)} className="text-xs font-medium text-[#127A80] hover:underline" data-testid="link-full-guide">Open full guide in Help center</Link>}
       </DialogContent>
     </Dialog>
   );
@@ -123,7 +123,7 @@ export function HelpDot({ topicId, label, hint, testid }: { topicId: string; lab
   return (
     <>
       <button type="button" onClick={() => setOpen(true)} aria-label={`Help: ${label}`} data-testid={testid ?? `button-help-${topicId}`}
-        className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[#002244]/50 hover:bg-[#E6F5FB] hover:text-[#009FDA] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#009FDA]">
+        className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[#323D4F]/50 hover:bg-[#E4F8F9] hover:text-[#127A80] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1ED3D9]">
         <CircleHelp className="h-4 w-4" />
       </button>
       <GuidanceDialog open={open} onOpenChange={setOpen} topics={[topic]} title={`${label}: ${topic.title}`} hint={hint} initialTab={hint ? "examples" : "definition"} />

@@ -24,9 +24,9 @@ export default function AuditPage() {
                 {rows.map((a) => (
                   <tr key={a.id} data-testid={`row-audit-${a.id}`}>
                     <td className="whitespace-nowrap px-4 py-3 text-xs text-muted-foreground tnum">{fmtDateTime(a.createdAt)}</td>
-                    <td className="px-4 py-3 font-medium text-[#002244]">{a.actor}</td>
-                    <td className="px-4 py-3 text-[#002244]">{humanize(a.action)}</td>
-                    <td className="px-4 py-3">{a.entity === "utility" ? <Link href={`/utilities/${a.entityId}`} className="text-[#009FDA] hover:underline">Utility</Link> : <Pill>{humanize(a.entity)}</Pill>}</td>
+                    <td className="px-4 py-3 font-medium text-[#323D4F]">{a.actor}</td>
+                    <td className="px-4 py-3 text-[#323D4F]">{humanize(a.action)}</td>
+                    <td className="px-4 py-3">{a.entity === "utility" ? <Link href={`/utilities/${a.entityId}`} className="text-[#127A80] hover:underline">Utility</Link> : <Pill>{humanize(a.entity)}</Pill>}</td>
                   </tr>
                 ))}
               </tbody>
