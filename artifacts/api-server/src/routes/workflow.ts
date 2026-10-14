@@ -8,6 +8,7 @@ import { activitySeed, progressOf } from "../lib/playbook";
 import { activityGuide, hasContent, schemaForExample } from "../lib/activity-guide";
 import { ensureDemo } from "../lib/import-demo";
 import { openAccessEnabled } from "../lib/open-access";
+import { isTagPlan, tagExamples, tagGuide } from "../lib/tagbilaran";
 
 const router:IRouter=Router();
 const actionBody=z.object({
@@ -35,6 +36,7 @@ router.post("/plans/:id/activities/:code",async(req,res)=>{
     const [plan]=await tx.select().from(plans).where(eq(plans.id,id)).for("update");
     if(!plan)throw new HttpError(404,"Plan not found.");
     await accessibleUtility(p,plan.utilityId);
+    const imported=await isTagPlan(id);
     const rows=await tx.select().from(planActivities).where(eq(planActivities.planId,id));
     const row=rows.find(r=>r.activityCode===code);
     if(!row)throw new HttpError(404,"Activity not found.");
@@ -45,12 +47,12 @@ router.post("/plans/:id/activities/:code",async(req,res)=>{
       if(reason)throw new HttpError(409,reason);
       if(["submitted","approved"].includes(status))throw new HttpError(409,"Reopen or return this activity before changing its content.");
       data=input.data??data;
-      schemaForExample(examples[code]).parse(data);
+      schemaForExample(imported?tagExamples[code]:examples[code]).parse(data);
       if(JSON.stringify(data).length>500000)throw new HttpError(400,"Activity content is too large.");
       if(input.action==="submit"){
-        const missing=activityGuide[code].required.filter(key=>!hasContent(data[key]));
+        const missing=(imported?tagGuide(code):activityGuide[code]).required.filter(key=>!hasContent(data[key]));
         if(missing.length)throw new HttpError(400,`Complete the required sections: ${missing.map(k=>k.replaceAll("_"," ")).join(", ")}.`);
-        if(code==="A1.1"){
+        if(code==="A1.1"&&!imported){
           const team=z.object({focal_point:z.object({name:z.string().trim().min(1),position:z.string().trim().min(1)}),
             team_members:z.array(z.object({name:z.string().trim().min(1),position:z.string().trim().min(1)})).min(1),
             kickoff_date:z.iso.date()}).safeParse(data);

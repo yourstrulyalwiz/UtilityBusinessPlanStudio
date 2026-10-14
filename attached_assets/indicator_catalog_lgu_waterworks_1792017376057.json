@@ -1,0 +1,186 @@
+{
+  "catalog": "LGU-run waterworks (Philippines draft JMC aligned)",
+  "indicators": [
+    {
+      "code": "connections",
+      "name": "Service connections by class",
+      "formula": "active accounts by class (residential, commercial, institutional, bulk)",
+      "unit": "#",
+      "kpi": false,
+      "jmc_standard": null,
+      "direction": "up"
+    },
+    {
+      "code": "population_served",
+      "name": "Population served",
+      "formula": "connections x persons per connection, or survey",
+      "unit": "people",
+      "kpi": false,
+      "jmc_standard": null,
+      "direction": "up"
+    },
+    {
+      "code": "water_coverage",
+      "name": "Water coverage",
+      "formula": "population served / population of service area",
+      "unit": "%",
+      "kpi": true,
+      "jmc_standard": "per 5-year business plan",
+      "direction": "up"
+    },
+    {
+      "code": "billed_volume",
+      "name": "Billed volume",
+      "formula": "sum of metered consumption billed",
+      "unit": "m3",
+      "kpi": false,
+      "jmc_standard": null,
+      "direction": "up"
+    },
+    {
+      "code": "production_volume",
+      "name": "Production volume",
+      "formula": "sum of production meter readings",
+      "unit": "m3",
+      "kpi": false,
+      "jmc_standard": null,
+      "direction": null
+    },
+    {
+      "code": "nrw",
+      "name": "Non-revenue water",
+      "formula": "(production - billed) / production",
+      "unit": "%",
+      "kpi": true,
+      "jmc_standard": "20% or below",
+      "direction": "down"
+    },
+    {
+      "code": "avg_consumption",
+      "name": "Average monthly consumption",
+      "formula": "billed volume / connections / months",
+      "unit": "m3/conn/month",
+      "kpi": true,
+      "jmc_standard": null,
+      "direction": null
+    },
+    {
+      "code": "water_availability",
+      "name": "Water availability",
+      "formula": "average hours of supply per day",
+      "unit": "hours/day",
+      "kpi": true,
+      "jmc_standard": "at least 18",
+      "direction": "up"
+    },
+    {
+      "code": "water_quality",
+      "name": "Water quality compliance",
+      "formula": "samples passing PNSDW / samples taken",
+      "unit": "%",
+      "kpi": true,
+      "jmc_standard": "compliance with PNSDW",
+      "direction": "up"
+    },
+    {
+      "code": "water_pressure",
+      "name": "Water pressure",
+      "formula": "average reading at monitoring points",
+      "unit": "psi",
+      "kpi": true,
+      "jmc_standard": "at least 8",
+      "direction": "up"
+    },
+    {
+      "code": "metered_connections",
+      "name": "Connections metered",
+      "formula": "metered connections / total connections",
+      "unit": "%",
+      "kpi": true,
+      "jmc_standard": null,
+      "direction": "up"
+    },
+    {
+      "code": "collections",
+      "name": "Collections (water sales)",
+      "formula": "cash collected from water sales",
+      "unit": "currency",
+      "kpi": false,
+      "jmc_standard": null,
+      "direction": "up"
+    },
+    {
+      "code": "collection_efficiency",
+      "name": "Revenue collection efficiency",
+      "formula": "YTD collections / YTD billings",
+      "unit": "%",
+      "kpi": true,
+      "jmc_standard": "not less than 95%",
+      "direction": "up"
+    },
+    {
+      "code": "avg_tariff",
+      "name": "Average tariff",
+      "formula": "water sales / billed volume",
+      "unit": "currency/m3",
+      "kpi": true,
+      "jmc_standard": null,
+      "direction": null
+    },
+    {
+      "code": "opex",
+      "name": "Operating expenses",
+      "formula": "salaries + power + chemicals + bulk water + maintenance + other O&M",
+      "unit": "currency",
+      "kpi": false,
+      "jmc_standard": null,
+      "direction": "down"
+    },
+    {
+      "code": "unit_production_cost",
+      "name": "Unit production cost",
+      "formula": "total annual O&M / production",
+      "unit": "currency/m3",
+      "kpi": false,
+      "jmc_standard": null,
+      "direction": "down"
+    },
+    {
+      "code": "operating_ratio",
+      "name": "Operating ratio",
+      "formula": "operating expenses / operating revenue",
+      "unit": "ratio",
+      "kpi": true,
+      "jmc_standard": "1.00 or below",
+      "direction": "down"
+    },
+    {
+      "code": "staff_per_1000",
+      "name": "Staff per 1,000 connections",
+      "formula": "total staff / connections x 1,000",
+      "unit": "ratio",
+      "kpi": true,
+      "jmc_standard": "1:100 regular (draft JMC); 1:250 industry average",
+      "direction": null
+    },
+    {
+      "code": "desludged_tanks",
+      "name": "Septic tanks desludged per year",
+      "formula": "count",
+      "unit": "#/year",
+      "kpi": true,
+      "jmc_standard": "annual target",
+      "direction": "up"
+    }
+  ],
+  "kpi_count": 12,
+  "optional_indicators_disabled_by_default": [
+    "ebitda_margin",
+    "dscr",
+    "occr",
+    "sewer_coverage",
+    "wastewater_treated",
+    "energy_cost_m3"
+  ],
+  "source": "01 Table 19; 02 FORMULA sheet"
+}

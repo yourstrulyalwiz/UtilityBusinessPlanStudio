@@ -66,3 +66,4 @@ export * from './workflow';
 export * from './workflowActivity';
 export * from './workflowActivityData';
 export * from './workflowActivityExample';
+export * from './workflowImportContext';

@@ -34,7 +34,7 @@ function Frame({ children }: { children: ReactNode }) {
         <div className="flex items-center gap-3">
           <Glyph />
           <div>
-            <div className="text-[15px] font-semibold text-[#002244]">UoF Business Plan Studio</div>
+            <div className="text-[15px] font-semibold text-[#002244]">Urban Water and Sanitation Service Optimization - Digital Transformation - Business Plan Studio</div>
             <Endorsement />
           </div>
         </div>

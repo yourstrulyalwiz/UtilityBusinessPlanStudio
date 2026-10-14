@@ -25,6 +25,8 @@ export const activityGuide:Record<string,{required:string[];instructions:string;
 
 export function hasContent(value:unknown):boolean{
   if(value===null||value===undefined)return false;
+  if(typeof value==="object"&&!Array.isArray(value)&&"value" in value&&"gap_note" in value)
+    return hasContent(value.value);
   if(typeof value==="string")return !!value.trim();
   if(typeof value==="number")return Number.isFinite(value);
   if(typeof value==="boolean")return true;
@@ -34,9 +36,9 @@ export function hasContent(value:unknown):boolean{
 
 /** Validate supplied field types while permitting incomplete drafts and additional user fields. */
 export function schemaForExample(example:unknown):z.ZodType {
-  if(Array.isArray(example))return z.array(schemaForExample(example[0])).max(1000);
+  if(Array.isArray(example))return z.array(schemaForExample(example[0])).max(1000).nullable();
   if(example&&typeof example==="object"){
-    return z.object(Object.fromEntries(Object.entries(example).map(([key,value])=>[key,schemaForExample(value).optional()]))).passthrough();
+    return z.object(Object.fromEntries(Object.entries(example).map(([key,value])=>[key,schemaForExample(value).optional()]))).passthrough().nullable();
   }
   if(typeof example==="number")return z.union([z.number(),z.null(),z.literal("")]);
   if(typeof example==="boolean")return z.boolean().nullable();

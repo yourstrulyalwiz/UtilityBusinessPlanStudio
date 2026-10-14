@@ -19,6 +19,7 @@ export function blankFrom(ex: unknown): Json {
 
 /** Merge saved data over blank example shape so every original key is present. */
 export function mergeShape(ex: unknown, data: unknown): Json {
+  if (data === null) return null;
   if (isObj(ex)) {
     const d = isObj(data) ? data : {};
     const out: Record<string, Json> = {};
@@ -33,6 +34,7 @@ export function mergeShape(ex: unknown, data: unknown): Json {
 
 export function meaningful(v: unknown): boolean {
   if (v === null || v === undefined) return false;
+  if (isObj(v) && "value" in v && "gap_note" in v) return meaningful(v.value);
   if (typeof v === "string") return v.trim().length > 0;
   if (typeof v === "number") return Number.isFinite(v);
   if (typeof v === "boolean") return true;
@@ -57,7 +59,7 @@ export function FieldEditor({ value, example, onChange, readOnly, path, depth = 
         {keys.map((k) => {
           const child = ex[k] ?? v[k];
           const complex = isObj(child) || Array.isArray(child);
-          const node = <FieldEditor value={v[k] ?? blankFrom(child)} example={child} readOnly={readOnly} path={`${path}.${k}`} depth={depth + 1} onChange={(nv) => onChange?.({ ...v, [k]: nv })} />;
+          const node = <FieldEditor value={v[k] === undefined ? blankFrom(child) : v[k]} example={child} readOnly={readOnly} path={`${path}.${k}`} depth={depth + 1} onChange={(nv) => onChange?.({ ...v, [k]: nv })} />;
           const topic = depth <= 2 ? topicForField(k,path) : undefined;
           const help = topic && <HelpDot topicId={topic.id} label={label(k)} hint={hintForField(k, topic)} testid={`button-field-help-${tid}-${k}`.replace(/[^a-zA-Z0-9-]+/g, "-")} />;
           return complex ? (

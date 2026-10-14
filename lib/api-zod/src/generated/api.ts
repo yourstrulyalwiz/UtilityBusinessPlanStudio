@@ -12,6 +12,7 @@ export const GetWorkflowParams = zod.object({
 })
 
 export const GetWorkflowResponse = zod.object({
+  "importContext": zod.record(zod.string(), zod.unknown()).optional(),
   "planId": zod.string(),
   "utilityName": zod.string(),
   "progress": zod.number(),
@@ -52,6 +53,7 @@ export const UpdateActivityBody = zod.object({
 })
 
 export const UpdateActivityResponse = zod.object({
+  "importContext": zod.record(zod.string(), zod.unknown()).optional(),
   "planId": zod.string(),
   "utilityName": zod.string(),
   "progress": zod.number(),

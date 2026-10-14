@@ -3,6 +3,22 @@ import { test } from "node:test";
 import { activitySeed, progressOf } from "./lib/playbook";
 import { activityGuide, hasContent, schemaForExample } from "./lib/activity-guide";
 import { blockedReason, examples } from "./lib/workflow";
+import { tagExamples, tagGuide, tagStatus, tagContext } from "./lib/tagbilaran";
+
+test("TCWS import retains its own form structure, source states and indicator definitions",()=>{
+  assert.equal(Object.keys(tagExamples).length,20);
+  for(const a of activitySeed){
+    schemaForExample(tagExamples[a.code]).parse(tagExamples[a.code]);
+    for(const key of tagGuide(a.code).required)assert.ok(key in tagExamples[a.code],`${a.code}.${key}`);
+  }
+  assert.equal(activitySeed.filter(a=>tagStatus(a.code)==="submitted").length,7);
+  assert.equal(activitySeed.filter(a=>tagStatus(a.code)==="in_progress").length,3);
+  assert.equal(activitySeed.filter(a=>tagStatus(a.code)==="not_started").length,10);
+  assert.equal(tagContext.catalog.indicators.length,19);
+  assert.equal(tagContext.catalog.indicators.filter(i=>i.kpi).length,12);
+  assert.equal(tagContext.catalog.optional_indicators_disabled_by_default.length,6);
+  assert.equal(hasContent({value:null,gap_note:"Missing source information"}),false);
+});
 
 test("all supplied examples have a form guide, correct field types and required content",()=>{
   assert.equal(activitySeed.length,20);

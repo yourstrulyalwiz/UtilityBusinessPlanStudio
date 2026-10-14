@@ -3,6 +3,7 @@ import countryReference from "./country-reference.json";
 import { phaseSeed, activitySeed } from "./playbook";
 import { seedTestIdentity, openAccessEnabled, testActor } from "./open-access";
 import { ensureDemo } from "./import-demo";
+import { ensureTagbilaran } from "./tagbilaran";
 
 // Reference definitions only. Never create example users or utility records.
 export async function seedReferenceData(){
@@ -16,5 +17,6 @@ export async function seedReferenceData(){
     const p=await testActor();
     await ensureDemo(p,"complete");
     await ensureDemo(p,"midway");
+    await ensureTagbilaran(p);
   }
 }

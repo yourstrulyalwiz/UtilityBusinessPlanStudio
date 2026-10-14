@@ -1,6 +1,6 @@
 kind = "web"
 previewPath = "/"
-title = "UoF Business Plan Studio"
+title = "Urban Water and Sanitation Service Optimization - Digital Transformation - Business Plan Studio"
 description = "Water utility business and investment planning: secure utility registry, portfolio oversight, and playbook progress."
 version = "1.0.0"
 id = "artifacts/bp-studio"

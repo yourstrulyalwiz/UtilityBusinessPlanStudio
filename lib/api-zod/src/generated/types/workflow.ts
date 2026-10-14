@@ -5,8 +5,10 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { WorkflowActivity } from './workflowActivity';
+import type { WorkflowImportContext } from './workflowImportContext';
 
 export interface Workflow {
+  importContext?: WorkflowImportContext;
   planId: string;
   utilityName: string;
   progress: number;

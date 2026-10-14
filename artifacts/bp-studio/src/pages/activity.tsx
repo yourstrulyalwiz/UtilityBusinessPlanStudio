@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { GuidanceDialog } from "@/components/guidance";
 import { topicsFor } from "@/lib/guidance";
 import { cn } from "@/lib/utils";
+import { ImportContext } from "@/components/import-context";
 
 export default function ActivityPage() {
   const { planId = "", code = "" } = useParams<{ planId: string; code: string }>();
@@ -176,22 +177,23 @@ export default function ActivityPage() {
             </div>
           </Card>
 
+          {wf.data.importContext && <ImportContext context={wf.data.importContext} source={wf.data.source} />}
           <div className="grid gap-5 xl:grid-cols-[1fr_260px]">
             <Card className="p-5">
               <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
                 <div className="flex rounded-lg bg-muted p-0.5 text-sm">
                   <button onClick={() => setShowEx(false)} className={cn("rounded-md px-3 py-1.5", !showEx && "bg-white font-medium text-[#002244] shadow-sm")} data-testid="tab-form">Your form</button>
-                  <button onClick={() => setShowEx(true)} className={cn("rounded-md px-3 py-1.5", showEx && "bg-white font-medium text-[#002244] shadow-sm")} data-testid="tab-example">Example</button>
+                  <button onClick={() => setShowEx(true)} className={cn("rounded-md px-3 py-1.5", showEx && "bg-white font-medium text-[#002244] shadow-sm")} data-testid="tab-example">{wf.data.importContext ? "Original source" : "Example"}</button>
                 </div>
-                {editable && !showEx && <Btn variant="outline" className="h-8" onClick={() => (meaningful(draft) ? setConfirmFill(true) : (setDraft(mergeShape(act.example, act.example)), setDirty(true)))} data-testid="button-fill-example">Fill with example</Btn>}
+                {editable && !showEx && !wf.data.importContext && <Btn variant="outline" className="h-8" onClick={() => (meaningful(draft) ? setConfirmFill(true) : (setDraft(mergeShape(act.example, act.example)), setDirty(true)))} data-testid="button-fill-example">Fill with example</Btn>}
               </div>
               {showEx ? (
                 <div>
-                  <div className="mb-4 rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-900" data-testid="text-example-source">Fictional example from the supplied dataset. {wf.data.source}</div>
+                  <div className="mb-4 rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-900" data-testid="text-example-source">{wf.data.importContext ? "Original supplied TCWS data, including gaps and estimates." : "Fictional example from the supplied dataset."} {wf.data.source}</div>
                   <FieldEditor value={act.example as Json} example={act.example} readOnly path={`ex.${act.code}`} />
                 </div>
               ) : (
-                <FieldEditor value={draft} example={act.example} readOnly={!editable || update.isPending} path={act.code} onChange={(v) => { setDraft(v); setDirty(true); setJustSubmitted(false); }} />
+                <div>{wf.data.importContext && <p className="mb-3 break-words text-xs text-muted-foreground">{wf.data.source} · Your saved changes may differ from the original source.</p>}<FieldEditor value={draft} example={act.example} readOnly={!editable || update.isPending} path={act.code} onChange={(v) => { setDraft(v); setDirty(true); setJustSubmitted(false); }} /></div>
               )}
             </Card>
 

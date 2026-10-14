@@ -881,6 +881,7 @@
         "locked":{"type":"boolean"},"lockReason":{"type":"string"},"updatedAt":{"type":"string"},"instructions":{"type":"string"},"needs":{"type":"array","items":{"type":"string"}},"feedback":{"type":"string"}
       }},
       "Workflow":{"type":"object","required":["planId","utilityName","progress","status","source","activities","nextCode","canEdit","canReview"],"properties":{
+        "importContext":{"type":"object","additionalProperties":true},
         "planId":{"type":"string"},"utilityName":{"type":"string"},"progress":{"type":"number"},"status":{"type":"string"},"source":{"type":"string"},
         "activities":{"type":"array","items":{"$ref":"#/components/schemas/WorkflowActivity"}},"nextCode":{"type":"string"},"canEdit":{"type":"boolean"},"canReview":{"type":"boolean"}
       }},

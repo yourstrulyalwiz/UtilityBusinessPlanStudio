@@ -61,7 +61,10 @@ export interface WorkflowActivity {
   feedback?: string;
 }
 
+export type WorkflowImportContext = { [key: string]: unknown };
+
 export interface Workflow {
+  importContext?: WorkflowImportContext;
   planId: string;
   utilityName: string;
   progress: number;

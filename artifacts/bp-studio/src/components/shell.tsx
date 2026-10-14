@@ -79,8 +79,8 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="flex items-center gap-3 px-5 pb-6 pt-6">
         <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white"><Glyph className="h-6 w-6" /></div>
         <div className="leading-tight">
-          <div className="text-[14px] font-semibold">BP Studio</div>
-          <div className="text-[11px] text-white/55">Utility of the Future</div>
+          <div className="text-[13px] font-semibold">Urban Water and Sanitation Service Optimization</div>
+          <div className="mt-1 text-[11px] text-white/70">- Digital Transformation - Business Plan Studio</div>
         </div>
       </div>
       <nav className="flex-1 space-y-0.5 px-3">
@@ -103,7 +103,7 @@ export function Shell({ children }: { children: ReactNode }) {
           </div>
           <button onClick={logout} className="rounded-md p-1.5 text-white/60 hover:bg-white/10 hover:text-white" aria-label="Log out" data-testid="button-logout"><LogOut className="h-4 w-4" /></button>
         </div>
-        <div className="mt-3 text-[10.5px] text-white/40">Water Global Practice · Utility of the Future</div>
+        <div className="mt-3 text-[10.5px] text-white/40">Urban Water and Sanitation · Digital Transformation</div>
       </div>
     </aside>
   );

@@ -1,6 +1,12 @@
-# UoF Business Plan Studio
+# Urban Water and Sanitation Service Optimization - Digital Transformation - Business Plan Studio
 
 A secure registry for water utility Business & Investment Plans following the Utility of the Future playbook.
+
+## Supplied real-utility case
+
+The user requested importing the Tagbilaran TCWS plan and LGU waterworks indicator catalog. Treat TCWS as a real, preliminary source case, never as a fictional Valle Verde example. Preserve nulls, gap notes, original document references, and tariff/model cautions; imported submission states are not evidence of independent verification or approval. The original seven source documents have not been separately supplied. Catalog formulas are definitions, not a calculation engine.
+
+**Why:** The uploaded case has a different activity structure and explicitly records missing information and unresolved financial assumptions. Do not fill those gaps with invented data or unrelated demo values.
 
 ## Run & Operate
 
