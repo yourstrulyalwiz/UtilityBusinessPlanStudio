@@ -131,10 +131,10 @@ export default function ActivityPage() {
 
       <div className="grid gap-6 lg:grid-cols-[230px_1fr]">
         <nav className="hidden lg:block">
-          <div className="sticky top-20 max-h-[calc(100dvh-6rem)] overflow-auto rounded-xl border bg-card p-2">
+          <div className="sticky top-20 max-h-[calc(100dvh-6rem)] glass overflow-auto rounded-xl border p-2">
             {acts.map((a, i) => (
               <button key={a.code} onClick={() => go(`${base}/activities/${a.code}`)} data-testid={`nav-activity-${a.code}`}
-                className={cn("flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-xs", a.code === act.code ? "bg-[#002244] text-white" : "text-[#002244] hover:bg-muted")}>
+                className={cn("flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-xs", a.code === act.code ? "navy-depth text-white shadow-[0_6px_14px_-8px_rgba(0,34,68,.6)]" : "text-[#002244] hover:bg-muted")}>
                 {a.status === "approved" ? <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#5B8C1F]" /> : a.locked ? <Lock className="h-3.5 w-3.5 shrink-0 opacity-50" /> : <Circle className="h-3.5 w-3.5 shrink-0" style={{ color: phaseColor(a.phaseCode, i) }} />}
                 <span className="font-mono opacity-70">{a.code}</span><span className="truncate">{a.name}</span>
               </button>
@@ -144,7 +144,7 @@ export default function ActivityPage() {
 
         <div className="min-w-0 space-y-5">
           <Card className="rise overflow-hidden">
-            <div className="h-1" style={{ background: color }} />
+            <div className="h-1.5" style={{ background: `linear-gradient(90deg, ${color}, ${color}55)` }} />
             <div className="p-6">
               <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                 <span className="font-semibold uppercase tracking-[0.12em]" style={{ color }} data-testid="text-step">Step {idx + 1} / {acts.length}</span>
@@ -163,11 +163,11 @@ export default function ActivityPage() {
               {act.locked && <div className="mt-4 flex items-start gap-2 rounded-lg border border-amber-300/60 bg-amber-50 px-4 py-3 text-sm text-amber-900" data-testid="text-lock-reason"><Lock className="mt-0.5 h-4 w-4 shrink-0" /> <span><strong>Preview only.</strong> {act.lockReason || "Earlier steps must be completed first."}</span></div>}
               {!canEdit && !act.locked && <div className="mt-4 rounded-lg bg-muted/60 px-4 py-2.5 text-xs text-muted-foreground">Your role has read-only access to this step.</div>}
               <div className="mt-5 grid gap-4 md:grid-cols-[1.4fr_1fr]">
-                <div className="rounded-lg bg-[#009FDA]/[.06] p-4">
+                <div className="rounded-lg border border-[#009FDA]/15 bg-gradient-to-br from-[#009FDA]/[.09] to-[#009FDA]/[.03] p-4">
                   <div className="mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#002244]"><BookOpen className="h-3.5 w-3.5" /> Instructions</div>
                   <p className="whitespace-pre-line text-sm leading-relaxed text-[#002244]" data-testid="text-instructions">{act.instructions || "No instructions supplied for this step."}</p>
                 </div>
-                <div className="rounded-lg border p-4">
+                <div className="rounded-lg border bg-white/60 p-4">
                   <div className="mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#002244]"><ClipboardList className="h-3.5 w-3.5" /> You will need</div>
                   {act.needs.length ? <ul className="space-y-1 text-sm text-[#002244]">{act.needs.map((n) => <li key={n} className="flex gap-2"><span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#009FDA]" />{n}</li>)}</ul> : <p className="text-xs text-muted-foreground">Nothing specific listed.</p>}
                 </div>
@@ -181,7 +181,7 @@ export default function ActivityPage() {
           <div className="grid gap-5 xl:grid-cols-[1fr_260px]">
             <Card className="p-5">
               <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-                <div className="flex rounded-lg bg-muted p-0.5 text-sm">
+                <div className="flex rounded-lg bg-[#002244]/[.06] p-0.5 text-sm">
                   <button onClick={() => setShowEx(false)} className={cn("rounded-md px-3 py-1.5", !showEx && "bg-white font-medium text-[#002244] shadow-sm")} data-testid="tab-form">Your form</button>
                   <button onClick={() => setShowEx(true)} className={cn("rounded-md px-3 py-1.5", showEx && "bg-white font-medium text-[#002244] shadow-sm")} data-testid="tab-example">{wf.data.importContext ? "Original source" : "Example"}</button>
                 </div>

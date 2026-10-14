@@ -22,7 +22,7 @@ export function PageHeader({ eyebrow, title, description, actions }: { eyebrow?:
     <div className="mb-7 flex flex-col gap-4 md:flex-row md:items-end md:justify-between rise">
       <div>
         {eyebrow && <div className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#009FDA]">{eyebrow}</div>}
-        <h1 className="text-[26px] font-semibold tracking-tight text-[#002244]">{title}</h1>
+        <h1 className="text-[28px] font-semibold tracking-tight text-[#002244]">{title}</h1>
         {description && <p className="mt-1.5 max-w-2xl text-sm text-muted-foreground">{description}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
@@ -31,13 +31,13 @@ export function PageHeader({ eyebrow, title, description, actions }: { eyebrow?:
 }
 
 export function Card({ className, children, ...rest }: { className?: string; children: ReactNode } & React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("rounded-xl border border-card-border bg-card", className)} {...rest}>{children}</div>;
+  return <div className={cn("glass rounded-xl border", className)} {...rest}>{children}</div>;
 }
 
 export function Empty({ icon, title, body, action }: { icon: ReactNode; title: string; body: ReactNode; action?: ReactNode }) {
   return (
     <div className="flex flex-col items-center px-6 py-14 text-center" data-testid="state-empty">
-      <div className="relative mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#009FDA]/10 text-[#009FDA]">{icon}</div>
+      <div className="relative mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[#009FDA]/10 text-[#009FDA] ring-8 ring-[#009FDA]/[.05]">{icon}</div>
       <div className="text-[15px] font-semibold text-[#002244]">{title}</div>
       <div className="mt-1.5 max-w-sm text-sm text-muted-foreground">{body}</div>
       <Wave className="mt-6 max-w-[160px] opacity-70" />
@@ -115,9 +115,9 @@ export function Field({ label, hint, error, children, required }: { label: strin
 
 export function Btn({ variant = "primary", className, ...p }: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary" | "ghost" | "outline" | "danger" | "navy" }) {
   const v = {
-    primary: "bg-[#009FDA] text-white hover:bg-[#008dc2]",
+    primary: "btn-glow bg-[#009FDA] text-white hover:bg-[#008dc2]",
     navy: "bg-[#002244] text-white hover:bg-[#0a3360]",
-    outline: "border border-input bg-white text-[#002244] hover:bg-muted",
+    outline: "border border-input bg-white/80 text-[#002244] hover:bg-muted",
     ghost: "text-[#002244] hover:bg-muted",
     danger: "bg-destructive text-white hover:opacity-90",
   };

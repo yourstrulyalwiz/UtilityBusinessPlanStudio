@@ -2,6 +2,10 @@
 
 A secure registry for water utility Business & Investment Plans following the Utility of the Future playbook.
 
+## Visual direction
+
+The user wants a visually striking interface with transparencies while maintaining the existing brand. Preserve navy/cyan identity and prioritize readable data and forms over decorative effects.
+
 ## Supplied real-utility case
 
 The user requested importing the Tagbilaran TCWS plan and LGU waterworks indicator catalog. Treat TCWS as a real, preliminary source case, never as a fictional Valle Verde example. Preserve nulls, gap notes, original document references, and tariff/model cautions; imported submission states are not evidence of independent verification or approval. The original seven source documents have not been separately supplied. Catalog formulas are definitions, not a calculation engine.

@@ -74,9 +74,9 @@ export default function UtilityPage() {
             </dl>
           </div>
           <div className="flex shrink-0 flex-col items-stretch gap-2 md:w-48">
-            <div className="rounded-lg bg-muted/60 p-3">
+            <div className="rounded-lg border border-[#009FDA]/15 bg-[#E6F5FB]/60 p-3">
               <div className="flex justify-between text-xs"><span className="text-muted-foreground">Progress</span><span className="font-semibold text-[#002244] tnum">{Math.round(u.progress)}%</span></div>
-              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white"><div className="h-full rounded-full bg-[#009FDA]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div>
+              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white"><div className="h-full rounded-full bg-gradient-to-r from-[#0077b3] to-[#009FDA]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div>
             </div>
             <Tooltip>
               <TooltipTrigger asChild><a href={`/api/plans/${u.planId}/deck`} className="flex h-10 w-full items-center justify-center gap-2 rounded-lg border bg-white text-sm font-medium text-[#002244] hover:bg-muted" data-testid="button-deck"><FileText className="h-4 w-4" /> Download draft deck</a></TooltipTrigger>
@@ -96,13 +96,13 @@ export default function UtilityPage() {
             const done = !nxt;
             return (
               <Card className="rise mb-6 overflow-hidden" data-testid="card-continue">
-                <div className="flex flex-col gap-4 bg-[#002244] p-5 text-white sm:flex-row sm:items-center">
+                <div className="navy-depth flex flex-col gap-4 p-5 text-white sm:flex-row sm:items-center">
                   <div className="min-w-0 flex-1">
                     <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7FD3F2]">{done ? "All steps complete" : `Next up · step ${w.activities.indexOf(nxt) + 1} of ${w.activities.length}`}</div>
                     <div className="mt-1 text-lg font-semibold" data-testid="text-next-activity">{done ? "Every activity is approved." : <><span className="mr-2 font-mono text-sm text-white/60">{nxt.code}</span>{nxt.name}</>}</div>
                     {!done && <div className="mt-1 text-xs text-white/70">{nxt.phaseCode} · {nxt.days} days · {humanize(nxt.status)}{!w.canEdit ? " · read-only for your role" : ""}</div>}
                   </div>
-                  {done ? <CheckCircle2 className="h-8 w-8 text-[#7FD3F2]" /> : <Link href={`/plans/${w.planId}/activities/${nxt.code}`} className="inline-flex h-10 items-center gap-2 rounded-lg bg-[#009FDA] px-4 text-sm font-medium text-white hover:bg-[#0089bd]" data-testid="button-continue">{nxt.status === "not_started" ? "Start step" : "Continue"} <ArrowRight className="h-4 w-4" /></Link>}
+                  {done ? <CheckCircle2 className="h-8 w-8 text-[#7FD3F2]" /> : <Link href={`/plans/${w.planId}/activities/${nxt.code}`} className="inline-flex h-10 items-center gap-2 rounded-lg btn-glow bg-[#009FDA] px-4 text-sm font-medium text-white hover:bg-[#0089bd]" data-testid="button-continue">{nxt.status === "not_started" ? "Start step" : "Continue"} <ArrowRight className="h-4 w-4" /></Link>}
                 </div>
               </Card>
             );
@@ -118,7 +118,7 @@ export default function UtilityPage() {
                 const color = phaseColor(pc, i);
                 const done = acts.filter((a) => a.status === "approved").length;
                 return (
-                  <Card key={pc} className="overflow-hidden" data-testid={`phase-${pc}`}>
+                  <Card key={pc} className="lift overflow-hidden" data-testid={`phase-${pc}`}>
                     <div className="flex items-center justify-between border-b px-5 py-3" style={{ borderLeft: `4px solid ${color}` }}>
                       <div className="text-sm font-semibold" style={{ color }}>Phase {i + 1} <span className="ml-1 text-xs font-normal text-muted-foreground">{pc}</span></div>
                       <span className="text-xs text-muted-foreground tnum">{done}/{acts.length} complete</span>

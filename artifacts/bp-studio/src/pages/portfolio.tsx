@@ -27,7 +27,7 @@ function toParams(f: Filters, page: number): ListUtilitiesParams {
 
 function Tile({ label, value, sub, onClick, accent, testid }: { label: string; value: string; sub: string; onClick: () => void; accent: string; testid: string }) {
   return (
-    <button onClick={onClick} data-testid={testid} className="group rise rounded-xl border bg-card p-5 text-left transition hover:-translate-y-0.5 hover:border-[#009FDA]/50">
+    <button onClick={onClick} data-testid={testid} className="glass lift group rise relative overflow-hidden rounded-xl border p-5 text-left hover:border-[#009FDA]/50">
       <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
         <span className="h-2 w-2 rounded-full" style={{ background: accent }} />{label}
       </div>
@@ -50,7 +50,7 @@ function Bars({ title, data, colorFor, onPick, empty }: { title: string; data: B
             <button key={b.label} disabled={!onPick} onClick={() => onPick?.(b)} className="block w-full text-left disabled:cursor-default" data-testid={`bar-${b.label}`}>
               <div className="mb-1 flex justify-between text-xs"><span className="text-[#002244]">{b.label}</span><span className="font-medium text-[#002244] tnum">{b.value}</span></div>
               <div className="h-2 overflow-hidden rounded-full bg-muted">
-                <div className="h-full origin-left rounded-full transition-transform duration-700" style={{ width: `${(b.value / max) * 100}%`, background: colorFor(b, i) }} />
+                <div className="bar-fill h-full origin-left rounded-full transition-transform duration-700" style={{ width: `${(b.value / max) * 100}%`, background: colorFor(b, i) }} />
               </div>
             </button>
           ))}
@@ -137,12 +137,12 @@ export default function Portfolio({ admin }: { admin: boolean }) {
       {admin ? (
         <Card className="rise mb-6 overflow-hidden" data-testid="card-admin-onboarding">
           <div className="grid gap-0 md:grid-cols-[1.1fr_2fr]">
-            <div className="bg-[#002244] p-5 text-white">
+            <div className="navy-depth p-5 text-white">
               <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7FD3F2]">Your role</div>
               <p className="mt-2 text-sm leading-relaxed text-white/85">The global team sets up the Studio: people, utilities and teams. TTLs then populate each plan step by step, and you review what they submit.</p>
               <Link href="/help" className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#7FD3F2] hover:underline" data-testid="link-admin-help">Read the global team guide <ChevronRight className="h-3.5 w-3.5" /></Link>
             </div>
-            <div className="grid gap-px bg-border sm:grid-cols-2">
+            <div className="grid gap-px bg-[#002244]/[.07] sm:grid-cols-2">
               {[
                 { n: "1", t: "Manage people", d: "Invite TTLs, editors and viewers and set roles.", el: <Link href="/users" className="text-[#009FDA] hover:underline" data-testid="link-onboard-people">Open People & roles</Link> },
                 { n: "2", t: "Create a utility", d: "Registers the utility and its 20-step plan.", el: <button type="button" onClick={() => setCreating(true)} className="text-[#009FDA] hover:underline" data-testid="button-onboard-create">Register utility</button> },
@@ -151,7 +151,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
                   ? { n: "4", t: "See a worked example", d: "A fictional, fully completed demo plan.", el: <button type="button" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "complete" } })} className="text-[#009FDA] hover:underline" data-testid="button-onboard-example">Open worked example</button> }
                   : { n: "4", t: "Review utility requests", d: "Approve or decline requests to register utilities.", el: <Link href="/requests" className="text-[#009FDA] hover:underline" data-testid="link-onboard-requests">Utility requests</Link> },
               ].map((x) => (
-                <div key={x.n} className="bg-card p-4">
+                <div key={x.n} className="bg-white/90 p-4 transition-colors hover:bg-[#E6F5FB]/70">
                   <div className="flex items-center gap-2 text-sm font-semibold text-[#002244]"><span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E6F5FB] text-[11px] text-[#009FDA]">{x.n}</span>{x.t}</div>
                   <p className="mt-1 text-xs text-muted-foreground">{x.d}</p>
                   <div className="mt-2 text-xs font-medium">{x.el}</div>
@@ -178,7 +178,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
             <div className="w-full space-y-2 md:w-72">
               {list.isLoading ? <div className="h-10 animate-pulse rounded-lg bg-muted" /> : items.length === 0 ? <p className="text-xs text-muted-foreground">No plans assigned yet. A TTL or administrator can add you to a team.</p> :
                 items.slice(0, 3).map((u) => (
-                  <Link key={u.id} href={`/plans/${u.planId}`} className="flex items-center justify-between gap-2 rounded-lg bg-[#002244] px-3 py-2.5 text-sm text-white hover:bg-[#003366]" data-testid={`link-continue-plan-${u.id}`}>
+                  <Link key={u.id} href={`/plans/${u.planId}`} className="flex items-center justify-between gap-2 navy-depth rounded-lg px-3 py-2.5 text-sm text-white transition hover:brightness-125" data-testid={`link-continue-plan-${u.id}`}>
                     <span className="min-w-0 truncate">{me.role === "viewer" ? "Open" : "Continue my plan"}: {u.shortName || u.name}</span><ChevronRight className="h-4 w-4 shrink-0" />
                   </Link>
                 ))}
@@ -219,7 +219,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
 
       <div ref={tableRef} className="scroll-mt-20" />
       <Card className="overflow-hidden">
-        <div className="space-y-3 border-b p-4">
+        <div className="space-y-3 border-b bg-white/40 p-4">
           <div className="flex flex-col gap-3 md:flex-row">
             <div className="relative flex-1">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -289,7 +289,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
         ) : (
           <div className={cn("overflow-x-auto transition-opacity", list.isFetching && "opacity-60")}>
             <table className="w-full min-w-[860px] text-sm">
-              <thead className="bg-muted/50 text-xs text-muted-foreground">
+              <thead className="bg-[#002244]/[.035] text-xs uppercase tracking-wide text-muted-foreground">
                 <tr><SortH col="name">Utility</SortH><SortH col="country">Country</SortH><SortH col="ttl">TTL</SortH><SortH col="year">Year</SortH><th className="px-4 py-3 text-left font-medium">Phase</th><SortH col="progress" className="w-44">Progress</SortH><SortH col="status">Status</SortH></tr>
               </thead>
               <tbody className="divide-y">
@@ -307,7 +307,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
                     <td className="px-4 py-3 text-[#002244]">{u.ttlName}</td>
                     <td className="px-4 py-3 tnum">{u.planYear}</td>
                     <td className="px-4 py-3"><span className="inline-flex items-center gap-1.5 text-xs"><span className="h-2 w-2 rounded-full" style={{ background: phaseColor(u.currentPhase) }} />{u.currentPhase || "—"}</span></td>
-                    <td className="px-4 py-3"><div className="flex items-center gap-2"><div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full bg-[#009FDA]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div><span className="w-9 text-right text-xs tnum">{Math.round(u.progress)}%</span></div></td>
+                    <td className="px-4 py-3"><div className="flex items-center gap-2"><div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full bg-gradient-to-r from-[#0077b3] to-[#009FDA]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div><span className="w-9 text-right text-xs tnum">{Math.round(u.progress)}%</span></div></td>
                     <td className="px-4 py-3"><Pill tone={statusTone(u.status === "archived" ? u.status : u.planStatus)}>{humanize(u.status === "archived" ? u.status : u.planStatus)}</Pill></td>
                   </tr>
                 ))}

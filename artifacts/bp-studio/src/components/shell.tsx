@@ -19,7 +19,7 @@ function Notifications() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="relative flex h-9 w-9 items-center justify-center rounded-lg border bg-white text-[#002244] hover:bg-muted" data-testid="button-notifications" aria-label="Notifications">
+        <button className="relative flex h-9 w-9 items-center justify-center rounded-lg border bg-white/80 text-[#002244] hover:bg-white" data-testid="button-notifications" aria-label="Notifications">
           <Bell className="h-4 w-4" />
           {unread.length > 0 && <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#D9622B] px-1 text-[10px] font-semibold text-white tnum">{unread.length}</span>}
         </button>
@@ -75,9 +75,9 @@ export function Shell({ children }: { children: ReactNode }) {
   const active = (h: string) => (h === "/" ? loc === "/" || inWorkspace : loc.startsWith(h) || (h === "/admin" && inWorkspace));
 
   const sidebar = (
-    <aside className="flex h-full w-64 flex-col bg-[#002244] text-white">
+    <aside className="sidebar-depth flex h-full w-64 flex-col text-white">
       <div className="flex items-center gap-3 px-5 pb-6 pt-6">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white"><Glyph className="h-6 w-6" /></div>
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white shadow-[0_6px_18px_-6px_rgba(0,159,218,.6)]"><Glyph className="h-6 w-6" /></div>
         <div className="leading-tight">
           <div className="text-[13px] font-semibold">Urban Water and Sanitation Service Optimization</div>
           <div className="mt-1 text-[11px] text-white/70">- Digital Transformation - Business Plan Studio</div>
@@ -87,7 +87,7 @@ export function Shell({ children }: { children: ReactNode }) {
         {nav.map((n) => (
           <Link key={n.href} href={n.href} onClick={() => setOpen(false)} data-testid={`link-${n.label.toLowerCase().replace(/\W+/g, "-")}`}
             className={cn("group relative flex items-center gap-3 rounded-lg px-3 py-2 text-[13.5px] transition",
-              active(n.href) ? "bg-white/10 font-medium text-white" : "text-white/70 hover:bg-white/5 hover:text-white")}>
+              active(n.href) ? "bg-white/[.12] font-medium text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,.08)]" : "text-white/70 hover:bg-white/5 hover:text-white")}>
             {active(n.href) && <span className="absolute left-0 top-1.5 bottom-1.5 w-[3px] rounded-r bg-[#009FDA]" />}
             <n.icon className="h-4 w-4" /> {n.label}
           </Link>
@@ -109,17 +109,17 @@ export function Shell({ children }: { children: ReactNode }) {
   );
 
   return (
-    <div className="flex min-h-[100dvh] bg-background">
+    <div className="studio-surface flex min-h-[100dvh]">
       <div className="sticky top-0 hidden h-[100dvh] md:block">{sidebar}</div>
       {open && (
         <div className="fixed inset-0 z-50 md:hidden">
-          <div className="absolute inset-0 bg-[#002244]/40" onClick={() => setOpen(false)} />
+          <div className="absolute inset-0 bg-[#002244]/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
           <div className="relative h-full w-64">{sidebar}</div>
           <button className="absolute left-[270px] top-4 rounded-lg bg-white p-2" onClick={() => setOpen(false)} aria-label="Close menu"><X className="h-4 w-4" /></button>
         </div>
       )}
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b bg-background/90 px-4 backdrop-blur md:px-8">
+        <header className="sticky top-0 z-30 flex h-14 items-center justify-between glass-bar border-b border-[#002244]/[.06] px-4 md:px-8">
           <button className="rounded-lg p-2 md:hidden" onClick={() => setOpen(true)} aria-label="Open menu" data-testid="button-menu"><Menu className="h-5 w-5" /></button>
           <div className="hidden text-xs text-muted-foreground md:block">{me.organization || "World Bank"} · signed in as {me.email}</div>
           <div className="flex items-center gap-3"><RoleSwitcher /><Link href="/help" className="rounded-lg p-2 text-[#002244]/70 hover:bg-muted hover:text-[#002244]" aria-label="Help center" data-testid="button-topbar-help"><CircleHelp className="h-5 w-5" /></Link><Notifications /></div>
