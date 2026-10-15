@@ -9,6 +9,7 @@ import { migrateStrategy } from "./strategy-migration";
 import { migrateAssessment } from "./assessment-migration";
 import { migrateReviewed } from "./reviewed-migration";
 import {migrateFixedScenarios} from "./fixed-scenarios";
+import {refreshExamples} from "./example-refresh";
 
 // Reference definitions only. Never create example users or utility records.
 export async function seedReferenceData(){
@@ -28,4 +29,5 @@ export async function seedReferenceData(){
   await migrateAssessment();
   await migrateReviewed();
   await migrateFixedScenarios();
+  await refreshExamples();
 }

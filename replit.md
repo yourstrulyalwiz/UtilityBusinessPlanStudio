@@ -77,6 +77,8 @@ Use the supplied Option B datasets and brand guide, not the earlier institutiona
 
 The user wants two clear perspectives: the global team manages the tool; the TTL is the primary user who develops and populates plans. Explanatory popups should include practical recommendations and examples from different sectors. Keep instructional illustrations separate from entered utility data.
 
+Apply approved Tagbilaran editor/report improvements to the supplied example utilities too, using each example's own data. Never populate user-created utilities with example values. Numeric maturity scores have no supplied mapping to qualitative assessment statuses; retain them as numeric evidence, not invented judgments.
+
 ## Gotchas
 
 - Open-mode creation, plan navigation, unchanged detail saving, and draft PPTX download have been verified in a fresh browser. Normal-mode protection has API regression coverage; real signed-in role journeys still need browser verification.
