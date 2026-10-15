@@ -218,6 +218,22 @@ export const LoadDemoPlanResponse = zod.object({
 })
 
 
+export const DeleteBusinessPlanParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+
+
+
+export const DeleteBusinessPlanBody = zod.object({
+  "confirmName": zod.string().min(1)
+})
+
+export const DeleteBusinessPlanResponse = zod.object({
+  "success": zod.boolean()
+})
+
+
 export const GetPlanParams = zod.object({
   "id": zod.coerce.string()
 })

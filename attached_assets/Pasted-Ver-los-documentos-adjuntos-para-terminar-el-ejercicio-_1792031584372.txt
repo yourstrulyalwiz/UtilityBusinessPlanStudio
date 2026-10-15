@@ -1,0 +1,11 @@
+Ver los documentos adjuntos para terminar el ejercicio.
+
+Con base en lo anterior hecho para los M1 a M3 hacer los ajustes en las siguientes secciones, incluir en todas las seciones graficas de tendencia si aplica, etc, especialmente donde se hacen proyecciones, en las simulaciones permitir como pocion crear tipo de volumen para :jugar con la herramienta” y generar escenarios temporales, pero solo deben haber escenarios fijos 3 o los que sean recomendados en practocas mejores. Asegirar el impacto visyal, user friendly, uso de graficas que presenten claramente indicadores, avances, etc. Generar todo el ejemplo completo de esa utility y replicar los ejemplos. Esta pendiente la opción de poder borrar business plans/Utilities en el panel de control.
+
+Para el M1 agrupar mas claramente los indicadores, los cuadros pueden ser mas pequeños y esta muy simple, hacer algo e mejor impacto visual y mas moderno, por ejemplo el nivel puede medirse como un un speedometro o algo así, tal vez poner iconos para cada indicador para que sea vistalmente mas amigable. Hacer lo mismo en los 8 modulos
+
+Para M% es muy difícil hacer un seguimiento así, no es intuitivo y es solouna lista larga, no es claro, hacerlo mas user friendly y usar mejores tablas, mas color y mejor diseño, puedes see desplegables por sección en la parte de abajo y en la parte de arriba los totalesm proyecciones y graficas. Mejora esta parte también
+
+Igual para M^ y M&, es muy simple el diseño, no es intuitivo y puede desarrollarse mas moderno, ver mejores practias internacionales.
+
+La versión imprimible es muy mal disenada, no tiene portada, no hay diseño, debería tener un grab diseño moderno e intutivo, con iconos grafica, etc. No parece un documento profesional. Debe ser un documento imprimible, editado como oirun diseñador grafico moderno. No dejar simples listas de datos, si hay tablas dejarlos en tablas, no listas, dehar lo relevante no todo, etc. Falta mejorar sustancialmente estos reporte. Una vez terminado con Tagbilaran City Waterworks System, replicarlo para el resto de utilitises de ejemplo.

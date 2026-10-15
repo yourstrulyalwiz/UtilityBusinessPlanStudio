@@ -107,7 +107,7 @@ export function FieldEditor({ value, example, onChange, readOnly, path, depth = 
       </span>
     );
   }
-  if (typeof example === "number" || typeof value === "number") {
+  if (typeof value === "number" || (typeof example === "number" && (value === null || value === undefined))) {
     return <input type="number" step="any" className={cn(inputCls, "tnum")} disabled={readOnly} value={value === null || value === undefined ? "" : String(value)}
       onChange={(e) => onChange?.(e.target.value === "" ? null : Number(e.target.value))} aria-label={label(path.split(".").pop() ?? "")} data-testid={`input-${tid}`} />;
   }

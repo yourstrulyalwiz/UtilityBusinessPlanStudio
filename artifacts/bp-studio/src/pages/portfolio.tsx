@@ -14,6 +14,7 @@ import { useMe, errMsg, phaseColor, logoUrl, initials, humanize } from "@/lib/ap
 import { useToast } from "@/hooks/use-toast";
 import { useTestMode } from "@/lib/test-mode";
 import { cn } from "@/lib/utils";
+import { DeleteActions } from "@/components/delete-dialogs";
 
 type Filters = { q: string; country: string; region: string; ttl: string; year: string; status: string; sort: string; direction: string };
 const EMPTY: Filters = { q: "", country: "", region: "", ttl: "", year: "", status: "", sort: "name", direction: "asc" };
@@ -178,7 +179,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
             <div className="w-full space-y-2 md:w-72">
               {list.isLoading ? <div className="h-10 animate-pulse rounded-lg bg-muted" /> : items.length === 0 ? <p className="text-xs text-muted-foreground">No plans assigned yet. A TTL or administrator can add you to a team.</p> :
                 items.slice(0, 3).map((u) => (
-                  <Link key={u.id} href={`/plans/${u.planId}`} className="flex items-center justify-between gap-2 navy-depth rounded-lg px-3 py-2.5 text-sm text-white transition hover:brightness-125" data-testid={`link-continue-plan-${u.id}`}>
+                  <Link key={u.id} href={(u.planId ? `/plans/${u.planId}` : `/utilities/${u.id}`)} className="flex items-center justify-between gap-2 navy-depth rounded-lg px-3 py-2.5 text-sm text-white transition hover:brightness-125" data-testid={`link-continue-plan-${u.id}`}>
                     <span className="min-w-0 truncate">{me.role === "viewer" ? "Open" : "Continue my plan"}: {u.shortName || u.name}</span><ChevronRight className="h-4 w-4 shrink-0" />
                   </Link>
                 ))}
@@ -290,13 +291,13 @@ export default function Portfolio({ admin }: { admin: boolean }) {
           <div className={cn("overflow-x-auto transition-opacity", list.isFetching && "opacity-60")}>
             <table className="w-full min-w-[980px] text-sm">
               <thead className="bg-[#323D4F]/[.035] text-xs uppercase tracking-wide text-muted-foreground">
-                <tr><SortH col="name">Utility</SortH><SortH col="country">Country</SortH><SortH col="ttl">TTL</SortH><th className="px-4 py-3 text-left font-medium">Project Number</th><SortH col="year">Year</SortH><th className="px-4 py-3 text-left font-medium">Module</th><SortH col="progress" className="w-44">Reviewed</SortH><SortH col="status">Status</SortH></tr>
+                <tr><SortH col="name">Utility</SortH><SortH col="country">Country</SortH><SortH col="ttl">TTL</SortH><th className="px-4 py-3 text-left font-medium">Project Number</th><SortH col="year">Year</SortH><th className="px-4 py-3 text-left font-medium">Module</th><SortH col="progress" className="w-44">Reviewed</SortH><SortH col="status">Status</SortH>{admin && <th className="px-4 py-3 text-right font-medium">Delete</th>}</tr>
               </thead>
               <tbody className="divide-y">
                 {items.map((u) => (
-                  <tr key={u.id} className="group cursor-pointer hover:bg-[#1ED3D9]/[.035] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1ED3D9]" tabIndex={0} aria-label={`Open plan for ${u.name}`} onClick={() => navigate(`/plans/${u.planId}`)} onKeyDown={e=>{if(e.target===e.currentTarget&&(e.key==="Enter"||e.key===" ")){e.preventDefault();navigate(`/plans/${u.planId}`);}}} data-testid={`row-utility-${u.id}`}>
+                  <tr key={u.id} className="group cursor-pointer hover:bg-[#1ED3D9]/[.035] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1ED3D9]" tabIndex={0} aria-label={u.planId ? `Open plan for ${u.name}` : `Open utility ${u.name} (no business plan)`} onClick={() => navigate((u.planId ? `/plans/${u.planId}` : `/utilities/${u.id}`))} onKeyDown={e=>{if(e.target===e.currentTarget&&(e.key==="Enter"||e.key===" ")){e.preventDefault();navigate((u.planId ? `/plans/${u.planId}` : `/utilities/${u.id}`));}}} data-testid={`row-utility-${u.id}`}>
                     <td className="px-4 py-3">
-                      <Link href={`/plans/${u.planId}`} onClick={e=>e.stopPropagation()} className="flex items-center gap-3">
+                      <Link href={(u.planId ? `/plans/${u.planId}` : `/utilities/${u.id}`)} onClick={e=>e.stopPropagation()} className="flex items-center gap-3">
                         <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg border bg-white text-[10px] font-semibold text-[#323D4F]">
                           {u.logoPath ? <img src={logoUrl(u.logoPath)!} alt="" className="h-full w-full object-contain p-0.5" /> : initials(u.shortName || u.name)}
                         </div>
@@ -306,10 +307,11 @@ export default function Portfolio({ admin }: { admin: boolean }) {
                     <td className="px-4 py-3"><div className="text-[#323D4F]">{u.countryName}</div><div className="text-xs text-muted-foreground">{u.region}</div></td>
                     <td className="px-4 py-3 text-[#323D4F]">{u.ttlName}</td>
                     <td className="px-4 py-3 font-mono text-xs text-[#323D4F]" data-testid={`text-project-${u.id}`}>{u.wbProjectId || "-"}</td>
-                    <td className="px-4 py-3 tnum">{u.planYear}</td>
+                    <td className="px-4 py-3 tnum">{u.planId && u.planYear ? u.planYear : "–"}</td>
                     <td className="px-4 py-3"><span className="inline-flex items-center gap-1.5 text-xs"><span className="h-2 w-2 rounded-full" style={{ background: phaseColor(u.currentPhase) }} />{u.currentPhase || "—"}</span></td>
                     <td className="px-4 py-3"><div className="flex items-center gap-2"><div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full bg-gradient-to-r from-[#127A80] to-[#1ED3D9]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div><span className="w-9 text-right text-xs tnum">{Math.round(u.progress)}%</span></div></td>
                     <td className="px-4 py-3"><Pill tone={statusTone(u.status === "archived" ? u.status : u.planStatus)}>{humanize(u.status === "archived" ? u.status : u.planStatus)}</Pill></td>
+                    {admin && <td className="px-2 py-3"><DeleteActions utilityId={u.id} planId={u.planId ?? ""} name={u.name} /></td>}
                   </tr>
                 ))}
               </tbody>

@@ -58,6 +58,12 @@
       }
     },
     "/plans/{id}": {
+      "delete": {
+        "operationId": "deleteBusinessPlan",
+        "parameters": [{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
+        "requestBody": {"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PlanDeletion"}}}},
+        "responses": {"200":{"description":"Plan deleted; utility retained","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Success"}}}}}
+      },
       "get": {
         "operationId": "getPlan",
         "parameters": [{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
@@ -903,6 +909,7 @@
   },
   "components": {
     "schemas": {
+      "PlanDeletion":{"type":"object","required":["confirmName"],"properties":{"confirmName":{"type":"string","minLength":1}}},
       "DemoInput":{"type":"object","required":["mode"],"properties":{"mode":{"type":"string","enum":["complete","midway"]}}},
       "DemoResult":{"type":"object","required":["planId"],"properties":{"planId":{"type":"string"}}},
       "ActivityAction":{"type":"object","required":["action","updatedAt"],"properties":{"action":{"type":"string","enum":["save","submit","approve","return","reopen"]},"updatedAt":{"type":"string"},"data":{"type":"object","additionalProperties":{}},"comment":{"type":"string"}}},

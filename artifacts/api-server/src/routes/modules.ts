@@ -1,5 +1,5 @@
 import { Router, type IRouter } from "express";
-import { db, plans, planModules, modulePlans, legacyPlanCopies, guidanceTopics } from "@workspace/db";
+import { db, plans, planModules, modulePlans, legacyPlanCopies, guidanceTopics, comments,planActivities } from "@workspace/db";
 import { eq, and, asc } from "drizzle-orm";
 import { z } from "zod/v4";
 import * as api from "@workspace/api-zod";
@@ -12,9 +12,28 @@ import {assessmentSchema,assessmentReady} from "../lib/assessment";
 import {evaluateBaseline,isBaseline,workbook} from "@workspace/baseline";
 
 const router:IRouter=Router();
+router.delete("/plans/:id",async(req,res)=>{
+ const p=await actor(req,["admin"]);const id=uuid(req.params.id);
+ const input=z.object({confirmName:z.string().min(1)}).parse(req.body);
+ await db.transaction(async tx=>{
+  const [plan]=await tx.select().from(plans).where(eq(plans.id,id)).for("update");
+  if(!plan)throw new HttpError(404,"Plan not found.");
+  const u=await accessibleUtility(p,plan.utilityId);
+  if(input.confirmName!==u.name)throw new HttpError(400,"Type the exact utility name to confirm deleting this business plan.");
+  const [meta]=await tx.select().from(modulePlans).where(eq(modulePlans.planId,id));
+  await tx.delete(comments).where(eq(comments.planId,id));
+  await tx.delete(planActivities).where(eq(planActivities.planId,id));
+  await tx.delete(planModules).where(eq(planModules.planId,id));
+  await tx.delete(legacyPlanCopies).where(eq(legacyPlanCopies.planId,id));
+  await tx.delete(modulePlans).where(eq(modulePlans.planId,id));
+  await tx.delete(plans).where(eq(plans.id,id));
+  await writeAudit(tx,p,"Deleted business plan","plan",id,{deletedSourceKinds:meta?[meta.kind]:[],utilityName:u.name},u.id);
+ });
+ res.json({success:true});
+});
 const actionSchema=z.object({
   action:z.enum(["save","submit","approve","return","reopen"]),updatedAt:z.iso.datetime(),
-  data:z.record(z.string(),z.unknown()).optional(),scenarios:z.array(z.unknown()).max(50).optional(),
+  data:z.record(z.string(),z.unknown()).optional(),scenarios:z.array(z.object({code:z.string(),name:z.string(),type:z.enum(["conservative","base","ambitious"])}).passthrough()).length(3).refine(a=>new Set(a.map(s=>s.type)).size===3&&new Set(a.map(s=>s.code)).size===3,"Use one Conservative, Base and Ambitious scenario.").optional(),
   comment:z.string().max(10000).optional(),
 });
 function safeContent(data:unknown){

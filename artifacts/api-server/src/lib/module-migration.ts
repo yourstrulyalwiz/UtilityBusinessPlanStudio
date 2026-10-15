@@ -4,10 +4,11 @@ import type { Tx } from "./studio";
 import {createBaseline} from "@workspace/baseline";
 import {blankStrategy} from "./strategy";
 import {blankAssessment} from "./assessment";
+import {fixedScenarios} from "./fixed-scenarios";
 import { demo, real, guidance, sourceNames, exampleFor, blankValue, moduleDefinitions } from "./module-definitions";
 
 export async function createBlankModulePlan(tx:Tx,planId:string) {
-  await tx.insert(modulePlans).values({planId,kind:"user",source:"User-entered plan",context:{migrationNote:"Independent eight-module business planning. Examples are fictional and are never filled automatically."}});
+  await tx.insert(modulePlans).values({planId,kind:"user",source:"User-entered plan",scenarios:fixedScenarios(),context:{fixedScenarioDefinitions:true,migrationNote:"Independent eight-module business planning. Examples are fictional and are never filled automatically."}});
   await tx.insert(planModules).values(moduleDefinitions.map(m=>({planId,number:m.number,data:m.number===1?{...createBaseline()}:m.number===2?blankStrategy():m.number===3?blankAssessment():blankValue(exampleFor("user",m.number)) as Record<string,unknown>})));
 }
 

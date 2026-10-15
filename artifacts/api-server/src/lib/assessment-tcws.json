@@ -5,12 +5,13 @@
       "id": "area-1",
       "area": "Strategy & Planning",
       "status": "Moderate",
-      "key_indicators": "Revised vision, mission and values (Nov 2025); 5 strategic objectives; CAPEX program PhP 255.4 M (2026–2029)",
+      "key_indicators": "Revised vision, mission and values (Nov 2025); 5 strategic objectives; CAPEX PhP 255.4 M in the plan vs PhP 579.2 M in the financial model (2026–2029)",
       "findings": [
         "New vision: world-class, sustainable waterworks with 24/7 potable supply by 2035.",
         "Five objectives defined: billed volume, NRW, collection, cost recovery, after-sales service.",
         "Three priority projects: pipe replacement (PhP 113.1 M), coverage expansion (PhP 22.9 M), new main lines for bulk water (PhP 119.4 M).",
-        "Plan is preliminary; objectives lack owners, annual targets and timelines."
+        "Plan is preliminary; objectives lack owners, annual targets and timelines.",
+        "The plan and the financial model are not aligned (CAPEX, OPEX scenario, volume base of the tariff)."
       ],
       "message": "Clear direction is in place; objectives now need owners, annual targets and deadlines to become an executable plan."
     },
@@ -18,39 +19,41 @@
       "id": "area-2",
       "area": "Commercial Management",
       "status": "Critical",
-      "key_indicators": "Tariff PhP 6.20/m3 vs PhP 17.68/m3 cost-recovery tariff (2024); collection efficiency not measured; metered connections not reported",
+      "key_indicators": "Tariff unchanged since Sept 2016; PhP 12.5 collected per m3 vs PhP 17.68/m3 cost-recovery tariff (2024); collection efficiency not measured",
       "findings": [
-        "6,461 connections (2024), 98.9% residential; average consumption 26.1 m3/connection/month.",
-        "Tariff unchanged at PhP 6.20/m3 (2020–2023); it should be PhP 17.68/m3 to recover OPEX.",
-        "Collection efficiency is not calculated; no baseline exists.",
-        "Meters are purchased by customers and are not always replaced when required.",
-        "Online payment partners are already available."
+        "Connections grew from 5,612 (2020) to 6,461 (2024) but fell to 6,314 (2025); 99% residential; average consumption 23.6 m3/connection/month.",
+        "Billed volume flat at 1.7–1.9 M m3/yr since 2020.",
+        "Block tariff unchanged since Sept 2016 (PhP 62 minimum for 10 m3; PhP 7–23/m3; commercial PhP 23/m3; 15% late penalty).",
+        "Collections rose from PhP 18.7 M (2020) to PhP 23.1 M (2023) and PhP 22.9 M (2024); billings are not recorded, so collection efficiency cannot be measured.",
+        "Collections per m3 (PhP 12.5) look high for the 2016 tariff and need to be reconciled.",
+        "Meters are purchased by customers and are not always replaced when required."
       ],
-      "message": "The tariff is about one-third of cost and collection is not measured; the revenue base is the critical constraint."
+      "message": "A 2016 tariff, flat volumes and no billing records make the revenue base the critical constraint."
     },
     {
       "id": "area-3",
       "area": "Technical Operations",
       "status": "Moderate",
-      "key_indicators": "NRW 31.3% (Level 1); NRW 16.2 l/conn/h (Level 3); continuity 22–24 h/day (Level 4); availability 180 l/cap/day (Level 4)",
+      "key_indicators": "NRW 39.9% (Level 1); NRW 21.6 l/conn/h (Level 3); continuity 23.9 h/day, 93% of customers 24/7 (Level 4); availability 168 l/cap/day (Level 4)",
       "findings": [
-        "Production 7.66 MLD vs billed 5.26 MLD: about 2.4 MLD lost every day.",
-        "Supply is reliable (22–24 h) from deep wells with chlorination at all pump stations.",
+        "NRW 46% (2023) and 40% (2024); 31% in H1 2025 is provisional because several production readings are repeated month to month.",
+        "Production is declining: 9.7 MLD (2023), 8.4 MLD (2024), 7.7 MLD (H1 2025).",
+        "26 pumping units (160.5 HP) on deep wells, all with production meters and chlorinators.",
         "Old galvanized iron pipes in Tiptip, Manga and Ubujan; no DMAs yet; no preventive maintenance.",
         "Supply gap of 11.7 MLD against projected city demand."
       ],
-      "message": "Continuity is good, but one-third of produced water is lost; cutting NRW is the cheapest source of new supply."
+      "message": "Continuity is good, but about 40% of produced water is lost while production declines; cutting NRW is the cheapest source of new supply."
     },
     {
       "id": "area-4",
       "area": "Financial Management",
       "status": "Critical",
-      "key_indicators": "EBITDA margin -14.1% (Level 1); operating cost coverage 87.7% (Level 3)",
+      "key_indicators": "EBITDA margin -12.8% (Level 1); operating cost coverage 88.7% (Level 3); operating ratio 1.13 (2023)",
       "findings": [
-        "Water sales PhP 22.9 M (2024) vs OPEX PhP 26.1 M (2023): operating loss of about PhP 3.2 M.",
+        "Revenue PhP 23.1 M vs OPEX PhP 26.1 M (2023): operating loss of about PhP 3.0 M.",
         "Negative bottom line acknowledged by the utility.",
         "Operates as a Local Economic Enterprise (LEE), not funded by the general fund; accounts not yet ring-fenced.",
-        "Proposed tariff (PhP 214.03 for the first 10 m3) makes the plan financially viable and affordable (2% of low-income household income)."
+        "Proposed tariff (PhP 214.03 for the first 10 m3) is based on a volume that includes private providers' water; on TCWS bulk volume alone the required average tariff would be about PhP 50/m3."
       ],
       "message": "Revenues do not cover operating costs; tariff reform and ring-fenced LEE accounts are required for cost recovery."
     },
@@ -96,25 +99,26 @@
       "id": "area-8",
       "area": "Data & Performance Management",
       "status": "Weak",
-      "key_indicators": "9 of 22 performance indicators can be calculated; preliminary KPI system defined",
+      "key_indicators": "10 of 22 performance indicators can be calculated; 19 data inconsistencies found across sources",
       "findings": [
-        "No data on collection, metering, customer satisfaction, complaints, turnover or HR costs.",
-        "Annual OPEX and production volumes for 2024 not available.",
-        "A preliminary KPI monitoring system with standards and frequencies has been defined."
+        "No data on billings, metering, customer satisfaction, complaints, turnover or HR costs; no 2024 OPEX.",
+        "Connection breakdown by barangay is repeated unchanged across 2022–2025 records.",
+        "Production readings repeated month to month in 2025; some units at zero in late 2024.",
+        "Business plan, financial model and utility records report different connections, NRW, CAPEX and revenue labels."
       ],
-      "message": "Most performance gaps cannot be measured yet; establishing baselines is the first step."
+      "message": "Data quality is a binding constraint; reconcile one set of baseline figures before setting targets."
     }
   ],
   "messages": [
     {
       "id": "message-1",
       "type": "Overall",
-      "text": "TCWS provides reliable water to its customers but is not financially sustainable: the tariff covers about one-third of cost, one-third of water is lost, and revenues fall short of operating costs."
+      "text": "TCWS provides reliable water to its customers but is not financially sustainable: the tariff has not changed since 2016, about 40% of produced water is lost, and revenues fall short of operating costs."
     },
     {
       "id": "message-2",
       "type": "Overall",
-      "text": "Average performance level across the 9 measurable indicators: 2.8 of 5 (between Basic and Good)."
+      "text": "Average performance level across the 10 measurable indicators: 2.9 of 5 (between Basic and Good)."
     },
     {
       "id": "message-3",
@@ -124,12 +128,12 @@
     {
       "id": "message-4",
       "type": "Priority 2",
-      "text": "Reduce NRW from 31% to 20% through DMAs, pipe replacement and control of illegal connections."
+      "text": "Reduce NRW from 40% to 20% through DMAs, pipe replacement and control of illegal connections."
     },
     {
       "id": "message-5",
       "type": "Priority 3",
-      "text": "Measure what matters: set baselines for collection, metering and customer service."
+      "text": "Fix the data: record billings, verify production meters, and align the plan with the financial model."
     },
     {
       "id": "message-6",
@@ -232,15 +236,27 @@
       },
       {
         "id": "weaknesses-12",
-        "text": "High NRW (31%) and no district metered areas"
+        "text": "High NRW (40% in 2024) and no district metered areas"
       },
       {
         "id": "weaknesses-13",
-        "text": "Collection efficiency and metering not measured"
+        "text": "Billings not recorded, so collection efficiency cannot be measured"
       },
       {
         "id": "weaknesses-14",
-        "text": "Low coverage (24% of city population)"
+        "text": "Low coverage (about 27% of city population)"
+      },
+      {
+        "id": "weaknesses-15",
+        "text": "Tariff unchanged since September 2016"
+      },
+      {
+        "id": "weaknesses-16",
+        "text": "Declining production (9.7 MLD in 2023 to 7.7 MLD in H1 2025)"
+      },
+      {
+        "id": "weaknesses-17",
+        "text": "Inconsistent data across records, plan and financial model"
       }
     ],
     "opportunities": [

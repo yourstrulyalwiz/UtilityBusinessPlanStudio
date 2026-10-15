@@ -1,5 +1,5 @@
 import { db, modulePlans, plans, planModules, audit, type StudioPerson } from "@workspace/db";
-import { eq, and, sql } from "drizzle-orm";
+import { eq, and, sql, inArray } from "drizzle-orm";
 import { createUtilityRecord, writeAudit } from "./studio";
 import { demo, real, exampleFor, sourceNames, moduleDefinitions } from "./module-definitions";
 
@@ -8,7 +8,7 @@ export async function seedSuppliedModulePlans(p:StudioPerson) {
     await tx.execute(sql`SELECT pg_advisory_xact_lock(81260344)`);
     const [existing]=await tx.select().from(modulePlans).where(eq(modulePlans.kind,kind)).limit(1);
     if(existing)return;
-    const [deleted]=await tx.select({id:audit.id}).from(audit).where(and(eq(audit.action,"Deleted utility"),sql`${audit.diff}->'deletedSourceKinds' @> ${JSON.stringify([kind])}::jsonb`)).limit(1);
+    const [deleted]=await tx.select({id:audit.id}).from(audit).where(and(inArray(audit.action,["Deleted utility","Deleted business plan"]),sql`${audit.diff}->'deletedSourceKinds' @> ${JSON.stringify([kind])}::jsonb`)).limit(1);
     if(deleted)return; // An intentionally deleted example must not reappear on restart.
     const supplied=kind==="real"?real:demo;
     const u=await createUtilityRecord(tx,p,{name:supplied.utility.name,shortName:supplied.utility.short_name,countryIso3:supplied.utility.country_iso3,

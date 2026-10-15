@@ -4,6 +4,11 @@
  * Api
  * OpenAPI spec version: 1.0.0
  */
+export interface PlanDeletion {
+  /** @minLength 1 */
+  confirmName: string;
+}
+
 export type DemoInputMode = typeof DemoInputMode[keyof typeof DemoInputMode];
 
 

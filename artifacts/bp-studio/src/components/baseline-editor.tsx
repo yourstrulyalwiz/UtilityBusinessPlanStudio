@@ -134,8 +134,8 @@ export function BaselineEditor({ value, onChange, readOnly }: Props) {
         if (!list.length) return null;
         return (
           <section key={d}>
-            <h3 className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-[#323D4F]">{d}</h3>
-            <div className="grid gap-3 lg:grid-cols-2">
+            <h3 className="mb-2 flex items-center gap-2 text-[12px] font-semibold uppercase tracking-wider text-[#323D4F]"><span className="h-3 w-1 rounded bg-[#1ED3D9]" />{d}<span className="font-mono text-[10px] font-normal normal-case text-[#6B7687]">{list.length} indicators</span></h3>
+            <div className="grid gap-2.5 sm:grid-cols-2 2xl:grid-cols-3">
               {list.map((i) => <IndicatorCard key={i.id} ind={i} note={data.indicatorNotes[i.id] ?? ""} readOnly={readOnly}
                 onNote={(t) => set({ indicatorNotes: { ...data.indicatorNotes, [i.id]: t } })} />)}
             </div>
@@ -191,34 +191,56 @@ export function BaselineEditor({ value, onChange, readOnly }: Props) {
   );
 }
 
+function arcPath(cx: number, cy: number, r: number, a0: number, a1: number) {
+  const p = (a: number) => [cx + r * Math.cos((Math.PI * a) / 180), cy - r * Math.sin((Math.PI * a) / 180)];
+  const [x0, y0] = p(a0), [x1, y1] = p(a1);
+  return `M ${x0} ${y0} A ${r} ${r} 0 0 1 ${x1} ${y1}`;
+}
+/** Semicircular 1-5 level gauge. Level is also given as text (never colour alone). */
+export function LevelGauge({ level, informational, size = 92 }: { level: number | null; informational?: boolean; size?: number }) {
+  const text = informational ? "Informational, no levels defined" : level === null ? "No level" : `Level ${level} of 5, ${levelLabels[level - 1]}`;
+  const needle = level === null ? null : 180 - (level - 0.5) * 36;
+  return (
+    <svg viewBox="0 0 100 58" width={size} height={size * 0.58} role="meter" aria-valuemin={1} aria-valuemax={5} aria-valuenow={level ?? undefined} aria-valuetext={text} aria-label="Performance level" className="shrink-0">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <path key={i} d={arcPath(50, 50, 40, 180 - i * 36 - 2, 180 - (i + 1) * 36 + 2)} fill="none" strokeWidth={10} strokeLinecap="butt"
+          stroke={informational ? "#E3E8EE" : level !== null && i + 1 <= level ? LEVEL_COLORS[level - 1] : "#E3E8EE"} strokeDasharray={informational ? "3 3" : undefined} />
+      ))}
+      {needle !== null && <line x1={50} y1={50} x2={50 + 30 * Math.cos((Math.PI * needle) / 180)} y2={50 - 30 * Math.sin((Math.PI * needle) / 180)} stroke="#323D4F" strokeWidth={2.5} strokeLinecap="round" />}
+      <circle cx={50} cy={50} r={4.5} fill="#323D4F" />
+      <text x={50} y={36} textAnchor="middle" fontSize={13} fontWeight={700} fill="#323D4F" fontFamily="JetBrains Mono, monospace">{informational ? "i" : level ?? "–"}</text>
+    </svg>
+  );
+}
+
 function IndicatorCard({ ind, note, onNote, readOnly }: { ind: Indicator; note: string; onNote: (t: string) => void; readOnly?: boolean }) {
   const info = !ind.direction;
   const hasErr = ind.issues.some((x) => x.severity === "error");
   return (
-    <article className="rounded-xl border border-[#E3E8EE] bg-white p-4 shadow-[0_1px_2px_rgba(50,61,79,.05)]" data-testid={`card-indicator-${ind.id}`}>
-      <div className="flex items-start justify-between gap-3">
-        <h4 className="text-sm font-semibold leading-snug text-[#323D4F]">{ind.name}</h4>
-        <span className="shrink-0 font-mono text-[10px] text-[#6B7687]">{ind.direction === ">" ? "Higher is better" : ind.direction === "<" ? "Lower is better" : "Informational"}</span>
+    <article className="flex flex-col rounded-xl border border-[#E3E8EE] bg-white p-3 transition hover:border-[#1ED3D9]/60" data-testid={`card-indicator-${ind.id}`}>
+      <div className="flex items-center gap-3">
+        <LevelGauge level={ind.level} informational={info} size={78} />
+        <div className="min-w-0 flex-1">
+          <h4 className="text-[12.5px] font-semibold leading-snug text-[#323D4F]">{ind.name}</h4>
+          {ind.value === null ? <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#6B7687]"><CircleSlash className="h-3.5 w-3.5" />No data</span>
+            : <div className={cn("text-lg font-semibold leading-tight tnum", hasErr ? "text-[#9A3A05]" : "text-[#323D4F]")} data-testid={`text-value-${ind.id}`}>{fmtValue(ind.value, ind.unit)}</div>}
+          <div className="text-[10.5px] text-[#5B6678]" data-testid="text-level">{info ? "Informational" : ind.level ? `L${ind.level} · ${levelLabels[ind.level - 1]}` : "No level"} · {ind.direction === ">" ? "higher is better" : ind.direction === "<" ? "lower is better" : "no bands"}</div>
+        </div>
+        {ind.issues.length > 0 && <span className="shrink-0 rounded bg-[#FFF1E8] p-1 text-[#9A3A05]" title={ind.issues.map((x) => x.message).join("\n")} aria-label={`${ind.issues.length} checks`}><AlertTriangle className="h-3.5 w-3.5" /></span>}
       </div>
-      <div className="mt-2 flex items-baseline gap-2">
-        {ind.value === null ? <span className="inline-flex items-center gap-1.5 text-lg font-semibold text-[#6B7687]"><CircleSlash className="h-4 w-4" />No data</span>
-          : <span className={cn("text-2xl font-semibold tnum", hasErr ? "text-[#9A3A05]" : "text-[#323D4F]")} data-testid={`text-value-${ind.id}`}>{fmtValue(ind.value, ind.unit)}</span>}
-      </div>
-      <div className="mt-3"><LevelMeter level={ind.level} informational={info} /></div>
-      {ind.issues.length > 0 && <ul className="mt-3 space-y-1">{ind.issues.map((x, k) => <li key={k} className={cn("flex gap-1.5 rounded px-2 py-1 text-xs", x.severity === "error" ? "bg-[#FFF1E8] text-[#9A3A05]" : "bg-[#F7F9FB] text-[#5B6678]")}><AlertTriangle className="mt-0.5 h-3 w-3 shrink-0" /><span><strong>{x.severity === "error" ? "Error" : "Warning"}:</strong> {x.message}</span></li>)}</ul>}
-      {ind.value === null && ind.missing.length > 0 && <p className="mt-2 text-xs text-[#5B6678]">Missing: {ind.missing.map((k) => varById.get(k)?.name ?? k).join("; ")}</p>}
-      <details className="group mt-3 text-xs">
-        <summary className="flex cursor-pointer list-none items-center gap-1 font-medium text-[#127A80]" data-testid={`toggle-formula-${ind.id}`}>Formula and level boundaries<ChevronDown className="h-3.5 w-3.5 transition group-open:rotate-180" /></summary>
+      <details className="group mt-2 text-xs">
+        <summary className="flex cursor-pointer list-none items-center gap-1 text-[11px] font-medium text-[#127A80]" data-testid={`toggle-formula-${ind.id}`}>Details, formula and note<ChevronDown className="h-3.5 w-3.5 transition group-open:rotate-180" />{note && <span className="ml-auto rounded bg-[#E4F8F9] px-1.5 text-[10px] text-[#1F5F63]">note</span>}</summary>
         <div className="mt-2 space-y-2 text-[#5B6678]">
+          {ind.issues.map((x, k) => <p key={k} className={cn("flex gap-1.5 rounded px-2 py-1", x.severity === "error" ? "bg-[#FFF1E8] text-[#9A3A05]" : "bg-[#F7F9FB]")}><AlertTriangle className="mt-0.5 h-3 w-3 shrink-0" /><span><strong>{x.severity === "error" ? "Error" : "Warning"}:</strong> {x.message}</span></p>)}
+          {ind.value === null && ind.missing.length > 0 && <p>Missing: {ind.missing.map((k) => varById.get(k)?.name ?? k).join("; ")}</p>}
           <p><span className="font-medium text-[#323D4F]">Formula:</span> {ind.formula} <span className="text-[#6B7687]">({ind.unit})</span></p>
-          <p><span className="font-medium text-[#323D4F]">Inputs:</span> {ind.dependencies.map((k) => varById.get(k)?.name ?? k).join("; ")}</p>
           {info ? <p>No performance levels are defined for this indicator.</p> : (
             <div className="grid grid-cols-5 gap-1 text-center">{ind.bands.map((b, k) => <div key={k} className={cn("rounded px-1 py-1", ind.level === k + 1 ? "bg-[#323D4F] text-white" : "bg-[#F7F9FB]")}><div className="font-mono text-[10px]">L{k + 1}</div><div className="text-[10px] tnum">{b}</div></div>)}</div>
           )}
+          <label className="block text-[11px] font-medium text-[#323D4F]" htmlFor={`note-${ind.id}`}>Analytical note</label>
+          <textarea id={`note-${ind.id}`} rows={2} disabled={readOnly} className={cn(inputCls, "h-auto py-2 text-xs")} placeholder={readOnly ? "No note" : "Interpretation, caveats, data quality"} value={note} onChange={(e) => onNote(e.target.value)} data-testid={`input-note-${ind.id}`} />
         </div>
       </details>
-      <label className="mt-3 block text-[11px] font-medium text-[#323D4F]" htmlFor={`note-${ind.id}`}>Analytical note</label>
-      <textarea id={`note-${ind.id}`} rows={2} disabled={readOnly} className={cn(inputCls, "mt-1 h-auto py-2 text-xs")} placeholder={readOnly ? "No note" : "Interpretation, caveats, data quality"} value={note} onChange={(e) => onNote(e.target.value)} data-testid={`input-note-${ind.id}`} />
     </article>
   );
 }

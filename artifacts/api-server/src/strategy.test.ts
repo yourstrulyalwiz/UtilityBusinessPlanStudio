@@ -9,7 +9,8 @@ test("strategy workbook content is complete structurally, with missing informati
   assert.equal(d.objectives[2].time_bound,"");
   assert.equal(strategyReady(d),true);
   assert.equal(strategyReady(blankStrategy()),false);
-  assert.ok(d.objectives[0].baseline.includes("6,461 (2024)"));
+  assert.ok(d.objectives[0].baseline.includes("6,461 (Dec 2024)"));
+  assert.ok(d.objectives[0].baseline.includes("6,314 (Dec 2025)"));
   const changed=structuredClone(d);
   changed.objectives[0].target="";
   assert.equal(strategyReady(changed),false);

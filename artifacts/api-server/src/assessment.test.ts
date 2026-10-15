@@ -5,7 +5,7 @@ test("assessment import retains exact content counts and no source fields",()=>{
   const d=assessmentSchema.parse(assessmentSource);
   assert.equal(d.areas.length,8);
   assert.equal(d.messages.length,7);
-  assert.deepEqual(["strengths","weaknesses","opportunities","threats"].map(k=>(d.swot[k] as unknown[]).length),[10,14,7,7]);
+  assert.deepEqual(["strengths","weaknesses","opportunities","threats"].map(k=>(d.swot[k] as unknown[]).length),[10,17,7,7]);
   assert.ok(d.review_notes.includes("27%")&&d.review_notes.includes("24%"));
   assert.ok(!JSON.stringify(d).includes('"source"'));
   assert.equal(assessmentReady(d),true);

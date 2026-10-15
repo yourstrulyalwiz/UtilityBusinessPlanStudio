@@ -1,5 +1,6 @@
 import demo from "./demo-option-b.json";
 import real from "./tagbilaran-option-b.json";
+import reviewed from "./tcws-reviewed.json";
 import guidance from "./guidance-option-b.json";
 import catalog from "./lgu-indicators.json";
 import {createBaseline,isBaseline,evaluateBaseline} from "@workspace/baseline";
@@ -24,6 +25,7 @@ export const sourceNames={
   catalog:"indicator_catalog_lgu_waterworks_(1)_1792021268122.json",
 };
 export function exampleFor(kind:string,n:number):Record<string,unknown> {
+  if(kind==="real")return (reviewed as Record<string,unknown>)[`module${n}`] as Record<string,unknown>;
   if(n===3&&kind==="real")return assessmentSource;
   if(n===2&&kind==="real")return strategySource;
   if(n===1)return {...createBaseline(kind==="real")};

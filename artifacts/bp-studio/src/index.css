@@ -416,3 +416,15 @@ body,.studio-surface{background-color:#F7F9FB;background-image:radial-gradient(9
   .report-dialog > :not(.print-report) { display: none; }
   .print-report { position: static; padding: 12px; overflow: visible; }
 }
+@media print {
+  @page { size: A4; margin: 14mm 12mm 16mm; }
+  html, body { background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .no-print, .report-dialog button[aria-label="Close"], .report-dialog > button { display: none !important; }
+  .print-report { padding: 0; font-size: 10.5pt; }
+  .report-cover { min-height: 250mm; break-after: page; border-radius: 0; }
+  .report-page { break-before: page; margin-top: 0 !important; }
+  .print-avoid, .print-report table tr, .print-chart { break-inside: avoid; }
+  .print-report h2, .print-report h3 { break-after: avoid; }
+  .print-report textarea, .print-report input, .print-report select { border: 0 !important; resize: none; padding: 0 !important; background: transparent !important; }
+  .print-report details { display: block; }
+}

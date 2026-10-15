@@ -5,7 +5,7 @@ import {
   useGetModulePlan, getGetModulePlanQueryKey, useUpdateModule, getGetPlanQueryKey, getGetWorkflowQueryKey,
   getListUtilitiesQueryKey, getGetSummaryQueryKey, type ModuleActionAction, type ModulePlan,
 } from "@workspace/api-client-react";
-import { AlertTriangle, ArrowLeft, Calculator, CheckCircle2, ChevronLeft, ChevronRight, Download, RotateCcw, Save, Send, Undo2 } from "lucide-react";
+import { AlertTriangle, ArrowLeft, CheckCircle2, ChevronLeft, ChevronRight, Download, RotateCcw, Save, Send, Undo2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, ErrorState, Pill, Btn, inputCls } from "@/components/kit";
 import { FieldEditor, meaningful, type Json } from "@/components/field-editor";
@@ -18,6 +18,9 @@ import { AssessmentEditor, AssessmentGuide, isAssessmentV1 } from "@/components/
 import { useMe, errMsg, fmtDateTime } from "@/lib/app";
 import { moduleColor, moduleTone, statusLabel, reviewedCount, toTopic, isConflict, apiHref } from "@/lib/modules";
 import { useToast } from "@/hooks/use-toast";
+import { M4View, M5View, M6View, M7View, M8View, ScenarioPanel, normalizeScenarios } from "@/components/module-views";
+import { WhatIfSimulator } from "@/components/simulator";
+import { HistoryPanel, Collapse, HISTORY_SOURCE, SourceProvider } from "@/components/plan-data";
 import { cn } from "@/lib/utils";
 
 const clone = <T,>(v: T): T => (v === undefined ? v : JSON.parse(JSON.stringify(v)));
@@ -115,7 +118,7 @@ export default function ModulePage() {
     update.mutate({ id: planId, number: mod.number, data: {
       action, updatedAt: stamp,
       ...(withData ? { data: draft as Record<string, unknown> } : {}),
-      ...(withData && mod.number === 1 && Array.isArray(scen) ? { scenarios: scen as unknown[] } : {}),
+      ...(withData && mod.number === 1 ? { scenarios: normalizeScenarios(scen).fixed as unknown[] } : {}),
       ...(comment.trim() ? { comment: comment.trim() } : {}),
     } });
   };
@@ -131,9 +134,10 @@ export default function ModulePage() {
   const color = moduleColor(num);
   const reviewed = reviewedCount(plan.modules);
   const exLabel = "Reference example";
-  const financial = num === 5 || num === 6;
+  const View = num === 4 ? M4View : num === 5 ? M5View : num === 6 ? M6View : num === 7 ? M7View : num === 8 ? M8View : null;
 
   return (
+    <SourceProvider kind={plan.kind}>
     <div>
       <button onClick={() => go(base)} className="mb-5 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-[#323D4F]" data-testid="link-back-overview"><ArrowLeft className="h-4 w-4" /> {plan.utilityName} overview</button>
 
@@ -172,7 +176,7 @@ export default function ModulePage() {
               {mod.description && <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#5B6678]" data-testid="text-module-description">{mod.description}</p>}
               {num !== 1 && !assess && <div className="mt-4 flex flex-wrap gap-2"><ModuleHelpButton topics={topics} moduleNumber={num} moduleTitle={mod.title} /></div>}
               {!canEdit && <div className="mt-4 rounded-lg bg-muted/60 px-4 py-2.5 text-xs text-muted-foreground">Your role has read-only access to this plan.</div>}
-              {financial && <p className="mt-4 flex gap-2 rounded-lg border-l-4 border-[#FF6A0D] bg-[#FFF1E8] px-4 py-3 text-xs text-[#9A3A05]" data-testid="text-financial-warning"><Calculator className="mt-0.5 h-4 w-4 shrink-0" /><span><strong>No calculation engine.</strong> Values here are supplied scenario figures, stored as entered. Changing an input does not recalculate revenue requirements, tariffs or any other financial result. Update dependent figures yourself and explain them.</span></p>}
+              
               {mod.feedback && <p className="mt-4 rounded-lg border border-[#FF6A0D]/30 bg-[#FFF1E8] p-4 text-sm text-[#9A3A05]" data-testid="text-feedback"><strong>Latest review comment:</strong> {mod.feedback}</p>}
               {conflict && <div className="mt-4 flex flex-col gap-2 rounded-lg border border-[#FF6A0D]/50 bg-[#FFF1E8] p-4 text-sm text-[#9A3A05] sm:flex-row sm:items-center" data-testid="text-conflict">
                 <AlertTriangle className="h-4 w-4 shrink-0" />
@@ -188,28 +192,30 @@ export default function ModulePage() {
                 <button role="tab" aria-selected={tab === "form"} onClick={() => setTab("form")} className={cn("rounded-md px-3 py-1.5", tab === "form" && "bg-white font-medium text-[#323D4F] shadow-sm")} data-testid="tab-form">Your module</button>
                 <button role="tab" aria-selected={tab === "example"} onClick={() => setTab("example")} className={cn("rounded-md px-3 py-1.5", tab === "example" && "bg-white font-medium text-[#323D4F] shadow-sm")} data-testid="tab-example">{exLabel}</button>
               </div>}
-              {num === 1 && <h2 className="text-sm font-semibold text-[#323D4F]">Indicators</h2>}
+              {num === 1 && <div className="flex rounded-lg bg-[#323D4F]/[.06] p-0.5 text-sm" role="tablist">
+                <button role="tab" aria-selected={tab !== "scenarios"} onClick={() => setTab("form")} className={cn("rounded-md px-3 py-1.5", tab !== "scenarios" && "bg-white font-medium text-[#323D4F] shadow-sm")} data-testid="tab-indicators">Indicators</button>
+                <button role="tab" aria-selected={tab === "scenarios"} onClick={() => setTab("scenarios")} className={cn("rounded-md px-3 py-1.5", tab === "scenarios" && "bg-white font-medium text-[#323D4F] shadow-sm")} data-testid="tab-scenarios">Scenarios (3 fixed)</button>
+              </div>}
               {canFill && tab === "form" && <Btn variant="outline" className="h-8" disabled={pending} onClick={() => setConfirmFill(true)} data-testid="button-fill-example">Fill with fictional example</Btn>}
             </div>
-            {num === 1 ? (
-              <div>
+            {num === 1 && tab === "scenarios" ? (
+              <ScenarioPanel value={scen} readOnly={!editable || pending} onChange={(v) => { setScen(v as unknown as Json); setDirty(true); }} />
+            ) : num === 1 ? (
+              <div className="space-y-5">
                 {frozen && <p className="mb-3 rounded-md bg-muted/60 px-3 py-2 text-xs text-muted-foreground">{status === "approved" ? "Approved. Fields are frozen until a reviewer reopens the module." : "Ready for review. Fields are frozen until a reviewer approves or returns it."}</p>}
                 <BaselineEditor value={draft} readOnly={!editable || pending} onChange={(v) => { setDraft(v as unknown as Json); setDirty(true); }} />
+                <HistoryPanel history={(draft as Record<string, Json>)?.history} source={HISTORY_SOURCE} title="Indicator history (reviewed)" />
               </div>
             ) : tab === "example" ? (
               <div>
                 <div className="mb-4 rounded-md bg-[#FFF1E8] px-3 py-2 text-xs text-[#9A3A05]" data-testid="text-example-note">{plan.kind === "real" ? "Original supplied source data for this module, including gaps and estimates. Read-only." : "Fictional illustrative example. Read-only; replace with your utility's information."}</div>
-                {meaningful(mod.example) ? (num === 2 && isStrategyV1(mod.example) ? <StrategyEditor value={mod.example as Json} readOnly /> : num === 3 && isAssessmentV1(mod.example) ? <AssessmentEditor value={mod.example as Json} readOnly /> : <FieldEditor value={mod.example as Json} example={mod.example} readOnly path={`ex.${num}`} />) : <p className="text-sm text-muted-foreground">No example supplied for this module.</p>}
-              </div>
-            ) : tab === "scenarios" ? (
-              <div>
-                <p className="mb-3 rounded-md bg-[#E4F8F9] px-3 py-2 text-xs text-[#1F5F63]">Scenario metadata (names, descriptions, assumptions) is saved with Module 1. Scenario figures are supplied values; the Studio does not compute scenario results.</p>
-                <FieldEditor value={scen} example={plan.scenarios.length ? plan.scenarios : [{code:"",name:"",type:"",description:"",is_primary:false,locked:false}]} readOnly={!editable || pending} path="scenarios" onChange={(v) => { setScen(v); setDirty(true); }} />
+                {meaningful(mod.example) ? (num === 2 && isStrategyV1(mod.example) ? <StrategyEditor value={mod.example as Json} readOnly /> : num === 3 && isAssessmentV1(mod.example) ? <AssessmentEditor value={mod.example as Json} readOnly /> : View ? <View data={mod.example} /> : <FieldEditor value={mod.example as Json} example={mod.example} readOnly path={`ex.${num}`} />) : <p className="text-sm text-muted-foreground">No example supplied for this module.</p>}
               </div>
             ) : (
               <div>
                 {frozen && <p className="mb-3 rounded-md bg-muted/60 px-3 py-2 text-xs text-muted-foreground">{status === "approved" ? "Approved. Fields are frozen until a reviewer reopens the module." : "Ready for review. Fields are frozen until a reviewer approves or returns it."}</p>}
-                {strat ? <StrategyEditor value={draft} readOnly={!editable || pending} onChange={(v) => { setDraft(v); setDirty(true); }} /> : assess ? <AssessmentEditor value={draft} readOnly={!editable || pending} onChange={(v) => { setDraft(v); setDirty(true); }} /> : <FieldEditor value={draft} example={plan.kind === "real" ? mod.data : mod.example} readOnly={!editable || pending} path={`m${num}`} onChange={(v) => { setDraft(v); setDirty(true); }} />}
+                {View && <div className="mb-5 space-y-4"><View data={draft} />{num === 5 && <WhatIfSimulator />}</div>}
+                {View ? <Collapse title={editable ? "Edit supplied figures" : "All supplied fields"} sub="Full data tables; values are stored as entered" testid="collapse-edit-tables"><FieldEditor value={draft} example={plan.kind === "real" ? mod.data : mod.example} readOnly={!editable || pending} path={`m${num}`} onChange={(v) => { setDraft(v); setDirty(true); }} /></Collapse> : strat ? <StrategyEditor value={draft} readOnly={!editable || pending} onChange={(v) => { setDraft(v); setDirty(true); }} /> : assess ? <AssessmentEditor value={draft} readOnly={!editable || pending} onChange={(v) => { setDraft(v); setDirty(true); }} /> : <FieldEditor value={draft} example={plan.kind === "real" ? mod.data : mod.example} readOnly={!editable || pending} path={`m${num}`} onChange={(v) => { setDraft(v); setDirty(true); }} />}
               </div>
             )}
           </Card>
@@ -267,10 +273,11 @@ export default function ModulePage() {
           <div className="flex flex-wrap justify-end gap-2">
             <Btn variant="ghost" onClick={() => setPendingNav(null)} data-testid="button-stay">Stay</Btn>
             <Btn variant="outline" onClick={() => { const h = pendingNav!; setDirty(false); setPendingNav(null); initFor.current = ""; navigate(h); }} data-testid="button-discard">Discard and leave</Btn>
-            {editable && <Btn onClick={() => { const h = pendingNav!; setPendingNav(null); update.mutate({ id: planId, number: mod.number, data: { action: "save", updatedAt: stamp, data: draft as Record<string, unknown>, ...(mod.number === 1 && Array.isArray(scen) ? { scenarios: scen as unknown[] } : {}) } }, { onSuccess: () => navigate(h) }); }} data-testid="button-save-leave">Save and leave</Btn>}
+            {editable && <Btn onClick={() => { const h = pendingNav!; setPendingNav(null); update.mutate({ id: planId, number: mod.number, data: { action: "save", updatedAt: stamp, data: draft as Record<string, unknown>, ...(mod.number === 1 ? { scenarios: normalizeScenarios(scen).fixed as unknown[] } : {}) } }, { onSuccess: () => navigate(h) }); }} data-testid="button-save-leave">Save and leave</Btn>}
           </div>
         </DialogContent>
       </Dialog>
     </div>
+    </SourceProvider>
   );
 }

@@ -6,4 +6,4 @@ export const baselineSchema=z.object({
   variables:z.record(z.string(),z.number().finite().nullable()).refine(v=>Object.keys(v).length===inputVariables.length&&inputVariables.every(d=>d.id in v),"Supply the workbook variable set"),
   variableNotes:notes(inputVariables.map(v=>v.id)),
   indicatorNotes:notes(workbook.indicators.map(i=>i.id)),importedWorkbook:z.boolean(),
-});
+}).passthrough();

@@ -36,14 +36,18 @@ export function errMsg(e: unknown, fallback = "Something went wrong.") {
   return anyE?.data?.error || anyE?.message || fallback;
 }
 
+/** Only strict ISO dates are formatted; ranges like "22-24" are shown verbatim. */
+const ISO = /^\d{4}-\d{2}-\d{2}(T[\d:.]+(Z|[+-]\d{2}:?\d{2})?)?$/;
 export function fmtDate(s?: string | null) {
   if (!s) return "—";
+  if (!ISO.test(s)) return s;
   const d = new Date(s);
   if (isNaN(d.getTime())) return s;
   return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 }
 export function fmtDateTime(s?: string | null) {
   if (!s) return "—";
+  if (!ISO.test(s)) return s;
   const d = new Date(s);
   if (isNaN(d.getTime())) return s;
   return d.toLocaleString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });

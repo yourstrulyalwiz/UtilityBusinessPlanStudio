@@ -48,7 +48,6 @@ router.get(["/utilities/:id","/plans/:planId"],async(req,res)=>{
   }else id=uuid(req.params.id);
   await accessibleUtility(p,id);
   const utility=(await utilityRows(p)).find(r=>r.id===id)!;
-  const a=await db.select({row:planActivities,def:activities}).from(planActivities).innerJoin(activities,eq(activities.code,planActivities.activityCode)).where(eq(planActivities.planId,utility.planId)).orderBy(activities.code);
   const team=await db.select({id:members.id,fullName:people.fullName,email:people.email,memberRole:members.memberRole}).from(members).innerJoin(people,eq(people.id,members.userId)).where(eq(members.utilityId,id));
   res.json(api.GetUtilityResponse.parse({utility,activities:[],members:team,audit:["admin","ttl"].includes(p.role)?await auditRows(p,id):[]}));
 });

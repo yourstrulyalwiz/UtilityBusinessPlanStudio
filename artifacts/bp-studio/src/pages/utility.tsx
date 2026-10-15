@@ -84,7 +84,7 @@ export default function UtilityPage() {
             </div>
             <div className="mt-1 text-sm text-muted-foreground">{u.serviceArea} · {u.countryName} · {u.region}</div>
             <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 text-sm sm:grid-cols-4">
-              {[["TTL", u.ttlName], ["Plan year", String(u.planYear)], ["Currency", u.currency], ["WB project", u.wbProjectId || "—"], ["Plan status", humanize(u.planStatus)], ["Current module", u.currentPhase || "—"], ["Registered", fmtDate(u.createdAt)]].map(([k, v]) => (
+              {[["TTL", u.ttlName], ["Plan year", u.planId && u.planYear ? String(u.planYear) : "–"], ["Currency", u.currency], ["WB project", u.wbProjectId || "—"], ["Plan status", u.planId ? humanize(u.planStatus) : "No business plan"], ["Current module", u.currentPhase || "—"], ["Registered", fmtDate(u.createdAt)]].map(([k, v]) => (
                 <div key={k}><dt className="text-[11px] uppercase tracking-wider text-muted-foreground">{k}</dt><dd className="mt-0.5 font-medium text-[#323D4F]">{v}</dd></div>
               ))}
             </dl>
@@ -94,10 +94,10 @@ export default function UtilityPage() {
               <div className="flex justify-between text-xs"><span className="text-muted-foreground">Reviewed modules</span><span className="font-semibold text-[#323D4F] tnum">{Math.round(u.progress)}%</span></div>
               <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white"><div className="h-full rounded-full bg-gradient-to-r from-[#127A80] to-[#1ED3D9]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div>
             </div>
-            <Tooltip>
+            {u.planId && <Tooltip>
               <TooltipTrigger asChild><a href={`/api/plans/${u.planId}/deck`} className="flex h-10 w-full items-center justify-center gap-2 rounded-lg border bg-white text-sm font-medium text-[#323D4F] hover:bg-muted" data-testid="button-deck"><FileText className="h-4 w-4" /> Registry summary deck</a></TooltipTrigger>
               <TooltipContent>Registry information only. This is not a complete business plan; use Module 8 outputs for module data.</TooltipContent>
-            </Tooltip>
+            </Tooltip>}
             {me.role === "admin" && <Btn variant="navy" onClick={() => { setForm({ name: u.name, shortName: u.shortName, serviceArea: u.serviceArea, ttlUserId: u.ttlUserId, wbProjectId: u.wbProjectId, status: u.status === "archived" ? "archived" : "active", logoPath: u.logoPath }); setEditing(true); }} data-testid="button-edit-utility"><Pencil className="h-4 w-4" /> Edit details</Btn>}
           </div>
         </div>
@@ -105,7 +105,7 @@ export default function UtilityPage() {
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
         <div>
-          {mp.isLoading ? <div className="h-96 animate-pulse rounded-xl border bg-card" /> : mp.isError || !mp.data ? <Card><ErrorState message={errMsg(mp.error, "Module plan unavailable.")} onRetry={() => mp.refetch()} /></Card> : <ModuleOverview plan={mp.data} />}
+          {!wfPlanId && q.data ? <Card data-testid="state-no-plan"><Empty icon={<FileText className="h-6 w-6" />} title="No business plan" body="This utility has no business plan. Its registry details, team and history remain available. No plan is created automatically." /></Card> : mp.isLoading ? <div className="h-96 animate-pulse rounded-xl border bg-card" /> : mp.isError || !mp.data ? <Card><ErrorState message={errMsg(mp.error, "Module plan unavailable.")} onRetry={() => mp.refetch()} /></Card> : <ModuleOverview plan={mp.data} />}
         </div>
 
         <div className="space-y-6">

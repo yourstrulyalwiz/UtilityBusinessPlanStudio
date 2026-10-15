@@ -40,7 +40,7 @@ export async function accessibleUtility(p:StudioPerson,id:string,writeTeam=false
 }
 export async function utilityRows(p:StudioPerson){
   let rows=await db.select({u:utilities,p:plans,c:countries,t:people}).from(utilities)
-    .innerJoin(plans,eq(plans.utilityId,utilities.id)).innerJoin(countries,eq(countries.iso3,utilities.countryIso3))
+    .leftJoin(plans,eq(plans.utilityId,utilities.id)).innerJoin(countries,eq(countries.iso3,utilities.countryIso3))
     .innerJoin(people,eq(people.id,utilities.ttlUserId)).orderBy(desc(utilities.createdAt));
   if(p.role==="ttl") rows=rows.filter(r=>r.u.ttlUserId===p.id);
   else if(p.role!=="admin"){
@@ -48,13 +48,13 @@ export async function utilityRows(p:StudioPerson){
     const ids=new Set(assignments.map(m=>m.id)); rows=rows.filter(r=>ids.has(r.u.id));
   }
   const stateRows=rows.length?await db.select({planId:planModules.planId,number:planModules.number,status:planModules.status})
-    .from(planModules).where(inArray(planModules.planId,rows.map(r=>r.p.id))).orderBy(planModules.number):[];
+    .from(planModules).where(inArray(planModules.planId,rows.flatMap(r=>r.p?[r.p.id]:[]))).orderBy(planModules.number):[];
   return rows.map(({u,p:plan,c,t})=>({
     id:u.id,name:u.name,shortName:u.shortName,countryIso3:u.countryIso3,countryName:c.name,region:c.region,
-    serviceArea:u.serviceArea,ttlUserId:t.id,ttlName:t.fullName,planId:plan.id,planYear:plan.planYear,currency:plan.currency,
-    status:u.status,planStatus:plan.status,progress:Number(plan.progress),currentPhase:
-      `M${stateRows.find(r=>r.planId===plan.id&&r.status!=="approved")?.number??8}`,createdAt:u.createdAt.toISOString(),
-    uofCompletionDate:plan.uofCompletionDate,wbProjectId:u.wbProjectId,logoPath:u.logoPath,
+    serviceArea:u.serviceArea,ttlUserId:t.id,ttlName:t.fullName,planId:plan?.id??"",planYear:plan?.planYear??0,currency:plan?.currency??"",
+    status:u.status,planStatus:plan?.status??"not_started",progress:Number(plan?.progress??0),currentPhase:
+      plan?`M${stateRows.find(r=>r.planId===plan.id&&r.status!=="approved")?.number??8}`:"No business plan",createdAt:u.createdAt.toISOString(),
+    uofCompletionDate:plan?.uofCompletionDate??null,wbProjectId:u.wbProjectId,logoPath:u.logoPath,
   }));
 }
 export function filterUtilities(rows:Awaited<ReturnType<typeof utilityRows>>,query:Record<string,unknown>){

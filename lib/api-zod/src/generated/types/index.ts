@@ -52,6 +52,7 @@ export * from './personUpdate';
 export * from './personUpdateRole';
 export * from './phase';
 export * from './planActivity';
+export * from './planDeletion';
 export * from './planModule';
 export * from './planModuleData';
 export * from './planModuleExample';
