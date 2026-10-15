@@ -1,0 +1,1082 @@
+{
+  "source": "Indicadores_TCWS_2024_1792026762156.xlsx",
+  "year": 2024,
+  "indicators": [
+    {
+      "id": "i5",
+      "row": 5,
+      "dimension": "Reliable",
+      "name": "Continuity (hours/day on average)",
+      "unit": "h/día",
+      "formula": "Horas promedio de servicio",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$19)),\"Sin dato\",Variables!$C$19),\"Sin dato\")",
+      "cachedValue": 23.0,
+      "cachedLevel": 4.0,
+      "direction": ">",
+      "thresholds": [
+        8.0,
+        15.0,
+        20.0,
+        24.0
+      ],
+      "bands": [
+        "< 8",
+        "8 – 15",
+        "15 – 20",
+        "20 – 24",
+        "≥ 24"
+      ]
+    },
+    {
+      "id": "i6",
+      "row": 6,
+      "dimension": "Reliable",
+      "name": "Continuity (% of customers with 24/7 supply)",
+      "unit": "%",
+      "formula": "Clientes con 24/7 / total",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$18)),\"Sin dato\",Variables!$C$18),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": ">",
+      "thresholds": [
+        0.05,
+        0.25,
+        0.6,
+        1.0
+      ],
+      "bands": [
+        "< 5%",
+        "5% – 25%",
+        "25% – 60%",
+        "60% – 100%",
+        "≥ 100%"
+      ]
+    },
+    {
+      "id": "i7",
+      "row": 7,
+      "dimension": "Reliable",
+      "name": "Availability (l/pc/day)",
+      "unit": "l/hab/día",
+      "formula": "Ventas domésticas × 1000 / 365 / población servida",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$17) ,Variables!$C$56=\"\"),\"Sin dato\",Variables!$C$17*1000/365/Variables!$C$56),\"Sin dato\")",
+      "cachedValue": 179.551858759525,
+      "cachedLevel": 4.0,
+      "direction": ">",
+      "thresholds": [
+        30.0,
+        50.0,
+        120.0,
+        240.0
+      ],
+      "bands": [
+        "< 30",
+        "30 – 50",
+        "50 – 120",
+        "120 – 240",
+        "≥ 240"
+      ]
+    },
+    {
+      "id": "i8",
+      "row": 8,
+      "dimension": "Reliable",
+      "name": "Fecal sludge emptying services provided in less than 24 hours",
+      "unit": "%",
+      "formula": "Vaciados en < 24 h / solicitados",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$26)),\"Sin dato\",Variables!$C$26),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": ">",
+      "thresholds": [
+        0.3,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "bands": [
+        "< 30%",
+        "30% – 50%",
+        "50% – 75%",
+        "75% – 90%",
+        "≥ 90%"
+      ]
+    },
+    {
+      "id": "i9",
+      "row": 9,
+      "dimension": "Safe",
+      "name": "Drinking Water Quality (%)",
+      "unit": "%",
+      "formula": "Muestras conformes / total",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$20)),\"Sin dato\",Variables!$C$20),\"Sin dato\")",
+      "cachedValue": 0.9,
+      "cachedLevel": 3.0,
+      "direction": ">",
+      "thresholds": [
+        0.5,
+        0.85,
+        0.95,
+        0.97
+      ],
+      "bands": [
+        "< 50%",
+        "50% – 85%",
+        "85% – 95%",
+        "95% – 97%",
+        "≥ 97%"
+      ]
+    },
+    {
+      "id": "i10",
+      "row": 10,
+      "dimension": "Safe",
+      "name": "Wastewater and fecal sludge treatment (%)",
+      "unit": "%",
+      "formula": "Tratado / recolectado",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$25) ,ISBLANK(Variables!$C$24)),\"Sin dato\",Variables!$C$25/Variables!$C$24),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": ">",
+      "thresholds": [
+        0.3,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "bands": [
+        "< 30%",
+        "30% – 50%",
+        "50% – 75%",
+        "75% – 90%",
+        "≥ 90%"
+      ]
+    },
+    {
+      "id": "i11",
+      "row": 11,
+      "dimension": "Inclusive",
+      "name": "Drinking Water Coverage (%)",
+      "unit": "%",
+      "formula": "Población servida con agua / población",
+      "excelFormula": "IFERROR(IF(OR(Variables!$C$56=\"\" ,ISBLANK(Variables!$C$6)),\"Sin dato\",Variables!$C$56/Variables!$C$6),\"Sin dato\")",
+      "cachedValue": 0.270966830003769,
+      "cachedLevel": 1.0,
+      "direction": ">",
+      "thresholds": [
+        0.5,
+        0.75,
+        0.85,
+        0.95
+      ],
+      "bands": [
+        "< 50%",
+        "50% – 75%",
+        "75% – 85%",
+        "85% – 95%",
+        "≥ 95%"
+      ]
+    },
+    {
+      "id": "i12",
+      "row": 12,
+      "dimension": "Inclusive",
+      "name": "Sanitation Coverage (%)",
+      "unit": "%",
+      "formula": "Población con saneamiento / población",
+      "excelFormula": "IFERROR(IF(OR(Variables!$C$57=\"\" ,ISBLANK(Variables!$C$6)),\"Sin dato\",Variables!$C$57/Variables!$C$6),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": ">",
+      "thresholds": [
+        0.1,
+        0.2,
+        0.5,
+        0.8
+      ],
+      "bands": [
+        "< 10%",
+        "10% – 20%",
+        "20% – 50%",
+        "50% – 80%",
+        "≥ 80%"
+      ]
+    },
+    {
+      "id": "i13",
+      "row": 13,
+      "dimension": "Responsive",
+      "name": "Percent Customers Satisfied with Service (past 2 years)",
+      "unit": "%",
+      "formula": "Encuesta de satisfacción",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$32)),\"Sin dato\",Variables!$C$32),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": ">",
+      "thresholds": [
+        0.2,
+        0.4,
+        0.55,
+        0.7
+      ],
+      "bands": [
+        "< 20%",
+        "20% – 40%",
+        "40% – 55%",
+        "55% – 70%",
+        "≥ 70%"
+      ]
+    },
+    {
+      "id": "i14",
+      "row": 14,
+      "dimension": "Responsive",
+      "name": "Percent of grievances satisfactorily resolved within 7 days",
+      "unit": "%",
+      "formula": "Resueltos en 7 días / recibidos",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$31)),\"Sin dato\",Variables!$C$31),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": ">",
+      "thresholds": [
+        0.1,
+        0.25,
+        0.5,
+        0.7
+      ],
+      "bands": [
+        "< 10%",
+        "10% – 25%",
+        "25% – 50%",
+        "50% – 70%",
+        "≥ 70%"
+      ]
+    },
+    {
+      "id": "i15",
+      "row": 15,
+      "dimension": "Responsive",
+      "name": "Percentage of sewer blockage complaints addressed within 48 hours",
+      "unit": "%",
+      "formula": "Atendidas en 48 h / recibidas",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$27)),\"Sin dato\",Variables!$C$27),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": ">",
+      "thresholds": [
+        0.3,
+        0.5,
+        0.75,
+        0.9
+      ],
+      "bands": [
+        "< 30%",
+        "30% – 50%",
+        "50% – 75%",
+        "75% – 90%",
+        "≥ 90%"
+      ]
+    },
+    {
+      "id": "i16",
+      "row": 16,
+      "dimension": "Commercial Management",
+      "name": "Collection rate (%)",
+      "unit": "%",
+      "formula": "Cobranza / ingresos",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$36) ,ISBLANK(Variables!$C$35)),\"Sin dato\",Variables!$C$36/Variables!$C$35),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": ">",
+      "thresholds": [
+        0.6,
+        0.7,
+        0.9,
+        0.95
+      ],
+      "bands": [
+        "< 60%",
+        "60% – 70%",
+        "70% – 90%",
+        "90% – 95%",
+        "≥ 95%"
+      ]
+    },
+    {
+      "id": "i17",
+      "row": 17,
+      "dimension": "Commercial Management",
+      "name": "Metered water connections (%)",
+      "unit": "%",
+      "formula": "Conexiones con medidor / total",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$11) ,ISBLANK(Variables!$C$10)),\"Sin dato\",Variables!$C$11/Variables!$C$10),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": ">",
+      "thresholds": [
+        0.25,
+        0.6,
+        0.85,
+        0.95
+      ],
+      "bands": [
+        "< 25%",
+        "25% – 60%",
+        "60% – 85%",
+        "85% – 95%",
+        "≥ 95%"
+      ]
+    },
+    {
+      "id": "i18",
+      "row": 18,
+      "dimension": "Commercial Management",
+      "name": "Service Complaints Resolved",
+      "unit": "%",
+      "formula": "Resueltas / recibidas",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$33)),\"Sin dato\",Variables!$C$33),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": ">",
+      "thresholds": [
+        0.6,
+        0.8,
+        0.9,
+        0.95
+      ],
+      "bands": [
+        "< 60%",
+        "60% – 80%",
+        "80% – 90%",
+        "90% – 95%",
+        "≥ 95%"
+      ]
+    },
+    {
+      "id": "i19",
+      "row": 19,
+      "dimension": "Technical Operations",
+      "name": "NRW (Liters/Connection/Hour)",
+      "unit": "l/con/h",
+      "formula": "Volumen NRW × 1000 / 365 / conexiones / horas de servicio",
+      "excelFormula": "IFERROR(IF(OR(Variables!$C$58=\"\" ,ISBLANK(Variables!$C$10) ,ISBLANK(Variables!$C$19)),\"Sin dato\",Variables!$C$58*1000/365/Variables!$C$10/Variables!$C$19),\"Sin dato\")",
+      "cachedValue": 16.1504141908306,
+      "cachedLevel": 3.0,
+      "direction": "<",
+      "thresholds": [
+        50.0,
+        25.0,
+        12.0,
+        6.0
+      ],
+      "bands": [
+        "> 50",
+        "25 – 50",
+        "12 – 25",
+        "6 – 12",
+        "≤ 6"
+      ]
+    },
+    {
+      "id": "i20",
+      "row": 20,
+      "dimension": "Technical Operations",
+      "name": "Non-Revenue Water (%)",
+      "unit": "%",
+      "formula": "(Producido − vendido) / producido",
+      "excelFormula": "IFERROR(IF(OR(Variables!$C$58=\"\" ,ISBLANK(Variables!$C$15)),\"Sin dato\",Variables!$C$58/Variables!$C$15),\"Sin dato\")",
+      "cachedValue": 0.31331592689295,
+      "cachedLevel": 1.0,
+      "direction": "<",
+      "thresholds": [
+        0.3,
+        0.2,
+        0.1,
+        0.05
+      ],
+      "bands": [
+        "> 30%",
+        "20% – 30%",
+        "10% – 20%",
+        "5% – 10%",
+        "≤ 5%"
+      ]
+    },
+    {
+      "id": "i21",
+      "row": 21,
+      "dimension": "Technical Operations",
+      "name": "Sewer Blockages (blockages/100km)",
+      "unit": "obstr./100 km",
+      "formula": "Obstrucciones / km de red × 100",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$29) ,ISBLANK(Variables!$C$28)),\"Sin dato\",Variables!$C$29/Variables!$C$28*100),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": "<",
+      "thresholds": [
+        30.0,
+        20.0,
+        10.0,
+        5.0
+      ],
+      "bands": [
+        "> 30",
+        "20 – 30",
+        "10 – 20",
+        "5 – 10",
+        "≤ 5"
+      ]
+    },
+    {
+      "id": "i22",
+      "row": 22,
+      "dimension": "Financial Management",
+      "name": "EBITDA Margin",
+      "unit": "%",
+      "formula": "(Ingresos − gastos operativos) / ingresos",
+      "excelFormula": "IFERROR(IF(OR(Variables!$C$59=\"\" ,ISBLANK(Variables!$C$35)),\"Sin dato\",Variables!$C$59/Variables!$C$35),\"Sin dato\")",
+      "cachedValue": -0.140684663326805,
+      "cachedLevel": 1.0,
+      "direction": ">",
+      "thresholds": [
+        0.0,
+        0.05,
+        0.19,
+        0.3
+      ],
+      "bands": [
+        "< 0%",
+        "0% – 5%",
+        "5% – 19%",
+        "19% – 30%",
+        "≥ 30%"
+      ]
+    },
+    {
+      "id": "i23",
+      "row": 23,
+      "dimension": "Financial Management",
+      "name": "Operation Cost Coverage (%)",
+      "unit": "%",
+      "formula": "Ingresos / gastos operativos",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$35) ,ISBLANK(Variables!$C$38)),\"Sin dato\",Variables!$C$35/Variables!$C$38),\"Sin dato\")",
+      "cachedValue": 0.876666472470579,
+      "cachedLevel": 3.0,
+      "direction": ">",
+      "thresholds": [
+        0.6,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "bands": [
+        "< 60%",
+        "60% – 80%",
+        "80% – 90%",
+        "90% – 100%",
+        "≥ 100%"
+      ]
+    },
+    {
+      "id": "i24",
+      "row": 24,
+      "dimension": "Talent Management",
+      "name": "Employees per 1000 connections (water and/or wastewater)",
+      "unit": "emp/1000 con",
+      "formula": "Empleados / (conexiones agua + alcantarillado) × 1000",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$48) ,ISBLANK(Variables!$C$10)),\"Sin dato\",Variables!$C$48/(Variables!$C$10+N(Variables!$C$22))*1000),\"Sin dato\")",
+      "cachedValue": 1.39297322395914,
+      "cachedLevel": 5.0,
+      "direction": "<",
+      "thresholds": [
+        10.0,
+        6.0,
+        5.0,
+        3.0
+      ],
+      "bands": [
+        "> 10",
+        "6 – 10",
+        "5 – 6",
+        "3 – 5",
+        "≤ 3"
+      ]
+    },
+    {
+      "id": "i25",
+      "row": 25,
+      "dimension": "Talent Management",
+      "name": "Employee Turnover Rate",
+      "unit": "%",
+      "formula": "Empleados que se retiraron / empleados",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$54) ,ISBLANK(Variables!$C$48)),\"Sin dato\",Variables!$C$54/Variables!$C$48),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": "<",
+      "thresholds": [
+        0.1,
+        0.07,
+        0.05,
+        0.03
+      ],
+      "bands": [
+        "> 10%",
+        "7% – 10%",
+        "5% – 7%",
+        "3% – 5%",
+        "≤ 3%"
+      ]
+    },
+    {
+      "id": "i26",
+      "row": 26,
+      "dimension": "Talent Management",
+      "name": "HR Costs as % of Total Operating Costs",
+      "unit": "%",
+      "formula": "Costo de personal / gastos operativos",
+      "excelFormula": "IFERROR(IF(OR(ISBLANK(Variables!$C$40) ,ISBLANK(Variables!$C$38)),\"Sin dato\",Variables!$C$40/Variables!$C$38),\"Sin dato\")",
+      "cachedValue": "Sin dato",
+      "cachedLevel": "Sin dato",
+      "direction": "",
+      "thresholds": [
+        "",
+        "",
+        "",
+        ""
+      ],
+      "bands": [
+        "Informativo (sin rangos de referencia)",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "id": "v6",
+      "row": 6,
+      "group": "Alcance del servicio",
+      "name": "Number of people in service area (last census)",
+      "unit": "personas",
+      "value": 106120.0,
+      "origin": "Documento",
+      "note": "Censo PSA 2024, toda la ciudad. TCWS atiende 10 de 15 barangays (aprox. 27,000 personas).",
+      "excelFormula": null
+    },
+    {
+      "id": "v7",
+      "row": 7,
+      "group": "Alcance del servicio",
+      "name": "Average number of persons in one family",
+      "unit": "personas",
+      "value": 4.5,
+      "origin": "Documento",
+      "note": "Tamaño medio del hogar (Tabla 20).",
+      "excelFormula": null
+    },
+    {
+      "id": "v8",
+      "row": 8,
+      "group": "Alcance del servicio",
+      "name": "Average number of people served per public standpipe",
+      "unit": "personas",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "No se reportan surtidores públicos.",
+      "excelFormula": null
+    },
+    {
+      "id": "v10",
+      "row": 10,
+      "group": "Servicio de agua",
+      "name": "Total water service connections",
+      "unit": "número",
+      "value": 6461.0,
+      "origin": "Documento",
+      "note": "Conexiones reales 2024 (nota Tabla 21). Ago-2025: 6,084.",
+      "excelFormula": null
+    },
+    {
+      "id": "v11",
+      "row": 11,
+      "group": "Servicio de agua",
+      "name": "Total water service connections with installed water meter",
+      "unit": "número",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "Los medidores los compra el usuario; no se reporta el número.",
+      "excelFormula": null
+    },
+    {
+      "id": "v12",
+      "row": 12,
+      "group": "Servicio de agua",
+      "name": "Total water connections with installed Smart Meters",
+      "unit": "número",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v13",
+      "row": 13,
+      "group": "Servicio de agua",
+      "name": "Total active domestic water connections",
+      "unit": "número",
+      "value": 6390.0,
+      "origin": "Estimado",
+      "note": "6,461 × 98.9% (participación residencial 6,017/6,084 de 2025).",
+      "excelFormula": null
+    },
+    {
+      "id": "v14",
+      "row": 14,
+      "group": "Servicio de agua",
+      "name": "Total number of public water sources or standpipes",
+      "unit": "número",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v15",
+      "row": 15,
+      "group": "Servicio de agua",
+      "name": "Total annual produced water volume",
+      "unit": "m³",
+      "value": 2795900.0,
+      "origin": "Estimado",
+      "note": "Sin dato 2024. 7.66 MLD × 365 (promedio ene–jun 2025).",
+      "excelFormula": null
+    },
+    {
+      "id": "v16",
+      "row": 16,
+      "group": "Servicio de agua",
+      "name": "Total annual water sales volume",
+      "unit": "m³",
+      "value": 1919900.0,
+      "origin": "Estimado",
+      "note": "Sin dato 2024. 5.26 MLD × 365 (promedio ene–jun 2025). Facturado 2023: 1,897,357 m³.",
+      "excelFormula": null
+    },
+    {
+      "id": "v17",
+      "row": 17,
+      "group": "Servicio de agua",
+      "name": "Total sales volume to domestic customers",
+      "unit": "m³",
+      "value": 1884500.0,
+      "origin": "Estimado",
+      "note": "6,017 conexiones residenciales × 26.1 m³/mes × 12.",
+      "excelFormula": null
+    },
+    {
+      "id": "v18",
+      "row": 18,
+      "group": "Servicio de agua",
+      "name": "Continuity (% of customers with 24/7 supply)",
+      "unit": "%",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v19",
+      "row": 19,
+      "group": "Servicio de agua",
+      "name": "Continuity (hours/day on average)",
+      "unit": "horas",
+      "value": 23.0,
+      "origin": "Inferido",
+      "note": "Reportado 22 a 24 h/día; se usa el punto medio.",
+      "excelFormula": null
+    },
+    {
+      "id": "v20",
+      "row": 20,
+      "group": "Servicio de agua",
+      "name": "Drinking water quality (% of samples meeting standards)",
+      "unit": "%",
+      "value": 0.9,
+      "origin": "Inferido",
+      "note": "FODA: \"10% de fallas en muestreo\" (norma PNSDW, no OMS).",
+      "excelFormula": null
+    },
+    {
+      "id": "v22",
+      "row": 22,
+      "group": "Aguas residuales y lodos fecales",
+      "name": "Number of domestic properties with wastewater network connection",
+      "unit": "número",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "TCWS no presta servicio de saneamiento.",
+      "excelFormula": null
+    },
+    {
+      "id": "v23",
+      "row": 23,
+      "group": "Aguas residuales y lodos fecales",
+      "name": "Number of properties with septic tank",
+      "unit": "número",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "PPDO reporta 103% de hogares con fosa (cifra inconsistente).",
+      "excelFormula": null
+    },
+    {
+      "id": "v24",
+      "row": 24,
+      "group": "Aguas residuales y lodos fecales",
+      "name": "Wastewater and fecal sludge collected",
+      "unit": "m³",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v25",
+      "row": 25,
+      "group": "Aguas residuales y lodos fecales",
+      "name": "Wastewater and fecal sludge treated",
+      "unit": "m³",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "Planta de lodos de 24 m³/día en desarrollo.",
+      "excelFormula": null
+    },
+    {
+      "id": "v26",
+      "row": 26,
+      "group": "Aguas residuales y lodos fecales",
+      "name": "Fecal sludge emptying provided within 24 hours of request",
+      "unit": "%",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v27",
+      "row": 27,
+      "group": "Aguas residuales y lodos fecales",
+      "name": "Sewer blockage complaints addressed within 48 hours",
+      "unit": "%",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v28",
+      "row": 28,
+      "group": "Aguas residuales y lodos fecales",
+      "name": "Total length of sewer network",
+      "unit": "km",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v29",
+      "row": 29,
+      "group": "Aguas residuales y lodos fecales",
+      "name": "Total number of blockages",
+      "unit": "número",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v31",
+      "row": 31,
+      "group": "Servicio al cliente",
+      "name": "Grievances satisfactorily resolved within 7 days",
+      "unit": "%",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "Solo se definieron metas de tiempo de respuesta.",
+      "excelFormula": null
+    },
+    {
+      "id": "v32",
+      "row": 32,
+      "group": "Servicio al cliente",
+      "name": "Customers satisfied with service (past 2 years)",
+      "unit": "%",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v33",
+      "row": 33,
+      "group": "Servicio al cliente",
+      "name": "Service complaints resolved (resolved / received)",
+      "unit": "%",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v35",
+      "row": 35,
+      "group": "Datos financieros (PhP)",
+      "name": "Total annual revenues",
+      "unit": "PhP",
+      "value": 22887685.65,
+      "origin": "Documento",
+      "note": "Ventas de agua 2024 (Tabla 5). Ingresos totales no reportados.",
+      "excelFormula": null
+    },
+    {
+      "id": "v36",
+      "row": 36,
+      "group": "Datos financieros (PhP)",
+      "name": "Annual payments received from customers (collection)",
+      "unit": "PhP",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "Eficiencia de cobranza no calculada.",
+      "excelFormula": null
+    },
+    {
+      "id": "v37",
+      "row": 37,
+      "group": "Datos financieros (PhP)",
+      "name": "Annual payments received through electronic payments",
+      "unit": "PhP",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "Existen socios de pago en línea; sin montos.",
+      "excelFormula": null
+    },
+    {
+      "id": "v38",
+      "row": 38,
+      "group": "Datos financieros (PhP)",
+      "name": "Operating annual expenses (excl. depreciation & interest)",
+      "unit": "PhP",
+      "value": 26107632.0,
+      "origin": "Documento",
+      "note": "Sin dato 2024. OPEX calculado 2023 (Tabla 16).",
+      "excelFormula": null
+    },
+    {
+      "id": "v39",
+      "row": 39,
+      "group": "Datos financieros (PhP)",
+      "name": "Annual electricity costs",
+      "unit": "PhP",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "Solo proyección 2030: PhP 87.8 M.",
+      "excelFormula": null
+    },
+    {
+      "id": "v40",
+      "row": 40,
+      "group": "Datos financieros (PhP)",
+      "name": "Annual labor costs",
+      "unit": "PhP",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "Solo proyección 2030: PhP 10.4 M.",
+      "excelFormula": null
+    },
+    {
+      "id": "v41",
+      "row": 41,
+      "group": "Datos financieros (PhP)",
+      "name": "Annual other costs",
+      "unit": "PhP",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v42",
+      "row": 42,
+      "group": "Datos financieros (PhP)",
+      "name": "Total invoices received from suppliers",
+      "unit": "PhP",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v43",
+      "row": 43,
+      "group": "Datos financieros (PhP)",
+      "name": "Total electronic invoices received from suppliers",
+      "unit": "PhP",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v45",
+      "row": 45,
+      "group": "Planificación y estrategia",
+      "name": "Adherence to planning schedule",
+      "unit": "%",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v46",
+      "row": 46,
+      "group": "Planificación y estrategia",
+      "name": "Budget adherence",
+      "unit": "%",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v48",
+      "row": 48,
+      "group": "Recursos humanos",
+      "name": "Total number of full-time employees",
+      "unit": "número",
+      "value": 9.0,
+      "origin": "Documento",
+      "note": "Personal de planta (Tabla 6). Con 15 \"job order\" = 24. El texto menciona 11 de planta.",
+      "excelFormula": null
+    },
+    {
+      "id": "v49",
+      "row": 49,
+      "group": "Recursos humanos",
+      "name": "Total number of full-time female employees",
+      "unit": "número",
+      "value": 1.0,
+      "origin": "Documento",
+      "note": "De planta; 6 incluyendo \"job order\".",
+      "excelFormula": null
+    },
+    {
+      "id": "v50",
+      "row": 50,
+      "group": "Recursos humanos",
+      "name": "Total number of managers",
+      "unit": "número",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "Organigrama: jefe de departamento y OIC.",
+      "excelFormula": null
+    },
+    {
+      "id": "v51",
+      "row": 51,
+      "group": "Recursos humanos",
+      "name": "Total number of female managers",
+      "unit": "número",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v52",
+      "row": 52,
+      "group": "Recursos humanos",
+      "name": "Total number of engineers",
+      "unit": "número",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v53",
+      "row": 53,
+      "group": "Recursos humanos",
+      "name": "Total number of female engineers",
+      "unit": "número",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v54",
+      "row": 54,
+      "group": "Recursos humanos",
+      "name": "Number of employees who left during the period",
+      "unit": "número",
+      "value": null,
+      "origin": "Sin dato",
+      "note": "",
+      "excelFormula": null
+    },
+    {
+      "id": "v56",
+      "row": 56,
+      "group": "Variables intermedias (calculadas)",
+      "name": "Population served with water",
+      "unit": "personas",
+      "value": 28755.0,
+      "origin": "Calculado",
+      "note": "Personas/familia × conexiones domésticas + personas/surtidor × surtidores.",
+      "excelFormula": "IF(OR(ISBLANK(Variables!$C$7),ISBLANK(Variables!$C$13)),\"\",Variables!$C$7*Variables!$C$13+N(Variables!$C$8)*N(Variables!$C$14))"
+    },
+    {
+      "id": "v57",
+      "row": 57,
+      "group": "Variables intermedias (calculadas)",
+      "name": "Population served with sanitation",
+      "unit": "personas",
+      "value": null,
+      "origin": "Calculado",
+      "note": "Personas/familia × (conexiones al alcantarillado + fosas sépticas).",
+      "excelFormula": "IF(AND(ISBLANK(Variables!$C$22),ISBLANK(Variables!$C$23)),\"\",Variables!$C$7*(N(Variables!$C$22)+N(Variables!$C$23)))"
+    },
+    {
+      "id": "v58",
+      "row": 58,
+      "group": "Variables intermedias (calculadas)",
+      "name": "Non-revenue water volume",
+      "unit": "m³",
+      "value": 876000.0,
+      "origin": "Calculado",
+      "note": "Producido − vendido.",
+      "excelFormula": "IF(OR(ISBLANK(Variables!$C$15),ISBLANK(Variables!$C$16)),\"\",Variables!$C$15-Variables!$C$16)"
+    },
+    {
+      "id": "v59",
+      "row": 59,
+      "group": "Variables intermedias (calculadas)",
+      "name": "EBITDA",
+      "unit": "PhP",
+      "value": -3219946.35,
+      "origin": "Calculado",
+      "note": "Ingresos − gastos operativos.",
+      "excelFormula": "IF(OR(ISBLANK(Variables!$C$35),ISBLANK(Variables!$C$38)),\"\",Variables!$C$35-Variables!$C$38)"
+    }
+  ],
+  "notes": [
+    "• Año base 2024. Donde el documento no trae el dato de 2024 se usó el más cercano: gastos operativos 2023 y volúmenes producido/vendido de ene–jun 2025 anualizados (ver hoja Variables).",
+    "• Margen EBITDA y cobertura de costos comparan ingresos 2024 con gastos operativos 2023: son aproximados.",
+    "• La cobertura de agua usa la población de toda la ciudad; TCWS solo atiende 10 de 15 barangays, por lo que la cobertura real de su área sería mayor.",
+    "• Empleados por 1,000 conexiones usa 9 empleados de planta; con los 15 \"job order\" (24 en total) el valor sería 3.71 (Nivel 4).",
+    "• \"Sin dato\": el documento no reporta la información necesaria. Al completar la hoja Variables, los indicadores se recalculan solos."
+  ]
+}

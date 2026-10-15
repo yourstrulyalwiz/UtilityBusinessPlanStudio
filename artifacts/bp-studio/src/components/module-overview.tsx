@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import type { ModulePlan } from "@workspace/api-client-react";
 import { ArrowRight, Archive, CheckCircle2, Download, MessageSquareWarning } from "lucide-react";
 import { Card, Pill } from "@/components/kit";
-import { KindBadge, ProvenancePanel } from "@/components/module-context";
+import { KindBadge } from "@/components/module-context";
 import { moduleColor, moduleTone, statusLabel, reviewedCount, apiHref } from "@/lib/modules";
 import { fmtDateTime } from "@/lib/app";
 
@@ -59,7 +59,6 @@ export function ModuleOverview({ plan }: { plan: ModulePlan }) {
         </div>
       </div>
 
-      <ProvenancePanel plan={plan} />
     </div>
   );
 }

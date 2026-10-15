@@ -55,11 +55,16 @@ The user requested importing the Tagbilaran TCWS plan and LGU waterworks indicat
 - Supplied Option B Valle Verde is fictional; Tagbilaran is real preliminary source data. Source imports initialize once and never reset edits.
 - Conversion preserves immutable full legacy plan snapshots and original activity records. Supplied cases load the new Option B files; other authored content is carried forward in related modules for review. No old approval carries forward.
 - Admins can permanently delete a utility after typing its exact name. This also removes all its plans and legacy copies; the dialog advises downloading them first or archiving instead. Accounts and audit history remain. Explicitly deleted supplied examples must not be automatically reseeded.
+- M1 is now the practical utility baseline, using only the uploaded Indicadores_TCWS_2024 workbook indicator/variable definitions and level thresholds. TCWS uses 6,461 connections for 2024; 6,084 is a different-year count, not its replacement. Other utilities start blank rather than borrowing the example's numbers. Preserve workbook approximations and missing values; HR costs has no level bands. Percentages such as operating-cost coverage may legitimately exceed 100%. Old M1 payloads are retained in export context, not shown as active data.
 - Financial entries and scenarios are stored as entered, not recalculated. A full module-data JSON export and basic print-friendly report are available. Automatic modelling, Excel compatibility and polished final Word/PPT documents remain outstanding. PPT is explicitly registry-only.
 - Email delivery is not configured; invitation UI provides an app link and clearly says no email was sent. Decisions notify in-app.
 - Country reference currently includes 217 economies from World Bank Data360 WDI metadata. That response does not supply region mappings or national currencies: region is explicitly Unclassified and USD is the business-plan default, not an assertion about national currency. Complete ISO coverage and authoritative region mappings remain outstanding.
 
 ## User preferences
+
+El usuario hará las pruebas con Tagbilaran City Waterworks System, porque es la utility con la que tiene datos. Primero ajustar esta utility; después de validar los ajustes, adaptar los ejemplos acordadamente.
+
+**Why:** El usuario indicó este orden de trabajo. No sustituir su caso de prueba por ejemplos ficticios ni sobrescribir sus datos durante verificaciones automáticas.
 
 Use the supplied Option B datasets and brand guide, not the earlier institutional workflow. The user expects populated examples and a usable step-by-step authoring tool, not a blank registry with read-only names.
 

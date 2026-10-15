@@ -124,8 +124,8 @@ export default function Portfolio({ admin }: { admin: boolean }) {
 
   return (
     <div>
-      <PageHeader eyebrow={admin ? "Portfolio administration" : me.role === "ttl" ? "Task Team Leader" : "Workspace"} title={admin ? "Global team workspace" : "My utility plans"}
-        description={admin ? "Provision people and utilities, follow every plan's progress and review modules submitted for review." : me.role === "viewer" ? "Plans you can read. Editing is not available for your role." : "The utility business plans you lead or contribute to."}
+      <PageHeader eyebrow={admin ? "Portfolio administration" : me.role === "ttl" ? "Global Water Practice" : "Workspace"} title={admin ? "Global team workspace" : "Portfolio Buiness Plans"}
+        description={admin ? "Provision people and utilities, follow every plan's progress and review modules submitted for review." : me.role === "viewer" ? "Plans you can read. Editing is not available for your role." : "Control panel business and investment plans."}
         actions={admin && <div className="flex flex-wrap gap-2">
           {openAccess && <>
             <Btn variant="outline" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "complete" } })} data-testid="button-demo-complete"><BookOpen className="h-4 w-4" /> Open Valle Verde example</Btn>
@@ -288,9 +288,9 @@ export default function Portfolio({ admin }: { admin: boolean }) {
           )
         ) : (
           <div className={cn("overflow-x-auto transition-opacity", list.isFetching && "opacity-60")}>
-            <table className="w-full min-w-[860px] text-sm">
+            <table className="w-full min-w-[980px] text-sm">
               <thead className="bg-[#323D4F]/[.035] text-xs uppercase tracking-wide text-muted-foreground">
-                <tr><SortH col="name">Utility</SortH><SortH col="country">Country</SortH><SortH col="ttl">TTL</SortH><SortH col="year">Year</SortH><th className="px-4 py-3 text-left font-medium">Module</th><SortH col="progress" className="w-44">Reviewed</SortH><SortH col="status">Status</SortH></tr>
+                <tr><SortH col="name">Utility</SortH><SortH col="country">Country</SortH><SortH col="ttl">TTL</SortH><th className="px-4 py-3 text-left font-medium">Project Number</th><SortH col="year">Year</SortH><th className="px-4 py-3 text-left font-medium">Module</th><SortH col="progress" className="w-44">Reviewed</SortH><SortH col="status">Status</SortH></tr>
               </thead>
               <tbody className="divide-y">
                 {items.map((u) => (
@@ -305,6 +305,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
                     </td>
                     <td className="px-4 py-3"><div className="text-[#323D4F]">{u.countryName}</div><div className="text-xs text-muted-foreground">{u.region}</div></td>
                     <td className="px-4 py-3 text-[#323D4F]">{u.ttlName}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-[#323D4F]" data-testid={`text-project-${u.id}`}>{u.wbProjectId || "-"}</td>
                     <td className="px-4 py-3 tnum">{u.planYear}</td>
                     <td className="px-4 py-3"><span className="inline-flex items-center gap-1.5 text-xs"><span className="h-2 w-2 rounded-full" style={{ background: phaseColor(u.currentPhase) }} />{u.currentPhase || "—"}</span></td>
                     <td className="px-4 py-3"><div className="flex items-center gap-2"><div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full bg-gradient-to-r from-[#127A80] to-[#1ED3D9]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div><span className="w-9 text-right text-xs tnum">{Math.round(u.progress)}%</span></div></td>

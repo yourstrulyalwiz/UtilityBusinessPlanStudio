@@ -2,10 +2,11 @@ import demo from "./demo-option-b.json";
 import real from "./tagbilaran-option-b.json";
 import guidance from "./guidance-option-b.json";
 import catalog from "./lgu-indicators.json";
+import {createBaseline,isBaseline,evaluateBaseline} from "@workspace/baseline";
 
 export { demo, real, guidance, catalog };
 export const moduleDefinitions = [
-  {number:1,title:"Utility profile & planning",description:"Define the service area, team, planning horizon and scenarios."},
+  {number:1,title:"Utility baseline",description:"Review key indicators, performance levels and the editable variables behind them."},
   {number:2,title:"Strategic direction",description:"Describe mission, vision, values and measurable objectives."},
   {number:3,title:"Diagnostic & baseline",description:"Assess service performance, demand, assets, enabling conditions and SWOT."},
   {number:4,title:"Goals, strategies & actions",description:"Connect goals to strategies, costed actions and project charters."},
@@ -21,6 +22,7 @@ export const sourceNames={
   catalog:"indicator_catalog_lgu_waterworks_(1)_1792021268122.json",
 };
 export function exampleFor(kind:string,n:number):Record<string,unknown> {
+  if(n===1)return {...createBaseline(kind==="real")};
   const source=(kind==="real"?real:demo) as Record<string,unknown>;
   return source[`module${n}`] as Record<string,unknown>;
 }
@@ -51,6 +53,7 @@ export const coreFields:Record<number,string[]>={
   6:["current_tariff","Baseline","required_tariff","proposed_tariff"],7:["kpis"],8:["executive_summary"],
 };
 export function moduleReady(number:number,data:Record<string,unknown>) {
+  if(number===1)return isBaseline(data)&&evaluateBaseline(data).valid&&Object.values(data.variables).some(v=>typeof v==="number"&&Number.isFinite(v));
   const keys=coreFields[number]??[];
   // Financial and baseline source templates have alternative field names.
   return [3,5,6].includes(number)?keys.some(k=>meaningfulModule(data[k])):keys.every(k=>meaningfulModule(data[k]));

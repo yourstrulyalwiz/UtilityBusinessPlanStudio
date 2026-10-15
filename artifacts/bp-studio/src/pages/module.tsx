@@ -5,12 +5,13 @@ import {
   useGetModulePlan, getGetModulePlanQueryKey, useUpdateModule, getGetPlanQueryKey, getGetWorkflowQueryKey,
   getListUtilitiesQueryKey, getGetSummaryQueryKey, type ModuleActionAction, type ModulePlan,
 } from "@workspace/api-client-react";
-import { AlertTriangle, ArrowLeft, Calculator, CheckCircle2, ChevronLeft, ChevronRight, Download, Layers, RotateCcw, Save, Send, Undo2 } from "lucide-react";
+import { AlertTriangle, ArrowLeft, Calculator, CheckCircle2, ChevronLeft, ChevronRight, Download, RotateCcw, Save, Send, Undo2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, ErrorState, Pill, Btn, inputCls } from "@/components/kit";
 import { FieldEditor, meaningful, type Json } from "@/components/field-editor";
 import { ModuleHelpButton, HelpRail } from "@/components/module-help";
-import { ProvenancePanel, KindBadge } from "@/components/module-context";
+import { KindBadge } from "@/components/module-context";
+import { BaselineEditor } from "@/components/baseline-editor";
 import { PlanReport } from "@/components/module-report";
 import { useMe, errMsg, fmtDateTime } from "@/lib/app";
 import { moduleColor, moduleTone, statusLabel, reviewedCount, toTopic, isConflict, apiHref } from "@/lib/modules";
@@ -101,7 +102,7 @@ export default function ModulePage() {
   const status = mod?.status ?? "";
   const frozen = status === "ready_for_review" || status === "approved";
   const editable = !!mod && canEdit && !frozen;
-  const canFill = editable && (plan?.kind === "fictional" || plan?.kind === "user");
+  const canFill = editable && num !== 1 && (plan?.kind === "fictional" || plan?.kind === "user");
 
   const run = (action: ModuleActionAction) => {
     if (!mod) return;
@@ -165,7 +166,7 @@ export default function ModulePage() {
               </div>
               <h1 className="mt-2 text-2xl font-semibold tracking-tight text-[#323D4F] md:text-[28px]" data-testid="text-module-title">{mod.title}</h1>
               {mod.description && <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#5B6678]" data-testid="text-module-description">{mod.description}</p>}
-              <div className="mt-4 flex flex-wrap gap-2"><ModuleHelpButton topics={topics} moduleNumber={num} moduleTitle={mod.title} /></div>
+              {num !== 1 && <div className="mt-4 flex flex-wrap gap-2"><ModuleHelpButton topics={topics} moduleNumber={num} moduleTitle={mod.title} /></div>}
               {!canEdit && <div className="mt-4 rounded-lg bg-muted/60 px-4 py-2.5 text-xs text-muted-foreground">Your role has read-only access to this plan.</div>}
               {financial && <p className="mt-4 flex gap-2 rounded-lg border-l-4 border-[#FF6A0D] bg-[#FFF1E8] px-4 py-3 text-xs text-[#9A3A05]" data-testid="text-financial-warning"><Calculator className="mt-0.5 h-4 w-4 shrink-0" /><span><strong>No calculation engine.</strong> Values here are supplied scenario figures, stored as entered. Changing an input does not recalculate revenue requirements, tariffs or any other financial result. Update dependent figures yourself and explain them.</span></p>}
               {mod.feedback && <p className="mt-4 rounded-lg border border-[#FF6A0D]/30 bg-[#FFF1E8] p-4 text-sm text-[#9A3A05]" data-testid="text-feedback"><strong>Latest review comment:</strong> {mod.feedback}</p>}
@@ -179,14 +180,19 @@ export default function ModulePage() {
 
           <Card className="p-5">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-              <div className="flex rounded-lg bg-[#323D4F]/[.06] p-0.5 text-sm" role="tablist">
+              {num !== 1 && <div className="flex rounded-lg bg-[#323D4F]/[.06] p-0.5 text-sm" role="tablist">
                 <button role="tab" aria-selected={tab === "form"} onClick={() => setTab("form")} className={cn("rounded-md px-3 py-1.5", tab === "form" && "bg-white font-medium text-[#323D4F] shadow-sm")} data-testid="tab-form">Your module</button>
-                {num === 1 && <button role="tab" aria-selected={tab === "scenarios"} onClick={() => setTab("scenarios")} className={cn("inline-flex items-center gap-1 rounded-md px-3 py-1.5", tab === "scenarios" && "bg-white font-medium text-[#323D4F] shadow-sm")} data-testid="tab-scenarios"><Layers className="h-3.5 w-3.5" /> Scenarios</button>}
                 <button role="tab" aria-selected={tab === "example"} onClick={() => setTab("example")} className={cn("rounded-md px-3 py-1.5", tab === "example" && "bg-white font-medium text-[#323D4F] shadow-sm")} data-testid="tab-example">{exLabel}</button>
-              </div>
+              </div>}
+              {num === 1 && <h2 className="text-sm font-semibold text-[#323D4F]">Indicators</h2>}
               {canFill && tab === "form" && <Btn variant="outline" className="h-8" disabled={pending} onClick={() => setConfirmFill(true)} data-testid="button-fill-example">Fill with fictional example</Btn>}
             </div>
-            {tab === "example" ? (
+            {num === 1 ? (
+              <div>
+                {frozen && <p className="mb-3 rounded-md bg-muted/60 px-3 py-2 text-xs text-muted-foreground">{status === "approved" ? "Approved. Fields are frozen until a reviewer reopens the module." : "Ready for review. Fields are frozen until a reviewer approves or returns it."}</p>}
+                <BaselineEditor value={draft} readOnly={!editable || pending} onChange={(v) => { setDraft(v as unknown as Json); setDirty(true); }} />
+              </div>
+            ) : tab === "example" ? (
               <div>
                 <div className="mb-4 rounded-md bg-[#FFF1E8] px-3 py-2 text-xs text-[#9A3A05]" data-testid="text-example-note">{plan.kind === "real" ? "Original supplied source data for this module, including gaps and estimates. Read-only." : "Fictional illustrative example. Read-only; replace with your utility's information."} {plan.exampleSource}</div>
                 {meaningful(mod.example) ? <FieldEditor value={mod.example as Json} example={mod.example} readOnly path={`ex.${num}`} /> : <p className="text-sm text-muted-foreground">No example supplied for this module.</p>}
@@ -213,8 +219,6 @@ export default function ModulePage() {
               <a href={apiHref(`/api/plans/${planId}/module-export`)} className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-input bg-white px-3.5 text-sm font-medium text-[#323D4F] hover:bg-muted" data-testid="link-module-export"><Download className="h-4 w-4" /> Export module data (JSON)</a>
             </div>
           </Card>}
-
-          <ProvenancePanel plan={plan} />
 
           <div className="flex items-center justify-between gap-2">
             <Btn variant="outline" disabled={!prev} onClick={() => prev && go(`${base}/modules/${prev.number}`)} data-testid="button-prev-module"><ChevronLeft className="h-4 w-4" /> {prev ? <span className="hidden sm:inline">Module {prev.number}: {prev.title}</span> : "Previous"}{prev && <span className="sm:hidden">M{prev.number}</span>}</Btn>
@@ -244,7 +248,7 @@ export default function ModulePage() {
               {status === "approved" && <Btn variant="outline" className="w-full" disabled={pending} onClick={() => run("reopen")} data-testid="button-reopen"><RotateCcw className="h-4 w-4" /> Reopen</Btn>}
             </div>}
           </Card>
-          <Card className="p-4"><HelpRail key={num} topics={topics} moduleNumber={num} /></Card>
+          {num === 1 ? <Card className="p-4 text-sm"><h3 className="font-semibold">Working with your baseline</h3><ol className="mt-3 list-decimal space-y-3 pl-4 text-muted-foreground"><li>Review indicators and expand their formulas to understand each level.</li><li>Open the variable groups at the end to enter or correct data. Use one consistent reporting period.</li><li>Add analytical notes explaining gaps, estimates and actions.</li><li>Save your draft. Resolve consistency errors before submitting for review.</li></ol><p className="mt-4 text-xs text-muted-foreground">Missing data is not zero. An indicator without reference bands is informational, not rated.</p></Card> : <Card className="p-4"><HelpRail key={num} topics={topics} moduleNumber={num} /></Card>}
         </div>
       </div>
 

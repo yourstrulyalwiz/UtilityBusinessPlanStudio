@@ -177,6 +177,9 @@ importers:
       '@workspace/api-zod':
         specifier: workspace:*
         version: link:../../lib/api-zod
+      '@workspace/baseline':
+        specifier: workspace:*
+        version: link:../../lib/baseline
       '@workspace/db':
         specifier: workspace:*
         version: link:../../lib/db
@@ -243,6 +246,10 @@ importers:
         version: 3.1.0
 
   artifacts/bp-studio:
+    dependencies:
+      '@workspace/baseline':
+        specifier: workspace:*
+        version: link:../../lib/baseline
     devDependencies:
       '@hookform/resolvers':
         specifier: ^3.10.0
@@ -637,6 +644,8 @@ importers:
       zod:
         specifier: 'catalog:'
         version: 3.25.76
+
+  lib/baseline: {}
 
   lib/db:
     dependencies:

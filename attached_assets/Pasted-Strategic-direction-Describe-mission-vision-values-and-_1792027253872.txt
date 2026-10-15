@@ -1,0 +1,227 @@
+Strategic direction
+Describe mission, vision, values and measurable objectives.
+
+Module 2 guidance (4)
+Your module
+Original source
+Saved changes may differ from the original source. Use the Original source tab to compare.
+
+Source
+Loc
+§2.1 Table 7; §2.4.1; §2.5.1
+File
+01
+Values
+1
+Teamwork
+
+2
+Community-based Service
+
+3
+Respect
+
+4
+Dedication
+
+5
+Adaptiveness
+
+6
+Resilience
+
+7
+Innovation
+
+Add row
+Vision
+We want to become a world-class, sustainable waterworks by 2035. We want to achieve highly potable, 24/7 water supply. We see a more effective waterworks company capable of providing reliable and safe/clean water to every household in Tagbilaran City.
+Mission
+Our mission is to provide our customers in 10/15 barangays in Tagbilaran City with safe and reliable water. Our employees are capable and highly trained. We strive to treat every customer fairly and respectfully and address their needs quickly and effectively.
+Gap note
+Owners, achievable and time-bound fields to be completed
+Sign off
+Source
+Loc
+§2.5.1
+File
+01
+Meeting
+Presentation of the preliminary business plan to Mayor Jane Yap (online) during the November 2025 workshop
+Comments
+1
+Balance weaknesses against strengths
+
+2
+Low tariff is the number one weakness; increases must come with better service
+
+3
+Permanent heads for critical assets; digitalize billing
+
+4
+TCWS will not be sold to the private sector
+
+Add row
+Decision
+Value
+Gap note
+Formal approval not recorded
+Objectives
+1
+Code
+OBJ-1
+Owner
+Smart
+Relevant
+Low coverage (33% of service area) and lack of water supply are key weaknesses.
+Specific
+Increase billed volume by expanding to unserved barangays, upgrading pumping stations and replacing inaccurate meters.
+Achievable
+Measurable
+Billed volume (m3/yr) and connections; baseline 1,833,134 m3 (2024), 6,314 connections (2025).
+Time bound
+Title
+Improve billed volume
+
+2
+Code
+OBJ-2
+Owner
+Smart
+Relevant
+NRW above the draft JMC standard (20% or below).
+Specific
+Reduce physical and commercial losses through DMAs, pipe replacement and detection of illegal connections.
+Achievable
+Measurable
+NRW (%) = (production - billed)/production; baseline 31.3% (H1 2025), target 20%.
+Time bound
+Proposed path from demand analysis: 26% by 2030, 20% by 2035 (to be confirmed).
+Title
+Reduce NRW to 20%
+
+3
+Code
+OBJ-3
+Owner
+Smart
+Relevant
+Negative bottom line; tariff revenue is the only source.
+Specific
+Improve collection through disconnection enforcement and staggered AR payments.
+Achievable
+Measurable
+Collection efficiency (%) = collections/billings; target at least 95% (draft JMC). Baseline not available.
+Time bound
+Title
+Improve collection efficiency
+
+4
+Code
+OBJ-4
+Owner
+Smart
+Relevant
+Tariff unchanged since 2016; should-be tariff 17.68 PhP/m3 (2024) vs about 12.5 collected per m3.
+Specific
+Recover costs through ring-fenced LEE accounts and OPEX efficiency.
+Achievable
+Measurable
+Operating ratio = OPEX/operating revenue; baseline 1.13 (2023); target 1.00 or below.
+Time bound
+Title
+Manage cost recovery
+
+5
+Code
+OBJ-5
+Owner
+Smart
+Relevant
+Mayor: tariff increases must be balanced with better service.
+Specific
+Formalize customer service standards for complaints, leaks, illegal tapping, bulletins and new applications.
+Achievable
+Measurable
+Share of cases resolved within the standard time.
+Time bound
+Title
+Manage / improve after-sales service
+
+Add row
+Values previous
+1
+Wisdom
+
+2
+Accomplishment
+
+3
+Teamwork
+
+4
+Energy
+
+5
+Responsibility
+
+6
+Welcoming
+
+7
+Obedience
+
+8
+Respect
+
+9
+Kindness
+
+10
+Service
+
+Add row
+Vision previous
+To manage our organization and water resources to meet evolving regulatory requirements, water supply needs, and customer expectations in the future.
+Mission previous
+Our mission is to provide our customers with safe and reliable water in compliance with regulatory requirements. We strive to treat every customer fairly and respectfully, and to address their needs quickly and effectively.
+Guiding questions used
+Values
+1
+What do we stand for?
+
+2
+What behaviors are important to us?
+
+3
+How will we conduct our activities?
+
+4
+How do we treat our own people and community?
+
+Add row
+Vision
+1
+Where are we going moving forward?
+
+2
+What do we want to achieve in the future?
+
+3
+What kind of future state do we envision?
+
+4
+What impact do we want to leave the community 10-20 years from now?
+
+Add row
+Mission
+1
+What do we do today?
+
+2
+Who do we serve?
+
+3
+What are we trying to accomplish?
+
+Add row

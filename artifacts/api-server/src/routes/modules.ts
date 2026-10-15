@@ -6,6 +6,8 @@ import * as api from "@workspace/api-zod";
 import { actor, accessibleUtility, uuid, HttpError, writeAudit } from "../lib/studio";
 import { moduleWorkflow } from "../lib/module-workflow";
 import { moduleProgress, moduleReady, coreFields, sourceNames } from "../lib/module-definitions";
+import {baselineSchema} from "../lib/baseline-validation";
+import {evaluateBaseline,isBaseline,workbook} from "@workspace/baseline";
 
 const router:IRouter=Router();
 const actionSchema=z.object({
@@ -37,10 +39,17 @@ router.post("/plans/:id/modules/:number",async(req,res)=>{
     if(input.action==="save"||input.action==="submit"){
       if(["ready_for_review","approved"].includes(status))throw new HttpError(409,"Return or reopen this module before editing.");
       data=input.data??data;safeContent(data);if(input.scenarios)safeContent(input.scenarios);
+      if(number===1){
+        data=baselineSchema.parse(data);
+        const result=evaluateBaseline(baselineSchema.parse(data));
+        if(input.action==="submit"&&!result.valid)throw new HttpError(400,result.issues.filter(i=>i.severity==="error").map(i=>i.message).join(" "));
+        if(input.action==="submit"&&!moduleReady(1,data))throw new HttpError(400,"Enter at least one baseline variable before submitting.");
+      }
       if(input.action==="submit"&&!moduleReady(number,data))throw new HttpError(400,`Add the core module information before submitting: ${coreFields[number].join(", ").replaceAll("_"," ")}. Missing-value notes and citations do not count as content.`);
       status=input.action==="submit"?"ready_for_review":"in_progress";
       if(number===1&&input.scenarios!==undefined)await tx.update(modulePlans).set({scenarios:input.scenarios}).where(eq(modulePlans.planId,id));
     }else if(input.action==="approve"){
+      if(number===1&&(!isBaseline(data)||!evaluateBaseline(data).valid))throw new HttpError(400,"Correct baseline inconsistencies before approval.");
       if(status!=="ready_for_review")throw new HttpError(409,"Submit the module for review first.");
       status="approved";
     }else if(input.action==="return"){
@@ -72,6 +81,7 @@ router.get("/plans/:id/module-export",async(req,res)=>{
   res.setHeader("Content-Disposition",`attachment; filename="business-plan-${id}.json"`);
   res.json({format:"Independent eight-module business plan",exportedAt:new Date().toISOString(),
     source:wf.source,context:wf.context,scenarios:wf.scenarios,modules:wf.modules.map(({example,...m})=>m),
+    baselineResults:isBaseline(wf.modules[0]?.data)?{source:workbook.source,...evaluateBaseline(wf.modules[0].data)}:null,
     catalog:wf.catalog,catalogSource:wf.catalogSource,reviewProgress:wf.progress,
     calculationNotice:"Figures are entered or supplied scenario results. Editing inputs does not recalculate a financial model."});
 });

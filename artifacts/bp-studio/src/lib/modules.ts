@@ -5,7 +5,7 @@ export const moduleColor = (n: number) => MODULE_COLORS[(((n - 1) % 8) + 8) % 8]
 
 /** Short names used only where module data has not loaded (e.g. sign-in screen). */
 export const MODULE_SHORT = [
-  "Utility profile and scenarios",
+  "Utility baseline",
   "Vision, mission and objectives",
   "Diagnosis and baseline",
   "Goals, strategies and actions",

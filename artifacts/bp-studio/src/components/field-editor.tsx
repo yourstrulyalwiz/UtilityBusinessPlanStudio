@@ -44,6 +44,9 @@ export function meaningful(v: unknown): boolean {
 const NEUTRAL: Record<string, string> = { uof_element: "Functional area", uof_elements: "Functional areas", uof_maturity: "Maturity assessment", uof_maturity_assessment: "Maturity assessment", uof: "Historical framework reference" };
 export const label = (k: string) => NEUTRAL[k] ?? k.replace(/^_+/, "").replace(/[_-]+/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (c) => c.toUpperCase());
 
+const HIDDEN = /^(source|loc|file|citation|sources|source_file|source_loc|source_ref)$|_(source|loc|file|citation)$/i;
+export const hiddenKey = (k: string) => HIDDEN.test(k);
+
 type Props = { value: Json; example: unknown; onChange?: (v: Json) => void; readOnly?: boolean; path: string; depth?: number };
 
 export function FieldEditor({ value, example, onChange, readOnly, path, depth = 0 }: Props) {
@@ -52,7 +55,7 @@ export function FieldEditor({ value, example, onChange, readOnly, path, depth = 
   if (isObj(example) || (isObj(value) && example === undefined)) {
     const ex = isObj(example) ? example : {};
     const v = isObj(value) ? value : {};
-    const keys = Array.from(new Set([...Object.keys(ex), ...Object.keys(v)]));
+    const keys = Array.from(new Set([...Object.keys(ex), ...Object.keys(v)])).filter((k) => !hiddenKey(k));
     return (
       <div className={cn("grid gap-4", depth > 0 && "sm:grid-cols-2")}>
         {keys.map((k) => {

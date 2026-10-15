@@ -4,6 +4,7 @@ import { phaseSeed, activitySeed } from "./playbook";
 import { seedTestIdentity, openAccessEnabled, testActor } from "./open-access";
 import { migrateModulePlans } from "./module-migration";
 import { seedSuppliedModulePlans } from "./module-seed";
+import { migrateBaseline } from "./baseline-migration";
 
 // Reference definitions only. Never create example users or utility records.
 export async function seedReferenceData(){
@@ -18,4 +19,5 @@ export async function seedReferenceData(){
     const p=await testActor();
     await seedSuppliedModulePlans(p);
   }
+  await migrateBaseline();
 }

@@ -31,6 +31,7 @@
     }
   },
   "references": [
+    {"path":"../../lib/baseline"},
     {
       "path": "../../lib/api-client-react"
     },
