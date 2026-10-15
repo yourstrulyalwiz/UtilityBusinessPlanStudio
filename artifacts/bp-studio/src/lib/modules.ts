@@ -23,6 +23,8 @@ export const STATUS_LABEL: Record<string, string> = {
   approved: "Approved",
 };
 export const statusLabel = (s: string) => STATUS_LABEL[s] ?? s.replace(/_/g, " ").replace(/^./, (c) => c.toUpperCase());
+export const stageProgress = (s: string) => ({ approved: 100, ready_for_review: 75, in_progress: 50 }[s] ?? 0);
+export const PROGRESS_HELP = "Workflow milestones: not started 0%, in progress 50%, ready for review 75%, approved 100%. Overall progress is the average across eight modules; it does not measure data completeness.";
 export function moduleTone(s: string): "neutral" | "blue" | "green" | "amber" | "navy" {
   if (s === "approved") return "green";
   if (s === "ready_for_review") return "navy";

@@ -3,6 +3,7 @@ import { eq, asc } from "drizzle-orm";
 import { accessibleUtility, HttpError } from "./studio";
 import { moduleDefinitions, exampleFor, moduleProgress, catalog, sourceNames } from "./module-definitions";
 import {isBaseline,englishSourceText} from "@workspace/baseline";
+import {workflowProgress} from "./workflow-progress";
 
 function translatedData(data:Record<string,unknown>) {
   if(!isBaseline(data))return data;
@@ -24,7 +25,7 @@ export async function moduleWorkflow(p:StudioPerson,planId:string) {
     planId,utilityName:utility.name,source:`Source: ${record.source}`,exampleSource:`Source: ${record.kind==="real"?sourceNames.real:sourceNames.fictional}`,
     kind:record.kind,context:record.context,scenarios:record.scenarios,
     modules:rows.map(row=>({...moduleDefinitions[row.number-1],status:row.status,data:translatedData(row.data),example:exampleFor(record.kind,row.number),feedback:row.feedback,updatedAt:row.updatedAt.toISOString()})),
-    progress:moduleProgress(rows),canEdit:utility.status!=="archived"&&["admin","ttl","editor"].includes(p.role),
+    progress:workflowProgress(rows),canEdit:utility.status!=="archived"&&["admin","ttl","editor"].includes(p.role),
     canReview:utility.status!=="archived"&&["admin","ttl"].includes(p.role),
     hasLegacyCopy:!!copy,guidance:topics.map(t=>({...t,updatedAt:t.updatedAt.toISOString()})),
     catalog,catalogSource:`Source: ${sourceNames.catalog}`,

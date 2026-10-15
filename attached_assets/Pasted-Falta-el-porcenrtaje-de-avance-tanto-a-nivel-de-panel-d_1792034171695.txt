@@ -1,0 +1,112 @@
+Falta el porcenrtaje de avance tanto a nivel de panel de control como de los M1 a M8. EL documento de r
+
+
+TODA ESTA SECCION DEBE BORRARSE
+Reported history
+Indicator history (reviewed)
+21 metrics · 68 observations
+Service connections – total
+No.
+6,314 in 2025
+•	2020: 2025 = as of December 2025
+•	2021: 2025 = as of December 2025
+•	2022: 2025 = as of December 2025
+•	2023: 2025 = as of December 2025
+•	2024: 2025 = as of December 2025
+•	2025: 2025 = as of December 2025
+Service connections – residential
+No.
+6,254 in 2025
+Service connections – commercial
+No.
+31 in 2025
+Service connections – institutional
+No.
+29 in 2025
+•	2020: Questionnaire shows 27 for 2025 YTD
+•	2021: Questionnaire shows 27 for 2025 YTD
+•	2022: Questionnaire shows 27 for 2025 YTD
+•	2023: Questionnaire shows 27 for 2025 YTD
+•	2024: Questionnaire shows 27 for 2025 YTD
+•	2025: Questionnaire shows 27 for 2025 YTD
+Billed volume
+m3/year
+1,833,134 in 2024
+Billed volume – Jan to Jun 2025
+m3
+•	2025 Jan–Jun: 952,194 m3 (partial period, not plotted)
+Billed volume – City Gov't / DepEd accounts
+m3/year
+74,298 in 2024
+Production volume
+m3/year
+3,049,028 in 2024
+•	2023: 2024 Sep–Dec: several pumping units report zero; production may be under-recorded
+•	2024: 2024 Sep–Dec: several pumping units report zero; production may be under-recorded
+Production volume – Jan to Jun 2025
+m3
+•	2025 Jan–Jun: 1,385,950 m3 (partial period, not plotted)
+Production – average daily
+MLD
+8.35 in 2024
+•	2025 Jan–Jun: 7.66 MLD (partial period, not plotted) · Calculated; 2025 = Jan–Jun
+•	2023: Calculated; 2025 = Jan–Jun
+•	2024: Calculated; 2025 = Jan–Jun
+Non-revenue water (NRW)
+%
+39.9 in 2024
+•	2025 Jan–Jun: 31.3 % (partial period, not plotted) · (Production − Billed) / Production; 2025 = Jan–Jun
+•	2023: (Production − Billed) / Production; 2025 = Jan–Jun
+•	2024: (Production − Billed) / Production; 2025 = Jan–Jun
+NRW – monthly spot check (Dec 2021)
+%
+•	2021 December spot check: 48.33 % (partial period, not plotted) · Billed 160,955 m3 vs produced 311,503 m3 (27 days)
+NRW – monthly spot check (Dec 2022)
+%
+•	2022 December spot check: 53.89 % (partial period, not plotted) · Billed 157,073 m3 vs produced 340,674 m3 (33 days)
+Water collections
+PhP/year
+22,887,685.65 in 2024
+•	2014 Feb–Dec: 8,774,969.36 PhP/year (partial period, not plotted) · 2014 = Feb–Dec; 2015 not reported. The Business Plan reports these figures as "Annual water sales"
+•	2016: 2014 = Feb–Dec; 2015 not reported. The Business Plan reports these figures as "Annual water sales"
+•	2017: 2014 = Feb–Dec; 2015 not reported. The Business Plan reports these figures as "Annual water sales"
+•	2018: 2014 = Feb–Dec; 2015 not reported. The Business Plan reports these figures as "Annual water sales"
+•	2019: 2014 = Feb–Dec; 2015 not reported. The Business Plan reports these figures as "Annual water sales"
+•	2020: 2014 = Feb–Dec; 2015 not reported. The Business Plan reports these figures as "Annual water sales"
+•	2021: 2014 = Feb–Dec; 2015 not reported. The Business Plan reports these figures as "Annual water sales"
+•	2022: 2014 = Feb–Dec; 2015 not reported. The Business Plan reports these figures as "Annual water sales"
+•	2023: 2014 = Feb–Dec; 2015 not reported. The Business Plan reports these figures as "Annual water sales"
+•	2024: 2014 = Feb–Dec; 2015 not reported. The Business Plan reports these figures as "Annual water sales"
+Water collections – Jan to Jul 2025
+PhP
+•	2025 Jan–Jul: 12,036,951.99 PhP (partial period, not plotted) · The Business Plan labels this figure "Jan–Jun 2025"
+Average collection per m3 billed
+PhP/m3
+12.49 in 2024
+•	2020: Collections / billed volume
+•	2021: Collections / billed volume
+•	2022: Collections / billed volume
+•	2023: Collections / billed volume
+•	2024: Collections / billed volume
+Average consumption per connection
+m3/conn/month
+23.6 in 2024
+•	2024: Billed volume / connections / 12 (BP reports 26.1)
+Operating expenses (calculated)
+PhP/year
+26,107,632 in 2023
+•	2020: 2022–2023 marked as calculated OPEX
+•	2021: 2022–2023 marked as calculated OPEX
+•	2022: 2022–2023 marked as calculated OPEX
+•	2023: 2022–2023 marked as calculated OPEX
+Operating ratio (OPEX / revenue)
+ratio
+1.13 in 2023
+•	2023: 26,107,632 / 23,144,634.58
+Pumping units in operation
+No.
+26 in 2025
+•	2025: 26 units (PS 1–28 incl. 11a/11b; PS 6 abandoned, PS 13 not operating); 160.5 HP total; all with production meters
+Staff – permanent / job order
+No.
+•	2025: Matches Business Plan Table 6

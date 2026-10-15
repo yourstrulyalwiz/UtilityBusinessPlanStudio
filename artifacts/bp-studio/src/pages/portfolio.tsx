@@ -199,7 +199,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <Tile testid="tile-utilities" label="Total utilities" value={String(s.utilities)} sub="Show all in registry" accent="#323D4F" onClick={() => { setQInput(""); setF(EMPTY); setPage(1); toTable(); }} />
                 <Tile testid="tile-countries" label="Distinct countries" value={String(s.countries)} sub="Sort registry by country" accent="#1ED3D9" onClick={() => { update({ sort: "country", direction: "asc" }); toTable(); }} />
-                <Tile testid="tile-progress" label="Average reviewed modules" value={`${Math.round(s.averageProgress * 10) / 10}%`} sub="Sort by progress" accent="#127A80" onClick={() => { update({ sort: "progress", direction: "desc" }); toTable(); }} />
+                <Tile testid="tile-progress" label="Average workflow progress" value={`${Math.round(s.averageProgress * 10) / 10}%`} sub="Draft 50% · Review 75% · Approved 100%" accent="#127A80" onClick={() => { update({ sort: "progress", direction: "desc" }); toTable(); }} />
                 <Tile testid="tile-completed" label="Completed plans" value={String(s.completed)} sub="Filter to completed" accent="#70AD47" onClick={() => { update({ status: "completed" }); toTable(); }} />
               </div>
               <div className="mt-4 grid gap-4 lg:grid-cols-2">
@@ -291,7 +291,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
           <div className={cn("overflow-x-auto transition-opacity", list.isFetching && "opacity-60")}>
             <table className="w-full min-w-[980px] text-sm">
               <thead className="bg-[#323D4F]/[.035] text-xs uppercase tracking-wide text-muted-foreground">
-                <tr><SortH col="name">Utility</SortH><SortH col="country">Country</SortH><SortH col="ttl">TTL</SortH><th className="px-4 py-3 text-left font-medium">Project Number</th><SortH col="year">Year</SortH><th className="px-4 py-3 text-left font-medium">Module</th><SortH col="progress" className="w-44">Reviewed</SortH><SortH col="status">Status</SortH>{admin && <th className="px-4 py-3 text-right font-medium">Delete</th>}</tr>
+                <tr><SortH col="name">Utility</SortH><SortH col="country">Country</SortH><SortH col="ttl">TTL</SortH><th className="px-4 py-3 text-left font-medium">Project Number</th><SortH col="year">Year</SortH><th className="px-4 py-3 text-left font-medium">Module</th><SortH col="progress" className="w-44">Workflow progress</SortH><SortH col="status">Status</SortH>{admin && <th className="px-4 py-3 text-right font-medium">Delete</th>}</tr>
               </thead>
               <tbody className="divide-y">
                 {items.map((u) => (

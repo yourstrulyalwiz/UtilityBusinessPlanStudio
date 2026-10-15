@@ -27,6 +27,7 @@ import type {
   DemoResult,
   ExportModulePlan200,
   GetLegacyCopy200,
+  GetPlanOutputs200,
   GetTestMode200,
   GuidanceTopicUpdate,
   HealthStatus,
@@ -46,6 +47,8 @@ import type {
   PersonInput,
   PersonUpdate,
   PlanDeletion,
+  PlanOutput,
+  PlanOutputRequest,
   Profile,
   RequestDecision,
   RequestInput,
@@ -93,6 +96,236 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export const getGetPlanOutputsUrl = (id: string,) => {
+
+
+
+
+  return `/api/plans/${id}/outputs`
+}
+
+export const getPlanOutputs = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<GetPlanOutputs200> => {
+
+  return customFetch<GetPlanOutputs200>(getGetPlanOutputsUrl(id),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetPlanOutputsQueryKey = (id: string,) => {
+    return [
+    `/api/plans/${id}/outputs`
+    ] as const;
+    }
+
+
+export const getGetPlanOutputsQueryOptions = <TData = Awaited<ReturnType<typeof getPlanOutputs>>, TError = ErrorType<unknown>>(id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getPlanOutputs>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetPlanOutputsQueryKey(id);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getPlanOutputs>>> = ({ signal }) => getPlanOutputs(id, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: id !== null && id !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getPlanOutputs>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetPlanOutputsQueryResult = NonNullable<Awaited<ReturnType<typeof getPlanOutputs>>>
+export type GetPlanOutputsQueryError = ErrorType<unknown>
+
+
+
+export function useGetPlanOutputs<TData = Awaited<ReturnType<typeof getPlanOutputs>>, TError = ErrorType<unknown>>(
+ id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getPlanOutputs>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetPlanOutputsQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getGeneratePlanOutputUrl = (id: string,) => {
+
+
+
+
+  return `/api/plans/${id}/outputs`
+}
+
+export const generatePlanOutput = async (id: string,
+    planOutputRequest: PlanOutputRequest, options?: Parameters<typeof customFetch>[1]): Promise<PlanOutput> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<PlanOutput>(getGeneratePlanOutputUrl(id),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(planOutputRequest)
+  }
+);}
+
+
+
+
+
+export const getGeneratePlanOutputMutationKey = () => ['generatePlanOutput'] as const;
+
+export const getGeneratePlanOutputMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof generatePlanOutput>>, TError,GeneratePlanOutputMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof generatePlanOutput>>, TError,GeneratePlanOutputMutationVariables, TContext> => {
+
+const mutationKey = getGeneratePlanOutputMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof generatePlanOutput>>, GeneratePlanOutputMutationVariables> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  generatePlanOutput(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type GeneratePlanOutputMutationResult = NonNullable<Awaited<ReturnType<typeof generatePlanOutput>>>
+    export type GeneratePlanOutputMutationBody = BodyType<PlanOutputRequest>
+    export type GeneratePlanOutputMutationError = ErrorType<unknown>
+    export type GeneratePlanOutputMutationVariables = {id: string;data: BodyType<PlanOutputRequest>}
+
+    export const useGeneratePlanOutput = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof generatePlanOutput>>, TError,GeneratePlanOutputMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof generatePlanOutput>>,
+        TError,
+        GeneratePlanOutputMutationVariables,
+        TContext
+      > => {
+      return useMutation(getGeneratePlanOutputMutationOptions(options));
+    }
+
+export const getDownloadPlanOutputUrl = (id: string,
+    outputId: string,) => {
+
+
+
+
+  return `/api/plans/${id}/outputs/${outputId}/download`
+}
+
+export const downloadPlanOutput = async (id: string,
+    outputId: string, options?: Parameters<typeof customFetch>[1]): Promise<Blob> => {
+
+  return customFetch<Blob>(getDownloadPlanOutputUrl(id,outputId),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getDownloadPlanOutputQueryKey = (id: string,
+    outputId: string,) => {
+    return [
+    `/api/plans/${id}/outputs/${outputId}/download`
+    ] as const;
+    }
+
+
+export const getDownloadPlanOutputQueryOptions = <TData = Awaited<ReturnType<typeof downloadPlanOutput>>, TError = ErrorType<unknown>>(id: string,
+    outputId: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof downloadPlanOutput>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getDownloadPlanOutputQueryKey(id,outputId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof downloadPlanOutput>>> = ({ signal }) => downloadPlanOutput(id,outputId, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: id !== null && id !== undefined && outputId !== null && outputId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof downloadPlanOutput>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type DownloadPlanOutputQueryResult = NonNullable<Awaited<ReturnType<typeof downloadPlanOutput>>>
+export type DownloadPlanOutputQueryError = ErrorType<unknown>
+
+
+
+export function useDownloadPlanOutput<TData = Awaited<ReturnType<typeof downloadPlanOutput>>, TError = ErrorType<unknown>>(
+ id: string,
+    outputId: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof downloadPlanOutput>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getDownloadPlanOutputQueryOptions(id,outputId,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
 
 export const getGetModulePlanUrl = (id: string,) => {
 

@@ -1,0 +1,115 @@
+Change request: BUSINESS PLAN OUTPUTS — full document and executive deck (generic for every utility).
+
+GENERAL RULES
+- Keep everything that already works.
+- KEEP the current app title, logo, color palette, typography and brand style. Read colors and fonts from the existing theme tokens; do not create new colors or fonts.
+- No "UoF" anywhere. All text in English.
+- Content comes only from each plan's data (primary scenario by default; the user can choose another). Never invent content: if data is missing, show a small amber "Data needed" tag.
+- Both outputs must work for any utility, country, currency and plan length, with no hard-coded values.
+
+========================================
+OUTPUT 1 — BUSINESS PLAN DOCUMENT (.docx + .pdf)
+========================================
+Button "Generate Business Plan" in Module 8. Build with the `docx` library; export PDF with LibreOffice headless when available.
+File name: {Country}_{UtilityShortName}_Business_Plan_{StartYear}-{EndYear}_v{n}
+
+STRUCTURE
+1. Cover
+2. Table of contents (automatic, with page numbers, grouped by the 4 phases)
+3. Executive summary (1 page)
+4. Eight module sections, in order, each starting on a new page:
+   Phase 1 — Who we are and where we want to go: Module 1 Utility profile and setup · Module 2 Vision, mission and objectives
+   Phase 2 — Where we stand and what we will do: Module 3 Baseline assessment and SWOT · Module 4 Goals, strategies and action plans
+   Phase 3 — What it costs and who pays: Module 5 Financial plan (CAPEX and OPEX) · Module 6 Tariff simulator
+   Phase 4 — How we follow up: Module 7 KPIs and monitoring · Module 8 Review and next steps
+5. Annexes: detailed tables, project charters, indicator definitions, source documents, open issues.
+
+COVER
+Full-bleed brand primary color; utility logo and app logo; title "Business Plan {StartYear}-{EndYear}"; utility name; city and country; scenario; date; version; a discreet "Draft" label until the plan is approved. No other text.
+
+EXECUTIVE SUMMARY
+- 3 key messages, max 20 words each.
+- A band of 4 headline indicators chosen automatically from the plan's KPIs and investments (value, unit, short label).
+- 1 small visual: progress toward the main targets.
+
+MODULE SECTION TEMPLATE (identical for all 8 modules)
+- Header band: module number inside a large circle, module name, phase tag, module color as accent.
+- Key message: one sentence, max 25 words, stating the main finding.
+- At a glance: max 3 headline figures (value, unit, short label, trend arrow).
+- One main visual (chart, diagram or compact table of max 6 rows × 5 columns).
+- Max 5 bullets, max 15 words each.
+- Footer: sources used and confidence badges (Measured, Calculated, Estimated, Data needed).
+- Max 2 pages per module; detail goes to the annexes.
+
+MAIN VISUAL PER MODULE
+1 Profile: icon fact grid (service area, people served, connections, water sources, staff).
+2 Vision and mission: vision and mission in large quote style; objectives as numbered cards.
+3 Baseline and SWOT: one trend chart of the most critical indicator + 2×2 SWOT with top 3 items per quadrant.
+4 Goals and actions: waterfall diagram Objective → Goal → Strategy → Action + top 5 actions by cost.
+5 Financial plan: CAPEX by year/category (stacked bars) + OPEX structure (donut or bar).
+6 Tariffs: comparison bars (current, required, proposed) + typical monthly bills at 3 consumption levels.
+7 KPIs: KPI table (baseline, target, standard) with traffic-light status.
+8 Review: completeness by module (8-segment bar), open issues, next steps with owner and date.
+
+========================================
+OUTPUT 2 — EXECUTIVE DECK (.pptx)
+========================================
+Button "Generate Executive Deck". Build with `pptxgenjs`, 16:9, native editable charts and text.
+File name: {Country}_{UtilityShortName}_Executive_Deck_{StartYear}-{EndYear}_v{n}
+Max 14 slides:
+1 Cover · 2 The plan on one page (3 messages + 4 headline indicators) · 3 Agenda (4 phases, 8 modules) · 4–11 One slide per module · 12 Investment and funding · 13 Tariff and affordability · 14 Decisions needed and next steps.
+Skip any module slide without data; never add filler slides.
+Put the detail removed from each slide into its speaker notes (3–5 bullets).
+
+========================================
+DESIGN SYSTEM — MANDATORY FOR BOTH OUTPUTS
+========================================
+Less is more
+- One idea per page or slide. If a page needs two ideas, split it or move one to the annex.
+- Titles are messages, not labels: a short sentence with the finding ("Losses fall by half by 2030"), not "NRW analysis".
+- Numbers: show only the 3 that matter most per page or slide; round them (one decimal for %, millions with "M"); always show units; detailed tables go to the annexes.
+- Text limits: document bullets max 15 words; slide body max 25 words in total; no paragraphs on slides.
+- Prefer a visual over a table and a table over text.
+
+Layout
+- Generous white space: margins of at least 2.5 cm in the document and 0.5 in on slides.
+- 12-column grid; consistent alignment; left-aligned text; no centered body text.
+- The same template for all modules, so the reader always knows where to look: header, key message, figures, visual, bullets, sources.
+- Every module is clearly identified: number badge, module color and phase tag in the same position on every page or slide.
+
+Typography
+- Use the brand fonts only. Clear hierarchy, max 3 sizes per page: title, subtitle/key message, body.
+- Headline figures large and bold (slides 40–60 pt); labels small and in the secondary text color.
+- No underlining, no all-caps paragraphs, no more than one bold phrase per bullet.
+
+Color
+- Brand palette only. Primary color for the cover, headers and emphasis; module colors only as accents (badge, rule, chart highlight).
+- At most 3 colors per chart; highlight the one series that carries the message and gray the rest.
+- Status colors reserved for meaning: green (on track), amber (at risk or data needed), red (off track). Never use color as the only signal; add a label or icon.
+- Minimum contrast WCAG AA.
+
+Charts
+- One message per chart, stated in its title.
+- No 3D, no shadows, no gradients, no pie charts with more than 4 slices.
+- Light or no gridlines; direct labels on bars and line ends instead of legends when possible; units in the axis title.
+- Same chart style across document and deck.
+
+Icons and images
+- One consistent line-icon set in brand color; no clip art or stock photos unless the utility uploaded its own.
+- Utility photos (if uploaded) only on the cover, section dividers or the closing slide.
+
+Consistency and finish
+- Footer on every page or slide: utility name · plan period · page or slide number; sources in small type.
+- The same names for modules, phases and indicators as in the app.
+- Language: plain, active, no jargon; spell out acronyms the first time.
+
+========================================
+QUALITY CHECKS BEFORE DOWNLOAD
+========================================
+- The deck has 14 slides or fewer; no text overflows its box (measure text against box size; shorten or move the detail to the notes).
+- No page or slide exceeds the text and number limits above; if one does, move the detail to the annex or notes automatically.
+- Every number matches the plan data and shows its unit; missing data appears as "Data needed".
+- The files open without errors in Word and PowerPoint; the table of contents updates.
+- Each generated version is saved in the plan's "Outputs" list with date, author, version and scenario.
+
+TEST with any utility in the system (including one with missing data). Show me the cover, the executive summary, one module section and three deck slides (plan on one page, one module, decisions and next steps).

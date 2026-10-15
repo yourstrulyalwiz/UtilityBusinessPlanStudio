@@ -3,7 +3,7 @@ import type { ModulePlan } from "@workspace/api-client-react";
 import { ArrowRight, Archive, CheckCircle2, Download, MessageSquareWarning } from "lucide-react";
 import { Card, Pill } from "@/components/kit";
 import { KindBadge } from "@/components/module-context";
-import { moduleColor, moduleTone, statusLabel, reviewedCount, apiHref } from "@/lib/modules";
+import { moduleColor, moduleTone, statusLabel, reviewedCount, apiHref, stageProgress, PROGRESS_HELP } from "@/lib/modules";
 import { fmtDateTime } from "@/lib/app";
 
 export function ModuleOverview({ plan }: { plan: ModulePlan }) {
@@ -20,12 +20,12 @@ export function ModuleOverview({ plan }: { plan: ModulePlan }) {
           </div>
           <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-end">
             <div className="min-w-0 flex-1">
-              <div className="text-[11px] uppercase tracking-wider text-[#AEB8C6]">Reviewed modules</div>
-              <div className="mt-1 flex items-baseline gap-2"><span className="text-[34px] font-semibold leading-none tnum" data-testid="text-reviewed-count">{reviewed}</span><span className="text-sm text-[#AEB8C6]">of 8 approved · {Math.round(plan.progress)}%</span></div>
+              <div className="text-[11px] uppercase tracking-wider text-[#AEB8C6]">Workflow progress</div>
+              <div className="mt-1 flex items-baseline gap-2"><span className="text-[34px] font-semibold leading-none tnum" data-testid="text-reviewed-count">{Math.round(plan.progress)}%</span><span className="text-sm text-[#AEB8C6]">{reviewed} of 8 approved</span></div>
               <div className="mt-3 grid grid-cols-8 gap-1" aria-hidden>
                 {plan.modules.map((m) => <span key={m.number} className="h-1.5 rounded-full" style={{ background: m.status === "approved" ? "#D9E950" : m.status === "ready_for_review" ? "#1ED3D9" : "rgba(255,255,255,.14)" }} />)}
               </div>
-              <p className="mt-2 text-[11px] text-[#AEB8C6]">Counts approved modules only, not how much data is filled in.</p>
+              <p className="mt-2 text-[11px] text-[#AEB8C6]">{PROGRESS_HELP}</p>
             </div>
             {next && <Link href={`${base}/modules/${next.number}`} className="btn-glow inline-flex h-10 shrink-0 items-center gap-2 rounded-lg bg-[#1ED3D9] px-4 text-sm font-medium text-[#29323F] hover:bg-[#17BFC5]" data-testid="button-continue">Open Module {next.number} <ArrowRight className="h-4 w-4" /></Link>}
           </div>
@@ -53,6 +53,8 @@ export function ModuleOverview({ plan }: { plan: ModulePlan }) {
               <div className="mt-1.5 text-[15px] font-semibold text-[#323D4F] group-hover:text-[#127A80]">{m.title}</div>
               {m.description && <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-[#5B6678]">{m.description}</p>}
               {m.feedback && <p className="mt-2 flex gap-1.5 text-xs text-[#9A3A05]"><MessageSquareWarning className="mt-0.5 h-3.5 w-3.5 shrink-0" /><span className="line-clamp-2">Review comment: {m.feedback}</span></p>}
+              <div className="mt-3 text-xs font-medium" title={PROGRESS_HELP}>Workflow progress · {stageProgress(m.status)}%</div>
+              <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full" style={{width:`${stageProgress(m.status)}%`,background:moduleColor(m.number)}} /></div>
               <div className="mt-auto pt-3 text-[11px] text-muted-foreground">Updated {fmtDateTime(m.updatedAt)}</div>
             </Link>
           ))}

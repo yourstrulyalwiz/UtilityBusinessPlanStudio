@@ -4,6 +4,40 @@
  * Api
  * OpenAPI spec version: 1.0.0
  */
+export type PlanOutputRequestFormat = typeof PlanOutputRequestFormat[keyof typeof PlanOutputRequestFormat];
+
+
+export const PlanOutputRequestFormat = {
+  docx: 'docx',
+  pdf: 'pdf',
+  pptx: 'pptx',
+} as const;
+
+export interface PlanOutputRequest {
+  format: PlanOutputRequestFormat;
+  scenarioCode?: string;
+}
+
+export type PlanOutputFormat = typeof PlanOutputFormat[keyof typeof PlanOutputFormat];
+
+
+export const PlanOutputFormat = {
+  docx: 'docx',
+  pdf: 'pdf',
+  pptx: 'pptx',
+} as const;
+
+export interface PlanOutput {
+  id: string;
+  version: number;
+  format: PlanOutputFormat;
+  filename: string;
+  createdAt: string;
+  author: string;
+  scenarioCode: string;
+  scenarioName: string;
+}
+
 export interface PlanDeletion {
   /** @minLength 1 */
   confirmName: string;
@@ -573,6 +607,11 @@ export interface ViewInput {
   name: string;
   filters: ViewInputFilters;
 }
+
+export type GetPlanOutputs200 = {
+  outputs: PlanOutput[];
+  pdfAvailable: boolean;
+};
 
 export type GetLegacyCopy200 = { [key: string]: unknown };
 

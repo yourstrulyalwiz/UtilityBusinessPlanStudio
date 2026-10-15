@@ -1,0 +1,58 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "Pbp30Qt9__6XD8RniGuNb"
+uri = "file://generated-artifacts/business-plan/TCWS_Output_Design_Preview.pdf"
+type = "pdf"
+title = "TCWS — Document and deck preview"
+description = "Six samples: cover, executive summary, a module section, plan-on-one-page slide, financial slide, and decisions slide."
+logical_id = "1339f86c-db96-4a94-9af5-193a6927b41a"
+content_hash = "sha256:e089ef61925896cbadb27f8cf91d95525d58b399e167e95a66dac778f9a9fcea"
+size = 695794
+mtime_ms = 1792035392623
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:498718db-1dd5-423c-819d-0fa4af5a77db/1339f86c-db96-4a94-9af5-193a6927b41a/7d55c52c-a8f1-400b-83d0-abb6b53eebbc"
+storage_version_token = "1792035436012747"
+content_type = "application/pdf"
+
+[[outputs]]
+id = "KSYS3BLGO162yPYDcrtK4"
+uri = "file://generated-artifacts/business-plan/Philippines_TCWS_Business_Plan_2026-2039_v3.docx"
+type = "word_document"
+title = "TCWS — Editable Business Plan"
+description = "Word document with all eight modules, phase-grouped contents and annexes."
+logical_id = "9486749b-ffb9-47fa-b486-984fba251e4c"
+content_hash = "sha256:4c3522d1e24b6fe0a841048792ff1613543922fa0913f868d6f2674a6d524f50"
+size = 410345
+mtime_ms = 1792035248137
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:498718db-1dd5-423c-819d-0fa4af5a77db/9486749b-ffb9-47fa-b486-984fba251e4c/e1fa38cf-4c70-401d-8c04-76d8be7d125e"
+storage_version_token = "1792035436594419"
+content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+
+[[outputs]]
+id = "U7nlVUkaIMKKU0OepId6T"
+uri = "file://generated-artifacts/business-plan/Philippines_TCWS_Business_Plan_2026-2039_v1.pdf"
+type = "pdf"
+title = "TCWS — Business Plan PDF"
+description = "Print-ready 21-page plan generated from the saved Base scenario data."
+logical_id = "2539e0be-e6b0-4cca-ae6d-924c7a82ec66"
+content_hash = "sha256:556763117a3b521a5722c39d3d4a6b2c538cf1b3bec54338c341e79355cd36ec"
+size = 494562
+mtime_ms = 1792035245341
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:498718db-1dd5-423c-819d-0fa4af5a77db/2539e0be-e6b0-4cca-ae6d-924c7a82ec66/bce83e7c-3283-45e6-999e-9c55ebbe6807"
+storage_version_token = "1792035437166060"
+content_type = "application/pdf"
+
+[[outputs]]
+id = "bL-vY176H0c-GC85DCdqZ"
+uri = "file://generated-artifacts/business-plan/Philippines_TCWS_Executive_Deck_2026-2039_v2.pptx"
+type = "slides"
+title = "TCWS — Executive Deck"
+description = "14-slide PowerPoint with editable text and native charts, plus speaker notes."
+logical_id = "ca560453-4669-4a58-8cd9-176a2450500e"
+content_hash = "sha256:ee864b82e4ddaf82ee02d216ca29d0006c4592d944539a8b22f0b842427a58de"
+size = 797221
+mtime_ms = 1792035246307
+storage_uri = "gcs://replit-rams-assets-reed/rams/assets/repl:498718db-1dd5-423c-819d-0fa4af5a77db/ca560453-4669-4a58-8cd9-176a2450500e/833991b1-6a8c-4029-9f01-91278a1f5673"
+storage_version_token = "1792035437954634"
+content_type = "application/vnd.openxmlformats-officedocument.presentationml.presentation"

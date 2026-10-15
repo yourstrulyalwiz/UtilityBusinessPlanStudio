@@ -10,6 +10,26 @@
     }
   ],
   "paths": {
+    "/plans/{id}/outputs": {
+      "get": {
+        "operationId": "getPlanOutputs",
+        "parameters": [{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
+        "responses":{"200":{"description":"Saved output versions","content":{"application/json":{"schema":{"type":"object","required":["outputs","pdfAvailable"],"properties":{"outputs":{"type":"array","items":{"$ref":"#/components/schemas/PlanOutput"}},"pdfAvailable":{"type":"boolean"}}}}}}}
+      },
+      "post": {
+        "operationId": "generatePlanOutput",
+        "parameters": [{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
+        "requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PlanOutputRequest"}}}},
+        "responses":{"201":{"description":"Saved output version","content":{"application/json":{"schema":{"$ref":"#/components/schemas/PlanOutput"}}}}}
+      }
+    },
+    "/plans/{id}/outputs/{outputId}/download": {
+      "get":{
+        "operationId":"downloadPlanOutput",
+        "parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"outputId","in":"path","required":true,"schema":{"type":"string"}}],
+        "responses":{"200":{"description":"Generated document or deck","content":{"application/octet-stream":{"schema":{"type":"string","format":"binary"}}}}}
+      }
+    },
     "/plans/{id}/modules": {
       "get":{"operationId":"getModulePlan","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
       "responses":{"200":{"description":"Eight-module plan","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ModulePlan"}}}}}}
@@ -909,6 +929,14 @@
   },
   "components": {
     "schemas": {
+      "PlanOutputRequest": {
+        "type":"object","required":["format"],
+        "properties":{"format":{"type":"string","enum":["docx","pdf","pptx"]},"scenarioCode":{"type":"string"}}
+      },
+      "PlanOutput": {
+        "type":"object","required":["id","version","format","filename","createdAt","author","scenarioCode","scenarioName"],
+        "properties":{"id":{"type":"string"},"version":{"type":"integer"},"format":{"type":"string","enum":["docx","pdf","pptx"]},"filename":{"type":"string"},"createdAt":{"type":"string"},"author":{"type":"string"},"scenarioCode":{"type":"string"},"scenarioName":{"type":"string"}}
+      },
       "PlanDeletion":{"type":"object","required":["confirmName"],"properties":{"confirmName":{"type":"string","minLength":1}}},
       "DemoInput":{"type":"object","required":["mode"],"properties":{"mode":{"type":"string","enum":["complete","midway"]}}},
       "DemoResult":{"type":"object","required":["planId"],"properties":{"planId":{"type":"string"}}},

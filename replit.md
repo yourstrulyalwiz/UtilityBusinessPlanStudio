@@ -50,7 +50,7 @@ The user requested importing the Tagbilaran TCWS plan and LGU waterworks indicat
 
 - Initial foundation: role-scoped registry, create/edit/archive utilities, user provisioning, TTL requests and decisions, team membership, saved views, CSV export, notifications, audit history, protected logo uploads.
 - Creating a utility initializes eight independent modules, with no sequencing locks. Save, submit for review, approve, return and reopen are role-scoped and use optimistic concurrency.
-- Progress means the percentage of eight modules explicitly approved, not populated data. Source load states are retained, not converted to approvals.
+- Dashboard and module workflow progress uses milestones: not started 0%, in progress 50%, ready for review 75%, approved 100%, averaged over eight modules. This is not data completeness. Approval counts remain separate; stored approval progress and source approvals are not changed.
 - Role-specific onboarding separates global administration from TTL authoring. The supplied Option B library has 21 topics; admins may edit guidance, TTLs read it.
 - Supplied Option B Valle Verde is fictional; Tagbilaran is real preliminary source data. Source imports initialize once and never reset edits.
 - Conversion preserves immutable full legacy plan snapshots and original activity records. Supplied cases load the new Option B files; other authored content is carried forward in related modules for review. No old approval carries forward.

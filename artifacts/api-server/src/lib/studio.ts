@@ -6,6 +6,7 @@ import type { UtilityInput } from "@workspace/api-zod";
 import { activitySeed } from "./playbook";
 import { openAccessEnabled, testActor } from "./open-access";
 import { createBlankModulePlan } from "./module-migration";
+import { workflowProgress } from "./workflow-progress";
 
 export class HttpError extends Error {
   constructor(public status:number,message:string){super(message);}
@@ -52,7 +53,7 @@ export async function utilityRows(p:StudioPerson){
   return rows.map(({u,p:plan,c,t})=>({
     id:u.id,name:u.name,shortName:u.shortName,countryIso3:u.countryIso3,countryName:c.name,region:c.region,
     serviceArea:u.serviceArea,ttlUserId:t.id,ttlName:t.fullName,planId:plan?.id??"",planYear:plan?.planYear??0,currency:plan?.currency??"",
-    status:u.status,planStatus:plan?.status??"not_started",progress:Number(plan?.progress??0),currentPhase:
+    status:u.status,planStatus:plan?.status??"not_started",progress:plan?workflowProgress(stateRows.filter(r=>r.planId===plan.id)):0,currentPhase:
       plan?`M${stateRows.find(r=>r.planId===plan.id&&r.status!=="approved")?.number??8}`:"No business plan",createdAt:u.createdAt.toISOString(),
     uofCompletionDate:plan?.uofCompletionDate??null,wbProjectId:u.wbProjectId,logoPath:u.logoPath,
   }));

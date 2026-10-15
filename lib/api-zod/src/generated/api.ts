@@ -7,6 +7,54 @@
 import * as zod from 'zod';
 
 
+export const GetPlanOutputsParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+export const GetPlanOutputsResponse = zod.object({
+  "outputs": zod.array(zod.object({
+  "id": zod.string(),
+  "version": zod.number().int(),
+  "format": zod.enum(['docx', 'pdf', 'pptx']),
+  "filename": zod.string(),
+  "createdAt": zod.string(),
+  "author": zod.string(),
+  "scenarioCode": zod.string(),
+  "scenarioName": zod.string()
+})),
+  "pdfAvailable": zod.boolean()
+})
+
+
+export const GeneratePlanOutputParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+export const GeneratePlanOutputBody = zod.object({
+  "format": zod.enum(['docx', 'pdf', 'pptx']),
+  "scenarioCode": zod.string().optional()
+})
+
+export const GeneratePlanOutputResponse = zod.object({
+  "id": zod.string(),
+  "version": zod.number().int(),
+  "format": zod.enum(['docx', 'pdf', 'pptx']),
+  "filename": zod.string(),
+  "createdAt": zod.string(),
+  "author": zod.string(),
+  "scenarioCode": zod.string(),
+  "scenarioName": zod.string()
+})
+
+
+export const DownloadPlanOutputParams = zod.object({
+  "id": zod.coerce.string(),
+  "outputId": zod.coerce.string()
+})
+
+export const DownloadPlanOutputResponse = zod.unknown()
+
+
 export const GetModulePlanParams = zod.object({
   "id": zod.coerce.string()
 })

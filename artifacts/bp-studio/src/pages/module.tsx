@@ -13,10 +13,11 @@ import { ModuleHelpButton, HelpRail } from "@/components/module-help";
 import { KindBadge } from "@/components/module-context";
 import { BaselineEditor } from "@/components/baseline-editor";
 import { PlanReport } from "@/components/module-report";
+import { PlanOutputsPanel } from "@/components/plan-outputs";
 import { StrategyEditor, isStrategyV1 } from "@/components/strategy-editor";
 import { AssessmentEditor, AssessmentGuide, isAssessmentV1 } from "@/components/assessment-editor";
 import { useMe, errMsg, fmtDateTime } from "@/lib/app";
-import { moduleColor, moduleTone, statusLabel, reviewedCount, toTopic, isConflict, apiHref } from "@/lib/modules";
+import { moduleColor, moduleTone, statusLabel, reviewedCount, toTopic, isConflict, apiHref, stageProgress, PROGRESS_HELP } from "@/lib/modules";
 import { useToast } from "@/hooks/use-toast";
 import { M4View, M5View, M6View, M7View, M8View, ScenarioPanel, normalizeScenarios } from "@/components/module-views";
 import { WhatIfSimulator } from "@/components/simulator";
@@ -145,7 +146,7 @@ export default function ModulePage() {
       <Card className="navy-depth rise mb-5 overflow-hidden p-0 text-white">
         <div className="flex flex-wrap items-center justify-between gap-2 px-5 pt-4 text-xs">
           <span className="font-semibold uppercase tracking-[0.14em] text-[#1ED3D9]">Eight modules · open any in any order</span>
-          <span className="text-[#AEB8C6]" data-testid="text-reviewed">Reviewed modules: <strong className="text-[#EEF2F6] tnum">{reviewed}/8</strong> ({Math.round(plan.progress)}%)</span>
+          <span className="text-[#AEB8C6]" data-testid="text-reviewed" title={PROGRESS_HELP}>Workflow progress: <strong className="text-[#EEF2F6] tnum">{Math.round(plan.progress)}%</strong> · Approved: {reviewed}/8</span>
         </div>
         <nav className="grid grid-cols-4 gap-1.5 p-3 sm:grid-cols-8" aria-label="Modules">
           {plan.modules.map((m) => (
@@ -156,7 +157,8 @@ export default function ModulePage() {
                 {m.status === "approved" ? <CheckCircle2 className="h-3.5 w-3.5 text-[#D9E950]" aria-label="Approved" /> : <span className="h-2 w-2 rounded-full" style={{ background: moduleColor(m.number), opacity: m.status === "not_started" ? 0.35 : 1 }} />}
               </div>
               <div className="mt-0.5 truncate text-[12px] font-medium text-[#EEF2F6]">{m.title}</div>
-              <div className="truncate text-[10px] text-[#AEB8C6]">{statusLabel(m.status)}</div>
+              <div className="truncate text-[10px] text-[#AEB8C6]" title={PROGRESS_HELP}>{statusLabel(m.status)} · {stageProgress(m.status)}%</div>
+              <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/10" role="progressbar" aria-label={`Module ${m.number} workflow progress`} aria-valuenow={stageProgress(m.status)} aria-valuemin={0} aria-valuemax={100}><div className="h-full rounded-full" style={{width:`${stageProgress(m.status)}%`,background:moduleColor(m.number)}} /></div>
             </button>
           ))}
         </nav>
@@ -170,7 +172,7 @@ export default function ModulePage() {
               <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
                 <span className="font-semibold uppercase tracking-[0.12em] text-[#127A80]" data-testid="text-module-number">Module {num} of 8</span>
                 <KindBadge kind={plan.kind} />
-                <span className="ml-auto"><Pill tone={moduleTone(status)}>{statusLabel(status)}</Pill></span>
+                <span className="ml-auto" title={PROGRESS_HELP}><Pill tone={moduleTone(status)}>{statusLabel(status)} · {stageProgress(status)}%</Pill></span>
               </div>
               <h1 className="mt-2 text-2xl font-semibold tracking-tight text-[#323D4F] md:text-[28px]" data-testid="text-module-title">{mod.title}</h1>
               {mod.description && <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#5B6678]" data-testid="text-module-description">{mod.description}</p>}
@@ -204,7 +206,6 @@ export default function ModulePage() {
               <div className="space-y-5">
                 {frozen && <p className="mb-3 rounded-md bg-muted/60 px-3 py-2 text-xs text-muted-foreground">{status === "approved" ? "Approved. Fields are frozen until a reviewer reopens the module." : "Ready for review. Fields are frozen until a reviewer approves or returns it."}</p>}
                 <BaselineEditor value={draft} readOnly={!editable || pending} onChange={(v) => { setDraft(v as unknown as Json); setDirty(true); }} />
-                <HistoryPanel history={(draft as Record<string, Json>)?.history} source={HISTORY_SOURCE} title="Indicator history (reviewed)" />
               </div>
             ) : tab === "example" ? (
               <div>
@@ -222,11 +223,12 @@ export default function ModulePage() {
 
           {num === 8 && <Card className="p-5" data-testid="card-outputs">
             <h2 className="text-sm font-semibold text-[#323D4F]">Outputs</h2>
-            <p className="mt-1 text-xs text-[#5B6678]">Export the saved active data or open a print-friendly report of all modules. Neither is a formatted final business-plan document.</p>
+            <p className="mt-1 text-xs text-[#5B6678]">Generate the formatted Business Plan and Executive Deck from saved module data, or export the raw data and a print-friendly report.</p>
             <div className="mt-3 flex flex-wrap gap-2">
               <PlanReport plan={plan} />
               <a href={apiHref(`/api/plans/${planId}/module-export`)} className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-input bg-white px-3.5 text-sm font-medium text-[#323D4F] hover:bg-muted" data-testid="link-module-export"><Download className="h-4 w-4" /> Export module data (JSON)</a>
             </div>
+            <PlanOutputsPanel planId={planId} scenarios={plan?.scenarios} canGenerate={canEdit} />
           </Card>}
 
           <div className="flex items-center justify-between gap-2">

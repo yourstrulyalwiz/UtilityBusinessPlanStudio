@@ -91,7 +91,7 @@ export default function UtilityPage() {
           </div>
           <div className="flex shrink-0 flex-col items-stretch gap-2 md:w-48">
             <div className="rounded-lg border border-[#1ED3D9]/15 bg-[#E4F8F9]/60 p-3">
-              <div className="flex justify-between text-xs"><span className="text-muted-foreground">Reviewed modules</span><span className="font-semibold text-[#323D4F] tnum">{Math.round(u.progress)}%</span></div>
+              <div className="flex justify-between text-xs"><span className="text-muted-foreground">Workflow progress</span><span className="font-semibold text-[#323D4F] tnum">{Math.round(u.progress)}%</span></div>
               <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white"><div className="h-full rounded-full bg-gradient-to-r from-[#127A80] to-[#1ED3D9]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div>
             </div>
             {u.planId && <Tooltip>

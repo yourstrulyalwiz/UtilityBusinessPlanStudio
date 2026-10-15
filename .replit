@@ -26,3 +26,4 @@ OPEN_ACCESS = "true"
 
 [nix]
 channel = "stable-25_05"
+packages = ["freetype", "gumbo", "harfbuzz", "imagemagick", "inter", "jbig2dec", "jetbrains-mono", "libjpeg_turbo", "libreoffice", "mupdf", "openjpeg", "poppler-utils", "swig", "xcbuild"]

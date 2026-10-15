@@ -1,3 +1,4 @@
 - [Data360 metadata boundaries](data360-reference.md) — country metadata is not a complete region/currency directory; do not infer missing classifications.
 - [Temporary open testing](open-testing.md) — preview roles change screens, not API privileges; closed mode must ignore every test identity and cookie.
 - [Workbook imports](workbook-imports.md) — address XLSX rows explicitly; omitted blank rows make positional array indexing unsafe.
+- [Output scenario mapping](output-scenarios.md) — supplied Improvement data represents the primary plan case, never all three scenario forecasts.

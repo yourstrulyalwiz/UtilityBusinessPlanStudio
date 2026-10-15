@@ -9,6 +9,7 @@ import testModeRouter from "./test-mode";
 import planExportRouter from "./plan-export";
 import workflowRouter from "./workflow";
 import modulesRouter from "./modules";
+import outputsRouter from "./plan-outputs";
 
 const router: IRouter = Router();
 
@@ -17,6 +18,7 @@ router.use(testModeRouter);
 router.use(planExportRouter);
 router.use(workflowRouter);
 router.use(modulesRouter);
+router.use(outputsRouter);
 router.use(authRouter);
 router.use(portfolioRouter);
 router.use(peopleRouter);
