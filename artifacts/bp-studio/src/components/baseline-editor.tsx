@@ -55,10 +55,6 @@ function NumInput({ value, unit, onChange, readOnly, id, invalid }: { value: num
   );
 }
 
-function SourceLabel({ edited }: { edited: boolean }) {
-  return <div className="mt-2 text-[11px] text-[#6B7687]" data-testid="text-source">Source: {SOURCE_FILE} (methodology){edited ? " · values include user entries" : ""}</div>;
-}
-
 type Props = { value: unknown; onChange?: (v: BaselineData) => void; readOnly?: boolean };
 
 export function BaselineEditor({ value, onChange, readOnly }: Props) {
@@ -71,7 +67,6 @@ export function BaselineEditor({ value, onChange, readOnly }: Props) {
   const setVar = (id: string, v: number | null) => set({ variables: { ...data.variables, [id]: v } });
 
   const fromWorkbook = (id: string) => data.importedWorkbook && data.variables[id] === (varById.get(id)?.value ?? null);
-  const edited = inputVariables.some((v) => data.variables[v.id] !== null && !fromWorkbook(v.id));
   const issueKeys = new Map<string, string[]>();
   ev.issues.forEach((i) => i.keys.forEach((k) => issueKeys.set(k, [...(issueKeys.get(k) ?? []), i.message])));
 
@@ -104,23 +99,23 @@ export function BaselineEditor({ value, onChange, readOnly }: Props) {
           <div className="rounded-lg bg-white/[.06] p-2.5"><div className="text-[10px] uppercase tracking-wide text-[#AEB8C6]">No data</div><div className="mt-1 text-xl font-semibold tnum" data-testid="count-nodata">{noData}</div></div>
           <div className="rounded-lg bg-white/[.06] p-2.5"><div className="text-[10px] uppercase tracking-wide text-[#AEB8C6]">Checks</div><div className="mt-1 text-sm font-semibold" data-testid="count-issues">{errors} errors · {warnings} warnings</div></div>
         </div>
-        <p className="mt-3 text-[11px] text-[#AEB8C6]">Levels use the exact workbook thresholds. Results with consistency errors receive no level. Drafts can be saved with warnings or errors; submission is checked by the server.</p>
+        <p className="mt-3 text-[11px] text-[#AEB8C6]">Levels follow the defined performance thresholds. Results with consistency errors receive no level. Drafts can be saved with warnings or errors; submission is checked by the server.</p>
       </div>
 
       <details className="group rounded-lg border border-[#E3E8EE] bg-[#F7F9FB] p-4 text-sm">
         <summary className="flex cursor-pointer list-none items-center gap-2 font-medium text-[#323D4F]" data-testid="toggle-method-help"><Info className="h-4 w-4 text-[#127A80]" />How indicators and levels work<ChevronDown className="ml-auto h-4 w-4 transition group-open:rotate-180" /></summary>
         <ul className="mt-3 list-disc space-y-1 pl-5 text-xs leading-relaxed text-[#5B6678]">
-          <li>Each indicator is calculated from the input variables with the workbook formula shown on its card. Percentages are entered as 0 to 100 and stored as fractions.</li>
-          <li>Levels 1 to 5 ({levelLabels.join(", ")}) follow the band boundaries in the workbook. For "higher is better" indicators a value at or above a boundary reaches that level; for "lower is better" a value at or below it.</li>
+          <li>Each indicator is calculated from your input variables using the formula shown on its card. Enter percentages from 0 to 100.</li>
+          <li>Levels 1 to 5 ({levelLabels.join(", ")}) follow the defined performance bands. For "higher is better" indicators a value at or above a boundary reaches that level; for "lower is better" a value at or below it.</li>
           <li>Missing inputs stay empty and the indicator shows No data; nothing is replaced by zero.</li>
-          <li>HR costs as % of operating costs is informational: the workbook defines no levels for it.</li>
+          <li>HR costs as % of operating costs is informational: no performance levels are defined for it.</li>
           <li>Operation cost coverage above 100% and a negative EBITDA margin are valid results.</li>
         </ul>
       </details>
 
       {data.importedWorkbook && (
         <details className="group rounded-lg border-l-4 border-[#FF6A0D] bg-[#FFF1E8] p-4 text-xs text-[#9A3A05]" data-testid="notes-workbook">
-          <summary className="flex cursor-pointer list-none items-center gap-2 font-medium"><AlertTriangle className="h-4 w-4" />Imported results are approximations. Read the workbook notes<ChevronDown className="ml-auto h-4 w-4 transition group-open:rotate-180" /></summary>
+          <summary className="flex cursor-pointer list-none items-center gap-2 font-medium"><AlertTriangle className="h-4 w-4" />Baseline assumptions and data limitations<ChevronDown className="ml-auto h-4 w-4 transition group-open:rotate-180" /></summary>
           <ul className="mt-2 space-y-1 leading-relaxed">{workbook.notes.map((n, i) => <li key={i}>{n.replace(/^•\s*/, "")}</li>)}</ul>
         </details>
       )}
@@ -141,7 +136,7 @@ export function BaselineEditor({ value, onChange, readOnly }: Props) {
           <section key={d}>
             <h3 className="mb-2 text-[12px] font-semibold uppercase tracking-wider text-[#323D4F]">{d}</h3>
             <div className="grid gap-3 lg:grid-cols-2">
-              {list.map((i) => <IndicatorCard key={i.id} ind={i} note={data.indicatorNotes[i.id] ?? ""} readOnly={readOnly} edited={i.dependencies.some((k) => data.variables[k] != null && !fromWorkbook(k))}
+              {list.map((i) => <IndicatorCard key={i.id} ind={i} note={data.indicatorNotes[i.id] ?? ""} readOnly={readOnly}
                 onNote={(t) => set({ indicatorNotes: { ...data.indicatorNotes, [i.id]: t } })} />)}
             </div>
           </section>
@@ -172,7 +167,7 @@ export function BaselineEditor({ value, onChange, readOnly }: Props) {
               </summary>
               <div className="grid gap-4 border-t p-4 md:grid-cols-2">
                 {vars.map((v) => <VariableField key={v.id} v={v} value={data.variables[v.id] ?? null} note={data.variableNotes[v.id] ?? ""} readOnly={readOnly}
-                  msgs={issueKeys.get(v.id) ?? []} origin={data.variables[v.id] == null ? null : fromWorkbook(v.id) ? "Workbook value" : "Entered value"}
+                  msgs={issueKeys.get(v.id) ?? []} origin={data.variables[v.id] == null ? null : fromWorkbook(v.id) ? "Baseline value" : "Entered value"}
                   onValue={(n) => setVar(v.id, n)} onNote={(t) => set({ variableNotes: { ...data.variableNotes, [v.id]: t } })} />)}
               </div>
             </details>
@@ -191,13 +186,12 @@ export function BaselineEditor({ value, onChange, readOnly }: Props) {
             ))}
           </div>
         </details>
-        <SourceLabel edited={edited} />
       </section>
     </div>
   );
 }
 
-function IndicatorCard({ ind, note, onNote, readOnly, edited }: { ind: Indicator; note: string; onNote: (t: string) => void; readOnly?: boolean; edited: boolean }) {
+function IndicatorCard({ ind, note, onNote, readOnly }: { ind: Indicator; note: string; onNote: (t: string) => void; readOnly?: boolean }) {
   const info = !ind.direction;
   const hasErr = ind.issues.some((x) => x.severity === "error");
   return (
@@ -218,14 +212,13 @@ function IndicatorCard({ ind, note, onNote, readOnly, edited }: { ind: Indicator
         <div className="mt-2 space-y-2 text-[#5B6678]">
           <p><span className="font-medium text-[#323D4F]">Formula:</span> {ind.formula} <span className="text-[#6B7687]">({ind.unit})</span></p>
           <p><span className="font-medium text-[#323D4F]">Inputs:</span> {ind.dependencies.map((k) => varById.get(k)?.name ?? k).join("; ")}</p>
-          {info ? <p>No level boundaries are defined in the workbook for this indicator.</p> : (
+          {info ? <p>No performance levels are defined for this indicator.</p> : (
             <div className="grid grid-cols-5 gap-1 text-center">{ind.bands.map((b, k) => <div key={k} className={cn("rounded px-1 py-1", ind.level === k + 1 ? "bg-[#323D4F] text-white" : "bg-[#F7F9FB]")}><div className="font-mono text-[10px]">L{k + 1}</div><div className="text-[10px] tnum">{b}</div></div>)}</div>
           )}
         </div>
       </details>
       <label className="mt-3 block text-[11px] font-medium text-[#323D4F]" htmlFor={`note-${ind.id}`}>Analytical note</label>
       <textarea id={`note-${ind.id}`} rows={2} disabled={readOnly} className={cn(inputCls, "mt-1 h-auto py-2 text-xs")} placeholder={readOnly ? "No note" : "Interpretation, caveats, data quality"} value={note} onChange={(e) => onNote(e.target.value)} data-testid={`input-note-${ind.id}`} />
-      <SourceLabel edited={edited} />
     </article>
   );
 }
