@@ -11,7 +11,8 @@ import { Card, Empty } from '@/components/kit';
 import { useMe } from '@/lib/app';
 import Portfolio from '@/pages/portfolio';
 import UtilityPage from '@/pages/utility';
-import ActivityPage from '@/pages/activity';
+import ModulePage from '@/pages/module';
+import { useParams } from 'wouter';
 import { HelpCenter, HelpTopic } from '@/pages/help';
 import Requests from '@/pages/requests';
 import UsersPage from '@/pages/users';
@@ -37,6 +38,11 @@ function Restricted({ children }: { children: ReactNode }) {
   return me.role === 'admin' || me.role === 'ttl' ? <>{children}</> : <Denied />;
 }
 
+function LegacyActivity() {
+  const { planId = '' } = useParams<{ planId: string }>();
+  return <Redirect to={`/plans/${planId}`} replace />;
+}
+
 function Router() {
   return (
     <Gate>
@@ -46,7 +52,8 @@ function Router() {
             <Route path="/" component={Home} />
             <Route path="/admin" component={AdminRoute} />
             <Route path="/utilities/:id" component={UtilityPage} />
-            <Route path="/plans/:planId/activities/:code" component={ActivityPage} />
+            <Route path="/plans/:planId/modules/:number" component={ModulePage} />
+            <Route path="/plans/:planId/activities/:code" component={LegacyActivity} />
             <Route path="/plans/:planId" component={UtilityPage} />
             <Route path="/help/:topicId" component={HelpTopic} />
             <Route path="/help" component={HelpCenter} />

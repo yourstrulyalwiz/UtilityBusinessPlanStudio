@@ -1,9 +1,10 @@
 import type { ReactNode } from "react";
 import { useAuth } from "@workspace/replit-auth-web";
 import { useQueryClient } from "@tanstack/react-query";
-import { useGetProfile, getGetProfileQueryKey, useBootstrapAdmin, useGetMetadata } from "@workspace/api-client-react";
+import { useGetProfile, getGetProfileQueryKey, useBootstrapAdmin } from "@workspace/api-client-react";
 import { ArrowRight, KeyRound, LockKeyhole, ShieldCheck, UserRoundX } from "lucide-react";
 import { Glyph, Wave, Btn, Card } from "@/components/kit";
+import { MODULE_SHORT } from "@/lib/modules";
 import { ProfileContext, errMsg, phaseColor } from "@/lib/app";
 import { useToast } from "@/hooks/use-toast";
 import { TestBanner } from "@/lib/test-mode";
@@ -36,8 +37,6 @@ function Frame({ children }: { children: ReactNode }) {
 }
 
 function SignIn({ login }: { login: () => void }) {
-  const meta = useGetMetadata();
-  const phases = meta.data?.phases ?? [];
   return (
     <Frame>
       <main className="mx-auto grid w-full max-w-6xl flex-1 items-center gap-12 px-6 pb-16 md:grid-cols-[1.15fr_1fr] md:px-12">
@@ -47,15 +46,15 @@ function SignIn({ login }: { login: () => void }) {
             One registry for every utility business plan.
           </h1>
           <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-[#AEB8C6]">
-            Register water and sanitation utilities, assign task teams, and follow each plan through its four
-            phases — with a full audit trail behind every change.
+            Register water and sanitation utilities, assign task teams, and build each plan across eight freely
+            navigable modules, with review and a full audit trail behind every change.
           </p>
           <Wave className="mt-8 max-w-sm" />
           <div className="mt-8 grid max-w-lg grid-cols-2 gap-3 sm:grid-cols-4">
-            {(phases.length ? phases : [null, null, null, null]).map((p, i) => (
-              <div key={p?.code ?? i} className="rounded-lg border border-white/10 bg-white/[.06] p-3 backdrop-blur-sm" style={{ borderTop: `3px solid ${phaseColor(p?.code ?? String(i + 1), i)}` }}>
-                <div className="text-[10px] font-semibold uppercase tracking-wider text-[#AEB8C6]">Phase {i + 1}</div>
-                <div className="mt-1 text-[13px] font-medium leading-snug text-[#EEF2F6]">{p ? p.name : <span className="inline-block h-3 w-16 animate-pulse rounded bg-white/15" />}</div>
+            {MODULE_SHORT.map((name, i) => (
+              <div key={name} className="rounded-lg border border-white/10 bg-white/[.06] p-3 backdrop-blur-sm" style={{ borderTop: `3px solid ${phaseColor(String(i + 1), i)}` }}>
+                <div className="text-[10px] font-semibold uppercase tracking-wider text-[#AEB8C6]">Module {i + 1}</div>
+                <div className="mt-1 text-[13px] font-medium leading-snug text-[#EEF2F6]">{name}</div>
               </div>
             ))}
           </div>

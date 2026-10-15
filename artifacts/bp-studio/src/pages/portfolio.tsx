@@ -94,7 +94,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
   const openAccess = !!useTestMode().data?.openAccess;
   const demo = useLoadDemoPlan({ mutation: {
     onSuccess: (r) => { qc.invalidateQueries({ queryKey: getListUtilitiesQueryKey() }); qc.invalidateQueries({ queryKey: getGetSummaryQueryKey() }); navigate(`/plans/${r.planId}`); },
-    onError: (e) => toast({ title: "Could not open demo plan", description: errMsg(e), variant: "destructive" }),
+    onError: (e) => toast({ title: "Could not open example plan", description: errMsg(e), variant: "destructive" }),
   } });
   useEffect(() => () => window.clearTimeout(timer.current), []);
   const update = (patch: Partial<Filters>) => { setF((s) => ({ ...s, ...patch })); setPage(1); };
@@ -125,11 +125,11 @@ export default function Portfolio({ admin }: { admin: boolean }) {
   return (
     <div>
       <PageHeader eyebrow={admin ? "Portfolio administration" : me.role === "ttl" ? "Task Team Leader" : "Workspace"} title={admin ? "Global team workspace" : "My utility plans"}
-        description={admin ? "Provision people and utilities, follow every plan's progress and review submitted steps." : me.role === "viewer" ? "Plans you can read. Editing is not available for your role." : "The utility business plans you lead or contribute to."}
+        description={admin ? "Provision people and utilities, follow every plan's progress and review modules submitted for review." : me.role === "viewer" ? "Plans you can read. Editing is not available for your role." : "The utility business plans you lead or contribute to."}
         actions={admin && <div className="flex flex-wrap gap-2">
           {openAccess && <>
-            <Btn variant="outline" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "complete" } })} data-testid="button-demo-complete"><BookOpen className="h-4 w-4" /> Open worked example (complete)</Btn>
-            <Btn variant="outline" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "midway" } })} data-testid="button-demo-midway"><PlayCircle className="h-4 w-4" /> Start midway demo</Btn>
+            <Btn variant="outline" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "complete" } })} data-testid="button-demo-complete"><BookOpen className="h-4 w-4" /> Open Valle Verde example</Btn>
+            <Btn variant="outline" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "midway" } })} data-testid="button-demo-midway"><PlayCircle className="h-4 w-4" /> Open second example</Btn>
           </>}
           <Btn onClick={() => setCreating(true)} data-testid="button-new-utility"><Plus className="h-4 w-4" /> New utility</Btn>
         </div>} />
@@ -139,16 +139,16 @@ export default function Portfolio({ admin }: { admin: boolean }) {
           <div className="grid gap-0 md:grid-cols-[1.1fr_2fr]">
             <div className="navy-depth p-5 text-white">
               <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1ED3D9]">Your role</div>
-              <p className="mt-2 text-sm leading-relaxed text-white/85">The global team sets up the Studio: people, utilities and teams. TTLs then populate each plan step by step, and you review what they submit.</p>
+              <p className="mt-2 text-sm leading-relaxed text-white/85">The global team sets up the Studio: people, utilities and teams. TTLs then populate each plan across eight modules, in any order, and you review what they submit.</p>
               <Link href="/help" className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#1ED3D9] hover:underline" data-testid="link-admin-help">Read the global team guide <ChevronRight className="h-3.5 w-3.5" /></Link>
             </div>
             <div className="grid gap-px bg-[#323D4F]/[.07] sm:grid-cols-2">
               {[
                 { n: "1", t: "Manage people", d: "Invite TTLs, editors and viewers and set roles.", el: <Link href="/users" className="text-[#127A80] hover:underline" data-testid="link-onboard-people">Open People & roles</Link> },
-                { n: "2", t: "Create a utility", d: "Registers the utility and its 20-step plan.", el: <button type="button" onClick={() => setCreating(true)} className="text-[#127A80] hover:underline" data-testid="button-onboard-create">Register utility</button> },
+                { n: "2", t: "Create a utility", d: "Registers the utility and a plan with eight blank modules.", el: <button type="button" onClick={() => setCreating(true)} className="text-[#127A80] hover:underline" data-testid="button-onboard-create">Register utility</button> },
                 { n: "3", t: "View progress", d: "Tiles and the registry show every plan's status.", el: <button type="button" onClick={toTable} className="text-[#127A80] hover:underline" data-testid="button-onboard-progress">Go to registry</button> },
                 openAccess
-                  ? { n: "4", t: "See a worked example", d: "A fictional, fully completed demo plan.", el: <button type="button" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "complete" } })} className="text-[#127A80] hover:underline" data-testid="button-onboard-example">Open worked example</button> }
+                  ? { n: "4", t: "See a fictional example", d: "The Valle Verde illustrative plan.", el: <button type="button" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "complete" } })} className="text-[#127A80] hover:underline" data-testid="button-onboard-example">Open Valle Verde example</button> }
                   : { n: "4", t: "Review utility requests", d: "Approve or decline requests to register utilities.", el: <Link href="/requests" className="text-[#127A80] hover:underline" data-testid="link-onboard-requests">Utility requests</Link> },
               ].map((x) => (
                 <div key={x.n} className="bg-white/90 p-4 transition-colors hover:bg-[#E4F8F9]/70">
@@ -166,11 +166,11 @@ export default function Portfolio({ admin }: { admin: boolean }) {
             <div className="min-w-0 flex-1">
               <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#127A80]">Getting started</div>
               <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-[#323D4F]">
-                <li>Open a plan and press Continue to reach the next step.</li>
-                {me.role === "viewer" ? <li>Read each step and its guidance; ask your TTL for changes.</li> : <>
-                  <li>Save draft keeps work private; Submit sends the step for review.</li>
-                  <li>Returned steps show the reviewer's comment. Revise and submit again.</li>
-                  <li>Examples are fictional drafts. Replace them with your utility's data.</li>
+                <li>Open a plan and choose any of its eight modules. There is no fixed order.</li>
+                {me.role === "viewer" ? <li>Read each module and its guidance; ask your TTL for changes.</li> : <>
+                  <li>Save draft stores your edits; Submit sends the module for review.</li>
+                  <li>Returned modules show the reviewer's comment. Revise and submit again.</li>
+                  <li>Examples are illustrative. Replace them with your utility's data.</li>
                 </>}
               </ol>
               <Link href="/help" className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-[#127A80] hover:underline" data-testid="link-ttl-help">Full guide <ChevronRight className="h-3.5 w-3.5" /></Link>
@@ -198,11 +198,11 @@ export default function Portfolio({ admin }: { admin: boolean }) {
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <Tile testid="tile-utilities" label="Total utilities" value={String(s.utilities)} sub="Show all in registry" accent="#323D4F" onClick={() => { setQInput(""); setF(EMPTY); setPage(1); toTable(); }} />
                 <Tile testid="tile-countries" label="Distinct countries" value={String(s.countries)} sub="Sort registry by country" accent="#1ED3D9" onClick={() => { update({ sort: "country", direction: "asc" }); toTable(); }} />
-                <Tile testid="tile-progress" label="Average progress" value={`${Math.round(s.averageProgress * 10) / 10}%`} sub="Sort by progress" accent="#127A80" onClick={() => { update({ sort: "progress", direction: "desc" }); toTable(); }} />
+                <Tile testid="tile-progress" label="Average reviewed modules" value={`${Math.round(s.averageProgress * 10) / 10}%`} sub="Sort by progress" accent="#127A80" onClick={() => { update({ sort: "progress", direction: "desc" }); toTable(); }} />
                 <Tile testid="tile-completed" label="Completed plans" value={String(s.completed)} sub="Filter to completed" accent="#70AD47" onClick={() => { update({ status: "completed" }); toTable(); }} />
               </div>
               <div className="mt-4 grid gap-4 lg:grid-cols-2">
-                <Bars title="Utilities by current phase" data={s.phases} colorFor={(b, i) => phaseColor(b.label, i)} empty="Phase counts appear once utilities are registered." />
+                <Bars title="Utilities by current module" data={s.phases} colorFor={(b, i) => phaseColor(b.label, i)} empty="Module counts appear once utilities are registered." />
                 <Bars title="Utilities by region" data={s.regions} colorFor={() => "#1ED3D9"} onPick={(b) => { update({ region: b.label }); toTable(); }} empty="Regional distribution appears once utilities are registered." />
               </div>
               {s.pendingRequests > 0 && (
@@ -290,7 +290,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
           <div className={cn("overflow-x-auto transition-opacity", list.isFetching && "opacity-60")}>
             <table className="w-full min-w-[860px] text-sm">
               <thead className="bg-[#323D4F]/[.035] text-xs uppercase tracking-wide text-muted-foreground">
-                <tr><SortH col="name">Utility</SortH><SortH col="country">Country</SortH><SortH col="ttl">TTL</SortH><SortH col="year">Year</SortH><th className="px-4 py-3 text-left font-medium">Phase</th><SortH col="progress" className="w-44">Progress</SortH><SortH col="status">Status</SortH></tr>
+                <tr><SortH col="name">Utility</SortH><SortH col="country">Country</SortH><SortH col="ttl">TTL</SortH><SortH col="year">Year</SortH><th className="px-4 py-3 text-left font-medium">Module</th><SortH col="progress" className="w-44">Reviewed</SortH><SortH col="status">Status</SortH></tr>
               </thead>
               <tbody className="divide-y">
                 {items.map((u) => (
@@ -330,7 +330,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
 
       <Sheet open={creating} onOpenChange={setCreating}>
         <SheetContent side="right" className="w-full overflow-y-auto sm:max-w-2xl">
-          <SheetHeader className="mb-6"><SheetTitle className="text-[#323D4F]">Create utility</SheetTitle><SheetDescription>Creates the utility and its business plan with the 20 standard activities.</SheetDescription></SheetHeader>
+          <SheetHeader className="mb-6"><SheetTitle className="text-[#323D4F]">Create utility</SheetTitle><SheetDescription>Creates the utility and its business plan with eight blank modules.</SheetDescription></SheetHeader>
           {creating && <UtilityForm submitLabel="Register utility" pending={create.isPending} onCancel={() => setCreating(false)} onSubmit={(data) => create.mutate({ data })} />}
         </SheetContent>
       </Sheet>

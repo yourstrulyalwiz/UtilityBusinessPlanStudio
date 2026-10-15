@@ -1,0 +1,2704 @@
+{
+  "_meta": {
+    "description": "REAL utility for the module-based Business Plan Studio (8 modules): Tagbilaran City Waterworks System (TCWS), Bohol, Philippines. Values transcribed from source files 01-07; gaps are null with gap_note. Prepared 2026-10-14.",
+    "version": "1.0",
+    "currency": "PHP",
+    "sources": {
+      "01": "01_Tagbilaran_City_Preliminary_Business_Plan_.pdf",
+      "02": "02_Tagbilaran_Financial_Model.xlsx",
+      "03": "03_Tagbilaran_WSP_data_summarized.xlsx",
+      "04": "04_Tagbilaran_City_filled-up_questionnaire.pdf",
+      "05": "05_Tagbilaran_City_Waterworks_WSC_BV_and_collection_data.pdf",
+      "06": "06_Tagbilaran_water_rate_schedule.jpg",
+      "07": "07_Tagbilaran_City_Waterworks_production_data.pdf"
+    },
+    "transcription_checks": [
+      "Monthly billed volume 2020-2025 equals printed annual totals (05)",
+      "Monthly production 2024 and Jan-Jun 2025 equal printed totals; 2023 monthly sum is 9 m3 below printed 3,535,036 (07)",
+      "Collections Jan-Jul 2025 sum to 12,036,951.99 (05)",
+      "Accounts by barangay sum to printed totals 2020-2025 (05)"
+    ],
+    "open_issues": [
+      "Financial model (02) divides required revenue by PWSP+BBWSP volume; PWSP equals private WSP supply in the demand analysis. Required tariff on TCWS volume only is about PhP 50/m3 (2030) vs 21.94.",
+      "Connections 2025: 6,314 (05, latest record) vs 6,084 (01, June 2025, older class breakdown).",
+      "OPEX 2022-2023 are calculated in 01 Table 16; OPEX 2024 is estimated from the should-be tariff.",
+      "Collections are used as water sales; billings are not available, so collection efficiency cannot be computed.",
+      "Draft JMC lists operating ratio 'at least 1.00'; the model's FORMULA sheet defines operating ratio = OPEX/revenue, so the target is applied as 1.00 or below."
+    ]
+  },
+  "utility": {
+    "name": "Tagbilaran City Waterworks System",
+    "short_name": "TCWS",
+    "country_iso3": "PHL",
+    "province": "Bohol",
+    "city_service_area": "Tagbilaran City (10 of 15 barangays)",
+    "operator_type": "LGU-operated waterworks (local economic enterprise)",
+    "level_of_service": "Level III",
+    "currency": "PHP",
+    "source": {
+      "file": "04",
+      "loc": "p.1"
+    }
+  },
+  "plan": {
+    "plan_year": 2026,
+    "base_year": 2024,
+    "actual_years": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "horizon_start": 2026,
+    "horizon_end": 2039,
+    "construction_period": [
+      2026,
+      2029
+    ],
+    "operation_period": [
+      2030,
+      2039
+    ],
+    "currency": "PHP",
+    "workshop": "November 2025",
+    "status": "preliminary business plan with indicative tariffs"
+  },
+  "scenarios": [
+    {
+      "code": "SC-BASE",
+      "name": "Baseline",
+      "type": "baseline",
+      "is_primary": false,
+      "description": "Status quo: deep wells only, tariff of September 2016, no new investment. Only historical data is available; projections to be built by the team.",
+      "gap_note": "Baseline projections not in sources"
+    },
+    {
+      "code": "SC-BP",
+      "name": "Business plan",
+      "type": "improvement",
+      "is_primary": true,
+      "description": "Preliminary business plan: PhP 579.2 M CAPEX 2026-2029 (100% grant) + 114.1 M in 2035, provincial bulk water from 2030, deep wells discontinued, proposed tariff 2030-2039.",
+      "source": {
+        "file": "01",
+        "loc": "\u00a72.4; 02"
+      }
+    }
+  ],
+  "module1": {
+    "profile": {
+      "name": "Tagbilaran City Waterworks System",
+      "operator": "LGU-operated waterworks, local economic enterprise (LEE), reports to the mayor",
+      "level_of_service": "Level III",
+      "city": "Tagbilaran City, Bohol: 15 barangays (12 urban), population 106,120 (2024 census)",
+      "service_area": "10 of 15 barangays (Bool, Booy, Cabawan, Cogon, Dao, Manga, San Isidro, Taloto, Tiptip, Ubujan); about 82,500 people",
+      "population_served": 27000,
+      "connections_2025": {
+        "residential": 6254,
+        "commercial": 31,
+        "institutional": 29,
+        "total": 6314
+      },
+      "water_source": "Groundwater only, 28 deep-well pumping stations (160.5 HP), chlorination",
+      "availability": "22-24 hours per day",
+      "staff": {
+        "regular": {
+          "male": 8,
+          "female": 1,
+          "total": 9
+        },
+        "job_order": {
+          "male": 10,
+          "female": 5,
+          "total": 15
+        },
+        "casual": null,
+        "total": 24,
+        "source": {
+          "file": "04",
+          "loc": "p.9 Table 13"
+        }
+      },
+      "other_providers": "BWUI (15,040 connections) and Richli Water (bulk surface water) also serve the city",
+      "source": {
+        "file": "01",
+        "loc": "\u00a71, Tables 3-6; 04; 07"
+      }
+    },
+    "project_team": {
+      "focal_point": {
+        "name": "Engr. Felito",
+        "position": "Head of TCWS",
+        "note": "appointment mentioned by the mayor",
+        "source": {
+          "file": "01",
+          "loc": "\u00a72.5.1"
+        }
+      },
+      "members": null,
+      "gap_note": "Names and roles of the planning team (technical, financial, customer service)"
+    },
+    "planning_dates": {
+      "base_year": 2024,
+      "plan_year": 2026,
+      "construction": "2026-2029",
+      "bulk_water_start": 2030,
+      "horizon_end": 2039,
+      "workshop": "November 2025"
+    }
+  },
+  "module2": {
+    "vision_previous": "To manage our organization and water resources to meet evolving regulatory requirements, water supply needs, and customer expectations in the future.",
+    "mission_previous": "Our mission is to provide our customers with safe and reliable water in compliance with regulatory requirements. We strive to treat every customer fairly and respectfully, and to address their needs quickly and effectively.",
+    "values_previous": [
+      "Wisdom",
+      "Accomplishment",
+      "Teamwork",
+      "Energy",
+      "Responsibility",
+      "Welcoming",
+      "Obedience",
+      "Respect",
+      "Kindness",
+      "Service"
+    ],
+    "vision": "We want to become a world-class, sustainable waterworks by 2035. We want to achieve highly potable, 24/7 water supply. We see a more effective waterworks company capable of providing reliable and safe/clean water to every household in Tagbilaran City.",
+    "mission": "Our mission is to provide our customers in 10/15 barangays in Tagbilaran City with safe and reliable water. Our employees are capable and highly trained. We strive to treat every customer fairly and respectfully and address their needs quickly and effectively.",
+    "values": [
+      "Teamwork",
+      "Community-based Service",
+      "Respect",
+      "Dedication",
+      "Adaptiveness",
+      "Resilience",
+      "Innovation"
+    ],
+    "guiding_questions_used": {
+      "vision": [
+        "Where are we going moving forward?",
+        "What do we want to achieve in the future?",
+        "What kind of future state do we envision?",
+        "What impact do we want to leave the community 10-20 years from now?"
+      ],
+      "mission": [
+        "What do we do today?",
+        "Who do we serve?",
+        "What are we trying to accomplish?"
+      ],
+      "values": [
+        "What do we stand for?",
+        "What behaviors are important to us?",
+        "How will we conduct our activities?",
+        "How do we treat our own people and community?"
+      ]
+    },
+    "objectives": [
+      {
+        "code": "OBJ-1",
+        "title": "Improve billed volume",
+        "smart": {
+          "specific": "Increase billed volume by expanding to unserved barangays, upgrading pumping stations and replacing inaccurate meters.",
+          "measurable": "Billed volume (m3/yr) and connections; baseline 1,833,134 m3 (2024), 6,314 connections (2025).",
+          "achievable": null,
+          "relevant": "Low coverage (33% of service area) and lack of water supply are key weaknesses.",
+          "time_bound": null
+        },
+        "owner": null
+      },
+      {
+        "code": "OBJ-2",
+        "title": "Reduce NRW to 20%",
+        "smart": {
+          "specific": "Reduce physical and commercial losses through DMAs, pipe replacement and detection of illegal connections.",
+          "measurable": "NRW (%) = (production - billed)/production; baseline 31.3% (H1 2025), target 20%.",
+          "achievable": null,
+          "relevant": "NRW above the draft JMC standard (20% or below).",
+          "time_bound": "Proposed path from demand analysis: 26% by 2030, 20% by 2035 (to be confirmed)."
+        },
+        "owner": null
+      },
+      {
+        "code": "OBJ-3",
+        "title": "Improve collection efficiency",
+        "smart": {
+          "specific": "Improve collection through disconnection enforcement and staggered AR payments.",
+          "measurable": "Collection efficiency (%) = collections/billings; target at least 95% (draft JMC). Baseline not available.",
+          "achievable": null,
+          "relevant": "Negative bottom line; tariff revenue is the only source.",
+          "time_bound": null
+        },
+        "owner": null
+      },
+      {
+        "code": "OBJ-4",
+        "title": "Manage cost recovery",
+        "smart": {
+          "specific": "Recover costs through ring-fenced LEE accounts and OPEX efficiency.",
+          "measurable": "Operating ratio = OPEX/operating revenue; baseline 1.13 (2023); target 1.00 or below.",
+          "achievable": null,
+          "relevant": "Tariff unchanged since 2016; should-be tariff 17.68 PhP/m3 (2024) vs about 12.5 collected per m3.",
+          "time_bound": null
+        },
+        "owner": null
+      },
+      {
+        "code": "OBJ-5",
+        "title": "Manage / improve after-sales service",
+        "smart": {
+          "specific": "Formalize customer service standards for complaints, leaks, illegal tapping, bulletins and new applications.",
+          "measurable": "Share of cases resolved within the standard time.",
+          "achievable": null,
+          "relevant": "Mayor: tariff increases must be balanced with better service.",
+          "time_bound": null
+        },
+        "owner": null
+      }
+    ],
+    "sign_off": {
+      "meeting": "Presentation of the preliminary business plan to Mayor Jane Yap (online) during the November 2025 workshop",
+      "decision": {
+        "value": null,
+        "gap_note": "Formal approval not recorded"
+      },
+      "comments": [
+        "Balance weaknesses against strengths",
+        "Low tariff is the number one weakness; increases must come with better service",
+        "Permanent heads for critical assets; digitalize billing",
+        "TCWS will not be sold to the private sector"
+      ],
+      "source": {
+        "file": "01",
+        "loc": "\u00a72.5.1"
+      }
+    },
+    "gap_note": "Owners, achievable and time-bound fields to be completed",
+    "source": {
+      "file": "01",
+      "loc": "\u00a72.1 Table 7; \u00a72.4.1; \u00a72.5.1"
+    }
+  },
+  "module3": {
+    "annual_indicators": [
+      {
+        "year": 2020,
+        "period": "Jan-Dec",
+        "connections": {
+          "res": 5545,
+          "com": 34,
+          "inst": 33,
+          "total": 5612,
+          "source": {
+            "file": "05",
+            "loc": "Total accounts as of Dec 2020"
+          }
+        },
+        "billed_m3": {
+          "value": 1753537,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Consumption summary 2020"
+          }
+        },
+        "production_m3": {
+          "value": null,
+          "gap_note": "No production records before 2023 (only Dec 2021 and Dec 2022 snapshots in 07)"
+        },
+        "nrw": {
+          "value": null,
+          "gap_note": "Requires annual production"
+        },
+        "avg_consumption_m3_conn_month": {
+          "value": 26.04,
+          "confidence": "calculated"
+        },
+        "collections_php": {
+          "value": 18741029.89,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Summary of water collections 2014-2025"
+          }
+        },
+        "avg_tariff_php_m3": {
+          "value": 10.69,
+          "confidence": "calculated",
+          "formula": "collections/billed volume"
+        },
+        "opex_php": {
+          "value": 17125593,
+          "confidence": "reported",
+          "source": {
+            "file": "01",
+            "loc": "Table 16"
+          }
+        },
+        "should_be_tariff_php_m3": {
+          "value": 9.83,
+          "source": {
+            "file": "01",
+            "loc": "Table 16"
+          }
+        },
+        "operating_ratio": {
+          "value": 0.914,
+          "confidence": "calculated",
+          "formula": "OPEX/collections"
+        },
+        "unit_production_cost_php_m3": {
+          "value": null,
+          "gap_note": "Requires OPEX and production"
+        }
+      },
+      {
+        "year": 2021,
+        "period": "Jan-Dec",
+        "connections": {
+          "res": 5886,
+          "com": 34,
+          "inst": 33,
+          "total": 5953,
+          "source": {
+            "file": "05",
+            "loc": "Total accounts as of Dec 2021"
+          }
+        },
+        "billed_m3": {
+          "value": 1807220,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Consumption summary 2021"
+          }
+        },
+        "production_m3": {
+          "value": null,
+          "gap_note": "No production records before 2023 (only Dec 2021 and Dec 2022 snapshots in 07)"
+        },
+        "nrw": {
+          "value": null,
+          "gap_note": "Requires annual production"
+        },
+        "avg_consumption_m3_conn_month": {
+          "value": 25.3,
+          "confidence": "calculated"
+        },
+        "collections_php": {
+          "value": 19858823.78,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Summary of water collections 2014-2025"
+          }
+        },
+        "avg_tariff_php_m3": {
+          "value": 10.99,
+          "confidence": "calculated",
+          "formula": "collections/billed volume"
+        },
+        "opex_php": {
+          "value": 19450006,
+          "confidence": "reported",
+          "source": {
+            "file": "01",
+            "loc": "Table 16"
+          }
+        },
+        "should_be_tariff_php_m3": {
+          "value": 10.76,
+          "source": {
+            "file": "01",
+            "loc": "Table 16"
+          }
+        },
+        "operating_ratio": {
+          "value": 0.979,
+          "confidence": "calculated",
+          "formula": "OPEX/collections"
+        },
+        "unit_production_cost_php_m3": {
+          "value": null,
+          "gap_note": "Requires OPEX and production"
+        }
+      },
+      {
+        "year": 2022,
+        "period": "Jan-Dec",
+        "connections": {
+          "res": 5986,
+          "com": 34,
+          "inst": 33,
+          "total": 6053,
+          "source": {
+            "file": "05",
+            "loc": "Total accounts as of Dec 2022"
+          }
+        },
+        "billed_m3": {
+          "value": 1704980,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Consumption summary 2022"
+          }
+        },
+        "production_m3": {
+          "value": null,
+          "gap_note": "No production records before 2023 (only Dec 2021 and Dec 2022 snapshots in 07)"
+        },
+        "nrw": {
+          "value": null,
+          "gap_note": "Requires annual production"
+        },
+        "avg_consumption_m3_conn_month": {
+          "value": 23.47,
+          "confidence": "calculated"
+        },
+        "collections_php": {
+          "value": 21121407.28,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Summary of water collections 2014-2025"
+          }
+        },
+        "avg_tariff_php_m3": {
+          "value": 12.39,
+          "confidence": "calculated",
+          "formula": "collections/billed volume"
+        },
+        "opex_php": {
+          "value": 21015606,
+          "confidence": "calculated",
+          "source": {
+            "file": "01",
+            "loc": "Table 16"
+          }
+        },
+        "should_be_tariff_php_m3": {
+          "value": 12.32,
+          "source": {
+            "file": "01",
+            "loc": "Table 16"
+          }
+        },
+        "operating_ratio": {
+          "value": 0.995,
+          "confidence": "calculated",
+          "formula": "OPEX/collections"
+        },
+        "unit_production_cost_php_m3": {
+          "value": null,
+          "gap_note": "Requires OPEX and production"
+        }
+      },
+      {
+        "year": 2023,
+        "period": "Jan-Dec",
+        "connections": {
+          "res": 6136,
+          "com": 34,
+          "inst": 33,
+          "total": 6213,
+          "source": {
+            "file": "05",
+            "loc": "Total accounts as of Dec 2023"
+          }
+        },
+        "billed_m3": {
+          "value": 1897357,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Consumption summary 2023"
+          }
+        },
+        "production_m3": {
+          "value": 3535036,
+          "confidence": "measured",
+          "source": {
+            "file": "07",
+            "loc": "Pumping stations production 2023 (printed annual total; monthly sum 3,535,027)"
+          }
+        },
+        "nrw": {
+          "value": 0.4633,
+          "confidence": "calculated",
+          "formula": "(production-billed)/production"
+        },
+        "avg_consumption_m3_conn_month": {
+          "value": 25.45,
+          "confidence": "calculated"
+        },
+        "collections_php": {
+          "value": 23144634.58,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Summary of water collections 2014-2025"
+          }
+        },
+        "avg_tariff_php_m3": {
+          "value": 12.2,
+          "confidence": "calculated",
+          "formula": "collections/billed volume"
+        },
+        "opex_php": {
+          "value": 26107632,
+          "confidence": "calculated",
+          "source": {
+            "file": "01",
+            "loc": "Table 16"
+          }
+        },
+        "should_be_tariff_php_m3": {
+          "value": 13.76,
+          "source": {
+            "file": "01",
+            "loc": "Table 16"
+          }
+        },
+        "operating_ratio": {
+          "value": 1.128,
+          "confidence": "calculated",
+          "formula": "OPEX/collections"
+        },
+        "unit_production_cost_php_m3": {
+          "value": 7.39,
+          "confidence": "calculated"
+        }
+      },
+      {
+        "year": 2024,
+        "period": "Jan-Dec",
+        "connections": {
+          "res": 6393,
+          "com": 35,
+          "inst": 33,
+          "total": 6461,
+          "source": {
+            "file": "05",
+            "loc": "Total accounts as of Dec 2024"
+          }
+        },
+        "billed_m3": {
+          "value": 1833134,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Consumption summary 2024"
+          }
+        },
+        "production_m3": {
+          "value": 3049028,
+          "confidence": "measured",
+          "source": {
+            "file": "07",
+            "loc": "Pumping stations production 2024"
+          }
+        },
+        "nrw": {
+          "value": 0.3988,
+          "confidence": "calculated",
+          "formula": "(production-billed)/production"
+        },
+        "avg_consumption_m3_conn_month": {
+          "value": 23.64,
+          "confidence": "calculated"
+        },
+        "collections_php": {
+          "value": 22887685.65,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Summary of water collections 2014-2025"
+          }
+        },
+        "avg_tariff_php_m3": {
+          "value": 12.49,
+          "confidence": "calculated",
+          "formula": "collections/billed volume"
+        },
+        "opex_php": {
+          "value": 32409809,
+          "confidence": "estimated",
+          "note": "should-be tariff 2024 x billed volume",
+          "source": {
+            "file": "01",
+            "loc": "Table 16"
+          }
+        },
+        "should_be_tariff_php_m3": {
+          "value": 17.68,
+          "source": {
+            "file": "01",
+            "loc": "Table 16"
+          }
+        },
+        "operating_ratio": {
+          "value": 1.416,
+          "confidence": "calculated",
+          "formula": "OPEX/collections"
+        },
+        "unit_production_cost_php_m3": {
+          "value": 10.63,
+          "confidence": "calculated"
+        }
+      },
+      {
+        "year": 2025,
+        "period": "Jan-Jun (collections Jan-Jul)",
+        "connections": {
+          "res": 6254,
+          "com": 31,
+          "inst": 29,
+          "total": 6314,
+          "source": {
+            "file": "05",
+            "loc": "Total accounts (latest record, labelled Dec 2025)"
+          }
+        },
+        "billed_m3": {
+          "value": 952194,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Consumption summary 2025"
+          }
+        },
+        "production_m3": {
+          "value": 1385950,
+          "confidence": "measured",
+          "source": {
+            "file": "07",
+            "loc": "Pumping stations production 2025"
+          }
+        },
+        "nrw": {
+          "value": 0.313,
+          "confidence": "calculated",
+          "formula": "(production-billed)/production"
+        },
+        "avg_consumption_m3_conn_month": {
+          "value": 25.13,
+          "confidence": "calculated"
+        },
+        "collections_php": {
+          "value": 12036951.99,
+          "confidence": "measured",
+          "source": {
+            "file": "05",
+            "loc": "Summary of water collections, Jan-Jul 2025"
+          }
+        },
+        "avg_tariff_php_m3": {
+          "value": 10.85,
+          "confidence": "calculated",
+          "formula": "collections/billed volume"
+        },
+        "opex_php": {
+          "value": null,
+          "gap_note": "OPEX 2025 not provided"
+        },
+        "should_be_tariff_php_m3": null,
+        "operating_ratio": {
+          "value": null,
+          "gap_note": "Requires OPEX"
+        },
+        "unit_production_cost_php_m3": {
+          "value": null,
+          "gap_note": "Requires OPEX and production"
+        }
+      }
+    ],
+    "monthly": {
+      "billed_m3": {
+        "2020": {
+          "Jan": 148363,
+          "Feb": 149831,
+          "Mar": 139374,
+          "Apr": 150790,
+          "May": 135739,
+          "Jun": 142474,
+          "Jul": 142729,
+          "Aug": 146960,
+          "Sep": 143872,
+          "Oct": 148922,
+          "Nov": 150836,
+          "Dec": 153647
+        },
+        "2021": {
+          "Jan": 158776,
+          "Feb": 138617,
+          "Mar": 152817,
+          "Apr": 141383,
+          "May": 150123,
+          "Jun": 151704,
+          "Jul": 137535,
+          "Aug": 155660,
+          "Sep": 160955,
+          "Oct": 159008,
+          "Nov": 149971,
+          "Dec": 150671
+        },
+        "2022": {
+          "Jan": 94020,
+          "Feb": 95101,
+          "Mar": 127949,
+          "Apr": 153619,
+          "May": 150560,
+          "Jun": 142934,
+          "Jul": 152688,
+          "Aug": 119499,
+          "Sep": 170151,
+          "Oct": 165254,
+          "Nov": 176132,
+          "Dec": 157073
+        },
+        "2023": {
+          "Jan": 153028,
+          "Feb": 158002,
+          "Mar": 143328,
+          "Apr": 137645,
+          "May": 160637,
+          "Jun": 169702,
+          "Jul": 162317,
+          "Aug": 140319,
+          "Sep": 179206,
+          "Oct": 169621,
+          "Nov": 160061,
+          "Dec": 163491
+        },
+        "2024": {
+          "Jan": 161417,
+          "Feb": 152004,
+          "Mar": 151359,
+          "Apr": 131227,
+          "May": 176429,
+          "Jun": 153642,
+          "Jul": 162030,
+          "Aug": 151153,
+          "Sep": 156752,
+          "Oct": 150673,
+          "Nov": 148957,
+          "Dec": 137491
+        },
+        "2025": {
+          "Jan": 171620,
+          "Feb": 149775,
+          "Mar": 149048,
+          "Apr": 151038,
+          "May": 175997,
+          "Jun": 154716,
+          "Jul": 157137,
+          "Aug": 118731
+        }
+      },
+      "production_m3": {
+        "2023": {
+          "Jan": 311166,
+          "Feb": 237708,
+          "Mar": 315996,
+          "Apr": 298709,
+          "May": 295131,
+          "Jun": 316231,
+          "Jul": 295128,
+          "Aug": 317490,
+          "Sep": 250690,
+          "Oct": 324851,
+          "Nov": 289685,
+          "Dec": 282242
+        },
+        "2024": {
+          "Jan": 320215,
+          "Feb": 237281,
+          "Mar": 272125,
+          "Apr": 265331,
+          "May": 263028,
+          "Jun": 237620,
+          "Jul": 250793,
+          "Aug": 274277,
+          "Sep": 212111,
+          "Oct": 242378,
+          "Nov": 203816,
+          "Dec": 270053
+        },
+        "2025": {
+          "Jan": 231138,
+          "Feb": 228560,
+          "Mar": 241223,
+          "Apr": 241234,
+          "May": 221798,
+          "Jun": 221997
+        }
+      },
+      "collections_php_2025": {
+        "Jan": 2047999.41,
+        "Feb": 1512149.49,
+        "Mar": 1804275.86,
+        "Apr": 1392153.07,
+        "May": 1805756.76,
+        "Jun": 1566736.28,
+        "Jul": 1907881.12
+      },
+      "note": "2025 August billed volume excludes Tiptip (incomplete in source). Monthly NRW is indicative because billing and production periods are not aligned.",
+      "source": {
+        "billed": {
+          "file": "05",
+          "loc": "pp.7-12"
+        },
+        "production": {
+          "file": "07",
+          "loc": "pp.1-2"
+        },
+        "collections": {
+          "file": "05",
+          "loc": "p.13"
+        }
+      }
+    },
+    "nrw_snapshots": [
+      {
+        "period": "2021-12-06 to 2022-01-02",
+        "production_m3": 311503,
+        "billed_m3": 160955,
+        "nrw": 0.4833,
+        "source": {
+          "file": "07",
+          "loc": "pp.5-6"
+        }
+      },
+      {
+        "period": "2022-12-01 to 2023-01-03",
+        "production_m3": 340674,
+        "billed_m3": 157073,
+        "nrw": 0.5389,
+        "source": {
+          "file": "07",
+          "loc": "pp.3-4"
+        }
+      }
+    ],
+    "connections_by_barangay": {
+      "2020": {
+        "Bool": 121,
+        "Booy": 257,
+        "Cabawan": 212,
+        "Cogon": 21,
+        "Dao": 804,
+        "Manga": 1235,
+        "SanIsidro": 173,
+        "TalotoZ8": 451,
+        "TalotoZ9": 344,
+        "Tiptip": 891,
+        "Ubujan": 1103,
+        "Other": 0
+      },
+      "2021": {
+        "Bool": 130,
+        "Booy": 259,
+        "Cabawan": 219,
+        "Cogon": 21,
+        "Dao": 820,
+        "Manga": 1296,
+        "SanIsidro": 193,
+        "TalotoZ8": 486,
+        "TalotoZ9": 370,
+        "Tiptip": 973,
+        "Ubujan": 1186,
+        "Other": 0
+      },
+      "2022": {
+        "Bool": 113,
+        "Booy": 262,
+        "Cabawan": 227,
+        "Cogon": 21,
+        "Dao": 896,
+        "Manga": 1322,
+        "SanIsidro": 193,
+        "TalotoZ8": 487,
+        "TalotoZ9": 369,
+        "Tiptip": 976,
+        "Ubujan": 1187,
+        "Other": 0
+      },
+      "2023": {
+        "Bool": 131,
+        "Booy": 260,
+        "Cabawan": 227,
+        "Cogon": 22,
+        "Dao": 926,
+        "Manga": 1332,
+        "SanIsidro": 192,
+        "TalotoZ8": 489,
+        "TalotoZ9": 373,
+        "Tiptip": 1060,
+        "Ubujan": 1188,
+        "Other": 13
+      },
+      "2024": {
+        "Bool": 137,
+        "Booy": 264,
+        "Cabawan": 235,
+        "Cogon": 22,
+        "Dao": 988,
+        "Manga": 1381,
+        "SanIsidro": 193,
+        "TalotoZ8": 515,
+        "TalotoZ9": 381,
+        "Tiptip": 1121,
+        "Ubujan": 1224,
+        "Other": 0
+      },
+      "2025": {
+        "Bool": 137,
+        "Booy": 250,
+        "Cabawan": 237,
+        "Cogon": 22,
+        "Dao": 960,
+        "Manga": 1327,
+        "SanIsidro": 183,
+        "TalotoZ8": 470,
+        "TalotoZ9": 350,
+        "Tiptip": 1133,
+        "Ubujan": 1185,
+        "Other": 60
+      }
+    },
+    "narratives": {
+      "Commercial": "Connections grew from 5,612 (2020) to 6,461 (2024); billed volume stayed between 1.70 and 1.90 million m3 per year. Collections rose from PhP 18.7 M to 23.1 M (2023) and dipped in 2024. The tariff is unchanged since 2016, so revenue per billed m3 is about PhP 12.",
+      "Technical": "All water comes from 28 deep-well pumping stations with chlorination. NRW fell from about 46% (2023) to 31% (H1 2025), partly because production fell from 3.5 to 3.0 million m3. Supply is 22-24 hours a day.",
+      "Financial": "OPEX rose from PhP 17.1 M (2020) to 26.1 M (2023, calculated), above collections from 2023 (operating ratio 1.13). The should-be tariff to recover OPEX was PhP 17.68/m3 in 2024.",
+      "Human talent": "24 staff (9 regular, 15 job order); multi-tasking and training needs flagged in the SWOT.",
+      "_note": "Draft narratives written from the source data; TCWS team to validate."
+    },
+    "provider_comparison": {
+      "TCWS": {
+        "connections": 6084,
+        "nrw": 0.31,
+        "billed_mld": 5.26,
+        "production_mld": 7.66,
+        "availability": "22-24h",
+        "source": "deep wells"
+      },
+      "BWUI": {
+        "connections": 15040,
+        "nrw": 0.1,
+        "billed_mld": 15.56,
+        "production_mld": 17.33,
+        "availability": "23h",
+        "source": "deep wells"
+      },
+      "Richli": {
+        "connections": "about 15,000",
+        "nrw": 0.068,
+        "availability": "24h",
+        "source": "surface water, 15 MLD WTPs"
+      },
+      "source": {
+        "file": "01",
+        "loc": "Table 2; 03 Tagbilaran summary"
+      }
+    },
+    "demographics": {
+      "population": {
+        "census_2024": 106120,
+        "projected": {
+          "2024": 112348,
+          "2030": 123690,
+          "2035": 133082,
+          "2040": 142190,
+          "2045": 151097,
+          "2050": 160562,
+          "2055": 170620
+        },
+        "source": {
+          "file": "01",
+          "loc": "\u00a71.1; Table 20"
+        }
+      },
+      "households": {
+        "2024": 24966,
+        "2030": 27487,
+        "2035": 29574,
+        "2040": 31598,
+        "2045": 33577,
+        "2050": 35680,
+        "2055": 37916
+      },
+      "household_size": 4.5,
+      "tourists": {
+        "2024": 157074,
+        "2030": 257947,
+        "2035": 390003,
+        "2040": 589669,
+        "2045": 891561,
+        "2050": 1348023,
+        "2055": 1938911
+      },
+      "barangays": 15,
+      "urban_barangays": 12,
+      "poverty_incidence": 0.105,
+      "employed": {
+        "male": 12155,
+        "female": 9358,
+        "source": "CBMS 2022"
+      },
+      "major_industries": "hotels, banks, intermodal transport, malls and commercial establishments",
+      "population_by_barangay": {
+        "Bool": 7441,
+        "Booy": 10698,
+        "Cabawan": 2326,
+        "Cogon": 16983,
+        "Dao": 11446,
+        "Manga": 8082,
+        "San Isidro": 6811,
+        "Taloto": 6831,
+        "Tiptip": 5922,
+        "Ubujan": 5952,
+        "Dampas": 9709,
+        "Mansasa": 6981,
+        "Poblacion I": 3131,
+        "Poblacion II": 4644,
+        "Poblacion III": 5391
+      },
+      "served_by_tcws": [
+        "Bool",
+        "Booy",
+        "Cabawan",
+        "Cogon",
+        "Dao",
+        "Manga",
+        "San Isidro",
+        "Taloto",
+        "Tiptip",
+        "Ubujan"
+      ],
+      "population_service_area": 82492,
+      "population_served": 27000,
+      "demand_analysis": {
+        "residential_lpcd": 185,
+        "commercial_m3_conn_day": 2.91,
+        "institutional_m3_conn_day": 9,
+        "tourist_lpcd": 197,
+        "total_demand_mld": {
+          "2024": 27.62,
+          "2030": 30.48,
+          "2035": 32.37,
+          "2040": 34.21,
+          "2045": 36.04,
+          "2050": 37.98,
+          "2055": 40.07
+        },
+        "nrw_projection": {
+          "2025": 0.4,
+          "2030": 0.26,
+          "2035": 0.2,
+          "2040": 0.2,
+          "2045": 0.2,
+          "2050": 0.2,
+          "2055": 0.2
+        },
+        "unconstrained_demand_mld": {
+          "2025": 39.86,
+          "2030": 41.77,
+          "2035": 41.34,
+          "2040": 44.1,
+          "2045": 47.06,
+          "2050": 50.52,
+          "2055": 54.46
+        },
+        "private_wsp_mld": {
+          "2025": 19.79,
+          "2030": 23.45,
+          "2035": 24.99,
+          "2040": 27.88,
+          "2045": 29.94,
+          "2050": 32.42,
+          "2055": 35.28
+        },
+        "net_demand_tcws_mld": {
+          "2025": 11.72,
+          "2030": 18.33,
+          "2035": 16.35,
+          "2040": 16.22,
+          "2045": 17.12,
+          "2050": 18.1,
+          "2055": 19.18
+        },
+        "source": {
+          "file": "01",
+          "loc": "Tables 20-25"
+        }
+      },
+      "avg_household_income": {
+        "value": null,
+        "gap_note": "Not provided (01 Table 1.2: 'Ave. Income: No data')"
+      },
+      "implications": "Households grow about 1.6% a year; TCWS serves a third of its service area; once provincial bulk water arrives (assumed 2030) TCWS stops deep wells and must serve a net demand of about 18 MLD."
+    },
+    "enablement_environment": {
+      "pillars": [
+        {
+          "pillar": "Policy",
+          "assessment": "Draft Joint Memorandum Circular (JMC) sets KPI standards for LGU-run waterworks; mayor states TCWS will not be privatized.",
+          "rating": null
+        },
+        {
+          "pillar": "Sector Institutions",
+          "assessment": "TCWS reports directly to the mayor; three WSPs serve the city (TCWS, BWUI, Richli).",
+          "rating": null
+        },
+        {
+          "pillar": "Intergovernmental Relations",
+          "assessment": "Provincial bulk water supply project; collaboration with BWUI; DILG provincial and regional support; DPWH AWSPSA.",
+          "rating": null
+        },
+        {
+          "pillar": "Financing",
+          "assessment": "LEE, not funded by general funds; CAPEX modeled as 100% grant; tariff unchanged since 2016.",
+          "rating": null
+        },
+        {
+          "pillar": "Regulation",
+          "assessment": "PNSDW water quality standards; monthly bacteriological testing; septage facilities (JICA pilot 24 m3/day, planned 25-100 m3/day).",
+          "rating": null
+        }
+      ],
+      "sanitation": "Households with basic sanitation reported as 103% by PPDO (May 2024) - data quality issue.",
+      "rating_gap": "Ratings 1-5 to be set by the team",
+      "source": {
+        "file": "01",
+        "loc": "\u00a71.3-1.5; \u00a72.3; \u00a72.5"
+      }
+    },
+    "swot": {
+      "strengths": [
+        [
+          "Committed and customer-friendly staff",
+          null
+        ],
+        [
+          "Staff can work under pressure",
+          null
+        ],
+        [
+          "Already under a local economic enterprise (LEE), not funded by general funds",
+          null
+        ],
+        [
+          "Installed chlorinators in all pumping stations",
+          null
+        ],
+        [
+          "Responsive team, especially in emergency services",
+          null
+        ],
+        [
+          "Customer expectations are effectively managed",
+          null
+        ],
+        [
+          "Strong management support",
+          null
+        ],
+        [
+          "Online payment partners",
+          null
+        ]
+      ],
+      "weaknesses": [
+        [
+          "Multi-tasking of personnel (organizational structure)",
+          null
+        ],
+        [
+          "Old galvanized iron pipes (parts of Brgys. Tiptip, Manga, Ubujan)",
+          null
+        ],
+        [
+          "Need training for technical and finance personnel",
+          null
+        ],
+        [
+          "Low tariff",
+          null
+        ],
+        [
+          "Lack of training for billing and collection, management, water safety plans",
+          null
+        ],
+        [
+          "Lack of water supply",
+          null
+        ],
+        [
+          "Lack of preventive maintenance",
+          null
+        ],
+        [
+          "Negative bottom line",
+          null
+        ],
+        [
+          "Handling negative criticism",
+          null
+        ],
+        [
+          "Lack of decision-making",
+          null
+        ],
+        [
+          "Water quality monitoring and compliance (10% failure in sampling)",
+          null
+        ]
+      ],
+      "opportunities": [
+        [
+          "Availability of bulk water supply in a few years' time",
+          null
+        ],
+        [
+          "Large growth potential - many investors",
+          null
+        ],
+        [
+          "NGOs and private organizations (e.g. USAID, Maynilad) that help improve water supply",
+          null
+        ],
+        [
+          "Other local water utilities' support (collaboration with BWUI)",
+          null
+        ]
+      ],
+      "threats": [
+        [
+          "Climate change",
+          null
+        ],
+        [
+          "Natural hazards (typhoons, earthquakes); standby gensets in selected pumping stations",
+          null
+        ],
+        [
+          "Saltwater intrusion in water sources",
+          null
+        ],
+        [
+          "Deep-well sources of some private institutions, establishments and businesses",
+          null
+        ]
+      ]
+    },
+    "swot_guiding_questions": [
+      "Which unserved areas can we expand to?",
+      "Where are the high-growth areas in the city?",
+      "How can we partner with the province?",
+      "How can we maximize existing septage facilities?",
+      "What technology can address existing issues?",
+      "How stable is electricity cost?",
+      "What is the risk of customers being unable to pay?",
+      "What is the threat from other providers?",
+      "Are our sources threatened by pollution or saltwater intrusion?"
+    ],
+    "management_comments": "Mayor Jane Yap: balance the number of weaknesses against strengths; the low tariff is the number one weakness, but increases must come with better service.",
+    "assets": {
+      "pumping_stations": [
+        {
+          "ps_no": 1,
+          "location": "San Roque Rd., Tiptip",
+          "hp": 3,
+          "last_installation": "2020-07-20",
+          "area_served": "Tiptip proper - Manga"
+        },
+        {
+          "ps_no": 2,
+          "location": "San Roque Rd., Tiptip",
+          "hp": 5,
+          "last_installation": "2021-09-09",
+          "area_served": "Tiptip proper - Manga"
+        },
+        {
+          "ps_no": 3,
+          "location": "J.A Clarin St., Dao",
+          "hp": 7.5,
+          "last_installation": "2018-02-01",
+          "area_served": "San Isidro, Dao, Taloto, Cogon"
+        },
+        {
+          "ps_no": 4,
+          "location": "Kabangkalan St., Tiptip",
+          "hp": 10,
+          "last_installation": "2018-12-11",
+          "area_served": "Tiptip-Uptown-Ubujan, Taloto"
+        },
+        {
+          "ps_no": 5,
+          "location": "J.A Clarin St., Dao",
+          "hp": 10,
+          "last_installation": "2020-09-15",
+          "area_served": "San Isidro, Dao"
+        },
+        {
+          "ps_no": 7,
+          "location": "Darunday St., Dao",
+          "hp": 7.5,
+          "last_installation": "2020-07-17",
+          "area_served": "Dao area & Feeding Reservoir #4"
+        },
+        {
+          "ps_no": 8,
+          "location": "Esabo St., Tiptip",
+          "hp": 3,
+          "last_installation": "2017-02-17",
+          "area_served": "Ubujan & Taloto"
+        },
+        {
+          "ps_no": 9,
+          "location": "Pilayre St., Bool",
+          "hp": 3,
+          "last_installation": "2017-12-29",
+          "area_served": "Bool area"
+        },
+        {
+          "ps_no": 10,
+          "location": "J.A Clarin St. cor. Alfarero St., San Isidro",
+          "hp": 1,
+          "last_installation": "2015-07-09",
+          "area_served": "San Isidro area"
+        },
+        {
+          "ps_no": 11,
+          "location": "TCCPM Dampas",
+          "hp": 2,
+          "last_installation": "2022-02-24",
+          "area_served": "IBT & TCCPM"
+        },
+        {
+          "ps_no": 12,
+          "location": "Manga-Tiptip-Cabawan Rd., Tiptip",
+          "hp": 15,
+          "last_installation": "2022-01-22",
+          "area_served": "Cabawan-Tiptip-Uptown-Ubujan-Manga-Taloto"
+        },
+        {
+          "ps_no": 13,
+          "location": "Libertad Rd., San Isidro",
+          "hp": 1,
+          "last_installation": null,
+          "area_served": "No operation"
+        },
+        {
+          "ps_no": 14,
+          "location": "Cabawan-Carbon Rd., Cabawan",
+          "hp": 1,
+          "last_installation": "2020-11-29",
+          "area_served": "Cabawan area"
+        },
+        {
+          "ps_no": 15,
+          "location": "Binayran Rd., San Isidro",
+          "hp": 1,
+          "last_installation": "2021-06-17",
+          "area_served": "Binayran, San Isidro"
+        },
+        {
+          "ps_no": 16,
+          "location": "Ellyhill Rd., Tiptip",
+          "hp": 10,
+          "last_installation": "2022-06-06",
+          "area_served": "Tiptip-Uptown-Manga"
+        },
+        {
+          "ps_no": 17,
+          "location": "Manga-Tiptip-Cabawan Rd., Tiptip",
+          "hp": 10,
+          "last_installation": "2013-06-19",
+          "area_served": "Tiptip-Manga"
+        },
+        {
+          "ps_no": 18,
+          "location": "Esabo St., Tiptip",
+          "hp": 1,
+          "last_installation": "2019-05-10",
+          "area_served": "Tiptip-San Isidro"
+        },
+        {
+          "ps_no": 19,
+          "location": "Lumantao Dr., Alfarero St., San Isidro",
+          "hp": 1,
+          "last_installation": "2023-02-01",
+          "area_served": "San Isidro area"
+        },
+        {
+          "ps_no": 20,
+          "location": "Upper Sto. Nino St., Dao",
+          "hp": 7.5,
+          "last_installation": "2018-01-06",
+          "area_served": "Dao-Booy-Taloto-Ubujan-Manga"
+        },
+        {
+          "ps_no": 21,
+          "location": "Uptown Rd., Tiptip",
+          "hp": 7.5,
+          "last_installation": "2022-09-26",
+          "area_served": "Tiptip-Uptown reservoir"
+        },
+        {
+          "ps_no": 23,
+          "location": "Dote St., Doldol, Ubujan",
+          "hp": 10,
+          "last_installation": "2015-08-04",
+          "area_served": "Ubujan, Taloto, Tiptip"
+        },
+        {
+          "ps_no": 24,
+          "location": "Casa Rd., Tiptip",
+          "hp": 10,
+          "last_installation": "2015-07-31",
+          "area_served": "Tiptip-Uptown"
+        },
+        {
+          "ps_no": 25,
+          "location": "Kabangkalan St., Tiptip",
+          "hp": 10,
+          "last_installation": "2016-07-06",
+          "area_served": "Tiptip-Dao"
+        },
+        {
+          "ps_no": 26,
+          "location": "Toledo St., Dao",
+          "hp": 5,
+          "last_installation": "2022-06-04",
+          "area_served": "Dao & San Isidro"
+        },
+        {
+          "ps_no": 27,
+          "location": "F. Dagohoy Rd., Tiptip",
+          "hp": 10,
+          "last_installation": "2018-02-06",
+          "area_served": "Tiptip, Dao, San Isidro"
+        },
+        {
+          "ps_no": 28,
+          "location": "Upper Sto. Nino St., Dao",
+          "hp": 10,
+          "last_installation": "2019-02-20",
+          "area_served": "Dao, Booy, Cogon"
+        }
+      ],
+      "asset_management_plan": {
+        "failure_modes": [
+          "mortality",
+          "capacity",
+          "level of service",
+          "financial efficiency"
+        ],
+        "criticality_method": "PoF x CoF, 1-5 scales; CoF by service connections affected",
+        "registry": [
+          {
+            "type": "Pump",
+            "location": "San Roque Rd., Tiptip",
+            "capacity": "5 HP",
+            "condition": "good",
+            "year": 2021
+          },
+          {
+            "type": "Pump",
+            "location": "7 Darunday St., Dao",
+            "capacity": "7.5 HP",
+            "condition": "bad, frequent breakdowns",
+            "year": 2021
+          },
+          {
+            "type": "Pump",
+            "location": "12 Manga-Tiptip-Cabawan Rd., Tiptip",
+            "capacity": "15 HP",
+            "condition": "fair",
+            "year": 2022
+          }
+        ],
+        "criticality": [
+          {
+            "station": "San Roque Rd., Tiptip",
+            "pof": 3,
+            "cof": 2,
+            "score": 6
+          },
+          {
+            "station": "7 Darunday St., Dao",
+            "pof": 3,
+            "cof": 3,
+            "score": 9
+          },
+          {
+            "station": "12 Manga-Tiptip-Cabawan Rd., Tiptip",
+            "pof": 2,
+            "cof": 5,
+            "score": 10
+          }
+        ],
+        "plan": [
+          {
+            "asset_id": "PS-001-2022",
+            "condition": "good",
+            "remaining_life": 2,
+            "criticality": 6,
+            "action": "plan for replacement in two years",
+            "cost_php": 300000
+          },
+          {
+            "asset_id": "PS-006-2020",
+            "condition": "breakdowns, frequent maintenance",
+            "remaining_life": 0,
+            "criticality": 9,
+            "action": "immediate replacement",
+            "cost_php": 600000
+          },
+          {
+            "asset_id": "PS-002-2022",
+            "condition": "fail",
+            "remaining_life": 0,
+            "criticality": 10,
+            "action": "immediate replacement",
+            "cost_php": 600000
+          }
+        ],
+        "source": {
+          "file": "01",
+          "loc": "\u00a72.2 Tables 8-12"
+        }
+      }
+    }
+  },
+  "module4": {
+    "goals": [
+      {
+        "code": "G-1.1",
+        "objective": "OBJ-1",
+        "title": "Connections and billed volume grow with bulk supply: 10,493 connections by 2030 (financial model)",
+        "kpi": "connections",
+        "target": 10493,
+        "target_year": 2030
+      },
+      {
+        "code": "G-1.2",
+        "objective": "OBJ-1",
+        "title": "All connections with accurate working meters",
+        "kpi": "metered_connections",
+        "target": 100,
+        "target_year": null
+      },
+      {
+        "code": "G-2.1",
+        "objective": "OBJ-2",
+        "title": "NRW from 31% (H1 2025) to 26% by 2030 and 20% by 2035",
+        "kpi": "nrw",
+        "target": 20,
+        "target_year": 2035
+      },
+      {
+        "code": "G-3.1",
+        "objective": "OBJ-3",
+        "title": "Collection efficiency of at least 95%",
+        "kpi": "collection_efficiency",
+        "target": 95,
+        "target_year": null
+      },
+      {
+        "code": "G-4.1",
+        "objective": "OBJ-4",
+        "title": "Operating ratio of 1.00 or below",
+        "kpi": "operating_ratio",
+        "target": 1.0,
+        "target_year": null
+      },
+      {
+        "code": "G-4.2",
+        "objective": "OBJ-4",
+        "title": "Lower unit production cost through energy efficiency and asset renewal",
+        "kpi": "unit_production_cost",
+        "target": null,
+        "target_year": null
+      },
+      {
+        "code": "G-5.1",
+        "objective": "OBJ-5",
+        "title": "Customer service standards met in all cases",
+        "kpi": "service_standards",
+        "target": 100,
+        "target_year": null
+      }
+    ],
+    "strategies": [
+      {
+        "code": "S-1.1",
+        "objective": "OBJ-1",
+        "title": "Expansion to unserved areas",
+        "tasks": [
+          "Extend pipelines to Brgys. Cabawan, Booy, Cogon, Dampas, Bool",
+          "Construct new reservoirs in the expansion areas",
+          "Construct new reservoirs at existing pump stations without reservoirs"
+        ]
+      },
+      {
+        "code": "S-1.2",
+        "objective": "OBJ-1",
+        "title": "Assessment and improvement of existing pumping stations",
+        "tasks": [
+          "Conduct pump testing",
+          "Assess and upgrade some of the existing pump units",
+          "Regularly maintain pump stations, chlorinators and gensets"
+        ]
+      },
+      {
+        "code": "S-1.3",
+        "objective": "OBJ-1",
+        "title": "Identification and replacement of old and inaccurate meters",
+        "tasks": [
+          "Procure water meters for new consumers; recalibrate or replace meters of existing customers (meters are currently provided by consumers)"
+        ]
+      },
+      {
+        "code": "S-2.1",
+        "objective": "OBJ-2",
+        "title": "Identify illegal connections",
+        "tasks": [
+          "Hire or designate more people to investigate illegal connections",
+          "Improve the expertise of employees"
+        ]
+      },
+      {
+        "code": "S-2.2",
+        "objective": "OBJ-2",
+        "title": "Identify problematic old pipes / high physical NRW",
+        "tasks": [
+          "Establish 6 DMAs covering all TCWS service areas",
+          "Replace old pipes at Brgys. Manga, Ubujan, Taloto",
+          "Appoint and train personnel to operate the DMAs"
+        ]
+      },
+      {
+        "code": "S-3.1",
+        "objective": "OBJ-3",
+        "title": "Disconnection enforcement",
+        "tasks": [
+          "Review or revisit the service contracts",
+          "Establish baseline data"
+        ]
+      },
+      {
+        "code": "S-3.2",
+        "objective": "OBJ-3",
+        "title": "Staggered payments",
+        "tasks": [
+          "Establish a staggered accounts-receivable payment schedule",
+          "Establish policies on accounts receivable"
+        ]
+      },
+      {
+        "code": "S-4.1",
+        "objective": "OBJ-4",
+        "title": "Set up an LEE with ring-fenced accounts",
+        "tasks": [
+          "Ring-fence the waterworks account",
+          "Regularly evaluate job designations and descriptions"
+        ]
+      },
+      {
+        "code": "S-4.2",
+        "objective": "OBJ-4",
+        "title": "OPEX efficiency",
+        "tasks": [
+          "Develop and implement energy-efficiency measures (fuel and electricity)",
+          "Regularly monitor fuel and electricity unit costs"
+        ]
+      },
+      {
+        "code": "S-5.1",
+        "objective": "OBJ-5",
+        "title": "Formalize customer service standards",
+        "tasks": [
+          "No-water complaints: simple 24-48 h, complex 5-7 working days",
+          "Mainline leak reports: within 24 h",
+          "Illegal tapping: investigate within 2 days, charge penalty, connect meters",
+          "Customer bulletins: daily during emergencies, inform barangay leaders, promote Facebook page",
+          "New applications: inspect within 24-48 h, approve within 7 working days, payment then installation"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "code": "ACT-01",
+        "title": "New main lines to receive bulk water (400/300/250/200 mm)",
+        "intervention_type": "Network expansion",
+        "objective": "OBJ-1",
+        "goal": "G-1.1",
+        "strategy": "S-1.1",
+        "responsible": "Planning / technical team",
+        "expected_effect": "Billed volume; accept bulk supply",
+        "capex_by_year_php": {
+          "2027": 26111816,
+          "2028": 44400205,
+          "2029": 48905939
+        },
+        "later_capex_php": {
+          "2035": 24000000
+        },
+        "total_capex_2026_2029_php": 119417961,
+        "funding": "Grant (100%, as modeled in 02)",
+        "start": "2027",
+        "end": "2029",
+        "opex_change_by_year_php": {},
+        "effects": {
+          "connections": {
+            "2030": 10493,
+            "2034": 11128,
+            "2039": 11908
+          }
+        },
+        "source": {
+          "file": "02",
+          "loc": "Tagbilaran CAPEX&OPEX_realistic"
+        },
+        "gap_note": "Owner name, milestones and quantified KPI effects to be confirmed by TCWS",
+        "effects_note": "Connections from financial model (02), all expansion actions combined"
+      },
+      {
+        "code": "ACT-02",
+        "title": "Pipe replacement and reinforcement (Tiptip, Manga, Ubujan, Taloto)",
+        "intervention_type": "Pipe rehabilitation",
+        "objective": "OBJ-2",
+        "goal": "G-2.1",
+        "strategy": "S-2.2",
+        "responsible": "Technical team",
+        "expected_effect": "NRW reduction, pressure, availability",
+        "capex_by_year_php": {
+          "2026": 32150482,
+          "2027": 47242045,
+          "2028": 27965923,
+          "2029": 5736761
+        },
+        "later_capex_php": {},
+        "total_capex_2026_2029_php": 113095211,
+        "funding": "Grant (100%, as modeled in 02)",
+        "start": "2026",
+        "end": "2029",
+        "opex_change_by_year_php": {},
+        "effects": {},
+        "source": {
+          "file": "02",
+          "loc": "Tagbilaran CAPEX&OPEX_realistic"
+        },
+        "gap_note": "Owner name, milestones and quantified KPI effects to be confirmed by TCWS"
+      },
+      {
+        "code": "ACT-03",
+        "title": "Expansion of coverage (San Isidro, Cabawan, Booy, Dampas, Bool)",
+        "intervention_type": "Network expansion",
+        "objective": "OBJ-1",
+        "goal": "G-1.1",
+        "strategy": "S-1.1",
+        "responsible": "Technical team",
+        "expected_effect": "More connections and billed volume",
+        "capex_by_year_php": {
+          "2026": 7182493,
+          "2027": 7786275,
+          "2028": 5974928,
+          "2029": 1991643
+        },
+        "later_capex_php": {},
+        "total_capex_2026_2029_php": 22935338,
+        "funding": "Grant (100%, as modeled in 02)",
+        "start": "2026",
+        "end": "2029",
+        "opex_change_by_year_php": {},
+        "effects": {
+          "connections": {
+            "2030": 10493,
+            "2034": 11128,
+            "2039": 11908
+          }
+        },
+        "source": {
+          "file": "02",
+          "loc": "Tagbilaran CAPEX&OPEX_realistic"
+        },
+        "gap_note": "Owner name, milestones and quantified KPI effects to be confirmed by TCWS",
+        "effects_note": "Connections from financial model (02), all expansion actions combined"
+      },
+      {
+        "code": "ACT-04",
+        "title": "Customer meter replacement",
+        "intervention_type": "Meter replacement",
+        "objective": "OBJ-1",
+        "goal": "G-1.2",
+        "strategy": "S-1.3",
+        "responsible": "Commercial team",
+        "expected_effect": "Accurate billing; lower apparent losses",
+        "capex_by_year_php": {
+          "2026": 55587536,
+          "2027": 55587536,
+          "2028": 55587536
+        },
+        "later_capex_php": {},
+        "total_capex_2026_2029_php": 166762608,
+        "funding": "Grant (100%, as modeled in 02)",
+        "start": "2026",
+        "end": "2028",
+        "opex_change_by_year_php": {},
+        "effects": {},
+        "source": {
+          "file": "02",
+          "loc": "Tagbilaran CAPEX&OPEX_realistic"
+        },
+        "gap_note": "Owner name, milestones and quantified KPI effects to be confirmed by TCWS"
+      },
+      {
+        "code": "ACT-05",
+        "title": "NRW program: monitoring, 6 DMAs, calibrated hydraulic model",
+        "intervention_type": "District metered areas",
+        "objective": "OBJ-2",
+        "goal": "G-2.1",
+        "strategy": "S-2.2",
+        "responsible": "Technical team",
+        "expected_effect": "NRW to 20%",
+        "capex_by_year_php": {
+          "2026": 9000000,
+          "2027": 12000000
+        },
+        "later_capex_php": {},
+        "total_capex_2026_2029_php": 21000000,
+        "funding": "Grant (100%, as modeled in 02)",
+        "start": "2026",
+        "end": "2027",
+        "opex_change_by_year_php": {},
+        "effects": {
+          "nrw_path_pct": {
+            "2025": 40,
+            "2030": 26,
+            "2035": 20
+          }
+        },
+        "source": {
+          "file": "02",
+          "loc": "Tagbilaran CAPEX&OPEX_realistic"
+        },
+        "gap_note": "Owner name, milestones and quantified KPI effects to be confirmed by TCWS",
+        "effects_note": "System-wide NRW path from demand analysis (01 Table 23), shared with ACT-02"
+      },
+      {
+        "code": "ACT-06",
+        "title": "Reservoir rehabilitation and new tanks",
+        "intervention_type": "Storage",
+        "objective": "OBJ-1",
+        "goal": "G-1.1",
+        "strategy": "S-1.2",
+        "responsible": "Technical team",
+        "expected_effect": "Storage for bulk supply",
+        "capex_by_year_php": {
+          "2026": 6000000
+        },
+        "later_capex_php": {
+          "2035": 65036862
+        },
+        "total_capex_2026_2029_php": 6000000,
+        "funding": "Grant (100%, as modeled in 02)",
+        "start": "2026",
+        "end": "2026",
+        "opex_change_by_year_php": {},
+        "effects": {},
+        "source": {
+          "file": "02",
+          "loc": "Tagbilaran CAPEX&OPEX_realistic"
+        },
+        "gap_note": "Owner name, milestones and quantified KPI effects to be confirmed by TCWS"
+      },
+      {
+        "code": "ACT-07",
+        "title": "Pump and motor replacement (asset management plan)",
+        "intervention_type": "Asset renewal",
+        "objective": "OBJ-4",
+        "goal": "G-4.2",
+        "strategy": "S-4.2",
+        "responsible": "Pumping station heads",
+        "expected_effect": "Reliability; energy efficiency",
+        "capex_by_year_php": {
+          "2026": 4912500
+        },
+        "later_capex_php": {
+          "2035": 5512500
+        },
+        "total_capex_2026_2029_php": 4912500,
+        "funding": "Grant (100%, as modeled in 02)",
+        "start": "2026",
+        "end": "2026",
+        "opex_change_by_year_php": {},
+        "effects": {},
+        "source": {
+          "file": "02",
+          "loc": "Tagbilaran CAPEX&OPEX_realistic"
+        },
+        "gap_note": "Owner name, milestones and quantified KPI effects to be confirmed by TCWS"
+      },
+      {
+        "code": "ACT-08",
+        "title": "New booster stations",
+        "intervention_type": "Water security",
+        "objective": "OBJ-1",
+        "goal": "G-1.1",
+        "strategy": "S-1.2",
+        "responsible": "Technical team",
+        "expected_effect": "Pressure and supply to expansion areas",
+        "capex_by_year_php": {
+          "2028": 4411400,
+          "2029": 6617100
+        },
+        "later_capex_php": {
+          "2035": 4200000
+        },
+        "total_capex_2026_2029_php": 11028500,
+        "funding": "Grant (100%, as modeled in 02)",
+        "start": "2028",
+        "end": "2029",
+        "opex_change_by_year_php": {},
+        "effects": {},
+        "source": {
+          "file": "02",
+          "loc": "Tagbilaran CAPEX&OPEX_realistic"
+        },
+        "gap_note": "Owner name, milestones and quantified KPI effects to be confirmed by TCWS"
+      },
+      {
+        "code": "ACT-09",
+        "title": "Fleet, automation, temporary facilities and unplanned works",
+        "intervention_type": "Equipment",
+        "objective": "OBJ-5",
+        "goal": "G-5.1",
+        "strategy": "S-5.1",
+        "responsible": "Admin",
+        "expected_effect": "Response times; digitalization",
+        "capex_by_year_php": {
+          "2026": 44018915,
+          "2027": 7948915,
+          "2028": 7948915
+        },
+        "later_capex_php": {
+          "2035": 15307500
+        },
+        "total_capex_2026_2029_php": 59916746,
+        "funding": "Grant (100%, as modeled in 02)",
+        "start": "2026",
+        "end": "2028",
+        "opex_change_by_year_php": {},
+        "effects": {},
+        "source": {
+          "file": "02",
+          "loc": "Tagbilaran CAPEX&OPEX_realistic"
+        },
+        "gap_note": "Owner name, milestones and quantified KPI effects to be confirmed by TCWS"
+      },
+      {
+        "code": "ACT-10",
+        "title": "Detailed design, supervision, contingencies and environmental charges",
+        "intervention_type": "Project support",
+        "objective": "OBJ-4",
+        "goal": "G-4.1",
+        "strategy": "S-4.1",
+        "responsible": "Planning",
+        "expected_effect": "Project delivery",
+        "capex_by_year_php": {
+          "2026": 10221242,
+          "2027": 6278956,
+          "2028": 6278956,
+          "2029": 31394781
+        },
+        "later_capex_php": {},
+        "total_capex_2026_2029_php": 54173935,
+        "funding": "Grant (100%, as modeled in 02)",
+        "start": "2026",
+        "end": "2029",
+        "opex_change_by_year_php": {},
+        "effects": {},
+        "source": {
+          "file": "02",
+          "loc": "Tagbilaran CAPEX&OPEX_realistic"
+        },
+        "gap_note": "Owner name, milestones and quantified KPI effects to be confirmed by TCWS"
+      }
+    ],
+    "charters": [
+      {
+        "action": "ACT-02",
+        "project_name": "Pipe Replacement and Reinforcement",
+        "budget_php": 113100000.0,
+        "bp_capex_by_year_php_m": {
+          "2026": 32.15,
+          "2027": 47.24,
+          "2028": 27.97,
+          "2029": 5.74
+        },
+        "mission": "Reduce NRW, increase conveyance capacity and improve water availability and pressure in Brgys. Manga, Ubujan, Tiptip and Taloto.",
+        "completion_date": "2029",
+        "sponsor": null,
+        "project_manager": null,
+        "risks": null,
+        "milestones": null,
+        "source": {
+          "file": "01",
+          "loc": "\u00a72.4.1; Table 14"
+        }
+      },
+      {
+        "action": "ACT-03",
+        "project_name": "Expansion of Coverage",
+        "budget_php": 22930000.0,
+        "bp_capex_by_year_php_m": {
+          "2026": 7.18,
+          "2027": 7.79,
+          "2028": 5.97,
+          "2029": 1.99
+        },
+        "mission": "Increase service connections and billed volume in San Isidro, Cabawan, Booy, Dampas and Bool.",
+        "completion_date": "2029",
+        "sponsor": null,
+        "project_manager": null,
+        "risks": null,
+        "milestones": null,
+        "source": {
+          "file": "01",
+          "loc": "\u00a72.4.1; Table 14"
+        }
+      },
+      {
+        "action": "ACT-01",
+        "project_name": "New Main Lines",
+        "budget_php": 119420000.0,
+        "bp_capex_by_year_php_m": {
+          "2027": 26.11,
+          "2028": 44.4,
+          "2029": 48.91
+        },
+        "mission": "Build main lines to accept the increased supply from the provincial bulk water project.",
+        "completion_date": "2029",
+        "sponsor": null,
+        "project_manager": null,
+        "risks": null,
+        "milestones": null,
+        "source": {
+          "file": "01",
+          "loc": "\u00a72.4.1; Table 14"
+        }
+      }
+    ],
+    "priorities_from_mayor": [
+      {
+        "priority": "Digitalize processes and improve the billing system",
+        "decision": "include as initiative"
+      },
+      {
+        "priority": "Permanent heads for critical assets such as pumping stations",
+        "decision": "include as initiative"
+      },
+      {
+        "priority": "Tariff increases balanced with better service",
+        "decision": "include in objective OBJ-4/OBJ-5"
+      },
+      {
+        "priority": "TCWS will not be sold to the private sector",
+        "decision": "policy constraint"
+      }
+    ],
+    "source": {
+      "file": "01",
+      "loc": "\u00a72.4.1; 02"
+    }
+  },
+  "module5": {
+    "actuals": [
+      {
+        "year": 2020,
+        "collections_php": 18741029.89,
+        "opex_php": 17125593,
+        "opex_confidence": "reported"
+      },
+      {
+        "year": 2021,
+        "collections_php": 19858823.78,
+        "opex_php": 19450006,
+        "opex_confidence": "reported"
+      },
+      {
+        "year": 2022,
+        "collections_php": 21121407.28,
+        "opex_php": 21015606,
+        "opex_confidence": "calculated"
+      },
+      {
+        "year": 2023,
+        "collections_php": 23144634.58,
+        "opex_php": 26107632,
+        "opex_confidence": "calculated"
+      },
+      {
+        "year": 2024,
+        "collections_php": 22887685.65,
+        "opex_php": 32409809,
+        "opex_confidence": "estimated"
+      },
+      {
+        "year": 2025,
+        "collections_php": 12036951.99,
+        "opex_php": null,
+        "opex_confidence": null
+      }
+    ],
+    "business_plan": {
+      "capex_by_year_php": {
+        "2026": 169073167.305,
+        "2027": 162955543.989,
+        "2028": 152567864.309,
+        "2029": 94646223.397,
+        "2035": 114056861.657
+      },
+      "capex_by_category_2026_2029_php": {
+        "service_accessibility": 282448509,
+        "service_continuity": 171675108,
+        "equipment_and_others": 59916746,
+        "ded_and_supervision": 25115825,
+        "contingencies": 25115825,
+        "water_security": 11028500,
+        "environmental": 3942285
+      },
+      "capex_npv_php": 498648306.623,
+      "opex_assumptions": {
+        "inflation": 0.05,
+        "staff_ratio_connections": 250,
+        "avg_salary_php_month": 19090,
+        "months_paid": 13,
+        "power_php_m3": 13.13,
+        "chemical_php_m3": 0.5,
+        "bulk_php_m3": {
+          "y2030_2034": 19.85,
+          "y2035_2039": 25.8
+        },
+        "misc_pct": 0.05,
+        "service_fee_pct": 0.1
+      },
+      "opex_php": {
+        "2030": 266854479.778,
+        "2031": 233682598.695,
+        "2032": 241784175.08,
+        "2033": 250331635.146,
+        "2034": 259353024.034,
+        "2035": 309865209.976,
+        "2036": 320071546.118,
+        "2037": 330830569.575,
+        "2038": 342176824.955,
+        "2039": 354147169.764
+      },
+      "opex_lines_2030_php": {
+        "salaries": 10416191.24,
+        "power": 87835897.314,
+        "chemicals": 0,
+        "bulk_water": 132790751.08,
+        "misc": 11552141.982,
+        "service_fee": 24259498.162
+      },
+      "depreciation": {
+        "life_years": 25,
+        "annual_php": {
+          "2030": 23169711.96,
+          "2031": 23169711.96,
+          "2032": 23169711.96,
+          "2033": 23169711.96,
+          "2034": 23169711.96,
+          "2035": 27731986.426,
+          "2036": 27731986.426,
+          "2037": 27731986.426,
+          "2038": 27731986.426,
+          "2039": 27731986.426
+        }
+      },
+      "financing": {
+        "grant_pct": 1.0,
+        "loan_pct": 0,
+        "equity_pct": 0,
+        "interest_rate": 0.05,
+        "repayment_years": 30,
+        "interest_php": 0
+      },
+      "working_capital_months": 2,
+      "required_revenue_php": {
+        "2030": 334499938.367,
+        "2031": 295799410.437,
+        "2032": 305251249.553,
+        "2033": 315223286.297,
+        "2034": 325748240.0,
+        "2035": 389241398.064,
+        "2036": 401148790.23,
+        "2037": 413700984.263,
+        "2038": 426938282.207,
+        "2039": 440903684.485
+      },
+      "demand": {
+        "connections": {
+          "2030": 10493,
+          "2031": 10648,
+          "2032": 10806,
+          "2033": 10966,
+          "2034": 11128,
+          "2035": 11292,
+          "2036": 11443,
+          "2037": 11596,
+          "2038": 11751,
+          "2039": 11908
+        },
+        "bbwsp_m3": {
+          "2030": 6689710.382,
+          "2031": 5685015.885,
+          "2032": 5753992.534,
+          "2033": 5824193.711,
+          "2034": 5895652.226,
+          "2035": 5967804.284,
+          "2036": 6035096.368,
+          "2037": 6103550.55,
+          "2038": 6173202.084,
+          "2039": 6244088.277
+        },
+        "pwsp_m3": {
+          "2030": 8557477.465,
+          "2031": 8621012.614,
+          "2032": 8741461.16,
+          "2033": 8865025.375,
+          "2034": 8991863.288,
+          "2035": 9122144.767,
+          "2036": 9246266.655,
+          "2037": 9373936.712,
+          "2038": 9505360.83,
+          "2039": 9640761.131
+        },
+        "deep_wells_m3": 0
+      },
+      "source": {
+        "file": "02",
+        "loc": "INPUT DATA, OPEX, DEPRCTN SCHED, AMORT SCHED, TARIFF CALC, FORMULA, CAPEX&OPEX_realistic"
+      }
+    },
+    "baseline": {
+      "gap_note": "No projections for the status-quo scenario in the sources"
+    }
+  },
+  "module6": {
+    "current_tariff": {
+      "effective": "2016-09",
+      "minimum_charge_php": 62.0,
+      "minimum_m3": 10,
+      "blocks_php_m3": [
+        [
+          11,
+          20,
+          7
+        ],
+        [
+          21,
+          30,
+          8
+        ],
+        [
+          31,
+          40,
+          11
+        ],
+        [
+          41,
+          50,
+          14
+        ],
+        [
+          51,
+          60,
+          17
+        ],
+        [
+          61,
+          70,
+          20
+        ],
+        [
+          71,
+          null,
+          23
+        ]
+      ],
+      "commercial_php_m3": 23.0,
+      "late_penalty": 0.15,
+      "due_dates": {
+        "Ubujan, Uptown, Cabawan": 7,
+        "Booy, Manga (Zones 6-7)": 15,
+        "Dao, Taloto (Zone 9), San Isidro, Bool": 21,
+        "Cogon, Taloto (Zone 8), Tiptip": 30
+      },
+      "bills_php": {
+        "m10": 62,
+        "m20": 132,
+        "m30": 212
+      },
+      "source": {
+        "file": "06",
+        "loc": "photo"
+      }
+    },
+    "customer_classes_2025": {
+      "residential": 6254,
+      "commercial": 31,
+      "institutional": 29
+    },
+    "avg_consumption_m3_month": 25.1,
+    "collection_rate": null,
+    "should_be_tariff_php_m3": {
+      "2020": 9.83,
+      "2021": 10.76,
+      "2022": 12.32,
+      "2023": 13.76,
+      "2024": 17.68
+    },
+    "required_tariff": {
+      "source_basis_php_m3": {
+        "2030": 21.938,
+        "2031": 20.677,
+        "2032": 21.058,
+        "2033": 21.459,
+        "2034": 21.881,
+        "2035": 25.795,
+        "2036": 26.251,
+        "2037": 26.729,
+        "2038": 27.231,
+        "2039": 27.756
+      },
+      "tcws_volume_only_php_m3": {
+        "2030": 50.0,
+        "2031": 52.03,
+        "2032": 53.05,
+        "2033": 54.12,
+        "2034": 55.25
+      },
+      "volume_sold_m3": {
+        "2030": 15247187.847,
+        "2031": 14306028.499,
+        "2032": 14495453.694,
+        "2033": 14689219.087,
+        "2034": 14887515.514,
+        "2035": 15089949.051,
+        "2036": 15281363.023,
+        "2037": 15477487.262,
+        "2038": 15678562.914,
+        "2039": 15884849.408
+      }
+    },
+    "proposed_tariff": {
+      "y2030_2034": {
+        "minimum_charge_php": 214.03,
+        "blocks_php_m3": [
+          [
+            11,
+            20,
+            22.47
+          ],
+          [
+            21,
+            30,
+            23.6
+          ],
+          [
+            31,
+            40,
+            24.78
+          ],
+          [
+            41,
+            50,
+            26.02
+          ],
+          [
+            51,
+            null,
+            27.32
+          ]
+        ]
+      },
+      "y2035_2039": {
+        "minimum_charge_php": 267.52,
+        "blocks_php_m3": [
+          [
+            11,
+            20,
+            28.09
+          ],
+          [
+            21,
+            30,
+            29.49
+          ],
+          [
+            31,
+            40,
+            30.97
+          ],
+          [
+            41,
+            50,
+            32.52
+          ],
+          [
+            51,
+            null,
+            34.14
+          ]
+        ]
+      },
+      "source": {
+        "file": "02",
+        "loc": "TARIFF CALC; 01 Table 17"
+      }
+    },
+    "bill_comparison_php_month": {
+      "TCWS_proposed": {
+        "m10": 214.03,
+        "m20": 438.76,
+        "m30": 674.72
+      },
+      "BWUI": {
+        "m10": 200.0,
+        "m20": 436.0,
+        "m30": 724.0
+      },
+      "Richli": {
+        "m10": 437.91,
+        "m20": 898.21,
+        "m30": 1379.81
+      },
+      "source": {
+        "file": "01",
+        "loc": "Table 18"
+      }
+    },
+    "affordability": {
+      "statement": "Proposed 2030-2034 tariff about 2% of the average income of the low-income group",
+      "income": null,
+      "source": {
+        "file": "01",
+        "loc": "\u00a72.4.3"
+      }
+    },
+    "scenarios": [
+      "Current tariff (2016)",
+      "Should-be tariff (OPEX only)",
+      "Proposed tariff (source 02 basis)",
+      "Required tariff on TCWS volume only"
+    ]
+  },
+  "module7": {
+    "kpis": [
+      {
+        "code": "water_coverage",
+        "baseline": 32.7,
+        "baseline_period": null,
+        "standard": "Per 5-year business plan",
+        "monitoring_method": "Monthly water service connections record",
+        "frequency": "monthly",
+        "targets": null,
+        "gap_note": null
+      },
+      {
+        "code": "water_quality",
+        "baseline": 90,
+        "baseline_period": null,
+        "standard": "Compliance with PNSDW targets",
+        "monitoring_method": "Bacteriological and physico-chemical test results",
+        "frequency": "monthly (bacteriological), semi-annual (physico-chemical)",
+        "targets": {
+          "any": 100
+        },
+        "gap_note": null
+      },
+      {
+        "code": "water_availability",
+        "baseline": "22-24",
+        "baseline_period": null,
+        "standard": "At least 18 hours",
+        "monitoring_method": "Customer complaints records",
+        "frequency": "daily",
+        "targets": {
+          "any": 18,
+          "2035": 24
+        },
+        "gap_note": null
+      },
+      {
+        "code": "nrw",
+        "baseline": 31.3,
+        "baseline_period": "H1 2025",
+        "standard": "20% or below",
+        "monitoring_method": "Production and actual billed volume data",
+        "frequency": "monthly",
+        "targets": {
+          "2030": 26,
+          "2035": 20
+        },
+        "gap_note": null
+      },
+      {
+        "code": "water_pressure",
+        "baseline": null,
+        "baseline_period": null,
+        "standard": "At least 8 psi",
+        "monitoring_method": "Pressure monitoring readings",
+        "frequency": "every 2 weeks, off-peak and peak",
+        "targets": {
+          "any": 8
+        },
+        "gap_note": "Baseline data needed"
+      },
+      {
+        "code": "operating_ratio",
+        "baseline": 1.13,
+        "baseline_period": "2023",
+        "standard": "1.00 (see open issue on direction)",
+        "monitoring_method": "Financial data",
+        "frequency": "monthly",
+        "targets": {
+          "any": 1.0
+        },
+        "gap_note": null
+      },
+      {
+        "code": "collection_efficiency",
+        "baseline": null,
+        "baseline_period": null,
+        "standard": "Not less than 95%",
+        "monitoring_method": "Financial data",
+        "frequency": "monthly",
+        "targets": {
+          "any": 95
+        },
+        "gap_note": "Baseline data needed"
+      },
+      {
+        "code": "avg_tariff",
+        "baseline": 12.49,
+        "baseline_period": "2024",
+        "standard": null,
+        "monitoring_method": null,
+        "frequency": null,
+        "targets": null,
+        "gap_note": null
+      },
+      {
+        "code": "staff_per_1000",
+        "baseline": 3.8,
+        "baseline_period": null,
+        "standard": "1 regular staff per 100 connections (draft JMC); 1:250 industry average",
+        "monitoring_method": "Staff and connections records",
+        "frequency": "annually",
+        "targets": {
+          "any": 4
+        },
+        "gap_note": null
+      },
+      {
+        "code": "metered_connections",
+        "baseline": null,
+        "baseline_period": null,
+        "standard": null,
+        "monitoring_method": null,
+        "frequency": null,
+        "targets": null,
+        "gap_note": "Baseline data needed"
+      },
+      {
+        "code": "avg_consumption",
+        "baseline": 25.1,
+        "baseline_period": "H1 2025",
+        "standard": null,
+        "monitoring_method": null,
+        "frequency": null,
+        "targets": null,
+        "gap_note": null
+      },
+      {
+        "code": "desludged_tanks",
+        "baseline": null,
+        "baseline_period": null,
+        "standard": "Annual target",
+        "monitoring_method": null,
+        "frequency": null,
+        "targets": null,
+        "gap_note": "Baseline data needed"
+      }
+    ],
+    "actuals_2025_monthly": {
+      "production_m3": {
+        "Jan": 231138,
+        "Feb": 228560,
+        "Mar": 241223,
+        "Apr": 241234,
+        "May": 221798,
+        "Jun": 221997
+      },
+      "billed_m3": {
+        "Jan": 171620,
+        "Feb": 149775,
+        "Mar": 149048,
+        "Apr": 151038,
+        "May": 175997,
+        "Jun": 154716
+      },
+      "collections_php": {
+        "Jan": 2047999.41,
+        "Feb": 1512149.49,
+        "Mar": 1804275.86,
+        "Apr": 1392153.07,
+        "May": 1805756.76,
+        "Jun": 1566736.28,
+        "Jul": 1907881.12
+      }
+    },
+    "tracking": {
+      "team": null,
+      "cadence": null,
+      "gap_note": "Tracking team and meeting cadence to be set"
+    }
+  },
+  "module8": {
+    "open_issues": [
+      "Financial model (02) divides required revenue by PWSP+BBWSP volume; PWSP equals private WSP supply in the demand analysis. Required tariff on TCWS volume only is about PhP 50/m3 (2030) vs 21.94.",
+      "Connections 2025: 6,314 (05, latest record) vs 6,084 (01, June 2025, older class breakdown).",
+      "OPEX 2022-2023 are calculated in 01 Table 16; OPEX 2024 is estimated from the should-be tariff.",
+      "Collections are used as water sales; billings are not available, so collection efficiency cannot be computed.",
+      "Draft JMC lists operating ratio 'at least 1.00'; the model's FORMULA sheet defines operating ratio = OPEX/revenue, so the target is applied as 1.00 or below."
+    ],
+    "executive_summary": null,
+    "gap_note": "Executive summary to be written and approved by TCWS",
+    "events": [
+      {
+        "date": "2025-11",
+        "audience": "Local chief executive",
+        "format": "presentation (online)"
+      }
+    ]
+  },
+  "load_state": {
+    "module_status": {
+      "1": "in_progress",
+      "2": "in_progress",
+      "3": "ready_for_review",
+      "4": "in_progress",
+      "5": "in_progress",
+      "6": "in_progress",
+      "7": "needs_data",
+      "8": "not_started"
+    }
+  }
+}

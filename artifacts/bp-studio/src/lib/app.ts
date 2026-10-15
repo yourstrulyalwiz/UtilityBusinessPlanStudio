@@ -11,11 +11,11 @@ export function useMe(): Person {
   return useProfile().person;
 }
 
-export const PHASE_COLORS = ["#1ED3D9", "#5A6780", "#D9E950", "#FF6A0D"];
+export const PHASE_COLORS = ["#1ED3D9", "#127A80", "#D9E950", "#70AD47", "#FF6A0D", "#5A6780", "#1ED3D9", "#D9E950"];
 export function phaseColor(code: string, index?: number) {
   const m = code.match(/(\d)/);
   const i = m ? Number(m[1]) - 1 : index ?? 0;
-  return PHASE_COLORS[((i % 4) + 4) % 4];
+  return PHASE_COLORS[((i % 8) + 8) % 8];
 }
 
 export const ROLE_LABEL: Record<string, string> = {

@@ -25,7 +25,10 @@ import type {
   BeginBrowserLoginParams,
   DemoInput,
   DemoResult,
+  ExportModulePlan200,
+  GetLegacyCopy200,
   GetTestMode200,
+  GuidanceTopicUpdate,
   HealthStatus,
   ListUtilitiesParams,
   LogoutBrowserSessionParams,
@@ -34,6 +37,10 @@ import type {
   Metadata,
   MobileTokenExchangeRequest,
   MobileTokenExchangeSuccess,
+  ModuleAction,
+  ModuleGuidanceLibrary,
+  ModuleGuidanceTopic,
+  ModulePlan,
   Notification,
   Person,
   PersonInput,
@@ -84,6 +91,458 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export const getGetModulePlanUrl = (id: string,) => {
+
+
+
+
+  return `/api/plans/${id}/modules`
+}
+
+export const getModulePlan = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<ModulePlan> => {
+
+  return customFetch<ModulePlan>(getGetModulePlanUrl(id),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetModulePlanQueryKey = (id: string,) => {
+    return [
+    `/api/plans/${id}/modules`
+    ] as const;
+    }
+
+
+export const getGetModulePlanQueryOptions = <TData = Awaited<ReturnType<typeof getModulePlan>>, TError = ErrorType<unknown>>(id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getModulePlan>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetModulePlanQueryKey(id);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getModulePlan>>> = ({ signal }) => getModulePlan(id, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: id !== null && id !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getModulePlan>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetModulePlanQueryResult = NonNullable<Awaited<ReturnType<typeof getModulePlan>>>
+export type GetModulePlanQueryError = ErrorType<unknown>
+
+
+
+export function useGetModulePlan<TData = Awaited<ReturnType<typeof getModulePlan>>, TError = ErrorType<unknown>>(
+ id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getModulePlan>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetModulePlanQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getUpdateModuleUrl = (id: string,
+    number: number,) => {
+
+
+
+
+  return `/api/plans/${id}/modules/${number}`
+}
+
+export const updateModule = async (id: string,
+    number: number,
+    moduleAction: ModuleAction, options?: Parameters<typeof customFetch>[1]): Promise<ModulePlan> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<ModulePlan>(getUpdateModuleUrl(id,number),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(moduleAction)
+  }
+);}
+
+
+
+
+
+export const getUpdateModuleMutationKey = () => ['updateModule'] as const;
+
+export const getUpdateModuleMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateModule>>, TError,UpdateModuleMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateModule>>, TError,UpdateModuleMutationVariables, TContext> => {
+
+const mutationKey = getUpdateModuleMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateModule>>, UpdateModuleMutationVariables> = (props) => {
+          const {id,number,data} = props ?? {};
+
+          return  updateModule(id,number,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateModuleMutationResult = NonNullable<Awaited<ReturnType<typeof updateModule>>>
+    export type UpdateModuleMutationBody = BodyType<ModuleAction>
+    export type UpdateModuleMutationError = ErrorType<unknown>
+    export type UpdateModuleMutationVariables = {id: string;number: number;data: BodyType<ModuleAction>}
+
+    export const useUpdateModule = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateModule>>, TError,UpdateModuleMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateModule>>,
+        TError,
+        UpdateModuleMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUpdateModuleMutationOptions(options));
+    }
+
+export const getGetLegacyCopyUrl = (id: string,) => {
+
+
+
+
+  return `/api/plans/${id}/legacy-copy`
+}
+
+export const getLegacyCopy = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<GetLegacyCopy200> => {
+
+  return customFetch<GetLegacyCopy200>(getGetLegacyCopyUrl(id),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetLegacyCopyQueryKey = (id: string,) => {
+    return [
+    `/api/plans/${id}/legacy-copy`
+    ] as const;
+    }
+
+
+export const getGetLegacyCopyQueryOptions = <TData = Awaited<ReturnType<typeof getLegacyCopy>>, TError = ErrorType<unknown>>(id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getLegacyCopy>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetLegacyCopyQueryKey(id);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getLegacyCopy>>> = ({ signal }) => getLegacyCopy(id, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: id !== null && id !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getLegacyCopy>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetLegacyCopyQueryResult = NonNullable<Awaited<ReturnType<typeof getLegacyCopy>>>
+export type GetLegacyCopyQueryError = ErrorType<unknown>
+
+
+
+export function useGetLegacyCopy<TData = Awaited<ReturnType<typeof getLegacyCopy>>, TError = ErrorType<unknown>>(
+ id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getLegacyCopy>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetLegacyCopyQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getExportModulePlanUrl = (id: string,) => {
+
+
+
+
+  return `/api/plans/${id}/module-export`
+}
+
+export const exportModulePlan = async (id: string, options?: Parameters<typeof customFetch>[1]): Promise<ExportModulePlan200> => {
+
+  return customFetch<ExportModulePlan200>(getExportModulePlanUrl(id),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getExportModulePlanQueryKey = (id: string,) => {
+    return [
+    `/api/plans/${id}/module-export`
+    ] as const;
+    }
+
+
+export const getExportModulePlanQueryOptions = <TData = Awaited<ReturnType<typeof exportModulePlan>>, TError = ErrorType<unknown>>(id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof exportModulePlan>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getExportModulePlanQueryKey(id);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof exportModulePlan>>> = ({ signal }) => exportModulePlan(id, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: id !== null && id !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof exportModulePlan>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ExportModulePlanQueryResult = NonNullable<Awaited<ReturnType<typeof exportModulePlan>>>
+export type ExportModulePlanQueryError = ErrorType<unknown>
+
+
+
+export function useExportModulePlan<TData = Awaited<ReturnType<typeof exportModulePlan>>, TError = ErrorType<unknown>>(
+ id: string, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof exportModulePlan>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getExportModulePlanQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getGetGuidanceLibraryUrl = () => {
+
+
+
+
+  return `/api/guidance-library`
+}
+
+export const getGuidanceLibrary = async ( options?: Parameters<typeof customFetch>[1]): Promise<ModuleGuidanceLibrary> => {
+
+  return customFetch<ModuleGuidanceLibrary>(getGetGuidanceLibraryUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetGuidanceLibraryQueryKey = () => {
+    return [
+    `/api/guidance-library`
+    ] as const;
+    }
+
+
+export const getGetGuidanceLibraryQueryOptions = <TData = Awaited<ReturnType<typeof getGuidanceLibrary>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getGuidanceLibrary>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetGuidanceLibraryQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getGuidanceLibrary>>> = ({ signal }) => getGuidanceLibrary({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getGuidanceLibrary>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetGuidanceLibraryQueryResult = NonNullable<Awaited<ReturnType<typeof getGuidanceLibrary>>>
+export type GetGuidanceLibraryQueryError = ErrorType<unknown>
+
+
+
+export function useGetGuidanceLibrary<TData = Awaited<ReturnType<typeof getGuidanceLibrary>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getGuidanceLibrary>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetGuidanceLibraryQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+
+export const getUpdateGuidanceTopicUrl = (id: string,) => {
+
+
+
+
+  return `/api/guidance-library/${id}`
+}
+
+export const updateGuidanceTopic = async (id: string,
+    guidanceTopicUpdate: GuidanceTopicUpdate, options?: Parameters<typeof customFetch>[1]): Promise<ModuleGuidanceTopic> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<ModuleGuidanceTopic>(getUpdateGuidanceTopicUrl(id),
+  {
+    ...options,
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(guidanceTopicUpdate)
+  }
+);}
+
+
+
+
+
+export const getUpdateGuidanceTopicMutationKey = () => ['updateGuidanceTopic'] as const;
+
+export const getUpdateGuidanceTopicMutationOptions = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateGuidanceTopic>>, TError,UpdateGuidanceTopicMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateGuidanceTopic>>, TError,UpdateGuidanceTopicMutationVariables, TContext> => {
+
+const mutationKey = getUpdateGuidanceTopicMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateGuidanceTopic>>, UpdateGuidanceTopicMutationVariables> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  updateGuidanceTopic(id,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateGuidanceTopicMutationResult = NonNullable<Awaited<ReturnType<typeof updateGuidanceTopic>>>
+    export type UpdateGuidanceTopicMutationBody = BodyType<GuidanceTopicUpdate>
+    export type UpdateGuidanceTopicMutationError = ErrorType<unknown>
+    export type UpdateGuidanceTopicMutationVariables = {id: string;data: BodyType<GuidanceTopicUpdate>}
+
+    export const useUpdateGuidanceTopic = <TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateGuidanceTopic>>, TError,UpdateGuidanceTopicMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateGuidanceTopic>>,
+        TError,
+        UpdateGuidanceTopicMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUpdateGuidanceTopicMutationOptions(options));
+    }
 
 export const getGetWorkflowUrl = (id: string,) => {
 

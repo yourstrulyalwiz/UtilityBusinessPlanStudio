@@ -407,3 +407,12 @@ body,.studio-surface{background-color:#F7F9FB;background-image:radial-gradient(9
 .rise:nth-child(2){animation-delay:.05s}.rise:nth-child(3){animation-delay:.1s}.rise:nth-child(4){animation-delay:.15s}
 @media (prefers-reduced-motion:reduce){.rise{animation:none}.lift,.lift:hover{transition:none;transform:none}*{scroll-behavior:auto}}
 @media (prefers-reduced-transparency:reduce){.glass,.glass-light{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}.glass-bar{background:#323D4F;-webkit-backdrop-filter:none;backdrop-filter:none}.glass-metric{background:#3B475B;-webkit-backdrop-filter:none;backdrop-filter:none}}
+
+@media print {
+  body * { visibility: hidden; }
+  .print-report, .print-report * { visibility: visible; }
+  body:has(.report-dialog) #root { display: none; }
+  .report-dialog { position: static; transform: none; width: 100%; max-width: none; height: auto; max-height: none; overflow: visible; display: block; border: 0; box-shadow: none; padding: 0; }
+  .report-dialog > :not(.print-report) { display: none; }
+  .print-report { position: static; padding: 12px; overflow: visible; }
+}

@@ -1,8 +1,6 @@
 import { Plus, Trash2 } from "lucide-react";
 import { inputCls } from "@/components/kit";
 import { cn } from "@/lib/utils";
-import { HelpDot } from "@/components/guidance";
-import { topicForField, hintForField } from "@/lib/guidance";
 
 export type Json = string | number | boolean | null | Json[] | { [k: string]: Json };
 
@@ -43,7 +41,8 @@ export function meaningful(v: unknown): boolean {
   return false;
 }
 
-export const label = (k: string) => k.replace(/^_+/, "").replace(/[_-]+/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (c) => c.toUpperCase());
+const NEUTRAL: Record<string, string> = { uof_element: "Functional area", uof_elements: "Functional areas", uof_maturity: "Maturity assessment", uof_maturity_assessment: "Maturity assessment", uof: "Historical framework reference" };
+export const label = (k: string) => NEUTRAL[k] ?? k.replace(/^_+/, "").replace(/[_-]+/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (c) => c.toUpperCase());
 
 type Props = { value: Json; example: unknown; onChange?: (v: Json) => void; readOnly?: boolean; path: string; depth?: number };
 
@@ -60,8 +59,7 @@ export function FieldEditor({ value, example, onChange, readOnly, path, depth = 
           const child = ex[k] ?? v[k];
           const complex = isObj(child) || Array.isArray(child);
           const node = <FieldEditor value={v[k] === undefined ? blankFrom(child) : v[k]} example={child} readOnly={readOnly} path={`${path}.${k}`} depth={depth + 1} onChange={(nv) => onChange?.({ ...v, [k]: nv })} />;
-          const topic = depth <= 2 ? topicForField(k,path) : undefined;
-          const help = topic && <HelpDot topicId={topic.id} label={label(k)} hint={hintForField(k, topic)} testid={`button-field-help-${tid}-${k}`.replace(/[^a-zA-Z0-9-]+/g, "-")} />;
+          const help = null;
           return complex ? (
             <fieldset key={k} className="col-span-full min-w-0 rounded-lg border border-[#323D4F]/10 bg-[#323D4F]/[.015] p-4" style={{ borderLeft: `3px solid ${depth % 2 ? "#127A80" : "#1ED3D9"}` }}>
               <legend className="flex items-center gap-1 px-1.5 text-[12px] font-semibold uppercase tracking-wider text-[#323D4F]">{label(k)}{help}</legend>

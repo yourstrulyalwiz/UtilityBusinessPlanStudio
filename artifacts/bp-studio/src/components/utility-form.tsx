@@ -63,7 +63,7 @@ export function UtilityForm({ initial, submitLabel, pending, onSubmit, onCancel 
   const users = useListUsers({ query: { queryKey: getListUsersQueryKey() } });
   const ttls = (users.data ?? []).filter((u) => (u.role === "ttl" || u.id === "00000000-0000-4000-8000-000000000001") && u.isActive);
   const [v, setV] = useState<UtilityInput>({
-    name: "", shortName: "", countryIso3: "", serviceArea: "", ttlUserId: "", planYear: YEAR, currency: "USD", uofCompletionDate: null, wbProjectId: "", logoPath: null, ...initial,
+    name: "", shortName: "", countryIso3: "", serviceArea: "", ttlUserId: "", planYear: YEAR, currency: "USD", wbProjectId: "", logoPath: null, ...initial,
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const set = <K extends keyof UtilityInput>(k: K, val: UtilityInput[K]) => setV((s) => ({ ...s, [k]: val }));
@@ -79,7 +79,7 @@ export function UtilityForm({ initial, submitLabel, pending, onSubmit, onCancel 
     if (v.wbProjectId && !/^P\d{6}$/.test(v.wbProjectId)) er.wbProjectId = "Format: P followed by 6 digits, e.g. P178123.";
     setErrors(er);
     if (Object.keys(er).length) return;
-    onSubmit({ ...v, name: v.name.trim(), serviceArea: v.serviceArea.trim(), shortName: v.shortName?.trim() || undefined, wbProjectId: v.wbProjectId || undefined, uofCompletionDate: v.uofCompletionDate || null, currency: v.currency || "USD" });
+    onSubmit({ ...v, name: v.name.trim(), serviceArea: v.serviceArea.trim(), shortName: v.shortName?.trim() || undefined, wbProjectId: v.wbProjectId || undefined, currency: v.currency || "USD" });
   };
 
   return (
@@ -113,7 +113,6 @@ export function UtilityForm({ initial, submitLabel, pending, onSubmit, onCancel 
         <Field label="Currency"><input className={inputCls + " uppercase"} value={v.currency ?? ""} maxLength={3} onChange={(e) => set("currency", e.target.value.toUpperCase())} data-testid="input-currency" /></Field>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="UoF completion date"><input type="date" className={inputCls} value={v.uofCompletionDate ?? ""} onChange={(e) => set("uofCompletionDate", e.target.value || null)} data-testid="input-completion-date" /></Field>
         <Field label="WB project ID" error={errors.wbProjectId} hint="Optional, e.g. P178123"><input className={inputCls} value={v.wbProjectId ?? ""} maxLength={7} onChange={(e) => set("wbProjectId", e.target.value.toUpperCase())} data-testid="input-wb-project" /></Field>
       </div>
       <Field label="Logo"><LogoPicker value={v.logoPath ?? null} onChange={(p) => set("logoPath", p)} /></Field>

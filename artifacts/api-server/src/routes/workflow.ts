@@ -1,12 +1,11 @@
 import { Router, type IRouter } from "express";
-import { db, plans, planActivities, comments } from "@workspace/db";
+import { db, plans, planActivities, comments, modulePlans } from "@workspace/db";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod/v4";
 import { actor, accessibleUtility, uuid, HttpError, writeAudit } from "../lib/studio";
 import { workflow, blockedReason, examples } from "../lib/workflow";
 import { activitySeed, progressOf } from "../lib/playbook";
 import { activityGuide, hasContent, schemaForExample } from "../lib/activity-guide";
-import { ensureDemo } from "../lib/import-demo";
 import { openAccessEnabled } from "../lib/open-access";
 import { isTagPlan, tagExamples, tagGuide } from "../lib/tagbilaran";
 
@@ -23,11 +22,16 @@ router.post("/demo-plan",async(req,res)=>{
   // Supplied examples use the test identity; closed-mode demo provisioning needs a real TTL.
   if(!openAccessEnabled())throw new HttpError(403,"Demo imports are available only in open-access test mode.");
   const {mode}=z.object({mode:z.enum(["complete","midway"])}).parse(req.body);
-  res.json(await ensureDemo(p,mode));
+  const examples=await db.select().from(modulePlans).where(eq(modulePlans.kind,"fictional"));
+  const example=examples[mode==="midway"&&examples.length>1?1:0];
+  if(!example)throw new HttpError(404,"The supplied Valle Verde example has not been loaded.");
+  res.json({planId:example.planId});
 });
 router.post("/plans/:id/activities/:code",async(req,res)=>{
   const p=await actor(req,["admin","ttl","editor"]);
   const id=uuid(req.params.id),code=String(req.params.code);
+  const [converted]=await db.select().from(modulePlans).where(eq(modulePlans.planId,id));
+  if(converted)throw new HttpError(409,"This plan uses eight modules now. Its previous activities are archived and cannot be changed.");
   if(!activityGuide[code])throw new HttpError(404,"Activity not found.");
   const input=actionBody.parse(req.body);
   if(["approve","return","reopen"].includes(input.action)&&!["admin","ttl"].includes(p.role))

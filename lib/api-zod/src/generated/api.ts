@@ -7,6 +7,134 @@
 import * as zod from 'zod';
 
 
+export const GetModulePlanParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+export const GetModulePlanResponse = zod.object({
+  "planId": zod.string(),
+  "utilityName": zod.string(),
+  "source": zod.string(),
+  "exampleSource": zod.string(),
+  "kind": zod.string(),
+  "context": zod.record(zod.string(), zod.unknown()),
+  "scenarios": zod.array(zod.unknown()),
+  "modules": zod.array(zod.object({
+  "number": zod.number().int(),
+  "title": zod.string(),
+  "description": zod.string(),
+  "status": zod.string(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "example": zod.record(zod.string(), zod.unknown()),
+  "updatedAt": zod.string(),
+  "feedback": zod.string()
+})),
+  "progress": zod.number(),
+  "canEdit": zod.boolean(),
+  "canReview": zod.boolean(),
+  "hasLegacyCopy": zod.boolean(),
+  "guidance": zod.array(zod.object({
+  "id": zod.string(),
+  "module": zod.number().int(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "updatedAt": zod.string()
+})),
+  "catalog": zod.record(zod.string(), zod.unknown()),
+  "catalogSource": zod.string(),
+  "nextModule": zod.number().int()
+})
+
+
+export const UpdateModuleParams = zod.object({
+  "id": zod.coerce.string(),
+  "number": zod.coerce.number().int()
+})
+
+export const UpdateModuleBody = zod.object({
+  "action": zod.enum(['save', 'submit', 'approve', 'return', 'reopen']),
+  "updatedAt": zod.string(),
+  "data": zod.record(zod.string(), zod.unknown()).optional(),
+  "scenarios": zod.array(zod.unknown()).optional(),
+  "comment": zod.string().optional()
+})
+
+export const UpdateModuleResponse = zod.object({
+  "planId": zod.string(),
+  "utilityName": zod.string(),
+  "source": zod.string(),
+  "exampleSource": zod.string(),
+  "kind": zod.string(),
+  "context": zod.record(zod.string(), zod.unknown()),
+  "scenarios": zod.array(zod.unknown()),
+  "modules": zod.array(zod.object({
+  "number": zod.number().int(),
+  "title": zod.string(),
+  "description": zod.string(),
+  "status": zod.string(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "example": zod.record(zod.string(), zod.unknown()),
+  "updatedAt": zod.string(),
+  "feedback": zod.string()
+})),
+  "progress": zod.number(),
+  "canEdit": zod.boolean(),
+  "canReview": zod.boolean(),
+  "hasLegacyCopy": zod.boolean(),
+  "guidance": zod.array(zod.object({
+  "id": zod.string(),
+  "module": zod.number().int(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "updatedAt": zod.string()
+})),
+  "catalog": zod.record(zod.string(), zod.unknown()),
+  "catalogSource": zod.string(),
+  "nextModule": zod.number().int()
+})
+
+
+export const GetLegacyCopyParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+export const GetLegacyCopyResponse = zod.record(zod.string(), zod.unknown())
+
+
+export const ExportModulePlanParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+export const ExportModulePlanResponse = zod.record(zod.string(), zod.unknown())
+
+
+export const GetGuidanceLibraryResponse = zod.object({
+  "topics": zod.array(zod.object({
+  "id": zod.string(),
+  "module": zod.number().int(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "updatedAt": zod.string()
+})),
+  "source": zod.string(),
+  "canManage": zod.boolean()
+})
+
+
+export const UpdateGuidanceTopicParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+export const UpdateGuidanceTopicBody = zod.object({
+  "updatedAt": zod.string(),
+  "data": zod.record(zod.string(), zod.unknown())
+})
+
+export const UpdateGuidanceTopicResponse = zod.object({
+  "id": zod.string(),
+  "module": zod.number().int(),
+  "data": zod.record(zod.string(), zod.unknown()),
+  "updatedAt": zod.string()
+})
+
+
 export const GetWorkflowParams = zod.object({
   "id": zod.coerce.string()
 })

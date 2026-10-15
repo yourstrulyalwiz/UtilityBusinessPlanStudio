@@ -61,6 +61,87 @@ export interface WorkflowActivity {
   feedback?: string;
 }
 
+export type ModuleGuidanceTopicData = { [key: string]: unknown };
+
+export interface ModuleGuidanceTopic {
+  id: string;
+  module: number;
+  data: ModuleGuidanceTopicData;
+  updatedAt: string;
+}
+
+export interface ModuleGuidanceLibrary {
+  topics: ModuleGuidanceTopic[];
+  source: string;
+  canManage: boolean;
+}
+
+export type GuidanceTopicUpdateData = { [key: string]: unknown };
+
+export interface GuidanceTopicUpdate {
+  updatedAt: string;
+  data: GuidanceTopicUpdateData;
+}
+
+export type PlanModuleData = { [key: string]: unknown };
+
+export type PlanModuleExample = { [key: string]: unknown };
+
+export interface PlanModule {
+  number: number;
+  title: string;
+  description: string;
+  status: string;
+  data: PlanModuleData;
+  example: PlanModuleExample;
+  updatedAt: string;
+  feedback: string;
+}
+
+export type ModulePlanContext = { [key: string]: unknown };
+
+export type ModulePlanCatalog = { [key: string]: unknown };
+
+export interface ModulePlan {
+  planId: string;
+  utilityName: string;
+  source: string;
+  exampleSource: string;
+  kind: string;
+  context: ModulePlanContext;
+  scenarios: unknown[];
+  modules: PlanModule[];
+  progress: number;
+  canEdit: boolean;
+  canReview: boolean;
+  hasLegacyCopy: boolean;
+  guidance: ModuleGuidanceTopic[];
+  catalog: ModulePlanCatalog;
+  catalogSource: string;
+  nextModule: number;
+}
+
+export type ModuleActionAction = typeof ModuleActionAction[keyof typeof ModuleActionAction];
+
+
+export const ModuleActionAction = {
+  save: 'save',
+  submit: 'submit',
+  approve: 'approve',
+  return: 'return',
+  reopen: 'reopen',
+} as const;
+
+export type ModuleActionData = { [key: string]: unknown };
+
+export interface ModuleAction {
+  action: ModuleActionAction;
+  updatedAt: string;
+  data?: ModuleActionData;
+  scenarios?: unknown[];
+  comment?: string;
+}
+
 export type WorkflowImportContext = { [key: string]: unknown };
 
 export interface Workflow {
@@ -479,6 +560,10 @@ export interface ViewInput {
   name: string;
   filters: ViewInputFilters;
 }
+
+export type GetLegacyCopy200 = { [key: string]: unknown };
+
+export type ExportModulePlan200 = { [key: string]: unknown };
 
 export type GetTestMode200 = {
   openAccess: boolean;

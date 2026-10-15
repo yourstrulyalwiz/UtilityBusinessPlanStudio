@@ -3,15 +3,16 @@ import { Link, useParams } from "wouter";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   useGetUtility, getGetUtilityQueryKey, useUpdateUtility, useAddMember, useRemoveMember, useListUsers, getListUsersQueryKey,
-  useGetPlan, getGetPlanQueryKey, useGetWorkflow, getGetWorkflowQueryKey,
+  useGetPlan, getGetPlanQueryKey, useGetModulePlan, getGetModulePlanQueryKey,
   getListUtilitiesQueryKey, getGetSummaryQueryKey, getListAuditQueryKey, type MemberInputMemberRole, type UtilityUpdate,
 } from "@workspace/api-client-react";
-import { ArrowLeft, ArrowRight, CheckCircle2, FileText, Lock, Pencil, Trash2, UserPlus, Users } from "lucide-react";
+import { ArrowLeft, FileText, Pencil, Trash2, UserPlus, Users } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, Empty, ErrorState, Pill, statusTone, Btn, Field, inputCls, Wave } from "@/components/kit";
 import { LogoPicker } from "@/components/utility-form";
-import { useMe, errMsg, phaseColor, logoUrl, initials, humanize, fmtDate, fmtDateTime, MEMBER_ROLE_LABEL } from "@/lib/app";
+import { ModuleOverview } from "@/components/module-overview";
+import { useMe, errMsg, logoUrl, initials, humanize, fmtDate, fmtDateTime, MEMBER_ROLE_LABEL } from "@/lib/app";
 import { useToast } from "@/hooks/use-toast";
 
 export default function UtilityPage() {
@@ -26,7 +27,7 @@ export default function UtilityPage() {
   const canManage = me.role === "admin" || me.role === "ttl";
   const users = useListUsers({ query: { enabled: canManage, queryKey: getListUsersQueryKey() } });
   const wfPlanId = planId || q.data?.utility.planId || "";
-  const wf = useGetWorkflow(wfPlanId, { query: { enabled: !!wfPlanId, queryKey: getGetWorkflowQueryKey(wfPlanId) } });
+  const mp = useGetModulePlan(wfPlanId, { query: { enabled: !!wfPlanId, queryKey: getGetModulePlanQueryKey(wfPlanId) } });
   const [editing, setEditing] = useState(false);
   const [adding, setAdding] = useState(false);
   const [newMember, setNewMember] = useState<{ userId: string; memberRole: MemberInputMemberRole }>({ userId: "", memberRole: "team" });
@@ -46,8 +47,7 @@ export default function UtilityPage() {
 
   if (q.isLoading) return <div className="space-y-4"><div className="h-28 animate-pulse rounded-xl border bg-card" /><div className="h-96 animate-pulse rounded-xl border bg-card" /></div>;
   if (q.isError || !q.data) return <Card><ErrorState message={errMsg(q.error, "Utility not found or you do not have access.")} onRetry={() => q.refetch()} /></Card>;
-  const { utility: u, activities, members, audit } = q.data;
-  const phases = Array.from(new Set(activities.map((a) => a.phaseCode)));
+  const { utility: u, members, audit } = q.data;
   const memberEmails = new Set(members.map((m) => m.email));
   const candidates = (users.data ?? []).filter((p) => p.isActive && !memberEmails.has(p.email));
   const ttls = (users.data ?? []).filter((p) => (p.role === "ttl" || p.id === "00000000-0000-4000-8000-000000000001") && p.isActive);
@@ -68,19 +68,19 @@ export default function UtilityPage() {
             </div>
             <div className="mt-1 text-sm text-muted-foreground">{u.serviceArea} · {u.countryName} · {u.region}</div>
             <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 text-sm sm:grid-cols-4">
-              {[["TTL", u.ttlName], ["Plan year", String(u.planYear)], ["Currency", u.currency], ["WB project", u.wbProjectId || "—"], ["UoF completion", fmtDate(u.uofCompletionDate)], ["Plan status", humanize(u.planStatus)], ["Current phase", u.currentPhase || "—"], ["Registered", fmtDate(u.createdAt)]].map(([k, v]) => (
+              {[["TTL", u.ttlName], ["Plan year", String(u.planYear)], ["Currency", u.currency], ["WB project", u.wbProjectId || "—"], ["Plan status", humanize(u.planStatus)], ["Current module", u.currentPhase || "—"], ["Registered", fmtDate(u.createdAt)]].map(([k, v]) => (
                 <div key={k}><dt className="text-[11px] uppercase tracking-wider text-muted-foreground">{k}</dt><dd className="mt-0.5 font-medium text-[#323D4F]">{v}</dd></div>
               ))}
             </dl>
           </div>
           <div className="flex shrink-0 flex-col items-stretch gap-2 md:w-48">
             <div className="rounded-lg border border-[#1ED3D9]/15 bg-[#E4F8F9]/60 p-3">
-              <div className="flex justify-between text-xs"><span className="text-muted-foreground">Progress</span><span className="font-semibold text-[#323D4F] tnum">{Math.round(u.progress)}%</span></div>
+              <div className="flex justify-between text-xs"><span className="text-muted-foreground">Reviewed modules</span><span className="font-semibold text-[#323D4F] tnum">{Math.round(u.progress)}%</span></div>
               <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white"><div className="h-full rounded-full bg-gradient-to-r from-[#127A80] to-[#1ED3D9]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div>
             </div>
             <Tooltip>
-              <TooltipTrigger asChild><a href={`/api/plans/${u.planId}/deck`} className="flex h-10 w-full items-center justify-center gap-2 rounded-lg border bg-white text-sm font-medium text-[#323D4F] hover:bg-muted" data-testid="button-deck"><FileText className="h-4 w-4" /> Download draft deck</a></TooltipTrigger>
-              <TooltipContent>Step 0 preview: registry information only. Full business-plan output arrives in Step 4.</TooltipContent>
+              <TooltipTrigger asChild><a href={`/api/plans/${u.planId}/deck`} className="flex h-10 w-full items-center justify-center gap-2 rounded-lg border bg-white text-sm font-medium text-[#323D4F] hover:bg-muted" data-testid="button-deck"><FileText className="h-4 w-4" /> Registry summary deck</a></TooltipTrigger>
+              <TooltipContent>Registry information only. This is not a complete business plan; use Module 8 outputs for module data.</TooltipContent>
             </Tooltip>
             {me.role === "admin" && <Btn variant="navy" onClick={() => { setForm({ name: u.name, shortName: u.shortName, serviceArea: u.serviceArea, ttlUserId: u.ttlUserId, wbProjectId: u.wbProjectId, status: u.status === "archived" ? "archived" : "active", logoPath: u.logoPath }); setEditing(true); }} data-testid="button-edit-utility"><Pencil className="h-4 w-4" /> Edit details</Btn>}
           </div>
@@ -89,57 +89,7 @@ export default function UtilityPage() {
 
       <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
         <div>
-          {(() => {
-            const w = wf.data; const nxt = w?.activities.find((a) => a.code === w.nextCode);
-            if (wf.isLoading) return <div className="mb-6 h-28 animate-pulse rounded-xl border bg-card" />;
-            if (!w) return wf.isError ? <Card className="mb-6"><ErrorState message={errMsg(wf.error, "Workflow unavailable.")} onRetry={() => wf.refetch()} /></Card> : null;
-            const done = !nxt;
-            return (
-              <Card className="rise mb-6 overflow-hidden" data-testid="card-continue">
-                <div className="navy-depth flex flex-col gap-4 p-5 text-white sm:flex-row sm:items-center">
-                  <div className="min-w-0 flex-1">
-                    <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1ED3D9]">{done ? "All steps complete" : `Next up · step ${w.activities.indexOf(nxt) + 1} of ${w.activities.length}`}</div>
-                    <div className="mt-1 text-lg font-semibold" data-testid="text-next-activity">{done ? "Every activity is approved." : <><span className="mr-2 font-mono text-sm text-white/60">{nxt.code}</span>{nxt.name}</>}</div>
-                    {!done && <div className="mt-1 text-xs text-white/70">{nxt.phaseCode} · {nxt.days} days · {humanize(nxt.status)}{!w.canEdit ? " · read-only for your role" : ""}</div>}
-                  </div>
-                  {done ? <CheckCircle2 className="h-8 w-8 text-[#1ED3D9]" /> : <Link href={`/plans/${w.planId}/activities/${nxt.code}`} className="inline-flex h-10 items-center gap-2 rounded-lg btn-glow bg-[#1ED3D9] px-4 text-sm font-medium text-[#29323F] hover:bg-[#17BFC5]" data-testid="button-continue">{nxt.status === "not_started" ? "Start step" : "Continue"} <ArrowRight className="h-4 w-4" /></Link>}
-                </div>
-              </Card>
-            );
-          })()}
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-base font-semibold text-[#323D4F]">Business plan activities</h2>
-            <span className="text-xs text-muted-foreground">Open any step to work or preview</span>
-          </div>
-          {activities.length === 0 ? <Card><Empty icon={<FileText className="h-6 w-6" />} title="No activities yet" body="The plan's activities will appear here once the plan is initialised." /></Card> : (
-            <div className="space-y-4">
-              {phases.map((pc, i) => {
-                const acts = activities.filter((a) => a.phaseCode === pc);
-                const color = phaseColor(pc, i);
-                const done = acts.filter((a) => a.status === "approved").length;
-                return (
-                  <Card key={pc} className="lift overflow-hidden" data-testid={`phase-${pc}`}>
-                    <div className="flex items-center justify-between border-b px-5 py-3" style={{ borderLeft: `4px solid ${color}` }}>
-                      <div className="text-sm font-semibold" style={{ color }}>Phase {i + 1} <span className="ml-1 text-xs font-normal text-muted-foreground">{pc}</span></div>
-                      <span className="text-xs text-muted-foreground tnum">{done}/{acts.length} complete</span>
-                    </div>
-                    <ul className="divide-y">
-                      {acts.map((a) => (
-                        <li key={a.code}><Link href={`/plans/${u.planId}/activities/${a.code}`} className="flex items-start gap-4 px-5 py-3 transition hover:bg-[#1ED3D9]/[.04]" data-testid={`activity-${a.code}`}>
-                          <span className="mt-0.5 w-10 shrink-0 font-mono text-[11px] text-muted-foreground">{a.code}</span>
-                          <div className="min-w-0 flex-1">
-                            <div className="text-sm font-medium text-[#323D4F]">{a.name}</div>
-                            <div className="mt-0.5 text-xs text-muted-foreground">{a.milestone ? `Milestone: ${a.milestone} · ` : ""}{a.days} days{a.ownerName ? ` · ${a.ownerName}` : ""}{a.dueDate ? ` · due ${fmtDate(a.dueDate)}` : ""}</div>
-                          </div>
-                          {wf.data?.activities.find((x) => x.code === a.code)?.locked && <Lock className="mt-1 h-3.5 w-3.5 text-muted-foreground" />}<Pill tone={statusTone(a.status)}>{humanize(a.status)}</Pill>
-                        </Link></li>
-                      ))}
-                    </ul>
-                  </Card>
-                );
-              })}
-            </div>
-          )}
+          {mp.isLoading ? <div className="h-96 animate-pulse rounded-xl border bg-card" /> : mp.isError || !mp.data ? <Card><ErrorState message={errMsg(mp.error, "Module plan unavailable.")} onRetry={() => mp.refetch()} /></Card> : <ModuleOverview plan={mp.data} />}
         </div>
 
         <div className="space-y-6">

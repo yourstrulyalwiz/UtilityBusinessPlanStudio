@@ -1,6 +1,6 @@
 # Urban Water and Sanitation Service Optimization - Business Plan Studio
 
-A secure registry for water utility Business & Investment Plans following the Utility of the Future playbook.
+An independent eight-module urban water and sanitation business planning tool. The user explicitly states Option B is not related to UoF; do not reintroduce UoF prerequisites, activity gates or branding.
 
 ## Visual direction
 
@@ -49,17 +49,18 @@ The user requested importing the Tagbilaran TCWS plan and LGU waterworks indicat
 ## Product
 
 - Initial foundation: role-scoped registry, create/edit/archive utilities, user provisioning, TTL requests and decisions, team membership, saved views, CSV export, notifications, audit history, protected logo uploads.
-- Creating a utility initializes its annual plan and all 20 activities (108 working days).
-- All 20 activities now have example-shaped editable forms, per-step instructions, sequential locks, saving with conflict detection, submission, approval, return comments and reopening. Progress is weighted by activity days.
-- Role-specific onboarding separates global-team administration from TTL authoring. A searchable Help Center and accessible activity/field dialogs cover 21 guidance topics. Cross-sector qualitative illustrations are labelled separately from uploaded examples and never populate financial data.
-- The supplied fictional Valle Verde file provides read-only examples and separate complete/midway plans in open test mode. Reopening a demo never resets existing edits. Test Utility and other existing plans are not overwritten.
-- Financial entries and scenarios are stored as entered, not recalculated. Cross-activity structured relationships, automatic financial modelling, Excel compatibility and final Word/PPT generation remain outstanding. The download still provides only a labelled registry-overview draft PPTX.
+- Creating a utility initializes eight independent modules, with no sequencing locks. Save, submit for review, approve, return and reopen are role-scoped and use optimistic concurrency.
+- Progress means the percentage of eight modules explicitly approved, not populated data. Source load states are retained, not converted to approvals.
+- Role-specific onboarding separates global administration from TTL authoring. The supplied Option B library has 21 topics; admins may edit guidance, TTLs read it.
+- Supplied Option B Valle Verde is fictional; Tagbilaran is real preliminary source data. Source imports initialize once and never reset edits.
+- Conversion preserves immutable full legacy plan snapshots and original activity records. Supplied cases load the new Option B files; other authored content is carried forward in related modules for review. No old approval carries forward.
+- Financial entries and scenarios are stored as entered, not recalculated. A full module-data JSON export and basic print-friendly report are available. Automatic modelling, Excel compatibility and polished final Word/PPT documents remain outstanding. PPT is explicitly registry-only.
 - Email delivery is not configured; invitation UI provides an app link and clearly says no email was sent. Decisions notify in-app.
 - Country reference currently includes 217 economies from World Bank Data360 WDI metadata. That response does not supply region mappings or national currencies: region is explicitly Unclassified and USD is the business-plan default, not an assertion about national currency. Complete ISO coverage and authoritative region mappings remain outstanding.
 
 ## User preferences
 
-Use the supplied technical specification and its institutional brand. The user corrected the foundation-only scope: they expect populated examples and a usable step-by-step plan authoring tool, not a blank registry with read-only activity names.
+Use the supplied Option B datasets and brand guide, not the earlier institutional workflow. The user expects populated examples and a usable step-by-step authoring tool, not a blank registry with read-only names.
 
 The user wants two clear perspectives: the global team manages the tool; the TTL is the primary user who develops and populates plans. Explanatory popups should include practical recommendations and examples from different sectors. Keep instructional illustrations separate from entered utility data.
 
@@ -67,7 +68,7 @@ The user wants two clear perspectives: the global team manages the tool; the TTL
 
 - Open-mode creation, plan navigation, unchanged detail saving, and draft PPTX download have been verified in a fresh browser. Normal-mode protection has API regression coverage; real signed-in role journeys still need browser verification.
 - Run `pnpm --filter @workspace/api-server test:access` to verify open, closed, unset, invalid flag values and forged role-cookie handling.
-- Run `pnpm --filter @workspace/api-server test:workflow` for supplied example field validation, sequential/phase gates and weighted progress.
+- Run `pnpm --filter @workspace/scripts exec tsx --test ../artifacts/api-server/src/modules.test.ts` for module progress, empty drafts and repeat-safe migration. The old workflow tests concern the archived system only.
 - Reference-data initialization inserts definitions only, never startup DDL.
 
 ## Pointers

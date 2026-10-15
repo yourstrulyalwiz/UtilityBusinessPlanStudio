@@ -5,9 +5,10 @@ import * as api from "@workspace/api-zod";
 import { actor, accessibleUtility, utilityRows, filterUtilities, uuid, createUtilityRecord, writeAudit, notify, validateLogo, auditRows, HttpError } from "../lib/studio";
 import countryReference from "../lib/country-reference.json";
 import { openAccessEnabled } from "../lib/open-access";
+import { moduleDefinitions } from "../lib/module-definitions";
 const router:IRouter=Router();
 router.get("/metadata",async(_req,res)=>{
-  res.json(api.GetMetadataResponse.parse({countries:await db.select().from(countries).orderBy(countries.name),countrySource:countryReference.source,phases:await db.select().from(phases).orderBy(phases.code),activities:await db.select().from(activities).orderBy(activities.code)}));
+  res.json(api.GetMetadataResponse.parse({countries:await db.select().from(countries).orderBy(countries.name),countrySource:countryReference.source,phases:moduleDefinitions.map(m=>({code:`M${m.number}`,name:m.title,days:0})),activities:[]}));
 });
 router.get("/admin/summary",async(req,res)=>{
   const p=await actor(req,["admin"]); const rows=(await utilityRows(p)).filter(r=>r.status==="active");
@@ -15,7 +16,7 @@ router.get("/admin/summary",async(req,res)=>{
   res.json(api.GetSummaryResponse.parse({
     utilities:rows.length,countries:new Set(rows.map(r=>r.countryIso3)).size,
     averageProgress:rows.length?rows.reduce((a,r)=>a+r.progress,0)/rows.length:0,completed:rows.filter(r=>r.planStatus==="completed").length,pendingRequests:pending.length,
-    phases:["P1","P2","P3","P4","Completed"].map(label=>({label,value:rows.filter(r=>label==="Completed"?r.planStatus==="completed":r.planStatus!=="completed"&&r.currentPhase===label).length})),
+    phases:[...moduleDefinitions.map(m=>`M${m.number}`),"Completed"].map(label=>({label,value:rows.filter(r=>label==="Completed"?r.planStatus==="completed":r.planStatus!=="completed"&&r.currentPhase===label).length})),
     regions:[...new Set(rows.map(r=>r.region))].sort().map(label=>({label,value:rows.filter(r=>r.region===label).length})),
   }));
 });
@@ -48,7 +49,7 @@ router.get(["/utilities/:id","/plans/:planId"],async(req,res)=>{
   const utility=(await utilityRows(p)).find(r=>r.id===id)!;
   const a=await db.select({row:planActivities,def:activities}).from(planActivities).innerJoin(activities,eq(activities.code,planActivities.activityCode)).where(eq(planActivities.planId,utility.planId)).orderBy(activities.code);
   const team=await db.select({id:members.id,fullName:people.fullName,email:people.email,memberRole:members.memberRole}).from(members).innerJoin(people,eq(people.id,members.userId)).where(eq(members.utilityId,id));
-  res.json(api.GetUtilityResponse.parse({utility,activities:a.map(({row,def})=>({...def,status:row.status,ownerName:null,dueDate:row.dueDate})),members:team,audit:["admin","ttl"].includes(p.role)?await auditRows(p,id):[]}));
+  res.json(api.GetUtilityResponse.parse({utility,activities:[],members:team,audit:["admin","ttl"].includes(p.role)?await auditRows(p,id):[]}));
 });
 router.patch("/utilities/:id",async(req,res)=>{
   const p=await actor(req,["admin"]);const id=uuid(req.params.id);const before=await accessibleUtility(p,id);

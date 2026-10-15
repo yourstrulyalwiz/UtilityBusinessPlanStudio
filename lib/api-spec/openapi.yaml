@@ -10,6 +10,31 @@
     }
   ],
   "paths": {
+    "/plans/{id}/modules": {
+      "get":{"operationId":"getModulePlan","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
+      "responses":{"200":{"description":"Eight-module plan","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ModulePlan"}}}}}}
+    },
+    "/plans/{id}/modules/{number}": {
+      "post":{"operationId":"updateModule","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"number","in":"path","required":true,"schema":{"type":"integer"}}],
+      "requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/ModuleAction"}}}},
+      "responses":{"200":{"description":"Saved module plan","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ModulePlan"}}}}}}
+    },
+    "/plans/{id}/legacy-copy": {
+      "get":{"operationId":"getLegacyCopy","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
+      "responses":{"200":{"description":"Immutable pre-conversion copy","content":{"application/json":{"schema":{"type":"object","additionalProperties":true}}}}}}
+    },
+    "/plans/{id}/module-export": {
+      "get":{"operationId":"exportModulePlan","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
+      "responses":{"200":{"description":"Full plan data export","content":{"application/json":{"schema":{"type":"object","additionalProperties":true}}}}}}
+    },
+    "/guidance-library": {
+      "get":{"operationId":"getGuidanceLibrary","responses":{"200":{"description":"Module-based explanations","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ModuleGuidanceLibrary"}}}}}}
+    },
+    "/guidance-library/{id}": {
+      "put":{"operationId":"updateGuidanceTopic","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
+      "requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/GuidanceTopicUpdate"}}}},
+      "responses":{"200":{"description":"Updated guidance topic","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ModuleGuidanceTopic"}}}}}}
+    },
     "/plans/{id}/workflow": {
       "get": {
         "operationId":"getWorkflow",
@@ -880,6 +905,14 @@
         "data":{"type":"object","additionalProperties":{}},"example":{"type":"object","additionalProperties":{}},"required":{"type":"array","items":{"type":"string"}},
         "locked":{"type":"boolean"},"lockReason":{"type":"string"},"updatedAt":{"type":"string"},"instructions":{"type":"string"},"needs":{"type":"array","items":{"type":"string"}},"feedback":{"type":"string"}
       }},
+      "ModuleGuidanceTopic":{"type":"object","required":["id","module","data","updatedAt"],"properties":{"id":{"type":"string"},"module":{"type":"integer"},"data":{"type":"object","additionalProperties":true},"updatedAt":{"type":"string"}}},
+      "ModuleGuidanceLibrary":{"type":"object","required":["topics","source","canManage"],"properties":{"topics":{"type":"array","items":{"$ref":"#/components/schemas/ModuleGuidanceTopic"}},"source":{"type":"string"},"canManage":{"type":"boolean"}}},
+      "GuidanceTopicUpdate":{"type":"object","required":["updatedAt","data"],"properties":{"updatedAt":{"type":"string"},"data":{"type":"object","additionalProperties":true}}},
+      "PlanModule":{"type":"object","required":["number","title","description","status","data","example","updatedAt","feedback"],"properties":{"number":{"type":"integer"},"title":{"type":"string"},"description":{"type":"string"},"status":{"type":"string"},"data":{"type":"object","additionalProperties":true},"example":{"type":"object","additionalProperties":true},"updatedAt":{"type":"string"},"feedback":{"type":"string"}}},
+      "ModulePlan":{"type":"object","required":["planId","utilityName","source","exampleSource","kind","context","scenarios","modules","progress","canEdit","canReview","hasLegacyCopy","guidance","catalog","catalogSource","nextModule"],"properties":{
+        "planId":{"type":"string"},"utilityName":{"type":"string"},"source":{"type":"string"},"exampleSource":{"type":"string"},"kind":{"type":"string"},"context":{"type":"object","additionalProperties":true},"scenarios":{"type":"array","items":{}},"modules":{"type":"array","items":{"$ref":"#/components/schemas/PlanModule"}},"progress":{"type":"number"},"canEdit":{"type":"boolean"},"canReview":{"type":"boolean"},"hasLegacyCopy":{"type":"boolean"},"guidance":{"type":"array","items":{"$ref":"#/components/schemas/ModuleGuidanceTopic"}},"catalog":{"type":"object","additionalProperties":true},"catalogSource":{"type":"string"},"nextModule":{"type":"integer"}
+      }},
+      "ModuleAction":{"type":"object","required":["action","updatedAt"],"properties":{"action":{"type":"string","enum":["save","submit","approve","return","reopen"]},"updatedAt":{"type":"string"},"data":{"type":"object","additionalProperties":true},"scenarios":{"type":"array","items":{}},"comment":{"type":"string"}}},
       "Workflow":{"type":"object","required":["planId","utilityName","progress","status","source","activities","nextCode","canEdit","canReview"],"properties":{
         "importContext":{"type":"object","additionalProperties":true},
         "planId":{"type":"string"},"utilityName":{"type":"string"},"progress":{"type":"number"},"status":{"type":"string"},"source":{"type":"string"},

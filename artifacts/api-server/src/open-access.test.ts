@@ -28,6 +28,9 @@ test("open access is opt-in; closed mode ignores preview cookies and restores AP
       }
       const absentPlan="00000000-0000-4000-8000-000000000000";
       assert.equal((await fetch(`${base}/plans/${absentPlan}/workflow`)).status,enabled?404:401);
+      assert.equal((await fetch(`${base}/plans/${absentPlan}/modules`)).status,enabled?404:401);
+      assert.equal((await fetch(`${base}/plans/${absentPlan}/legacy-copy`)).status,enabled?404:401);
+      assert.equal((await fetch(`${base}/guidance-library`)).status,enabled?200:401);
       assert.equal((await fetch(`${base}/plans/${absentPlan}/activities/A1.1`,{
         method:"POST",headers:{"Content-Type":"application/json"},
         body:JSON.stringify({action:"save",updatedAt:new Date().toISOString(),data:{}}),

@@ -1,0 +1,617 @@
+{
+  "library": "Business Plan Studio guidance (module-based)",
+  "editable": true,
+  "topics": [
+    {
+      "id": "utility-profile",
+      "module": 1,
+      "title": "Utility profile",
+      "definition": "A short description of the utility: who operates it, what services it provides, the area and people it serves, its water sources, assets, staff and governance.",
+      "why_it_matters": [
+        "Gives every reader the context before any number",
+        "Shows the scale of the challenge (who is and is not served)"
+      ],
+      "guiding_questions": [
+        "Who operates the utility and who does it report to?",
+        "Which areas and how many people does it serve?",
+        "Where does the water come from and how is it treated?",
+        "How many staff and connections does it have?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "TCWS is an LGU-operated Level III waterworks run as a local economic enterprise, reporting to the mayor. It serves 10 of Tagbilaran City's 15 barangays (about 27,000 people, 6,314 connections) from 28 deep-well pumping stations with chlorination, 22-24 hours a day, with 24 staff. Two private providers also serve the city.",
+        "editable": true,
+        "source": "01 \u00a71; 04; 07"
+      },
+      "tips": {
+        "do": [
+          "Keep it to one page",
+          "Name other providers in the area"
+        ],
+        "avoid": [
+          "Repeating performance data that belongs in Module 3"
+        ]
+      }
+    },
+    {
+      "id": "scenarios",
+      "module": 1,
+      "title": "Planning scenarios",
+      "definition": "A scenario is a complete version of the plan: its actions, costs, tariffs and targets. The Baseline shows what happens with no change; the improvement scenario is the proposed plan.",
+      "why_it_matters": [
+        "Comparing scenarios shows the value of the plan",
+        "Tests what happens if financing or tariff approval falls short"
+      ],
+      "guiding_questions": [
+        "What happens if we change nothing?",
+        "What does the proposed plan change?",
+        "Which alternative is worth testing (for example, less grant funding)?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Baseline: deep wells only, 2016 tariff, no new investment. Business plan: PhP 579 M of works in 2026-2029, provincial bulk water from 2030, proposed tariff from 2030.",
+        "editable": true,
+        "source": "01 \u00a72.4; 02"
+      },
+      "tips": {
+        "do": [
+          "Duplicate the main scenario to test variants",
+          "Lock a scenario once approved"
+        ],
+        "avoid": [
+          "More than 3-4 active scenarios"
+        ]
+      }
+    },
+    {
+      "id": "vision",
+      "module": 2,
+      "title": "Vision",
+      "definition": "What the utility wants to become in 10-20 years: a north star that guides every objective.",
+      "why_it_matters": [
+        "Aligns leaders, staff and the city on one ambition",
+        "Sets the direction objectives must move toward"
+      ],
+      "guiding_questions": [
+        "Where are we going?",
+        "What future state do we envision?",
+        "What impact do we want to leave the community 10-20 years from now?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "We want to become a world-class, sustainable waterworks by 2035. We want to achieve highly potable, 24/7 water supply. We see a more effective waterworks company capable of providing reliable and safe/clean water to every household in Tagbilaran City.",
+        "editable": true,
+        "source": "01 Table 7"
+      },
+      "tips": {
+        "do": [
+          "Make it ambitious and dated",
+          "Use words staff would say"
+        ],
+        "avoid": [
+          "Confusing it with the mission or with a single target"
+        ]
+      }
+    },
+    {
+      "id": "mission",
+      "module": 2,
+      "title": "Mission",
+      "definition": "Why the utility exists today: whom it serves, what it provides and how.",
+      "why_it_matters": [
+        "Anchors every decision and initiative",
+        "Explains the utility's purpose in one or two sentences"
+      ],
+      "guiding_questions": [
+        "What do we do today?",
+        "Who do we serve?",
+        "What are we trying to accomplish?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Our mission is to provide our customers in 10/15 barangays in Tagbilaran City with safe and reliable water. Our employees are capable and highly trained. We strive to treat every customer fairly and respectfully and address their needs quickly and effectively.",
+        "editable": true,
+        "source": "01 Table 7"
+      },
+      "tips": {
+        "do": [
+          "Keep it short",
+          "Name the customers served"
+        ],
+        "avoid": [
+          "Lists of activities or technical jargon"
+        ]
+      }
+    },
+    {
+      "id": "values",
+      "module": 2,
+      "title": "Core values",
+      "definition": "The few behaviors that guide how staff work with each other and with customers.",
+      "why_it_matters": [
+        "Turns vision and mission into daily behavior"
+      ],
+      "guiding_questions": [
+        "What do we stand for?",
+        "What behaviors are important to us?",
+        "How do we treat our own people and community?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Teamwork, Community-based Service, Respect, Dedication, Adaptiveness, Resilience, Innovation (reduced from 10 earlier values).",
+        "editable": true,
+        "source": "01 Table 7"
+      },
+      "tips": {
+        "do": [
+          "Keep 5-7 values you can explain with an example"
+        ],
+        "avoid": [
+          "Long lists nobody remembers"
+        ]
+      }
+    },
+    {
+      "id": "smart-objectives",
+      "module": 2,
+      "title": "Strategic objectives (SMART)",
+      "definition": "The few outcomes the utility commits to. SMART checks that each is Specific, Measurable, Achievable, Relevant and Time-bound.",
+      "why_it_matters": [
+        "Vague objectives cannot be managed",
+        "Each objective becomes goals, actions and KPIs"
+      ],
+      "guiding_questions": [
+        "What exactly will change, and who is involved?",
+        "How will we measure it, and how much is enough?",
+        "Do we have the resources?",
+        "How does it serve the mission?",
+        "By when?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Reduce NRW to 20%: reduce physical and commercial losses through DMAs, pipe replacement and detection of illegal connections; NRW from 31.3% (H1 2025) to 26% by 2030 and 20% by 2035.",
+        "editable": true,
+        "source": "01 \u00a72.4.1; Table 23"
+      },
+      "tips": {
+        "do": [
+          "Set stretch but credible targets",
+          "Use SMART to check the wording, not to lower ambition"
+        ],
+        "avoid": [
+          "More than 6-8 objectives"
+        ]
+      }
+    },
+    {
+      "id": "baseline-indicators",
+      "module": 3,
+      "title": "Baseline indicators",
+      "definition": "Measured history of the utility's performance (ideally 3-5 years): connections, billed and produced volume, NRW, consumption, collections, costs.",
+      "why_it_matters": [
+        "Targets are only credible if the starting point is known",
+        "Trends show whether things are improving"
+      ],
+      "guiding_questions": [
+        "What do our billing and production records say month by month?",
+        "Which numbers are measured, which calculated, which estimated?",
+        "What explains each trend?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "NRW = (production - billed) / production: 46.3% in 2023, 39.9% in 2024 and 31.3% in Jan-Jun 2025 (production 1,385,950 m3, billed 952,194 m3).",
+        "editable": true,
+        "source": "05; 07"
+      },
+      "tips": {
+        "do": [
+          "Record the source of every value",
+          "Explain trends in a short narrative"
+        ],
+        "avoid": [
+          "Mixing billing and calendar periods without saying so"
+        ]
+      }
+    },
+    {
+      "id": "demographics-demand",
+      "module": 3,
+      "title": "Demographics and water demand",
+      "definition": "Population, households, growth and economic activity in the service area, and the water demand they create.",
+      "why_it_matters": [
+        "Shows how many people still need service",
+        "Sizes future supply and investment"
+      ],
+      "guiding_questions": [
+        "How fast are population and households growing?",
+        "Who is not yet served?",
+        "What demand will we face in 5-10 years?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Tagbilaran: 112,348 people projected for 2024, rising to 123,690 by 2030; household size 4.5. Unconstrained city demand of 41.8 MLD in 2030; net demand to be served by TCWS of 18.3 MLD once bulk water arrives.",
+        "editable": true,
+        "source": "01 Tables 20-25"
+      },
+      "tips": {
+        "do": [
+          "Use official statistics and cite them",
+          "Translate each finding into a water implication"
+        ],
+        "avoid": [
+          "Census data older than the last round"
+        ]
+      }
+    },
+    {
+      "id": "enablement-environment",
+      "module": 3,
+      "title": "Enabling environment",
+      "definition": "The external conditions the utility operates in: policy, institutions, coordination with other levels of government, financing and regulation.",
+      "why_it_matters": [
+        "Many constraints (tariffs, transfers, standards) are outside the utility's control",
+        "Feeds the opportunities and threats in the SWOT"
+      ],
+      "guiding_questions": [
+        "What rules and standards apply to us?",
+        "Who decides our tariff?",
+        "Which partners and programs can support us?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Draft JMC sets KPI standards for LGU-run waterworks; TCWS is an LEE not funded by the general fund; a provincial bulk water project will supply the city from about 2030.",
+        "editable": true,
+        "source": "01 \u00a71.3-1.5; \u00a72.5"
+      },
+      "tips": {
+        "do": [
+          "Rate each area and justify the rating"
+        ],
+        "avoid": [
+          "Describing laws without saying how they affect the utility"
+        ]
+      }
+    },
+    {
+      "id": "swot",
+      "module": 3,
+      "title": "SWOT analysis",
+      "definition": "Internal strengths and weaknesses, and external opportunities and threats.",
+      "why_it_matters": [
+        "Bridges diagnosis and strategy",
+        "Its value is the actions it leads to"
+      ],
+      "guiding_questions": [
+        "Which unserved areas can we expand to?",
+        "How can we partner with the province?",
+        "How stable is electricity cost?",
+        "Are our sources threatened by saltwater intrusion?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Strength: chlorinators installed in all pumping stations. Weakness: low tariff (unchanged since 2016). Opportunity: bulk water supply in a few years. Threat: saltwater intrusion in water sources.",
+        "editable": true,
+        "source": "01 Table 13"
+      },
+      "tips": {
+        "do": [
+          "Start with opportunities and threats",
+          "Prioritize; significance matters more than the number of items"
+        ],
+        "avoid": [
+          "Filling quadrants without discussing implications"
+        ]
+      }
+    },
+    {
+      "id": "asset-management",
+      "module": 3,
+      "title": "Asset management",
+      "definition": "Knowing what the utility owns, its condition and criticality (probability of failure x consequence of failure), and when to renew it.",
+      "why_it_matters": [
+        "Directs limited funds to the assets most likely to fail with the biggest impact"
+      ],
+      "guiding_questions": [
+        "What do we own?",
+        "What are our most important assets?",
+        "What must we do to keep them working?",
+        "How do we pay for it?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Pump at 12 Manga-Tiptip-Cabawan Rd.: probability of failure 2, consequence 5 (more than 1,000 connections), criticality 10: immediate replacement, PhP 600,000.",
+        "editable": true,
+        "source": "01 \u00a72.2"
+      },
+      "tips": {
+        "do": [
+          "Update the registry every year"
+        ],
+        "avoid": [
+          "Replacing assets by age alone"
+        ]
+      }
+    },
+    {
+      "id": "waterfall",
+      "module": 4,
+      "title": "Goals, strategies and actions (waterfall)",
+      "definition": "Each objective cascades into goals (measurable result), strategies (the approach) and actions (projects with owner, dates, cost and expected effect).",
+      "why_it_matters": [
+        "Links every peso of investment to an objective",
+        "Makes responsibilities and timing explicit"
+      ],
+      "guiding_questions": [
+        "Which SWOT item does this address?",
+        "Who is accountable?",
+        "What will it cost each year?",
+        "Which KPI moves, and by how much?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Goal: reduce NRW to 20%. Strategy: identify problematic old pipes. Actions: establish 6 DMAs; replace old pipes in Manga, Ubujan and Taloto; train DMA operators.",
+        "editable": true,
+        "source": "01 \u00a72.4.1"
+      },
+      "tips": {
+        "do": [
+          "Give every action an owner and a cost",
+          "Estimate effects conservatively"
+        ],
+        "avoid": [
+          "Actions with no owner or budget"
+        ]
+      }
+    },
+    {
+      "id": "project-charters",
+      "module": 4,
+      "title": "Project charters",
+      "definition": "A short document that authorizes a project: mission, goals, scope, risks, milestones, sponsor, team, budget and completion date.",
+      "why_it_matters": [
+        "Creates clear boundaries and accountability before spending starts"
+      ],
+      "guiding_questions": [
+        "What will the project deliver and why?",
+        "What could go wrong?",
+        "Who signs and who manages?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Pipe Replacement and Reinforcement (Manga, Ubujan, Tiptip, Taloto): reduce NRW and improve pressure and availability; years 1-4; PhP 113.1 M.",
+        "editable": true,
+        "source": "01 \u00a72.4.1"
+      },
+      "tips": {
+        "do": [
+          "List only major milestones",
+          "Get signatures from sponsor, manager and finance"
+        ],
+        "avoid": [
+          "Charters without a budget or end date"
+        ]
+      }
+    },
+    {
+      "id": "capex-opex",
+      "module": 5,
+      "title": "CAPEX and OPEX",
+      "definition": "CAPEX is spending on long-lived assets (pipes, meters, pumps, tanks); OPEX is recurring running cost (salaries, power, chemicals, bulk water, maintenance).",
+      "why_it_matters": [
+        "CAPEX drives financing and depreciation; OPEX drives the tariff"
+      ],
+      "guiding_questions": [
+        "Which actions create CAPEX and in which years?",
+        "What OPEX will new assets and bulk water add?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Business plan CAPEX: PhP 579.2 M in 2026-2029 (meters 166.8 M, pipe replacement 113.1 M, main lines 119.4 M...). OPEX 2030: PhP 266.9 M, of which bulk water 132.8 M and power 87.8 M.",
+        "editable": true,
+        "source": "02"
+      },
+      "tips": {
+        "do": [
+          "Enter costs on the actions so totals reconcile"
+        ],
+        "avoid": [
+          "Entering the same investment twice"
+        ]
+      }
+    },
+    {
+      "id": "revenue-requirement",
+      "module": 5,
+      "title": "Revenue requirement",
+      "definition": "The revenue the utility needs each year: OPEX + depreciation + interest + working capital (+ allowed return).",
+      "why_it_matters": [
+        "It is the basis for a cost-recovering tariff"
+      ],
+      "guiding_questions": [
+        "Which costs must the tariff recover?",
+        "Is the investment a grant or a loan?",
+        "Which volume will be sold?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "2030: OPEX 266.9 M + depreciation 23.2 M + 2-month working capital 44.5 M = PhP 334.5 M (grant-funded, no interest).",
+        "editable": true,
+        "source": "02 TARIFF CALC"
+      },
+      "tips": {
+        "do": [
+          "State clearly which volume divides the requirement"
+        ],
+        "avoid": [
+          "Mixing the utility's volume with other providers' volume"
+        ]
+      }
+    },
+    {
+      "id": "tariff-structure",
+      "module": 6,
+      "title": "Tariff structure",
+      "definition": "How customers are charged: a minimum charge for the first block and rising prices per m3 for higher blocks, often different by customer class.",
+      "why_it_matters": [
+        "Rising blocks protect basic consumption and reward saving water"
+      ],
+      "guiding_questions": [
+        "What does a typical household pay today?",
+        "How do our bills compare with other providers?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Since September 2016: PhP 62 minimum for the first 10 m3, then 7, 8, 11, 14, 17, 20 and 23 PhP per m3 by block; commercial PhP 23 per m3. Bill at 20 m3: PhP 132.",
+        "editable": true,
+        "source": "06"
+      },
+      "tips": {
+        "do": [
+          "Show bills at 10, 20 and 30 m3"
+        ],
+        "avoid": [
+          "Changing blocks without testing bills by class"
+        ]
+      }
+    },
+    {
+      "id": "cost-recovery",
+      "module": 6,
+      "title": "Cost recovery and required tariff",
+      "definition": "Required tariff = revenue requirement / volume sold. The should-be tariff compares OPEX with billed volume.",
+      "why_it_matters": [
+        "Shows the gap between what customers pay and what service costs"
+      ],
+      "guiding_questions": [
+        "Which costs should the tariff recover now and later?",
+        "How large is the gap?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Should-be tariff to recover OPEX only: PhP 13.76 per m3 (2023) and 17.68 (2024), while TCWS collects about 12.5 per billed m3. Proposed minimum charge 2030-2034: PhP 214.03 for 10 m3.",
+        "editable": true,
+        "source": "01 Tables 16-17"
+      },
+      "tips": {
+        "do": [
+          "Present the increase together with service improvements"
+        ],
+        "avoid": [
+          "Increases with no service improvement"
+        ]
+      }
+    },
+    {
+      "id": "affordability",
+      "module": 6,
+      "title": "Affordability",
+      "definition": "The water bill as a share of household income, especially for low-income households.",
+      "why_it_matters": [
+        "A sustainable tariff must also be socially acceptable"
+      ],
+      "guiding_questions": [
+        "What share of income does a typical bill take?",
+        "How are low-income households protected?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "The proposed 2030-2034 tariff is about 2% of the average income of the low-income group (income data to be confirmed).",
+        "editable": true,
+        "source": "01 \u00a72.4.3"
+      },
+      "tips": {
+        "do": [
+          "Check the lowest income group, not only the average"
+        ],
+        "avoid": [
+          "Assuming affordability without income data"
+        ]
+      }
+    },
+    {
+      "id": "kpis",
+      "module": 7,
+      "title": "KPIs",
+      "definition": "The few indicators that show whether the plan is working, each with a standard, a baseline, targets, a data source and a frequency.",
+      "why_it_matters": [
+        "Lets managers act early",
+        "Links the plan to daily operations"
+      ],
+      "guiding_questions": [
+        "What is the standard?",
+        "Where does the data come from?",
+        "How often do we measure?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "NRW: standard 20% or below; baseline 31.3% (H1 2025); source production and billed volume; monthly.",
+        "editable": true,
+        "source": "01 Table 19"
+      },
+      "tips": {
+        "do": [
+          "Keep 8-12 KPIs",
+          "Record the data source"
+        ],
+        "avoid": [
+          "KPIs with no data owner"
+        ]
+      }
+    },
+    {
+      "id": "monitoring",
+      "module": 7,
+      "title": "Implementation monitoring",
+      "definition": "Regular review of KPI actuals against targets and of action milestones against plan.",
+      "why_it_matters": [
+        "Turns the plan into a management routine"
+      ],
+      "guiding_questions": [
+        "Who reviews, how often, with which agenda?",
+        "What happens when a KPI is off track?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Monthly: NRW, coverage, collection efficiency, operating ratio. Daily: availability. Every 2 weeks: pressure. Annually: staff ratio.",
+        "editable": true,
+        "source": "01 Table 19"
+      },
+      "tips": {
+        "do": [
+          "Explain every red item with a cause and an action"
+        ],
+        "avoid": [
+          "Changing targets to match results"
+        ]
+      }
+    },
+    {
+      "id": "review-output",
+      "module": 8,
+      "title": "Review and outputs",
+      "definition": "A final check that every module is complete and consistent, then generation of the business plan, summary deck and model.",
+      "why_it_matters": [
+        "Inconsistent numbers undermine credibility with decision makers"
+      ],
+      "guiding_questions": [
+        "Is every gap filled or explained?",
+        "Do CAPEX, tariffs and KPIs agree across modules?",
+        "Who approves?"
+      ],
+      "example": {
+        "utility": "Tagbilaran City Waterworks System (TCWS)",
+        "text": "Open issue to resolve before approval: the financial model divides required revenue by a volume that includes private providers' supply.",
+        "editable": true,
+        "source": "02; this review"
+      },
+      "tips": {
+        "do": [
+          "Resolve or explain every open issue"
+        ],
+        "avoid": [
+          "Publishing with unexplained warnings"
+        ]
+      }
+    }
+  ]
+}
