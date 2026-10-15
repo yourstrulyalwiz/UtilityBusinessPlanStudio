@@ -1,0 +1,86 @@
+{
+  "strategyVersion": 1,
+  "vision": "We want to become a world-class, sustainable waterworks by 2035. We want to achieve highly potable, 24/7 water supply. We see a more effective waterworks company capable of providing reliable and safe/clean water to every household in Tagbilaran City.",
+  "mission": "Our mission is to provide our customers in 10/15 barangays in Tagbilaran City with safe and reliable water. Our employees are capable and highly trained. We strive to treat every customer fairly and respectfully and address their needs quickly and effectively.",
+  "values": [
+    "Teamwork",
+    "Community-based Service",
+    "Respect",
+    "Dedication",
+    "Adaptiveness",
+    "Resilience",
+    "Innovation"
+  ],
+  "objectives": [
+    {
+      "code": "OBJ-1",
+      "title": "Improve billed volume",
+      "relevant": "Lack of water supply (SWOT weakness). TCWS serves 10 of 15 barangays and 24% of the city population; it covers approx. 33% of households in its 10 barangays. Supply gap of 11.7 MLD.",
+      "specific": "Increase billed volume by expanding to unserved areas (Cabawan, Booy, Cogon, Dampas, Bool), assessing and upgrading existing pump stations, and replacing old and inaccurate meters.",
+      "kpi": "Billed volume (m3/year); total service connections",
+      "kpi_formula": "Sum of billed volume over the year; count of active service connections",
+      "baseline": "Billed volume: 1,897,357 m3 (2023); 5.26 MLD ≈ 1,919,900 m3/yr (Jan–Jun 2025). Connections: 6,461 (2024); 6,084 (Jun 2025).",
+      "baseline_year": "2023 / 2024",
+      "target": "11,908 households served by end of 2039",
+      "time_bound": "Coverage expansion project: Years 1–4 (2026–2029), PhP 22.9 M. New main lines for bulk water: Years 2–4, PhP 119.4 M.",
+      "achievable": "",
+      "owner": ""
+    },
+    {
+      "code": "OBJ-2",
+      "title": "Reduce NRW to 20%",
+      "relevant": "NRW of 31% is above the 20% or below standard. Old galvanized iron pipes in Tiptip, Manga and Ubujan.",
+      "specific": "Reduce physical and commercial losses by identifying illegal connections, establishing 6 DMAs covering all service areas, and replacing old pipes in Manga, Ubujan and Taloto.",
+      "kpi": "Non-Revenue Water (%)",
+      "kpi_formula": "(Production volume − Billed volume) / Production volume",
+      "baseline": "31.3% (7.66 MLD produced, 5.26 MLD billed)",
+      "baseline_year": "2025 (Jan–Jun)",
+      "target": "20% or below",
+      "time_bound": "26% by 2030; 20% by 2035. Pipe replacement project: Years 1–4 (2026–2029), PhP 113.1 M.",
+      "achievable": "",
+      "owner": ""
+    },
+    {
+      "code": "OBJ-3",
+      "title": "Improve collection efficiency",
+      "relevant": "Negative bottom line (SWOT weakness); lack of training in billing and collection; collection efficiency is not currently calculated.",
+      "specific": "Improve collection through enforcement of disconnections (review service contracts) and staggered accounts receivable payment schedules and policies.",
+      "kpi": "Revenue collection efficiency (%)",
+      "kpi_formula": "Collections / Billings",
+      "baseline": "Not available",
+      "baseline_year": "",
+      "target": "Not less than 95%",
+      "time_bound": "",
+      "achievable": "",
+      "owner": ""
+    },
+    {
+      "code": "OBJ-4",
+      "title": "Manage cost recovery",
+      "relevant": "Low tariff is the number one weakness. Current tariff PhP 6.20/m3 vs. tariff required to recover OPEX of PhP 13.76/m3 (2023) and PhP 17.68/m3 (2024). Negative bottom line.",
+      "specific": "Recover costs by setting up an LEE with a ring-fenced waterworks account and improving OPEX efficiency (energy efficiency, monitoring of fuel and electricity unit costs).",
+      "kpi": "Operating ratio",
+      "kpi_formula": "Operating revenue / OPEX",
+      "baseline": "0.88 (2024 water sales PhP 22.9 M / 2023 OPEX PhP 26.1 M)",
+      "baseline_year": "2024 / 2023",
+      "target": "At least 1.00. Proposed tariff: PhP 214.03 for the first 10 m3 (Years 1–5) and PhP 267.52 (Years 6–10).",
+      "time_bound": "Years 1–5 and 6–10 of the tariff plan",
+      "achievable": "",
+      "owner": ""
+    },
+    {
+      "code": "OBJ-5",
+      "title": "Manage / improve after-sales service",
+      "relevant": "Tariff increases must be balanced with better service. Billing process to be digitalized.",
+      "specific": "Formalize customer service standards: no-water complaints (simple 24–48 h; complex 5–7 working days); mainline leaks within 24 h; illegal tapping investigated within 2 days; daily bulletins during interruptions; new applications inspected within 24–48 h and approved within 7 working days.",
+      "kpi": "Cases resolved within standard time (%)",
+      "kpi_formula": "Cases resolved within standard time / Total cases received",
+      "baseline": "Not available",
+      "baseline_year": "",
+      "target": "Service standard response times met",
+      "time_bound": "",
+      "achievable": "",
+      "owner": ""
+    }
+  ]
+}

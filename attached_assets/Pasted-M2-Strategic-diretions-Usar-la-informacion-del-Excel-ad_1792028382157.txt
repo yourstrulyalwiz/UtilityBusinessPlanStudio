@@ -1,0 +1,242 @@
+M2 Strategic diretions:
+
+Usar la informacion del Excel adjunto, dejar información de guía, ejemplos, etc en alguna parte, mejorar la parte visual, mas moderna e intuitiva y de impacto.
+
+Eliminar Source
+Loc
+File
+ Y fuentes similarss, no es necesario, hacer lo mismo para el resto de módulos.
+
+Esto también borrar y cosas iguales: Source
+Loc
+File
+Meeting
+
+Borrar esti de todas las secciones: Source and provenance
+Real utility data supplied by the user. Null values mean information is missing; they are never replaced with zero.
+Plan data source
+Source: tagbilaran_tcws_optionB_1792021268124.json
+Original source reference
+Source: tagbilaran_tcws_optionB_1792021268124.json
+The newly supplied Option B dataset initializes this plan. Previous Option A data and any edits remain in the immutable legacy copy; approvals do not carry forward.
+Financial figures, scenarios and indicative tariffs are shown exactly as supplied. They have not been independently verified, and the Studio does not recalculate them.
+Open issues in the source (5)
+•	
+•	
+•	
+•	
+•	
+Indicator catalog: 19 indicators, 12 KPIs (read-only)
+Source: Source: indicator_catalog_lgu_waterworks_(1)_1792021268122.json. Optional indicators stay disabled; formulas are definitions, not an automatic calculation engine.
+Catalog
+Indicators
+1
+Code
+Name
+Formula
+Unit
+Kpi
+No
+Jmc standard
+Direction
+2
+Code
+Name
+Formula
+Unit
+Kpi
+No
+Jmc standard
+Direction
+3
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+4
+Code
+Name
+Formula
+Unit
+Kpi
+No
+Jmc standard
+Direction
+5
+Code
+Name
+Formula
+Unit
+Kpi
+No
+Jmc standard
+Direction
+6
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+7
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+8
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+9
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+10
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+11
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+12
+Code
+Name
+Formula
+Unit
+Kpi
+No
+Jmc standard
+Direction
+13
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+14
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+15
+Code
+Name
+Formula
+Unit
+Kpi
+No
+Jmc standard
+Direction
+16
+Code
+Name
+Formula
+Unit
+Kpi
+No
+Jmc standard
+Direction
+17
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+18
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+19
+Code
+Name
+Formula
+Unit
+Kpi
+Yes
+Jmc standard
+Direction
+Kpi count
+Optional indicators disabled by default
+1
+2
+3
+4
+5
+6
+Source
+Plan, utility and source metadata
+Module 1: Utility profile & planningAll modulesModule 3: Diagnostic & baseline
+Save and review
+Last updated 14 Oct 2026, 19:52
+Save draftSave and submit for review
+Saving is manual. Submitting does not approve; a reviewer must approve or return it.
+Module guidance
+Core valuesHide
+The few behaviors that guide how staff work with each other and with customers.
+Why it matters
+•	Turns vision and mission into daily behavior
+Guiding questions
+1.	What do we stand for?
+2.	What behaviors are important to us?
+3.	How do we treat our own people and community?
+Illustrative example · Tagbilaran City Waterworks System (TCWS)
+Teamwork, Community-based Service, Respect, Dedication, Adaptiveness, Resilience, Innovation (reduced from 10 earlier values).
+Source reference: 01 Table 7
+Quoted for illustration only. Replace with your own utility's information.
+Do
+•	Keep 5-7 values you can explain with an example
+Avoid
+•	Long lists nobody remembers
+Strategic objectives (SMART)Show
+VisionShow
+MissionShow
+This is a temporary development preview, and these links are not for public use. Publish your app for secure sharing or use an invite link.
+
+
+

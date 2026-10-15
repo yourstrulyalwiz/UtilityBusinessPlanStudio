@@ -5,6 +5,7 @@ import { seedTestIdentity, openAccessEnabled, testActor } from "./open-access";
 import { migrateModulePlans } from "./module-migration";
 import { seedSuppliedModulePlans } from "./module-seed";
 import { migrateBaseline } from "./baseline-migration";
+import { migrateStrategy } from "./strategy-migration";
 
 // Reference definitions only. Never create example users or utility records.
 export async function seedReferenceData(){
@@ -20,4 +21,5 @@ export async function seedReferenceData(){
     await seedSuppliedModulePlans(p);
   }
   await migrateBaseline();
+  await migrateStrategy();
 }

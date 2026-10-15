@@ -13,6 +13,7 @@ import { ModuleHelpButton, HelpRail } from "@/components/module-help";
 import { KindBadge } from "@/components/module-context";
 import { BaselineEditor } from "@/components/baseline-editor";
 import { PlanReport } from "@/components/module-report";
+import { StrategyEditor, isStrategyV1 } from "@/components/strategy-editor";
 import { useMe, errMsg, fmtDateTime } from "@/lib/app";
 import { moduleColor, moduleTone, statusLabel, reviewedCount, toTopic, isConflict, apiHref } from "@/lib/modules";
 import { useToast } from "@/hooks/use-toast";
@@ -102,7 +103,8 @@ export default function ModulePage() {
   const status = mod?.status ?? "";
   const frozen = status === "ready_for_review" || status === "approved";
   const editable = !!mod && canEdit && !frozen;
-  const canFill = editable && num !== 1 && (plan?.kind === "fictional" || plan?.kind === "user");
+  const strat = num === 2 && isStrategyV1(draft);
+  const canFill = editable && num !== 1 && (plan?.kind === "fictional" || plan?.kind === "user") && (!strat || isStrategyV1(mod?.example));
 
   const run = (action: ModuleActionAction) => {
     if (!mod) return;
@@ -126,7 +128,7 @@ export default function ModulePage() {
   const next = plan.modules.find((m) => m.number === num + 1);
   const color = moduleColor(num);
   const reviewed = reviewedCount(plan.modules);
-  const exLabel = plan.kind === "real" ? "Original source" : "Example";
+  const exLabel = "Reference example";
   const financial = num === 5 || num === 6;
 
   return (
@@ -194,8 +196,8 @@ export default function ModulePage() {
               </div>
             ) : tab === "example" ? (
               <div>
-                <div className="mb-4 rounded-md bg-[#FFF1E8] px-3 py-2 text-xs text-[#9A3A05]" data-testid="text-example-note">{plan.kind === "real" ? "Original supplied source data for this module, including gaps and estimates. Read-only." : "Fictional illustrative example. Read-only; replace with your utility's information."} {plan.exampleSource}</div>
-                {meaningful(mod.example) ? <FieldEditor value={mod.example as Json} example={mod.example} readOnly path={`ex.${num}`} /> : <p className="text-sm text-muted-foreground">No example supplied for this module.</p>}
+                <div className="mb-4 rounded-md bg-[#FFF1E8] px-3 py-2 text-xs text-[#9A3A05]" data-testid="text-example-note">{plan.kind === "real" ? "Original supplied source data for this module, including gaps and estimates. Read-only." : "Fictional illustrative example. Read-only; replace with your utility's information."}</div>
+                {meaningful(mod.example) ? (num === 2 && isStrategyV1(mod.example) ? <StrategyEditor value={mod.example as Json} readOnly /> : <FieldEditor value={mod.example as Json} example={mod.example} readOnly path={`ex.${num}`} />) : <p className="text-sm text-muted-foreground">No example supplied for this module.</p>}
               </div>
             ) : tab === "scenarios" ? (
               <div>
@@ -204,9 +206,8 @@ export default function ModulePage() {
               </div>
             ) : (
               <div>
-                {plan.kind === "real" && <p className="mb-3 break-words text-xs text-muted-foreground">Saved changes may differ from the original source. Use the Original source tab to compare.</p>}
                 {frozen && <p className="mb-3 rounded-md bg-muted/60 px-3 py-2 text-xs text-muted-foreground">{status === "approved" ? "Approved. Fields are frozen until a reviewer reopens the module." : "Ready for review. Fields are frozen until a reviewer approves or returns it."}</p>}
-                <FieldEditor value={draft} example={plan.kind === "real" ? mod.data : mod.example} readOnly={!editable || pending} path={`m${num}`} onChange={(v) => { setDraft(v); setDirty(true); }} />
+                {strat ? <StrategyEditor value={draft} readOnly={!editable || pending} onChange={(v) => { setDraft(v); setDirty(true); }} /> : <FieldEditor value={draft} example={plan.kind === "real" ? mod.data : mod.example} readOnly={!editable || pending} path={`m${num}`} onChange={(v) => { setDraft(v); setDirty(true); }} />}
               </div>
             )}
           </Card>

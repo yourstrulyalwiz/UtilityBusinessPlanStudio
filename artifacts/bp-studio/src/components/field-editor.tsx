@@ -44,8 +44,9 @@ export function meaningful(v: unknown): boolean {
 const NEUTRAL: Record<string, string> = { uof_element: "Functional area", uof_elements: "Functional areas", uof_maturity: "Maturity assessment", uof_maturity_assessment: "Maturity assessment", uof: "Historical framework reference" };
 export const label = (k: string) => NEUTRAL[k] ?? k.replace(/^_+/, "").replace(/[_-]+/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (c) => c.toUpperCase());
 
-const HIDDEN = /^(source|loc|file|citation|sources|source_file|source_loc|source_ref)$|_(source|loc|file|citation)$/i;
+const HIDDEN = /^(source|loc|location_ref|file|filename|citation|citations|sources|source_file|source_loc|source_ref|source_meeting|meeting|meeting_ref|provenance|catalog|strategyVersion)$|_(source|sources|loc|file|filename|citation|meeting|provenance)$/i;
 export const hiddenKey = (k: string) => HIDDEN.test(k);
+const hasVisibleFields = (v: unknown): boolean => !isObj(v) || Object.entries(v).some(([k,c])=>!hiddenKey(k)&&hasVisibleFields(c));
 
 type Props = { value: Json; example: unknown; onChange?: (v: Json) => void; readOnly?: boolean; path: string; depth?: number };
 
@@ -55,7 +56,7 @@ export function FieldEditor({ value, example, onChange, readOnly, path, depth = 
   if (isObj(example) || (isObj(value) && example === undefined)) {
     const ex = isObj(example) ? example : {};
     const v = isObj(value) ? value : {};
-    const keys = Array.from(new Set([...Object.keys(ex), ...Object.keys(v)])).filter((k) => !hiddenKey(k));
+    const keys = Array.from(new Set([...Object.keys(ex), ...Object.keys(v)])).filter((k) => !hiddenKey(k)&&hasVisibleFields(ex[k]??v[k]));
     return (
       <div className={cn("grid gap-4", depth > 0 && "sm:grid-cols-2")}>
         {keys.map((k) => {

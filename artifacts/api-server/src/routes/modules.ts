@@ -7,6 +7,7 @@ import { actor, accessibleUtility, uuid, HttpError, writeAudit } from "../lib/st
 import { moduleWorkflow } from "../lib/module-workflow";
 import { moduleProgress, moduleReady, coreFields, sourceNames } from "../lib/module-definitions";
 import {baselineSchema} from "../lib/baseline-validation";
+import {strategySchema,strategyReady} from "../lib/strategy";
 import {evaluateBaseline,isBaseline,workbook} from "@workspace/baseline";
 
 const router:IRouter=Router();
@@ -39,6 +40,10 @@ router.post("/plans/:id/modules/:number",async(req,res)=>{
     if(input.action==="save"||input.action==="submit"){
       if(["ready_for_review","approved"].includes(status))throw new HttpError(409,"Return or reopen this module before editing.");
       data=input.data??data;safeContent(data);if(input.scenarios)safeContent(input.scenarios);
+      if(number===2&&(data.strategyVersion===1||row.data.strategyVersion===1)){
+        data=strategySchema.parse(data);
+        if(input.action==="submit"&&!strategyReady(data))throw new HttpError(400,"Add vision, mission, core values and objectives with a title, specific action, KPI and target before submitting.");
+      }
       if(number===1){
         data=baselineSchema.parse(data);
         const result=evaluateBaseline(baselineSchema.parse(data));

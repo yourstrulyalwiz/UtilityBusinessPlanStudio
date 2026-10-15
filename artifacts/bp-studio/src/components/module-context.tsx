@@ -12,7 +12,7 @@ const KIND_LABEL: Record<string, string> = {
 
 export function KindBadge({ kind }: { kind: string }) {
   const cls = kind === "real" ? "bg-[#323D4F] text-[#EEF2F6]" : kind === "fictional" ? "bg-[#D9E950] text-[#29323F]" : "bg-[#E4F8F9] text-[#1F5F63]";
-  return <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium ${cls}`} data-testid="badge-plan-kind">{kind === "real" ? "Real source data" : kind === "fictional" ? "Fictional example" : "Team plan"}</span>;
+  return <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium ${cls}`} data-testid="badge-plan-kind">{kind === "real" ? "Utility plan" : kind === "fictional" ? "Fictional example" : "Team plan"}</span>;
 }
 
 export function openIssues(plan: ModulePlan): string[] {

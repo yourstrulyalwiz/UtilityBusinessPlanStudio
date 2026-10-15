@@ -3,7 +3,8 @@ import type { ModulePlan } from "@workspace/api-client-react";
 import { Printer, ScrollText } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Btn } from "@/components/kit";
-import { label } from "@/components/field-editor";
+import { label, hiddenKey } from "@/components/field-editor";
+import { StrategyReport, isStrategyV1 } from "@/components/strategy-editor";
 import { openIssues } from "@/components/module-context";
 import { statusLabel, reviewedCount } from "@/lib/modules";
 import { fmtDateTime } from "@/lib/app";
@@ -12,7 +13,7 @@ import { BaselineReport } from "@/components/baseline-editor";
 function ReportValue({value}:{value:unknown}) {
   if(value===null||value===undefined)return <span className="text-[#5B6678]">No data</span>;
   if(Array.isArray(value))return value.length?<ol className="space-y-3 border-l pl-3">{value.map((v,i)=><li key={i}><ReportValue value={v}/></li>)}</ol>:<span>No entries</span>;
-  if(typeof value==="object")return <dl className="space-y-2">{Object.entries(value).map(([k,v])=><div key={k}><dt className="text-xs font-semibold">{label(k)}</dt><dd className="pl-2"><ReportValue value={v}/></dd></div>)}</dl>;
+  if(typeof value==="object")return <dl className="space-y-2">{Object.entries(value).filter(([k])=>!hiddenKey(k)&&k!=="strategyVersion").map(([k,v])=><div key={k}><dt className="text-xs font-semibold">{label(k)}</dt><dd className="pl-2"><ReportValue value={v}/></dd></div>)}</dl>;
   return <p className="whitespace-pre-wrap break-words text-sm">{typeof value==="boolean"?(value?"Yes":"No"):String(value)}</p>;
 }
 /** Print-friendly view of the saved module data. It is a readable dump, not a formatted business-plan document. */
@@ -40,7 +41,7 @@ export function PlanReport({ plan }: { plan: ModulePlan }) {
               <section key={m.number} className="break-inside-avoid-page">
                 <h2 className="text-lg font-semibold">Module {m.number}: {m.title} <span className="ml-2 text-xs font-normal text-[#5B6678]">{statusLabel(m.status)}</span></h2>
                 {m.description && <p className="mb-2 text-xs text-[#5B6678]">{m.description}</p>}
-                {m.number === 1 ? <BaselineReport value={m.data} /> : <ReportValue value={m.data} />}
+                {m.number === 1 ? <BaselineReport value={m.data} /> : m.number === 2 && isStrategyV1(m.data) ? <StrategyReport value={m.data} /> : <ReportValue value={m.data} />}
               </section>
             ))}
             {issues.length > 0 && <section><h2 className="text-lg font-semibold">Open issues</h2><ul className="list-disc pl-5 text-sm">{issues.map((x, i) => <li key={i}>{x}</li>)}</ul></section>}

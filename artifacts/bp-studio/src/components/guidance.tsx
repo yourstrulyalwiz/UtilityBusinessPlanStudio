@@ -59,13 +59,12 @@ export function TopicBody({ topic, initialTab = "definition", hint }: { topic: G
                 <tbody>{ex.table.rows.map((r, j) => <tr key={j}>{r.map((c, k) => <td key={k} className="border-b border-[#323D4F]/5 px-2 py-1 align-top">{c}</td>)}</tr>)}</tbody></table></div>}
             </figure>
           ))}
-          <p className="text-[11px] text-muted-foreground" data-testid="text-guide-source">Source: {topic.source}. Examples from the supplied document; not independently verified as current.</p>
+          <p className="text-[11px] text-muted-foreground" data-testid="text-guide-source">Examples are illustrative and not independently verified as current.</p>
         </>}
         {tab === "recommendations" && <>
           <ul className="space-y-1.5">{topic.tips.do.map((d) => <li key={d} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#3F6E22]" />{d}</li>)}</ul>
           <ul className="space-y-1.5">{topic.tips.avoid.map((d) => <li key={d} className="flex gap-2"><TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />Avoid: {d}</li>)}</ul>
           {topic.guidingQuestions && <div className="rounded-lg border p-3"><div className="mb-1 text-[11px] font-semibold uppercase tracking-wider">Guiding questions</div><ul className="list-disc space-y-1 pl-5">{topic.guidingQuestions.map((q) => <li key={q}>{q}</li>)}</ul></div>}
-          <p className="text-[11px] text-muted-foreground">Source: {topic.source}</p>
           <div className="rounded-lg border border-dashed p-3">
             <div className="mb-2 text-[11px] font-semibold uppercase tracking-wider">Across sectors</div>
             <SectorPicker value={sector} onChange={setSector} />

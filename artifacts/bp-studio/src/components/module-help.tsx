@@ -20,8 +20,7 @@ export function TopicView({ topic, compact }: { topic: Topic; compact?: boolean 
       {topic.example.text && <section className="rounded-lg border border-[#323D4F]/10 bg-[#F7F9FB] p-3">
         <h4 className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-[#5B6678]">Illustrative example{topic.example.utility ? ` · ${topic.example.utility}` : ""}</h4>
         <p className="leading-relaxed">{topic.example.text}</p>
-        {topic.example.source && <p className="mt-1.5 font-mono text-[11px] text-[#5B6678]">Source reference: {topic.example.source}</p>}
-        <p className="mt-1 text-[11px] text-[#5B6678]">Quoted for illustration only. Replace with your own utility's information.</p>
+                <p className="mt-1 text-[11px] text-[#5B6678]">Quoted for illustration only. Replace with your own utility's information.</p>
       </section>}
       {(topic.tips.do.length > 0 || topic.tips.avoid.length > 0) && <div className={cn("grid gap-3", !compact && "sm:grid-cols-2")}>
         <div className="rounded-lg border-l-4 border-[#70AD47] bg-[#70AD47]/[.06] p-3"><h4 className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider"><ThumbsUp className="h-3.5 w-3.5" /> Do</h4><ul className="space-y-1">{topic.tips.do.map((t) => <li key={t}>{t}</li>)}</ul></div>

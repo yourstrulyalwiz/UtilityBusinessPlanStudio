@@ -2,11 +2,12 @@ import { db, plans, utilities, planActivities, comments, members, audit, activit
 import { eq, and, sql } from "drizzle-orm";
 import type { Tx } from "./studio";
 import {createBaseline} from "@workspace/baseline";
+import {blankStrategy} from "./strategy";
 import { demo, real, guidance, sourceNames, exampleFor, blankValue, moduleDefinitions } from "./module-definitions";
 
 export async function createBlankModulePlan(tx:Tx,planId:string) {
   await tx.insert(modulePlans).values({planId,kind:"user",source:"User-entered plan",context:{migrationNote:"Independent eight-module business planning. Examples are fictional and are never filled automatically."}});
-  await tx.insert(planModules).values(moduleDefinitions.map(m=>({planId,number:m.number,data:m.number===1?{...createBaseline()}:blankValue(exampleFor("user",m.number)) as Record<string,unknown>})));
+  await tx.insert(planModules).values(moduleDefinitions.map(m=>({planId,number:m.number,data:m.number===1?{...createBaseline()}:m.number===2?blankStrategy():blankValue(exampleFor("user",m.number)) as Record<string,unknown>})));
 }
 
 /** Atomic, additive conversion. Capture every old record before changing active status/progress. */

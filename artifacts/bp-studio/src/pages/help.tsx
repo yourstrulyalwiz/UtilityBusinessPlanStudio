@@ -50,7 +50,7 @@ export function HelpCenter() {
             );
           })}
         </div>}
-      {q.data?.source && <p className="mt-6 text-[11px] text-muted-foreground">Source: {q.data.source}. Edits by administrators may differ from the source.</p>}
+      {q.data?.source && <p className="mt-6 text-[11px] text-muted-foreground">Edits by administrators may differ from the original guidance.</p>}
     </div>
   );
 }
@@ -128,7 +128,7 @@ export function HelpTopic() {
             </div>
             <h1 className="mt-2 text-2xl font-semibold tracking-tight text-[#323D4F]" data-testid="text-topic-title">{t.title}</h1>
             <div className="mt-5">{editing ? <TopicEditor key={t.updatedAt} topic={t} onDone={() => setEditing(false)} /> : <TopicView topic={t} />}</div>
-            <p className="mt-6 border-t pt-3 text-[11px] text-muted-foreground">Source: {q.data?.source}. Last updated {fmtDateTime(t.updatedAt)}. Edits may differ from the source.</p>
+            <p className="mt-6 border-t pt-3 text-[11px] text-muted-foreground">Last updated {fmtDateTime(t.updatedAt)}. Edits may differ from the source.</p>
           </div>
         </Card>}
       {siblings.length > 0 && <div className="mt-5"><div className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#5B6678]">Also in this module</div><div className="flex flex-wrap gap-2">{siblings.map((s) => <Link key={s.id} href={`/help/${s.id}`} className="rounded-full border bg-card px-3 py-1 text-sm text-[#323D4F] hover:border-[#1ED3D9]" data-testid={`link-sibling-${s.id}`}>{s.title}</Link>)}</div></div>}
