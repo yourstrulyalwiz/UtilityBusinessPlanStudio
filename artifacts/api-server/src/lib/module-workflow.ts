@@ -2,6 +2,13 @@ import { db, plans, modulePlans, planModules, legacyPlanCopies, guidanceTopics, 
 import { eq, asc } from "drizzle-orm";
 import { accessibleUtility, HttpError } from "./studio";
 import { moduleDefinitions, exampleFor, moduleProgress, catalog, sourceNames } from "./module-definitions";
+import {isBaseline,englishSourceText} from "@workspace/baseline";
+
+function translatedData(data:Record<string,unknown>) {
+  if(!isBaseline(data))return data;
+  return {...data,variableNotes:Object.fromEntries(Object.entries(data.variableNotes??{}).map(([k,v])=>[k,englishSourceText(v)])),
+    indicatorNotes:Object.fromEntries(Object.entries(data.indicatorNotes??{}).map(([k,v])=>[k,englishSourceText(v)]))};
+}
 
 export async function moduleWorkflow(p:StudioPerson,planId:string) {
   const [plan]=await db.select().from(plans).where(eq(plans.id,planId));
@@ -16,7 +23,7 @@ export async function moduleWorkflow(p:StudioPerson,planId:string) {
   return {
     planId,utilityName:utility.name,source:`Source: ${record.source}`,exampleSource:`Source: ${record.kind==="real"?sourceNames.real:sourceNames.fictional}`,
     kind:record.kind,context:record.context,scenarios:record.scenarios,
-    modules:rows.map(row=>({...moduleDefinitions[row.number-1],status:row.status,data:row.data,example:exampleFor(record.kind,row.number),feedback:row.feedback,updatedAt:row.updatedAt.toISOString()})),
+    modules:rows.map(row=>({...moduleDefinitions[row.number-1],status:row.status,data:translatedData(row.data),example:exampleFor(record.kind,row.number),feedback:row.feedback,updatedAt:row.updatedAt.toISOString()})),
     progress:moduleProgress(rows),canEdit:utility.status!=="archived"&&["admin","ttl","editor"].includes(p.role),
     canReview:utility.status!=="archived"&&["admin","ttl"].includes(p.role),
     hasLegacyCopy:!!copy,guidance:topics.map(t=>({...t,updatedAt:t.updatedAt.toISOString()})),

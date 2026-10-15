@@ -62,6 +62,8 @@ The user requested importing the Tagbilaran TCWS plan and LGU waterworks indicat
 
 ## User preferences
 
+All platform and deliverable text must be English, including workbook-derived headings, units, level labels, formulas and supplied notes. The user repeated this after Spanish workbook text remained visible. Keep original source files unchanged and preserve numeric values.
+
 El usuario hará las pruebas con Tagbilaran City Waterworks System, porque es la utility con la que tiene datos. Primero ajustar esta utility; después de validar los ajustes, adaptar los ejemplos acordadamente.
 
 **Why:** El usuario indicó este orden de trabajo. No sustituir su caso de prueba por ejemplos ficticios ni sobrescribir sus datos durante verificaciones automáticas.

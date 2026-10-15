@@ -1,4 +1,5 @@
-import workbook from "./workbook.json";
+import {englishWorkbook as workbook} from "./english";
+export {englishSourceText} from "./english";
 export {workbook};
 export const inputVariables=workbook.variables.filter(v=>!v.excelFormula);
 export const derivedVariables=workbook.variables.filter(v=>!!v.excelFormula);
@@ -21,7 +22,7 @@ export function isBaseline(v:unknown):v is BaselineData {
   const d=v as BaselineData;
   return d.baselineVersion===1&&!!d.variables&&typeof d.variables==="object"&&!Array.isArray(d.variables);
 }
-export const levelLabels=["Elemental","Básico","Bueno","Buen desempeño","Clase mundial"];
+export const levelLabels=["Elementary","Basic","Good","Well-performing","World-class"];
 export function levelFor(value:number,def:(typeof workbook.indicators)[number]):number|null {
   if(!def.direction)return null;
   for(let i=3;i>=0;i--)if(def.direction===">"?value>=Number(def.thresholds[i]):value<=Number(def.thresholds[i]))return i+2;
@@ -43,7 +44,7 @@ export function evaluateBaseline(data:BaselineData) {
       if(n<0)issue([v.id],`${v.name}: cannot be negative.`);
       if(v.unit==="%"&&n>1)issue([v.id],`${v.name}: cannot exceed 100%.`);
       if(v.id==="v19"&&n>24)issue([v.id],"Continuity cannot exceed 24 hours per day.");
-      if(v.unit==="número"&&!Number.isInteger(n))issue([v.id],`${v.name}: use a whole count.`);
+      if(v.unit==="count"&&!Number.isInteger(n))issue([v.id],`${v.name}: use a whole count.`);
     }
   }
   const relation=(a:string,b:string,message:string,severity:"error"|"warning"="error")=>{
