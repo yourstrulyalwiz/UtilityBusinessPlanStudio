@@ -1,0 +1,861 @@
+M2
+Cambiar el orden y dejar How we behave
+Values
+ Para el final de la seccion
+
+M3 Diagnostic & baseline
+
+
+Borrar todo est: Assets
+Pumping stations
+1
+Hp
+Ps no
+Location
+Area served
+Last installation
+2
+Hp
+Ps no
+Location
+Area served
+Last installation
+3
+Hp
+Ps no
+Location
+Area served
+Last installation
+4
+Hp
+Ps no
+Location
+Area served
+Last installation
+5
+Hp
+Ps no
+Location
+Area served
+Last installation
+6
+Hp
+Ps no
+Location
+Area served
+Last installation
+7
+Hp
+Ps no
+Location
+Area served
+Last installation
+8
+Hp
+Ps no
+Location
+Area served
+Last installation
+9
+Hp
+Ps no
+Location
+Area served
+Last installation
+10
+Hp
+Ps no
+Location
+Area served
+Last installation
+11
+Hp
+Ps no
+Location
+Area served
+Last installation
+12
+Hp
+Ps no
+Location
+Area served
+Last installation
+13
+Hp
+Ps no
+Location
+Area served
+Last installation
+14
+Hp
+Ps no
+Location
+Area served
+Last installation
+15
+Hp
+Ps no
+Location
+Area served
+Last installation
+16
+Hp
+Ps no
+Location
+Area served
+Last installation
+17
+Hp
+Ps no
+Location
+Area served
+Last installation
+18
+Hp
+Ps no
+Location
+Area served
+Last installation
+19
+Hp
+Ps no
+Location
+Area served
+Last installation
+20
+Hp
+Ps no
+Location
+Area served
+Last installation
+21
+Hp
+Ps no
+Location
+Area served
+Last installation
+22
+Hp
+Ps no
+Location
+Area served
+Last installation
+23
+Hp
+Ps no
+Location
+Area served
+Last installation
+24
+Hp
+Ps no
+Location
+Area served
+Last installation
+25
+Hp
+Ps no
+Location
+Area served
+Last installation
+26
+Hp
+Ps no
+Location
+Area served
+Last installation
+Asset management plan
+Plan
+1
+Action
+Asset id
+Cost php
+Condition
+Criticality
+Remaining life
+2
+Action
+Asset id
+Cost php
+Condition
+Criticality
+Remaining life
+3
+Action
+Asset id
+Cost php
+Condition
+Criticality
+Remaining life
+Registry
+1
+Type
+Year
+Capacity
+Location
+Condition
+2
+Type
+Year
+Capacity
+Location
+Condition
+3
+Type
+Year
+Capacity
+Location
+Condition
+Criticality
+1
+Cof
+Pof
+Score
+Station
+2
+Cof
+Pof
+Score
+Station
+3
+Cof
+Pof
+Score
+Station
+Failure modes
+1
+2
+3
+4
+Criticality method
+Monthly
+Note
+Billed m3
+2020
+Apr
+Aug
+Dec
+Feb
+Jan
+Jul
+Jun
+Mar
+May
+Nov
+Oct
+Sep
+2021
+Apr
+Aug
+Dec
+Feb
+Jan
+Jul
+Jun
+Mar
+May
+Nov
+Oct
+Sep
+2022
+Apr
+Aug
+Dec
+Feb
+Jan
+Jul
+Jun
+Mar
+May
+Nov
+Oct
+Sep
+2023
+Apr
+Aug
+Dec
+Feb
+Jan
+Jul
+Jun
+Mar
+May
+Nov
+Oct
+Sep
+2024
+Apr
+Aug
+Dec
+Feb
+Jan
+Jul
+Jun
+Mar
+May
+Nov
+Oct
+Sep
+2025
+Apr
+Aug
+Feb
+Jan
+Jul
+Jun
+Mar
+May
+Production m3
+2023
+Apr
+Aug
+Dec
+Feb
+Jan
+Jul
+Jun
+Mar
+May
+Nov
+Oct
+Sep
+2024
+Apr
+Aug
+Dec
+Feb
+Jan
+Jul
+Jun
+Mar
+May
+Nov
+Oct
+Sep
+2025
+Apr
+Feb
+Jan
+Jun
+Mar
+May
+Collections php 2025
+Apr
+Feb
+Jan
+Jul
+Jun
+Mar
+May
+Narratives
+Note
+Financial
+Technical
+Commercial
+Human talent
+Demographics
+Employed
+Male
+Female
+Tourists
+2024
+2030
+2035
+2040
+2045
+2050
+2055
+Barangays
+Households
+2024
+2030
+2035
+2040
+2045
+2050
+2055
+Population
+Projected
+2024
+2030
+2035
+2040
+2045
+2050
+2055
+Census 2024
+Implications
+Household size
+Served by tcws
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+Demand analysis
+Tourist lpcd
+Nrw projection
+2025
+2030
+2035
+2040
+2045
+2050
+2055
+Private wsp mld
+2025
+2030
+2035
+2040
+2045
+2050
+2055
+Residential lpcd
+Total demand mld
+2024
+2030
+2035
+2040
+2045
+2050
+2055
+Net demand tcws mld
+2025
+2030
+2035
+2040
+2045
+2050
+2055
+Commercial m3 conn day
+Unconstrained demand mld
+2025
+2030
+2035
+2040
+2045
+2050
+2055
+Institutional m3 conn day
+Urban barangays
+Major industries
+Population served
+Poverty incidence
+Avg household income
+Value
+Gap note
+Population by barangay
+Dao
+Bool
+Booy
+Cogon
+Manga
+Dampas
+Taloto
+Tiptip
+Ubujan
+Cabawan
+Mansasa
+San Isidro
+Poblacion I
+Poblacion II
+Poblacion III
+Population service area
+Nrw snapshots
+1
+Nrw
+Period
+Billed m3
+Production m3
+2
+Nrw
+Period
+Billed m3
+Production m3
+Annual indicators
+1
+Nrw
+Value
+Gap note
+Year
+Period
+Opex php
+Value
+Confidence
+Billed m3
+Value
+Confidence
+Connections
+Com
+Res
+Inst
+Total
+Production m3
+Value
+Gap note
+Collections php
+Value
+Confidence
+Operating ratio
+Value
+Formula
+Confidence
+Avg tariff php m3
+Value
+Formula
+Confidence
+Should be tariff php m3
+Value
+Unit production cost php m3
+Value
+Gap note
+Avg consumption m3 conn month
+Value
+Confidence
+2
+Nrw
+Value
+Gap note
+Year
+Period
+Opex php
+Value
+Confidence
+Billed m3
+Value
+Confidence
+Connections
+Com
+Res
+Inst
+Total
+Production m3
+Value
+Gap note
+Collections php
+Value
+Confidence
+Operating ratio
+Value
+Formula
+Confidence
+Avg tariff php m3
+Value
+Formula
+Confidence
+Should be tariff php m3
+Value
+Unit production cost php m3
+Value
+Gap note
+Avg consumption m3 conn month
+Value
+Confidence
+3
+Nrw
+Value
+Gap note
+Year
+Period
+Opex php
+Value
+Confidence
+Billed m3
+Value
+Confidence
+Connections
+Com
+Res
+Inst
+Total
+Production m3
+Value
+Gap note
+Collections php
+Value
+Confidence
+Operating ratio
+Value
+Formula
+Confidence
+Avg tariff php m3
+Value
+Formula
+Confidence
+Should be tariff php m3
+Value
+Unit production cost php m3
+Value
+Gap note
+Avg consumption m3 conn month
+Value
+Confidence
+4
+Nrw
+Value
+Gap note
+Formula
+Confidence
+Year
+Period
+Opex php
+Value
+Confidence
+Billed m3
+Value
+Confidence
+Connections
+Com
+Res
+Inst
+Total
+Production m3
+Value
+Gap note
+Confidence
+Collections php
+Value
+Confidence
+Operating ratio
+Value
+Formula
+Confidence
+Avg tariff php m3
+Value
+Formula
+Confidence
+Should be tariff php m3
+Value
+Unit production cost php m3
+Value
+Gap note
+Confidence
+Avg consumption m3 conn month
+Value
+Confidence
+5
+Nrw
+Value
+Gap note
+Formula
+Confidence
+Year
+Period
+Opex php
+Value
+Confidence
+Note
+Billed m3
+Value
+Confidence
+Connections
+Com
+Res
+Inst
+Total
+Production m3
+Value
+Gap note
+Confidence
+Collections php
+Value
+Confidence
+Operating ratio
+Value
+Formula
+Confidence
+Avg tariff php m3
+Value
+Formula
+Confidence
+Should be tariff php m3
+Value
+Unit production cost php m3
+Value
+Gap note
+Confidence
+Avg consumption m3 conn month
+Value
+Confidence
+6
+Nrw
+Value
+Gap note
+Formula
+Confidence
+Year
+Period
+Opex php
+Value
+Confidence
+Gap note
+Billed m3
+Value
+Confidence
+Connections
+Com
+Res
+Inst
+Total
+Production m3
+Value
+Gap note
+Confidence
+Collections php
+Value
+Confidence
+Operating ratio
+Value
+Formula
+Confidence
+Gap note
+Avg tariff php m3
+Value
+Formula
+Confidence
+Should be tariff php m3
+Value
+Unit production cost php m3
+Value
+Gap note
+Avg consumption m3 conn month
+Value
+Confidence
+Management comments
+Provider comparison
+BWUI
+Nrw
+Billed mld
+Connections
+Availability
+Production mld
+TCWS
+Nrw
+Billed mld
+Connections
+Availability
+Production mld
+Richli
+Nrw
+Connections
+Availability
+Enablement environment
+Pillars
+1
+Pillar
+Rating
+Assessment
+2
+Pillar
+Rating
+Assessment
+3
+Pillar
+Rating
+Assessment
+4
+Pillar
+Rating
+Assessment
+5
+Pillar
+Rating
+Assessment
+Rating gap
+Sanitation
+Swot guiding questions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+Connections by barangay
+2020
+Dao
+Bool
+Booy
+Cogon
+Manga
+Other
+Tiptip
+Ubujan
+Cabawan
+Taloto Z8
+Taloto Z9
+San Isidro
+2021
+Dao
+Bool
+Booy
+Cogon
+Manga
+Other
+Tiptip
+Ubujan
+Cabawan
+Taloto Z8
+Taloto Z9
+San Isidro
+2022
+Dao
+Bool
+Booy
+Cogon
+Manga
+Other
+Tiptip
+Ubujan
+Cabawan
+Taloto Z8
+Taloto Z9
+San Isidro
+2023
+Dao
+Bool
+Booy
+Cogon
+Manga
+Other
+Tiptip
+Ubujan
+Cabawan
+Taloto Z8
+Taloto Z9
+San Isidro
+2024
+Dao
+Bool
+Booy
+Cogon
+Manga
+Other
+Tiptip
+Ubujan
+Cabawan
+Taloto Z8
+Taloto Z9
+San Isidro
+2025
+Dao
+Bool
+Booy
+Cogon
+Manga
+Other
+Tiptip
+Ubujan
+Cabawan
+Taloto Z8
+Taloto Z9
+San Isidro
+
+Generar una seccion mas dinámica, visualmente impactante que sea un asessment con mensajes claros y precisos además del swot, todo 

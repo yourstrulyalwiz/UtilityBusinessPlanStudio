@@ -14,6 +14,7 @@ import { KindBadge } from "@/components/module-context";
 import { BaselineEditor } from "@/components/baseline-editor";
 import { PlanReport } from "@/components/module-report";
 import { StrategyEditor, isStrategyV1 } from "@/components/strategy-editor";
+import { AssessmentEditor, AssessmentGuide, isAssessmentV1 } from "@/components/assessment-editor";
 import { useMe, errMsg, fmtDateTime } from "@/lib/app";
 import { moduleColor, moduleTone, statusLabel, reviewedCount, toTopic, isConflict, apiHref } from "@/lib/modules";
 import { useToast } from "@/hooks/use-toast";
@@ -104,7 +105,8 @@ export default function ModulePage() {
   const frozen = status === "ready_for_review" || status === "approved";
   const editable = !!mod && canEdit && !frozen;
   const strat = num === 2 && isStrategyV1(draft);
-  const canFill = editable && num !== 1 && (plan?.kind === "fictional" || plan?.kind === "user") && (!strat || isStrategyV1(mod?.example));
+  const assess = num === 3 && isAssessmentV1(draft);
+  const canFill = editable && num !== 1 && (plan?.kind === "fictional" || plan?.kind === "user") && (!strat || isStrategyV1(mod?.example)) && (num !== 3 || isAssessmentV1(draft) === isAssessmentV1(mod?.example));
 
   const run = (action: ModuleActionAction) => {
     if (!mod) return;
@@ -168,7 +170,7 @@ export default function ModulePage() {
               </div>
               <h1 className="mt-2 text-2xl font-semibold tracking-tight text-[#323D4F] md:text-[28px]" data-testid="text-module-title">{mod.title}</h1>
               {mod.description && <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#5B6678]" data-testid="text-module-description">{mod.description}</p>}
-              {num !== 1 && <div className="mt-4 flex flex-wrap gap-2"><ModuleHelpButton topics={topics} moduleNumber={num} moduleTitle={mod.title} /></div>}
+              {num !== 1 && !assess && <div className="mt-4 flex flex-wrap gap-2"><ModuleHelpButton topics={topics} moduleNumber={num} moduleTitle={mod.title} /></div>}
               {!canEdit && <div className="mt-4 rounded-lg bg-muted/60 px-4 py-2.5 text-xs text-muted-foreground">Your role has read-only access to this plan.</div>}
               {financial && <p className="mt-4 flex gap-2 rounded-lg border-l-4 border-[#FF6A0D] bg-[#FFF1E8] px-4 py-3 text-xs text-[#9A3A05]" data-testid="text-financial-warning"><Calculator className="mt-0.5 h-4 w-4 shrink-0" /><span><strong>No calculation engine.</strong> Values here are supplied scenario figures, stored as entered. Changing an input does not recalculate revenue requirements, tariffs or any other financial result. Update dependent figures yourself and explain them.</span></p>}
               {mod.feedback && <p className="mt-4 rounded-lg border border-[#FF6A0D]/30 bg-[#FFF1E8] p-4 text-sm text-[#9A3A05]" data-testid="text-feedback"><strong>Latest review comment:</strong> {mod.feedback}</p>}
@@ -197,7 +199,7 @@ export default function ModulePage() {
             ) : tab === "example" ? (
               <div>
                 <div className="mb-4 rounded-md bg-[#FFF1E8] px-3 py-2 text-xs text-[#9A3A05]" data-testid="text-example-note">{plan.kind === "real" ? "Original supplied source data for this module, including gaps and estimates. Read-only." : "Fictional illustrative example. Read-only; replace with your utility's information."}</div>
-                {meaningful(mod.example) ? (num === 2 && isStrategyV1(mod.example) ? <StrategyEditor value={mod.example as Json} readOnly /> : <FieldEditor value={mod.example as Json} example={mod.example} readOnly path={`ex.${num}`} />) : <p className="text-sm text-muted-foreground">No example supplied for this module.</p>}
+                {meaningful(mod.example) ? (num === 2 && isStrategyV1(mod.example) ? <StrategyEditor value={mod.example as Json} readOnly /> : num === 3 && isAssessmentV1(mod.example) ? <AssessmentEditor value={mod.example as Json} readOnly /> : <FieldEditor value={mod.example as Json} example={mod.example} readOnly path={`ex.${num}`} />) : <p className="text-sm text-muted-foreground">No example supplied for this module.</p>}
               </div>
             ) : tab === "scenarios" ? (
               <div>
@@ -207,7 +209,7 @@ export default function ModulePage() {
             ) : (
               <div>
                 {frozen && <p className="mb-3 rounded-md bg-muted/60 px-3 py-2 text-xs text-muted-foreground">{status === "approved" ? "Approved. Fields are frozen until a reviewer reopens the module." : "Ready for review. Fields are frozen until a reviewer approves or returns it."}</p>}
-                {strat ? <StrategyEditor value={draft} readOnly={!editable || pending} onChange={(v) => { setDraft(v); setDirty(true); }} /> : <FieldEditor value={draft} example={plan.kind === "real" ? mod.data : mod.example} readOnly={!editable || pending} path={`m${num}`} onChange={(v) => { setDraft(v); setDirty(true); }} />}
+                {strat ? <StrategyEditor value={draft} readOnly={!editable || pending} onChange={(v) => { setDraft(v); setDirty(true); }} /> : assess ? <AssessmentEditor value={draft} readOnly={!editable || pending} onChange={(v) => { setDraft(v); setDirty(true); }} /> : <FieldEditor value={draft} example={plan.kind === "real" ? mod.data : mod.example} readOnly={!editable || pending} path={`m${num}`} onChange={(v) => { setDraft(v); setDirty(true); }} />}
               </div>
             )}
           </Card>
@@ -249,7 +251,7 @@ export default function ModulePage() {
               {status === "approved" && <Btn variant="outline" className="w-full" disabled={pending} onClick={() => run("reopen")} data-testid="button-reopen"><RotateCcw className="h-4 w-4" /> Reopen</Btn>}
             </div>}
           </Card>
-          {num === 1 ? <Card className="p-4 text-sm"><h3 className="font-semibold">Working with your baseline</h3><ol className="mt-3 list-decimal space-y-3 pl-4 text-muted-foreground"><li>Review indicators and expand their formulas to understand each level.</li><li>Open the variable groups at the end to enter or correct data. Use one consistent reporting period.</li><li>Add analytical notes explaining gaps, estimates and actions.</li><li>Save your draft. Resolve consistency errors before submitting for review.</li></ol><p className="mt-4 text-xs text-muted-foreground">Missing data is not zero. An indicator without reference bands is informational, not rated.</p></Card> : <Card className="p-4"><HelpRail key={num} topics={topics} moduleNumber={num} /></Card>}
+          {num === 1 ? <Card className="p-4 text-sm"><h3 className="font-semibold">Working with your baseline</h3><ol className="mt-3 list-decimal space-y-3 pl-4 text-muted-foreground"><li>Review indicators and expand their formulas to understand each level.</li><li>Open the variable groups at the end to enter or correct data. Use one consistent reporting period.</li><li>Add analytical notes explaining gaps, estimates and actions.</li><li>Save your draft. Resolve consistency errors before submitting for review.</li></ol><p className="mt-4 text-xs text-muted-foreground">Missing data is not zero. An indicator without reference bands is informational, not rated.</p></Card> : assess ? <Card className="p-4"><AssessmentGuide /></Card> : <Card className="p-4"><HelpRail key={num} topics={topics} moduleNumber={num} /></Card>}
         </div>
       </div>
 

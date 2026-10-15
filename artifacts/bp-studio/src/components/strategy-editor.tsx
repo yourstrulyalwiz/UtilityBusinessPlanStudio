@@ -121,26 +121,6 @@ export function StrategyEditor({ value, onChange, readOnly }: { value: Json; onC
         </Section>
       </div>
 
-      <Section icon={<span className="font-mono text-xs font-semibold">{values.length}</span>} eyebrow="How we behave" title="Values"
-        aside={!readOnly && <Btn variant="outline" className="h-8" onClick={() => { vk.add(); setValues([...values, ""]); }} data-testid="button-add-value"><Plus className="h-4 w-4" /> Add value</Btn>}>
-        {values.length === 0 && <p className="rounded-lg border border-dashed px-3 py-3 text-xs text-muted-foreground">No values recorded.{!readOnly && " Add the principles that guide staff decisions."}</p>}
-        <ol className="space-y-2">
-          {values.map((v, i) => (
-            <li key={vk.keys[i]} className="flex items-start gap-2 rounded-lg bg-[#F7F9FB] p-2 ring-1 ring-[#323D4F]/[.06]" data-testid={`row-value-${i}`}>
-              <span className="mt-2 w-6 shrink-0 text-right font-mono text-[11px] text-[#5B6678]">{i + 1}</span>
-              {readOnly ? <p className="min-w-0 flex-1 whitespace-pre-wrap break-words py-1.5 text-sm text-[#323D4F]">{str(v) || <span className="text-muted-foreground">Blank</span>}</p>
-                : <textarea rows={1} className={cn(ta, "min-h-10 flex-1")} value={str(v)} onChange={(e) => setValues(values.map((x, j) => (j === i ? e.target.value : x)))} aria-label={`Value ${i + 1}`} data-testid={`input-value-${i}`} />}
-              {!readOnly && <div className="flex shrink-0 items-center">
-                <IconBtn label="Move up" disabled={i === 0} onClick={() => { vk.move(i, i - 1); const a = [...values]; [a[i - 1], a[i]] = [a[i], a[i - 1]]; setValues(a); }} testid={`button-value-up-${i}`}><ArrowUp className="h-4 w-4" /></IconBtn>
-                <IconBtn label="Move down" disabled={i === values.length - 1} onClick={() => { vk.move(i, i + 1); const a = [...values]; [a[i + 1], a[i]] = [a[i], a[i + 1]]; setValues(a); }} testid={`button-value-down-${i}`}><ArrowDown className="h-4 w-4" /></IconBtn>
-                <IconBtn label="Remove value" danger onClick={() => setConfirm({ kind: "value", index: i, label: str(v).slice(0, 80) || `Value ${i + 1}` })} testid={`button-value-remove-${i}`}><Trash2 className="h-4 w-4" /></IconBtn>
-              </div>}
-            </li>
-          ))}
-        </ol>
-        <Guide title="Values">Values are short principles staff can apply when deciding, such as "Integrity: we bill only what is consumed and measured." A name plus one explanatory line works better than a single word.</Guide>
-      </Section>
-
       <Section icon={<Target className="h-4 w-4" />} eyebrow="SMART objectives" title={`Strategic objectives (${objectives.length})`}
         aside={!readOnly && <Btn variant="outline" className="h-8" onClick={() => { ok.add(); setObjectives([...objectives, { ...EMPTY_OBJ }]); }} data-testid="button-add-objective"><Plus className="h-4 w-4" /> Add objective</Btn>}>
         {incomplete > 0 && <p className="mb-3 flex gap-2 rounded-lg border-l-4 border-[#FF6A0D] bg-[#FFF1E8] px-3 py-2 text-xs text-[#9A3A05]" data-testid="text-objectives-incomplete"><AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" /><span><strong>{incomplete} of {objectives.length} objectives are not fully specified.</strong> Owner, achievability or deadline is missing. Complete them before the strategy can be considered SMART.</span></p>}
@@ -202,6 +182,26 @@ export function StrategyEditor({ value, onChange, readOnly }: { value: Json; onC
         </div>
       </Section>
 
+      <Section icon={<span className="font-mono text-xs font-semibold">{values.length}</span>} eyebrow="How we behave" title="Values"
+        aside={!readOnly && <Btn variant="outline" className="h-8" onClick={() => { vk.add(); setValues([...values, ""]); }} data-testid="button-add-value"><Plus className="h-4 w-4" /> Add value</Btn>}>
+        {values.length === 0 && <p className="rounded-lg border border-dashed px-3 py-3 text-xs text-muted-foreground">No values recorded.{!readOnly && " Add the principles that guide staff decisions."}</p>}
+        <ol className="space-y-2">
+          {values.map((v, i) => (
+            <li key={vk.keys[i]} className="flex items-start gap-2 rounded-lg bg-[#F7F9FB] p-2 ring-1 ring-[#323D4F]/[.06]" data-testid={`row-value-${i}`}>
+              <span className="mt-2 w-6 shrink-0 text-right font-mono text-[11px] text-[#5B6678]">{i + 1}</span>
+              {readOnly ? <p className="min-w-0 flex-1 whitespace-pre-wrap break-words py-1.5 text-sm text-[#323D4F]">{str(v) || <span className="text-muted-foreground">Blank</span>}</p>
+                : <textarea rows={1} className={cn(ta, "min-h-10 flex-1")} value={str(v)} onChange={(e) => setValues(values.map((x, j) => (j === i ? e.target.value : x)))} aria-label={`Value ${i + 1}`} data-testid={`input-value-${i}`} />}
+              {!readOnly && <div className="flex shrink-0 items-center">
+                <IconBtn label="Move up" disabled={i === 0} onClick={() => { vk.move(i, i - 1); const a = [...values]; [a[i - 1], a[i]] = [a[i], a[i - 1]]; setValues(a); }} testid={`button-value-up-${i}`}><ArrowUp className="h-4 w-4" /></IconBtn>
+                <IconBtn label="Move down" disabled={i === values.length - 1} onClick={() => { vk.move(i, i + 1); const a = [...values]; [a[i + 1], a[i]] = [a[i], a[i + 1]]; setValues(a); }} testid={`button-value-down-${i}`}><ArrowDown className="h-4 w-4" /></IconBtn>
+                <IconBtn label="Remove value" danger onClick={() => setConfirm({ kind: "value", index: i, label: str(v).slice(0, 80) || `Value ${i + 1}` })} testid={`button-value-remove-${i}`}><Trash2 className="h-4 w-4" /></IconBtn>
+              </div>}
+            </li>
+          ))}
+        </ol>
+        <Guide title="Values">Values are short principles staff can apply when deciding, such as "Integrity: we bill only what is consumed and measured." A name plus one explanatory line works better than a single word.</Guide>
+      </Section>
+
       <Dialog open={!!confirm} onOpenChange={(o) => !o && setConfirm(null)}>
         <DialogContent className="max-w-md rounded-xl">
           <DialogHeader><DialogTitle className="text-[#323D4F]">Remove this {confirm?.kind}?</DialogTitle><DialogDescription>"{confirm?.label}" will be removed from your draft. Nothing is saved until you click Save draft. Cancel keeps it unchanged.</DialogDescription></DialogHeader>
@@ -238,7 +238,6 @@ export function StrategyReport({ value }: { value: unknown }) {
     <div className="space-y-3 text-sm">
       <div><h3 className="text-xs font-semibold uppercase tracking-wider">Vision</h3><p className="whitespace-pre-wrap">{str(d.vision) || "Not provided"}</p></div>
       <div><h3 className="text-xs font-semibold uppercase tracking-wider">Mission</h3><p className="whitespace-pre-wrap">{str(d.mission) || "Not provided"}</p></div>
-      <div><h3 className="text-xs font-semibold uppercase tracking-wider">Values</h3>{values.length ? <ol className="list-decimal pl-5">{values.map((v, i) => <li key={i}>{str(v)}</li>)}</ol> : <p>None recorded</p>}</div>
       <div><h3 className="text-xs font-semibold uppercase tracking-wider">Strategic objectives</h3>
         {objs.length === 0 && <p>None recorded</p>}
         {objs.map((raw, i) => { const o: Obj = isObj(raw) ? raw : {}; const miss = missingCritical(o); return (
@@ -248,6 +247,7 @@ export function StrategyReport({ value }: { value: unknown }) {
             <dl className="mt-1 grid gap-x-4 gap-y-1 sm:grid-cols-2">{SMART.flatMap((g) => g.fields).filter((f) => !blank(o[f.k])).map((f) => <div key={f.k}><dt className="text-xs font-semibold">{f.label}</dt><dd className="whitespace-pre-wrap">{str(o[f.k])}</dd></div>)}</dl>
           </div>); })}
       </div>
+      <div><h3 className="text-xs font-semibold uppercase tracking-wider">Values</h3>{values.length ? <ol className="list-decimal pl-5">{values.map((v, i) => <li key={i}>{str(v)}</li>)}</ol> : <p>None recorded</p>}</div>
     </div>
   );
 }

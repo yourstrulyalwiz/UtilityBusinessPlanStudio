@@ -4,12 +4,13 @@ import guidance from "./guidance-option-b.json";
 import catalog from "./lgu-indicators.json";
 import {createBaseline,isBaseline,evaluateBaseline} from "@workspace/baseline";
 import {strategySource,strategyReady} from "./strategy";
+import {assessmentSource,assessmentReady} from "./assessment";
 
 export { demo, real, guidance, catalog };
 export const moduleDefinitions = [
   {number:1,title:"Utility baseline",description:"Review key indicators, performance levels and the editable variables behind them."},
   {number:2,title:"Strategic direction",description:"Describe mission, vision, values and measurable objectives."},
-  {number:3,title:"Diagnostic & baseline",description:"Assess service performance, demand, assets, enabling conditions and SWOT."},
+  {number:3,title:"Utility assessment",description:"Identify key findings, priorities and strategic strengths, weaknesses, opportunities and threats."},
   {number:4,title:"Goals, strategies & actions",description:"Connect goals to strategies, costed actions and project charters."},
   {number:5,title:"Financial plan",description:"Review historical finances, investment, operating costs and scenario projections."},
   {number:6,title:"Tariffs & affordability",description:"Compare tariffs, cost recovery and affordability with clear assumptions."},
@@ -23,6 +24,7 @@ export const sourceNames={
   catalog:"indicator_catalog_lgu_waterworks_(1)_1792021268122.json",
 };
 export function exampleFor(kind:string,n:number):Record<string,unknown> {
+  if(n===3&&kind==="real")return assessmentSource;
   if(n===2&&kind==="real")return strategySource;
   if(n===1)return {...createBaseline(kind==="real")};
   const source=(kind==="real"?real:demo) as Record<string,unknown>;
@@ -55,6 +57,7 @@ export const coreFields:Record<number,string[]>={
   6:["current_tariff","Baseline","required_tariff","proposed_tariff"],7:["kpis"],8:["executive_summary"],
 };
 export function moduleReady(number:number,data:Record<string,unknown>) {
+  if(number===3&&data.assessmentVersion===1)return assessmentReady(data);
   if(number===2&&data.strategyVersion===1)return strategyReady(data);
   if(number===1)return isBaseline(data)&&evaluateBaseline(data).valid&&Object.values(data.variables).some(v=>typeof v==="number"&&Number.isFinite(v));
   const keys=coreFields[number]??[];

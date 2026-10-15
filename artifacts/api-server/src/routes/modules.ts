@@ -8,6 +8,7 @@ import { moduleWorkflow } from "../lib/module-workflow";
 import { moduleProgress, moduleReady, coreFields, sourceNames } from "../lib/module-definitions";
 import {baselineSchema} from "../lib/baseline-validation";
 import {strategySchema,strategyReady} from "../lib/strategy";
+import {assessmentSchema,assessmentReady} from "../lib/assessment";
 import {evaluateBaseline,isBaseline,workbook} from "@workspace/baseline";
 
 const router:IRouter=Router();
@@ -40,6 +41,10 @@ router.post("/plans/:id/modules/:number",async(req,res)=>{
     if(input.action==="save"||input.action==="submit"){
       if(["ready_for_review","approved"].includes(status))throw new HttpError(409,"Return or reopen this module before editing.");
       data=input.data??data;safeContent(data);if(input.scenarios)safeContent(input.scenarios);
+      if(number===3&&(data.assessmentVersion===1||row.data.assessmentVersion===1)){
+        data=assessmentSchema.parse(data);
+        if(input.action==="submit"&&!assessmentReady(data))throw new HttpError(400,"Assess each area with a status, finding and key message; add an overall message or priority and at least one item in each SWOT category before submitting.");
+      }
       if(number===2&&(data.strategyVersion===1||row.data.strategyVersion===1)){
         data=strategySchema.parse(data);
         if(input.action==="submit"&&!strategyReady(data))throw new HttpError(400,"Add vision, mission, core values and objectives with a title, specific action, KPI and target before submitting.");

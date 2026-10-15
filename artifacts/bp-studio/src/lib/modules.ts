@@ -7,7 +7,7 @@ export const moduleColor = (n: number) => MODULE_COLORS[(((n - 1) % 8) + 8) % 8]
 export const MODULE_SHORT = [
   "Utility baseline",
   "Vision, mission and objectives",
-  "Diagnosis and baseline",
+  "Utility assessment",
   "Goals, strategies and actions",
   "Investment and operating costs",
   "Tariffs and cost recovery",

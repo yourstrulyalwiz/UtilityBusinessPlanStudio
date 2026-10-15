@@ -1,0 +1,308 @@
+{
+  "assessmentVersion": 1,
+  "areas": [
+    {
+      "id": "area-1",
+      "area": "Strategy & Planning",
+      "status": "Moderate",
+      "key_indicators": "Revised vision, mission and values (Nov 2025); 5 strategic objectives; CAPEX program PhP 255.4 M (2026–2029)",
+      "findings": [
+        "New vision: world-class, sustainable waterworks with 24/7 potable supply by 2035.",
+        "Five objectives defined: billed volume, NRW, collection, cost recovery, after-sales service.",
+        "Three priority projects: pipe replacement (PhP 113.1 M), coverage expansion (PhP 22.9 M), new main lines for bulk water (PhP 119.4 M).",
+        "Plan is preliminary; objectives lack owners, annual targets and timelines."
+      ],
+      "message": "Clear direction is in place; objectives now need owners, annual targets and deadlines to become an executable plan."
+    },
+    {
+      "id": "area-2",
+      "area": "Commercial Management",
+      "status": "Critical",
+      "key_indicators": "Tariff PhP 6.20/m3 vs PhP 17.68/m3 cost-recovery tariff (2024); collection efficiency not measured; metered connections not reported",
+      "findings": [
+        "6,461 connections (2024), 98.9% residential; average consumption 26.1 m3/connection/month.",
+        "Tariff unchanged at PhP 6.20/m3 (2020–2023); it should be PhP 17.68/m3 to recover OPEX.",
+        "Collection efficiency is not calculated; no baseline exists.",
+        "Meters are purchased by customers and are not always replaced when required.",
+        "Online payment partners are already available."
+      ],
+      "message": "The tariff is about one-third of cost and collection is not measured; the revenue base is the critical constraint."
+    },
+    {
+      "id": "area-3",
+      "area": "Technical Operations",
+      "status": "Moderate",
+      "key_indicators": "NRW 31.3% (Level 1); NRW 16.2 l/conn/h (Level 3); continuity 22–24 h/day (Level 4); availability 180 l/cap/day (Level 4)",
+      "findings": [
+        "Production 7.66 MLD vs billed 5.26 MLD: about 2.4 MLD lost every day.",
+        "Supply is reliable (22–24 h) from deep wells with chlorination at all pump stations.",
+        "Old galvanized iron pipes in Tiptip, Manga and Ubujan; no DMAs yet; no preventive maintenance.",
+        "Supply gap of 11.7 MLD against projected city demand."
+      ],
+      "message": "Continuity is good, but one-third of produced water is lost; cutting NRW is the cheapest source of new supply."
+    },
+    {
+      "id": "area-4",
+      "area": "Financial Management",
+      "status": "Critical",
+      "key_indicators": "EBITDA margin -14.1% (Level 1); operating cost coverage 87.7% (Level 3)",
+      "findings": [
+        "Water sales PhP 22.9 M (2024) vs OPEX PhP 26.1 M (2023): operating loss of about PhP 3.2 M.",
+        "Negative bottom line acknowledged by the utility.",
+        "Operates as a Local Economic Enterprise (LEE), not funded by the general fund; accounts not yet ring-fenced.",
+        "Proposed tariff (PhP 214.03 for the first 10 m3) makes the plan financially viable and affordable (2% of low-income household income)."
+      ],
+      "message": "Revenues do not cover operating costs; tariff reform and ring-fenced LEE accounts are required for cost recovery."
+    },
+    {
+      "id": "area-5",
+      "area": "Human Resources",
+      "status": "Moderate",
+      "key_indicators": "9 regular staff + 15 job-order (24 total, 6 female); 1.39 regular staff per 1,000 connections (Level 5); 3.7 including job-order",
+      "findings": [
+        "Lean staffing ratio, well below the 1:250 industry average.",
+        "Heavy reliance on job-order staff (63% of workforce).",
+        "Multi-tasking of personnel and unclear organizational structure.",
+        "Training needs in technical, finance, billing and collection, management and water safety planning.",
+        "No data on turnover or HR costs."
+      ],
+      "message": "The team is lean and committed but stretched; formalize the structure and invest in technical, finance and billing skills."
+    },
+    {
+      "id": "area-6",
+      "area": "Water Quality & Safety",
+      "status": "Moderate",
+      "key_indicators": "Drinking water quality 90% (Level 3)",
+      "findings": [
+        "10% of samples fail national drinking water standards (PNSDW).",
+        "Chlorinators installed in all pump stations.",
+        "Water quality monitoring and compliance identified as a weakness."
+      ],
+      "message": "Disinfection is in place, but a 10% sample failure rate requires a water safety plan and stronger monitoring."
+    },
+    {
+      "id": "area-7",
+      "area": "Coverage & Inclusion",
+      "status": "Weak",
+      "key_indicators": "Water coverage 27% of city population (Level 1); approx. 33% of households in the 10 served barangays",
+      "findings": [
+        "Serves 10 of 15 barangays; other providers (BWUI, Richli) supply most of the city.",
+        "Expansion to Cabawan, Booy, Cogon, Dampas and Bool planned; 11,908 households to benefit by 2039.",
+        "TCWS does not provide sanitation services."
+      ],
+      "message": "Coverage is low even inside its own service area; expansion depends on new supply and investment."
+    },
+    {
+      "id": "area-8",
+      "area": "Data & Performance Management",
+      "status": "Weak",
+      "key_indicators": "9 of 22 performance indicators can be calculated; preliminary KPI system defined",
+      "findings": [
+        "No data on collection, metering, customer satisfaction, complaints, turnover or HR costs.",
+        "Annual OPEX and production volumes for 2024 not available.",
+        "A preliminary KPI monitoring system with standards and frequencies has been defined."
+      ],
+      "message": "Most performance gaps cannot be measured yet; establishing baselines is the first step."
+    }
+  ],
+  "messages": [
+    {
+      "id": "message-1",
+      "type": "Overall",
+      "text": "TCWS provides reliable water to its customers but is not financially sustainable: the tariff covers about one-third of cost, one-third of water is lost, and revenues fall short of operating costs."
+    },
+    {
+      "id": "message-2",
+      "type": "Overall",
+      "text": "Average performance level across the 9 measurable indicators: 2.8 of 5 (between Basic and Good)."
+    },
+    {
+      "id": "message-3",
+      "type": "Priority 1",
+      "text": "Raise revenue: adjust the tariff toward cost recovery, linked to visible service improvements."
+    },
+    {
+      "id": "message-4",
+      "type": "Priority 2",
+      "text": "Reduce NRW from 31% to 20% through DMAs, pipe replacement and control of illegal connections."
+    },
+    {
+      "id": "message-5",
+      "type": "Priority 3",
+      "text": "Measure what matters: set baselines for collection, metering and customer service."
+    },
+    {
+      "id": "message-6",
+      "type": "Priority 4",
+      "text": "Ring-fence the waterworks account and assign owners and deadlines to each objective."
+    },
+    {
+      "id": "message-7",
+      "type": "Priority 5",
+      "text": "Build staff capacity in technical operations, finance, billing and water safety."
+    }
+  ],
+  "swot": {
+    "strengths": [
+      {
+        "id": "strengths-1",
+        "text": "Committed and customer-friendly staff"
+      },
+      {
+        "id": "strengths-2",
+        "text": "Staff can work under pressure"
+      },
+      {
+        "id": "strengths-3",
+        "text": "Already a Local Economic Enterprise (LEE), not funded by the general fund"
+      },
+      {
+        "id": "strengths-4",
+        "text": "Chlorinators installed in all pumping stations"
+      },
+      {
+        "id": "strengths-5",
+        "text": "Responsive team, especially in emergency services"
+      },
+      {
+        "id": "strengths-6",
+        "text": "Customer expectations are effectively managed"
+      },
+      {
+        "id": "strengths-7",
+        "text": "Strong management support"
+      },
+      {
+        "id": "strengths-8",
+        "text": "Online payment partners"
+      },
+      {
+        "id": "strengths-9",
+        "text": "Reliable supply of 22–24 hours per day"
+      },
+      {
+        "id": "strengths-10",
+        "text": "Lean staffing ratio (1.4 regular staff per 1,000 connections)"
+      }
+    ],
+    "weaknesses": [
+      {
+        "id": "weaknesses-1",
+        "text": "Multi-tasking of personnel (organizational structure)"
+      },
+      {
+        "id": "weaknesses-2",
+        "text": "Old galvanized iron pipes (parts of Tiptip, Manga, Ubujan)"
+      },
+      {
+        "id": "weaknesses-3",
+        "text": "Need for training of technical and finance personnel"
+      },
+      {
+        "id": "weaknesses-4",
+        "text": "Low tariff"
+      },
+      {
+        "id": "weaknesses-5",
+        "text": "Lack of training for billing and collection, management and water safety plans"
+      },
+      {
+        "id": "weaknesses-6",
+        "text": "Lack of water supply"
+      },
+      {
+        "id": "weaknesses-7",
+        "text": "Lack of preventive maintenance"
+      },
+      {
+        "id": "weaknesses-8",
+        "text": "Negative bottom line"
+      },
+      {
+        "id": "weaknesses-9",
+        "text": "Handling negative criticism"
+      },
+      {
+        "id": "weaknesses-10",
+        "text": "Lack of decision-making"
+      },
+      {
+        "id": "weaknesses-11",
+        "text": "Water quality monitoring and compliance (10% failure in sampling)"
+      },
+      {
+        "id": "weaknesses-12",
+        "text": "High NRW (31%) and no district metered areas"
+      },
+      {
+        "id": "weaknesses-13",
+        "text": "Collection efficiency and metering not measured"
+      },
+      {
+        "id": "weaknesses-14",
+        "text": "Low coverage (24% of city population)"
+      }
+    ],
+    "opportunities": [
+      {
+        "id": "opportunities-1",
+        "text": "Availability of bulk water supply in a few years"
+      },
+      {
+        "id": "opportunities-2",
+        "text": "Large growth potential; many investors"
+      },
+      {
+        "id": "opportunities-3",
+        "text": "NGOs and private organizations that help improve water services (e.g., USAID, Maynilad)"
+      },
+      {
+        "id": "opportunities-4",
+        "text": "Support from other local water utilities (collaboration with BWUI)"
+      },
+      {
+        "id": "opportunities-5",
+        "text": "Proposed tariff is financially viable and affordable (2% of low-income household income)"
+      },
+      {
+        "id": "opportunities-6",
+        "text": "Expansion to 5 unserved barangays; 11,908 households to benefit by 2039"
+      },
+      {
+        "id": "opportunities-7",
+        "text": "City commitment to digitalize billing and keep TCWS public"
+      }
+    ],
+    "threats": [
+      {
+        "id": "threats-1",
+        "text": "Climate change"
+      },
+      {
+        "id": "threats-2",
+        "text": "Natural hazards such as typhoons and earthquakes (standby gensets in selected pump stations)"
+      },
+      {
+        "id": "threats-3",
+        "text": "Saltwater intrusion in water sources"
+      },
+      {
+        "id": "threats-4",
+        "text": "Deep well sources of private institutions, establishments and businesses"
+      },
+      {
+        "id": "threats-5",
+        "text": "Competition from other water providers in the city (BWUI, Richli)"
+      },
+      {
+        "id": "threats-6",
+        "text": "Rising electricity costs (power is the largest projected OPEX item)"
+      },
+      {
+        "id": "threats-7",
+        "text": "Customer resistance to tariff increases without visible service improvement"
+      }
+    ]
+  },
+  "review_notes": "Coverage needs reconciliation: the Coverage & Inclusion assessment states 27% of city population, while the SWOT weakness states 24%. Confirm the reporting period and population denominator. Financial findings compare 2024 revenue with 2023 operating expenses; tariff viability and affordability statements are preliminary assessments, not independently verified results."
+}

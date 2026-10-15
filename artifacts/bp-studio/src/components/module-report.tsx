@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Btn } from "@/components/kit";
 import { label, hiddenKey } from "@/components/field-editor";
 import { StrategyReport, isStrategyV1 } from "@/components/strategy-editor";
+import { AssessmentReport, isAssessmentV1 } from "@/components/assessment-editor";
 import { openIssues } from "@/components/module-context";
 import { statusLabel, reviewedCount } from "@/lib/modules";
 import { fmtDateTime } from "@/lib/app";
@@ -41,7 +42,7 @@ export function PlanReport({ plan }: { plan: ModulePlan }) {
               <section key={m.number} className="break-inside-avoid-page">
                 <h2 className="text-lg font-semibold">Module {m.number}: {m.title} <span className="ml-2 text-xs font-normal text-[#5B6678]">{statusLabel(m.status)}</span></h2>
                 {m.description && <p className="mb-2 text-xs text-[#5B6678]">{m.description}</p>}
-                {m.number === 1 ? <BaselineReport value={m.data} /> : m.number === 2 && isStrategyV1(m.data) ? <StrategyReport value={m.data} /> : <ReportValue value={m.data} />}
+                {m.number === 1 ? <BaselineReport value={m.data} /> : m.number === 2 && isStrategyV1(m.data) ? <StrategyReport value={m.data} /> : m.number === 3 && isAssessmentV1(m.data) ? <AssessmentReport value={m.data} /> : <ReportValue value={m.data} />}
               </section>
             ))}
             {issues.length > 0 && <section><h2 className="text-lg font-semibold">Open issues</h2><ul className="list-disc pl-5 text-sm">{issues.map((x, i) => <li key={i}>{x}</li>)}</ul></section>}

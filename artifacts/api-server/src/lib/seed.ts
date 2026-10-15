@@ -6,6 +6,7 @@ import { migrateModulePlans } from "./module-migration";
 import { seedSuppliedModulePlans } from "./module-seed";
 import { migrateBaseline } from "./baseline-migration";
 import { migrateStrategy } from "./strategy-migration";
+import { migrateAssessment } from "./assessment-migration";
 
 // Reference definitions only. Never create example users or utility records.
 export async function seedReferenceData(){
@@ -22,4 +23,5 @@ export async function seedReferenceData(){
   }
   await migrateBaseline();
   await migrateStrategy();
+  await migrateAssessment();
 }
