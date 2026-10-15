@@ -70,6 +70,7 @@ export * from './uploadInput';
 export * from './uploadInputContentType';
 export * from './uploadResult';
 export * from './utility';
+export * from './utilityDeletion';
 export * from './utilityDetail';
 export * from './utilityInput';
 export * from './utilityList';

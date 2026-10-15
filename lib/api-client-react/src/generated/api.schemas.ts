@@ -331,6 +331,14 @@ export interface UtilityInput {
   logoPath?: string | null;
 }
 
+export interface UtilityDeletion {
+  /**
+     * @minLength 1
+     * @maxLength 200
+     */
+  confirmationName: string;
+}
+
 export type UtilityUpdateStatus = typeof UtilityUpdateStatus[keyof typeof UtilityUpdateStatus];
 
 

@@ -501,6 +501,23 @@ export const CreateUtilityResponse = zod.object({
 })
 
 
+export const DeleteUtilityParams = zod.object({
+  "id": zod.coerce.string()
+})
+
+export const deleteUtilityBodyConfirmationNameMax = 200;
+
+
+
+export const DeleteUtilityBody = zod.object({
+  "confirmationName": zod.string().min(1).max(deleteUtilityBodyConfirmationNameMax)
+})
+
+export const DeleteUtilityResponse = zod.object({
+  "success": zod.boolean()
+})
+
+
 export const GetUtilityParams = zod.object({
   "id": zod.coerce.string()
 })

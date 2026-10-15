@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Link, useParams } from "wouter";
+import { Link, useParams, useLocation } from "wouter";
 import { useQueryClient } from "@tanstack/react-query";
 import {
-  useGetUtility, getGetUtilityQueryKey, useUpdateUtility, useAddMember, useRemoveMember, useListUsers, getListUsersQueryKey,
+  useGetUtility, getGetUtilityQueryKey, useUpdateUtility, useDeleteUtility, useAddMember, useRemoveMember, useListUsers, getListUsersQueryKey,
   useGetPlan, getGetPlanQueryKey, useGetModulePlan, getGetModulePlanQueryKey,
   getListUtilitiesQueryKey, getGetSummaryQueryKey, getListAuditQueryKey, type MemberInputMemberRole, type UtilityUpdate,
 } from "@workspace/api-client-react";
@@ -19,6 +19,9 @@ export default function UtilityPage() {
   const { id: routeId = "", planId = "" } = useParams<{ id?: string; planId?: string }>();
   const me = useMe();
   const qc = useQueryClient();
+  const [,navigate] = useLocation();
+  const [deleting,setDeleting] = useState(false);
+  const [confirmationName,setConfirmationName] = useState("");
   const { toast } = useToast();
   const planQuery = useGetPlan(planId, { query: { enabled: !!planId, queryKey: getGetPlanQueryKey(planId) } });
   const utilityQuery = useGetUtility(routeId, { query: { enabled: !!routeId, queryKey: getGetUtilityQueryKey(routeId) } });
@@ -41,6 +44,19 @@ export default function UtilityPage() {
     qc.invalidateQueries({ queryKey: getListAuditQueryKey() });
   };
   const onErr = (title: string) => (e: unknown) => toast({ title, description: errMsg(e), variant: "destructive" });
+  const deletion = useDeleteUtility({mutation:{
+    onSuccess:()=>{
+      setDeleting(false);
+      navigate("/admin");
+      qc.removeQueries({queryKey:getGetUtilityQueryKey(id)});
+      qc.removeQueries({queryKey:getGetPlanQueryKey(wfPlanId)});
+      qc.removeQueries({queryKey:getGetModulePlanQueryKey(wfPlanId)});
+      qc.invalidateQueries({queryKey:getListUtilitiesQueryKey()});
+      qc.invalidateQueries({queryKey:getGetSummaryQueryKey()});
+      qc.invalidateQueries({queryKey:getListAuditQueryKey()});
+      toast({title:"Utility deleted"});
+    },onError:onErr("Could not delete utility")
+  }});
   const update = useUpdateUtility({ mutation: { onSuccess: () => { refresh(); setEditing(false); toast({ title: "Utility updated" }); }, onError: onErr("Update failed") } });
   const add = useAddMember({ mutation: { onSuccess: () => { refresh(); setAdding(false); setNewMember({ userId: "", memberRole: "team" }); toast({ title: "Team member added" }); }, onError: onErr("Could not add member") } });
   const remove = useRemoveMember({ mutation: { onSuccess: () => { refresh(); toast({ title: "Team member removed" }); }, onError: onErr("Could not remove member") } });
@@ -127,6 +143,24 @@ export default function UtilityPage() {
         </div>
       </div>
 
+      {me.role==="admin" && <Card className="mt-6 border-destructive/30 p-5">
+        <h2 className="font-semibold">Delete utility</h2>
+        <p className="mt-1 text-sm text-muted-foreground">Permanently remove this utility and its plans. To keep the data, use Edit details → Status → Archived instead.</p>
+        <Btn variant="outline" className="mt-3 border-destructive/40 text-destructive" onClick={()=>{setConfirmationName("");setDeleting(true);}} data-testid="button-delete-utility"><Trash2 className="h-4 w-4"/> Delete utility</Btn>
+      </Card>}
+      <Dialog open={deleting && me.role==="admin"} onOpenChange={(open)=>{if(!deletion.isPending)setDeleting(open);}}>
+        <DialogContent className="max-w-lg rounded-xl">
+          <DialogHeader><DialogTitle>Delete {u.name}?</DialogTitle><DialogDescription>This cannot be undone in the app. All annual plans, modules, comments, team assignments and archived legacy copies will be deleted. User accounts and administrative audit history will remain. Uploaded logo files are not erased from storage.</DialogDescription></DialogHeader>
+          <p className="text-sm">Download any plan data or legacy copies you need before continuing. Archiving is the safer alternative if you may need this utility again.</p>
+          <form className="space-y-4" onSubmit={e=>{e.preventDefault();if(confirmationName===u.name&&!deletion.isPending)deletion.mutate({id,data:{confirmationName}});}}>
+            <Field label={`Type the exact utility name: ${u.name}`} required><input className={inputCls} autoComplete="off" value={confirmationName} onChange={e=>setConfirmationName(e.target.value)} disabled={deletion.isPending} data-testid="input-delete-confirmation"/></Field>
+            <div className="flex flex-wrap justify-end gap-2">
+              <Btn type="button" variant="ghost" disabled={deletion.isPending} onClick={()=>setDeleting(false)}>Cancel</Btn>
+              <Btn type="submit" className="bg-destructive text-white hover:bg-destructive/90" disabled={deletion.isPending||confirmationName!==u.name} data-testid="button-confirm-delete-utility">{deletion.isPending?"Deleting…":"Permanently delete"}</Btn>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
       <Dialog open={adding} onOpenChange={setAdding}>
         <DialogContent className="max-w-md rounded-xl">
           <DialogHeader><DialogTitle className="text-[#323D4F]">Add team member</DialogTitle><DialogDescription>Only people with Studio access can be assigned. Invite new people from People &amp; roles.</DialogDescription></DialogHeader>

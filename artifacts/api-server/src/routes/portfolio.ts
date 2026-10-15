@@ -6,6 +6,7 @@ import { actor, accessibleUtility, utilityRows, filterUtilities, uuid, createUti
 import countryReference from "../lib/country-reference.json";
 import { openAccessEnabled } from "../lib/open-access";
 import { moduleDefinitions } from "../lib/module-definitions";
+import { deleteUtilityRecord } from "../lib/delete-utility";
 const router:IRouter=Router();
 router.get("/metadata",async(_req,res)=>{
   res.json(api.GetMetadataResponse.parse({countries:await db.select().from(countries).orderBy(countries.name),countrySource:countryReference.source,phases:moduleDefinitions.map(m=>({code:`M${m.number}`,name:m.title,days:0})),activities:[]}));
@@ -70,6 +71,13 @@ router.patch("/utilities/:id",async(req,res)=>{
     await writeAudit(tx,p,data.status==="archived"?"Archived utility":"Updated utility","utility",id,{before,after},id);
   });
   res.json(api.UpdateUtilityResponse.parse((await utilityRows(p)).find(r=>r.id===id)));
+});
+router.delete("/utilities/:id",async(req,res)=>{
+  const p=await actor(req,["admin"]);
+  const id=uuid(req.params.id);
+  const input=api.DeleteUtilityBody.parse(req.body);
+  await db.transaction(tx=>deleteUtilityRecord(tx,p,id,input.confirmationName));
+  res.json({success:true});
 });
 router.post("/utilities/:id/members",async(req,res)=>{
   const p=await actor(req,["admin","ttl"]);const id=uuid(req.params.id);const u=await accessibleUtility(p,id,true);

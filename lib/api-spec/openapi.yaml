@@ -404,6 +404,12 @@
       }
     },
     "/utilities/{id}": {
+      "delete": {
+        "operationId": "deleteUtility",
+        "parameters": [{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],
+        "requestBody": {"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/UtilityDeletion"}}}},
+        "responses": {"200":{"description":"Utility permanently deleted","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Success"}}}}}
+      },
       "get": {
         "operationId": "getUtility",
         "parameters": [
@@ -1316,6 +1322,11 @@
           "ttlUserId",
           "planYear"
         ]
+      },
+      "UtilityDeletion": {
+        "type":"object",
+        "required":["confirmationName"],
+        "properties":{"confirmationName":{"type":"string","minLength":1,"maxLength":200}}
       },
       "UtilityUpdate": {
         "type": "object",
