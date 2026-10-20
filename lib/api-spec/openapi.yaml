@@ -1454,6 +1454,10 @@
           "currentPhase": {
             "type": "string"
           },
+          "updatedAt": {
+            "type": "string",
+            "description": "Latest activity timestamp across utility creation/updates and its plan/module updates."
+          },
           "createdAt": {
             "type": "string"
           },
@@ -1490,6 +1494,7 @@
           "planStatus",
           "progress",
           "currentPhase",
+          "updatedAt",
           "createdAt",
           "uofCompletionDate",
           "wbProjectId",

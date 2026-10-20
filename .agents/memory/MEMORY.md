@@ -2,3 +2,4 @@
 - [Temporary open testing](open-testing.md) — preview roles change screens, not API privileges; closed mode must ignore every test identity and cookie.
 - [Workbook imports](workbook-imports.md) — address XLSX rows explicitly; omitted blank rows make positional array indexing unsafe.
 - [Output scenario mapping](output-scenarios.md) — supplied Improvement data represents the primary plan case, never all three scenario forecasts.
+- [Portfolio scope](portfolio-scope.md) — multi-utility overview; map participation is intentionally limited to Tagbilaran for now.

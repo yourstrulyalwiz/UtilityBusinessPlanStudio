@@ -3,21 +3,21 @@ import { Link, useLocation } from "wouter";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   useGetSummary, getGetSummaryQueryKey, useListUtilities, getListUtilitiesQueryKey, useGetMetadata, useListUsers, getListUsersQueryKey,
-  useListViews, getListViewsQueryKey, useSaveView, useDeleteView, useCreateUtility, useLoadDemoPlan, type ListUtilitiesParams, type Bucket,
+  useListViews, getListViewsQueryKey, useSaveView, useDeleteView, useCreateUtility, type ListUtilitiesParams,
 } from "@workspace/api-client-react";
-import { ArrowDown, ArrowUp, BookOpen, Bookmark, PlayCircle, ChevronLeft, ChevronRight, Download, Droplets, Plus, Search, Trash2, X } from "lucide-react";
+import { ArrowDown, ArrowUp, Bookmark, ChevronLeft, ChevronRight, Download, Droplets, Plus, Search, Trash2, X } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Card, PageHeader, Empty, ErrorState, SkeletonRows, Pill, statusTone, inputCls, Btn } from "@/components/kit";
 import { UtilityForm, PLAN_YEARS } from "@/components/utility-form";
-import { useMe, errMsg, phaseColor, logoUrl, initials, humanize } from "@/lib/app";
+import { useMe, errMsg, phaseColor, logoUrl, initials, humanize, fmtDate } from "@/lib/app";
+import { UtilityMap } from "@/components/world-map";
 import { useToast } from "@/hooks/use-toast";
-import { useTestMode } from "@/lib/test-mode";
 import { cn } from "@/lib/utils";
 import { DeleteActions } from "@/components/delete-dialogs";
 
 type Filters = { q: string; country: string; region: string; ttl: string; year: string; status: string; sort: string; direction: string };
-const EMPTY: Filters = { q: "", country: "", region: "", ttl: "", year: "", status: "", sort: "name", direction: "asc" };
+const EMPTY: Filters = { q: "", country: "", region: "", ttl: "", year: "", status: "", sort: "updatedAt", direction: "desc" };
 const PAGE = 25;
 
 function toParams(f: Filters, page: number): ListUtilitiesParams {
@@ -38,28 +38,8 @@ function Tile({ label, value, sub, onClick, accent, testid }: { label: string; v
   );
 }
 
-function Bars({ title, data, colorFor, onPick, empty }: { title: string; data: Bucket[]; colorFor: (b: Bucket, i: number) => string; onPick?: (b: Bucket) => void; empty: string }) {
-  const max = Math.max(1, ...data.map((d) => d.value));
-  return (
-    <Card className="p-5">
-      <div className="mb-4 text-sm font-semibold text-[#323D4F]">{title}</div>
-      {data.length === 0 || data.every((d) => d.value === 0) ? (
-        <div className="py-6 text-center text-xs text-muted-foreground">{empty}</div>
-      ) : (
-        <div className="space-y-3">
-          {data.map((b, i) => (
-            <button key={b.label} disabled={!onPick} onClick={() => onPick?.(b)} className="block w-full text-left disabled:cursor-default" data-testid={`bar-${b.label}`}>
-              <div className="mb-1 flex justify-between text-xs"><span className="text-[#323D4F]">{b.label}</span><span className="font-medium text-[#323D4F] tnum">{b.value}</span></div>
-              <div className="h-2 overflow-hidden rounded-full bg-muted">
-                <div className="bar-fill h-full origin-left rounded-full transition-transform duration-700" style={{ width: `${(b.value / max) * 100}%`, background: colorFor(b, i) }} />
-              </div>
-            </button>
-          ))}
-        </div>
-      )}
-    </Card>
-  );
-}
+const activeFiltersCount = (f: Filters) => (["q", "country", "region", "ttl", "year", "status"] as const).filter((k) => f[k]).length;
+const updatedOf = (u: { updatedAt: string }) => u.updatedAt;
 
 export default function Portfolio({ admin }: { admin: boolean }) {
   const [, navigate] = useLocation();
@@ -92,11 +72,6 @@ export default function Portfolio({ admin }: { admin: boolean }) {
     },
   });
 
-  const openAccess = !!useTestMode().data?.openAccess;
-  const demo = useLoadDemoPlan({ mutation: {
-    onSuccess: (r) => { qc.invalidateQueries({ queryKey: getListUtilitiesQueryKey() }); qc.invalidateQueries({ queryKey: getGetSummaryQueryKey() }); navigate(`/plans/${r.planId}`); },
-    onError: (e) => toast({ title: "Could not open example plan", description: errMsg(e), variant: "destructive" }),
-  } });
   useEffect(() => () => window.clearTimeout(timer.current), []);
   const update = (patch: Partial<Filters>) => { setF((s) => ({ ...s, ...patch })); setPage(1); };
   const onSearch = (v: string) => { setQInput(v); window.clearTimeout(timer.current); timer.current = window.setTimeout(() => update({ q: v.trim() }), 300); };
@@ -107,6 +82,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
   const total = list.data?.total ?? 0;
   const pages = Math.max(1, Math.ceil(total / PAGE));
   const items = list.data?.items ?? [];
+  const recent = f.sort === "updatedAt" && f.direction === "desc" && page === 1 && !activeFiltersCount(f) ? items.slice(0, 5) : [];
   const activeFilters = (["q", "country", "region", "ttl", "year", "status"] as const).filter((k) => f[k]);
   const exportHref = useMemo(() => {
     const p = new URLSearchParams(); Object.entries(toParams(f, 1)).forEach(([k, v]) => { if (v && k !== "page") p.set(k, String(v)); });
@@ -125,71 +101,36 @@ export default function Portfolio({ admin }: { admin: boolean }) {
 
   return (
     <div>
-      <PageHeader eyebrow={admin ? "Portfolio administration" : me.role === "ttl" ? "Global Water Practice" : "Workspace"} title={admin ? "Global team workspace" : "Portfolio Buiness Plans"}
-        description={admin ? "Provision people and utilities, follow every plan's progress and review modules submitted for review." : me.role === "viewer" ? "Plans you can read. Editing is not available for your role." : "Control panel business and investment plans."}
-        actions={admin && <div className="flex flex-wrap gap-2">
-          {openAccess && <>
-            <Btn variant="outline" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "complete" } })} data-testid="button-demo-complete"><BookOpen className="h-4 w-4" /> Open Valle Verde example</Btn>
-            <Btn variant="outline" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "midway" } })} data-testid="button-demo-midway"><PlayCircle className="h-4 w-4" /> Open second example</Btn>
-          </>}
-          <Btn onClick={() => setCreating(true)} data-testid="button-new-utility"><Plus className="h-4 w-4" /> New utility</Btn>
+      <PageHeader eyebrow={admin ? "Portfolio administration" : me.role === "ttl" ? "Global Water Practice" : "Workspace"} title={admin ? "Global portfolio" : "Business plans"}
+        description={admin ? "Every utility plan, most recently updated first." : me.role === "viewer" ? "Plans you can read. Editing is not available for your role." : "Your utilities and their business plans, most recently updated first."}
+        actions={<div className="flex flex-wrap gap-2">
+          <Link href="/manager-role" className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-input bg-white/80 px-3.5 text-sm font-medium text-[#323D4F] hover:bg-white" data-testid="link-manager-role-header">Manager role guide</Link>
+          {admin && <Btn onClick={() => setCreating(true)} data-testid="button-new-utility"><Plus className="h-4 w-4" /> New utility</Btn>}
         </div>} />
 
-      {admin ? (
-        <Card className="rise mb-6 overflow-hidden" data-testid="card-admin-onboarding">
-          <div className="grid gap-0 md:grid-cols-[1.1fr_2fr]">
-            <div className="navy-depth p-5 text-white">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#1ED3D9]">Your role</div>
-              <p className="mt-2 text-sm leading-relaxed text-white/85">The global team sets up the Studio: people, utilities and teams. TTLs then populate each plan across eight modules, in any order, and you review what they submit.</p>
-              <Link href="/help" className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-[#1ED3D9] hover:underline" data-testid="link-admin-help">Read the global team guide <ChevronRight className="h-3.5 w-3.5" /></Link>
-            </div>
-            <div className="grid gap-px bg-[#323D4F]/[.07] sm:grid-cols-2">
-              {[
-                { n: "1", t: "Manage people", d: "Invite TTLs, editors and viewers and set roles.", el: <Link href="/users" className="text-[#127A80] hover:underline" data-testid="link-onboard-people">Open People & roles</Link> },
-                { n: "2", t: "Create a utility", d: "Registers the utility and a plan with eight blank modules.", el: <button type="button" onClick={() => setCreating(true)} className="text-[#127A80] hover:underline" data-testid="button-onboard-create">Register utility</button> },
-                { n: "3", t: "View progress", d: "Tiles and the registry show every plan's status.", el: <button type="button" onClick={toTable} className="text-[#127A80] hover:underline" data-testid="button-onboard-progress">Go to registry</button> },
-                openAccess
-                  ? { n: "4", t: "See a fictional example", d: "The Valle Verde illustrative plan.", el: <button type="button" disabled={demo.isPending} onClick={() => demo.mutate({ data: { mode: "complete" } })} className="text-[#127A80] hover:underline" data-testid="button-onboard-example">Open Valle Verde example</button> }
-                  : { n: "4", t: "Review utility requests", d: "Approve or decline requests to register utilities.", el: <Link href="/requests" className="text-[#127A80] hover:underline" data-testid="link-onboard-requests">Utility requests</Link> },
-              ].map((x) => (
-                <div key={x.n} className="bg-white/90 p-4 transition-colors hover:bg-[#E4F8F9]/70">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-[#323D4F]"><span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E4F8F9] text-[11px] text-[#127A80]">{x.n}</span>{x.t}</div>
-                  <p className="mt-1 text-xs text-muted-foreground">{x.d}</p>
-                  <div className="mt-2 text-xs font-medium">{x.el}</div>
-                </div>
-              ))}
-            </div>
+      <div className="rise mb-6 grid gap-4 lg:grid-cols-[1.6fr_1fr]">
+        <UtilityMap />
+        <Card className="flex flex-col p-0" data-testid="card-recent">
+          <div className="border-b px-5 py-4">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#127A80]">Recently updated</div>
+            <div className="text-sm text-muted-foreground">{me.role === "viewer" ? "Open a plan to read it." : "Pick up where the work is moving."}</div>
+          </div>
+          <div className="flex-1 divide-y">
+            {list.isLoading ? <div className="space-y-2 p-4">{[0, 1, 2].map((i) => <div key={i} className="h-10 animate-pulse rounded-lg bg-muted" />)}</div> : recent.length === 0 ? (
+              <p className="p-5 text-sm text-muted-foreground">{admin ? "No utilities yet. Register the first one to start the portfolio." : "No plans assigned yet. A TTL or administrator can add you to a team."}</p>
+            ) : recent.map((u) => (
+              <Link key={u.id} href={u.planId ? `/plans/${u.planId}` : `/utilities/${u.id}`} className="flex items-center gap-3 px-5 py-3 transition-colors hover:bg-[#1ED3D9]/[.05]" data-testid={`link-continue-plan-${u.id}`}>
+                <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: phaseColor(u.currentPhase) }} />
+                <div className="min-w-0 flex-1"><div className="truncate text-sm font-medium text-[#323D4F]">{u.shortName || u.name}</div><div className="truncate text-xs text-muted-foreground">{u.countryName}{updatedOf(u) ? ` · updated ${fmtDate(updatedOf(u))}` : ""}</div></div>
+                <span className="text-xs text-[#127A80] tnum">{Math.round(u.progress)}%</span><ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+              </Link>
+            ))}
           </div>
         </Card>
-      ) : (
-        <Card className="rise mb-6 p-5" data-testid="card-getting-started">
-          <div className="flex flex-col gap-4 md:flex-row md:items-start">
-            <div className="min-w-0 flex-1">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#127A80]">Getting started</div>
-              <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-[#323D4F]">
-                <li>Open a plan and choose any of its eight modules. There is no fixed order.</li>
-                {me.role === "viewer" ? <li>Read each module and its guidance; ask your TTL for changes.</li> : <>
-                  <li>Save draft stores your edits; Submit sends the module for review.</li>
-                  <li>Returned modules show the reviewer's comment. Revise and submit again.</li>
-                  <li>Examples are illustrative. Replace them with your utility's data.</li>
-                </>}
-              </ol>
-              <Link href="/help" className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-[#127A80] hover:underline" data-testid="link-ttl-help">Full guide <ChevronRight className="h-3.5 w-3.5" /></Link>
-            </div>
-            <div className="w-full space-y-2 md:w-72">
-              {list.isLoading ? <div className="h-10 animate-pulse rounded-lg bg-muted" /> : items.length === 0 ? <p className="text-xs text-muted-foreground">No plans assigned yet. A TTL or administrator can add you to a team.</p> :
-                items.slice(0, 3).map((u) => (
-                  <Link key={u.id} href={(u.planId ? `/plans/${u.planId}` : `/utilities/${u.id}`)} className="flex items-center justify-between gap-2 navy-depth rounded-lg px-3 py-2.5 text-sm text-white transition hover:brightness-125" data-testid={`link-continue-plan-${u.id}`}>
-                    <span className="min-w-0 truncate">{me.role === "viewer" ? "Open" : "Continue my plan"}: {u.shortName || u.name}</span><ChevronRight className="h-4 w-4 shrink-0" />
-                  </Link>
-                ))}
-            </div>
-          </div>
-        </Card>
-      )}
+      </div>
 
       {admin && (
-        <section className="mb-8">
+        <section className="mb-6">
           {summary.isLoading ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[0, 1, 2, 3].map((i) => <div key={i} className="h-[124px] animate-pulse rounded-xl border bg-card" />)}</div>
           ) : summary.isError ? (
@@ -197,14 +138,10 @@ export default function Portfolio({ admin }: { admin: boolean }) {
           ) : s && (
             <>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <Tile testid="tile-utilities" label="Total utilities" value={String(s.utilities)} sub="Show all in registry" accent="#323D4F" onClick={() => { setQInput(""); setF(EMPTY); setPage(1); toTable(); }} />
+                <Tile testid="tile-utilities" label="Total utilities" value={String(s.utilities)} sub="Show all, newest first" accent="#323D4F" onClick={() => { setQInput(""); setF(EMPTY); setPage(1); toTable(); }} />
                 <Tile testid="tile-countries" label="Distinct countries" value={String(s.countries)} sub="Sort registry by country" accent="#1ED3D9" onClick={() => { update({ sort: "country", direction: "asc" }); toTable(); }} />
                 <Tile testid="tile-progress" label="Average workflow progress" value={`${Math.round(s.averageProgress * 10) / 10}%`} sub="Draft 50% · Review 75% · Approved 100%" accent="#127A80" onClick={() => { update({ sort: "progress", direction: "desc" }); toTable(); }} />
                 <Tile testid="tile-completed" label="Completed plans" value={String(s.completed)} sub="Filter to completed" accent="#70AD47" onClick={() => { update({ status: "completed" }); toTable(); }} />
-              </div>
-              <div className="mt-4 grid gap-4 lg:grid-cols-2">
-                <Bars title="Utilities by current module" data={s.phases} colorFor={(b, i) => phaseColor(b.label, i)} empty="Module counts appear once utilities are registered." />
-                <Bars title="Utilities by region" data={s.regions} colorFor={() => "#1ED3D9"} onPick={(b) => { update({ region: b.label }); toTable(); }} empty="Regional distribution appears once utilities are registered." />
               </div>
               {s.pendingRequests > 0 && (
                 <Link href="/requests" className="mt-4 flex items-center justify-between rounded-xl border border-[#1ED3D9]/30 bg-[#1ED3D9]/[.06] px-5 py-3 text-sm text-[#323D4F] hover:bg-[#1ED3D9]/10" data-testid="link-pending-requests">
@@ -289,9 +226,9 @@ export default function Portfolio({ admin }: { admin: boolean }) {
           )
         ) : (
           <div className={cn("overflow-x-auto transition-opacity", list.isFetching && "opacity-60")}>
-            <table className="w-full min-w-[980px] text-sm">
+            <table className="w-full min-w-[1060px] text-sm">
               <thead className="bg-[#323D4F]/[.035] text-xs uppercase tracking-wide text-muted-foreground">
-                <tr><SortH col="name">Utility</SortH><SortH col="country">Country</SortH><SortH col="ttl">TTL</SortH><th className="px-4 py-3 text-left font-medium">Project Number</th><SortH col="year">Year</SortH><th className="px-4 py-3 text-left font-medium">Module</th><SortH col="progress" className="w-44">Workflow progress</SortH><SortH col="status">Status</SortH>{admin && <th className="px-4 py-3 text-right font-medium">Delete</th>}</tr>
+                <tr><SortH col="name">Utility</SortH><SortH col="country">Country</SortH><SortH col="ttl">TTL</SortH><th className="px-4 py-3 text-left font-medium">Project Number</th><SortH col="year">Year</SortH><th className="px-4 py-3 text-left font-medium">Module</th><SortH col="progress" className="w-44">Workflow progress</SortH><SortH col="status">Status</SortH><SortH col="updatedAt">Updated</SortH>{admin && <th className="px-4 py-3 text-right font-medium">Delete</th>}</tr>
               </thead>
               <tbody className="divide-y">
                 {items.map((u) => (
@@ -311,6 +248,7 @@ export default function Portfolio({ admin }: { admin: boolean }) {
                     <td className="px-4 py-3"><span className="inline-flex items-center gap-1.5 text-xs"><span className="h-2 w-2 rounded-full" style={{ background: phaseColor(u.currentPhase) }} />{u.currentPhase || "—"}</span></td>
                     <td className="px-4 py-3"><div className="flex items-center gap-2"><div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full bg-gradient-to-r from-[#127A80] to-[#1ED3D9]" style={{ width: `${Math.min(100, u.progress)}%` }} /></div><span className="w-9 text-right text-xs tnum">{Math.round(u.progress)}%</span></div></td>
                     <td className="px-4 py-3"><Pill tone={statusTone(u.status === "archived" ? u.status : u.planStatus)}>{humanize(u.status === "archived" ? u.status : u.planStatus)}</Pill></td>
+                    <td className="px-4 py-3 text-xs text-muted-foreground tnum">{updatedOf(u) ? fmtDate(updatedOf(u)) : "–"}</td>
                     {admin && <td className="px-2 py-3"><DeleteActions utilityId={u.id} planId={u.planId ?? ""} name={u.name} /></td>}
                   </tr>
                 ))}

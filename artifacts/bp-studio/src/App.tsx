@@ -17,6 +17,7 @@ import { HelpCenter, HelpTopic } from '@/pages/help';
 import Requests from '@/pages/requests';
 import UsersPage from '@/pages/users';
 import AuditPage from '@/pages/audit';
+import ManagerRole from '@/pages/manager-role';
 import { ShieldAlert } from 'lucide-react';
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: 15000, refetchOnWindowFocus: false } } });
@@ -55,6 +56,7 @@ function Router() {
             <Route path="/plans/:planId/modules/:number" component={ModulePage} />
             <Route path="/plans/:planId/activities/:code" component={LegacyActivity} />
             <Route path="/plans/:planId" component={UtilityPage} />
+            <Route path="/manager-role" component={ManagerRole} />
             <Route path="/help/:topicId" component={HelpTopic} />
             <Route path="/help" component={HelpCenter} />
             <Route path="/requests">{() => <Restricted><Requests /></Restricted>}</Route>

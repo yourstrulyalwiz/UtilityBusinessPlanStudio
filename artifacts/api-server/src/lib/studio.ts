@@ -48,13 +48,14 @@ export async function utilityRows(p:StudioPerson){
     const assignments=await db.select({id:members.utilityId}).from(members).where(eq(members.userId,p.id));
     const ids=new Set(assignments.map(m=>m.id)); rows=rows.filter(r=>ids.has(r.u.id));
   }
-  const stateRows=rows.length?await db.select({planId:planModules.planId,number:planModules.number,status:planModules.status})
+  const stateRows=rows.length?await db.select({planId:planModules.planId,number:planModules.number,status:planModules.status,updatedAt:planModules.updatedAt})
     .from(planModules).where(inArray(planModules.planId,rows.flatMap(r=>r.p?[r.p.id]:[]))).orderBy(planModules.number):[];
   return rows.map(({u,p:plan,c,t})=>({
     id:u.id,name:u.name,shortName:u.shortName,countryIso3:u.countryIso3,countryName:c.name,region:c.region,
     serviceArea:u.serviceArea,ttlUserId:t.id,ttlName:t.fullName,planId:plan?.id??"",planYear:plan?.planYear??0,currency:plan?.currency??"",
     status:u.status,planStatus:plan?.status??"not_started",progress:plan?workflowProgress(stateRows.filter(r=>r.planId===plan.id)):0,currentPhase:
       plan?`M${stateRows.find(r=>r.planId===plan.id&&r.status!=="approved")?.number??8}`:"No business plan",createdAt:u.createdAt.toISOString(),
+    updatedAt:new Date(Math.max(u.createdAt.getTime(),u.updatedAt.getTime(),plan?.updatedAt.getTime()??0,...stateRows.filter(r=>r.planId===plan?.id).map(r=>r.updatedAt.getTime()))).toISOString(),
     uofCompletionDate:plan?.uofCompletionDate??null,wbProjectId:u.wbProjectId,logoPath:u.logoPath,
   }));
 }
@@ -65,9 +66,9 @@ export function filterUtilities(rows:Awaited<ReturnType<typeof utilityRows>>,que
   const sorted=rows.filter(u=>(!q||`${u.name} ${u.shortName} ${u.serviceArea} ${u.countryName} ${u.ttlName}`.toLowerCase().includes(q))
     &&includes("country",u.countryIso3)&&includes("region",u.region)&&includes("ttl",u.ttlUserId)&&includes("year",String(u.planYear))
     &&(!str("status")||str("status")==="active"?u.status!=="archived":str("status")==="all"||str("status")==="archived"?str("status")==="all"||u.status==="archived":u.status!=="archived"&&u.planStatus===str("status")));
-  const keys:Record<string,keyof typeof rows[number]>={country:"countryName",countryName:"countryName",utility:"name",name:"name",ttl:"ttlName",ttlName:"ttlName",progress:"progress",year:"planYear",planYear:"planYear",created:"createdAt",createdAt:"createdAt",status:"planStatus"};
-  const key=keys[str("sort")]??"createdAt",direction=str("direction")==="asc"?1:-1;
-  return sorted.sort((a,b)=>direction*(typeof a[key]==="number"?Number(a[key])-Number(b[key]):String(a[key]).localeCompare(String(b[key]))));
+  const keys:Record<string,keyof typeof rows[number]>={country:"countryName",countryName:"countryName",utility:"name",name:"name",ttl:"ttlName",ttlName:"ttlName",progress:"progress",year:"planYear",planYear:"planYear",created:"createdAt",createdAt:"createdAt",updatedAt:"updatedAt",status:"planStatus"};
+  const key=keys[str("sort")]??"updatedAt",direction=str("direction")==="asc"?1:-1;
+  return sorted.sort((a,b)=>direction*(typeof a[key]==="number"?Number(a[key])-Number(b[key]):String(a[key]).localeCompare(String(b[key]))) || b.createdAt.localeCompare(a.createdAt) || a.id.localeCompare(b.id));
 }
 export function validateYear(year:number){
   const current=new Date().getUTCFullYear();

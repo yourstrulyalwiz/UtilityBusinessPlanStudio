@@ -4,7 +4,7 @@ import { useAuth } from "@workspace/replit-auth-web";
 import { RoleSwitcher } from "@/lib/test-mode";
 import { useQueryClient } from "@tanstack/react-query";
 import { useListNotifications, getListNotificationsQueryKey, useReadNotification } from "@workspace/api-client-react";
-import { Bell, CircleHelp, ClipboardList, History, LayoutGrid, LogOut, Menu, Users, X } from "lucide-react";
+import { Bell, Compass, CircleHelp, ClipboardList, History, LayoutGrid, LogOut, Menu, Users, X } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Glyph } from "@/components/kit";
 import { useMe, ROLE_LABEL, initials, fmtDateTime } from "@/lib/app";
@@ -69,6 +69,7 @@ export function Shell({ children }: { children: ReactNode }) {
     { href: "/requests", label: "Requests", icon: ClipboardList, show: isAdmin || me.role === "ttl" },
     { href: "/users", label: "People & roles", icon: Users, show: canPeople },
     { href: "/audit", label: "Audit history", icon: History, show: canPeople },
+    { href: "/manager-role", label: "Manager role", icon: Compass, show: true },
     { href: "/help", label: "Help center", icon: CircleHelp, show: true },
   ].filter((n) => n.show);
   const inWorkspace = loc.startsWith("/utilities/") || loc.startsWith("/plans/");

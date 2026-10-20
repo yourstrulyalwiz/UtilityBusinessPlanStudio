@@ -424,6 +424,8 @@ export interface Utility {
   planStatus: string;
   progress: number;
   currentPhase: string;
+  /** Latest activity timestamp across utility creation/updates and its plan/module updates. */
+  updatedAt: string;
   createdAt: string;
   /** @nullable */
   uofCompletionDate: string | null;

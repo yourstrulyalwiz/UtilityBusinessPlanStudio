@@ -428,3 +428,7 @@ body,.studio-surface{background-color:#F7F9FB;background-image:radial-gradient(9
   .print-report textarea, .print-report input, .print-report select { border: 0 !important; resize: none; padding: 0 !important; background: transparent !important; }
   .print-report details { display: block; }
 }
+
+@keyframes map-pulse { 0%,100% { transform: scale(.6); opacity:.45 } 50% { transform: scale(1.4); opacity:0 } }
+.map-pulse { transform-box: fill-box; transform-origin: center; animation: map-pulse 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .map-pulse { animation: none; } }
