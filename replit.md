@@ -15,11 +15,16 @@ The user requested importing the Tagbilaran TCWS plan and LGU waterworks indicat
 ## Run & Operate
 
 - Use the managed `artifacts/api-server: API Server` and `artifacts/bp-studio: web` workflows.
+- Install all workspace dependencies with `pnpm install --frozen-lockfile`.
+- The managed workflows supply `PORT` and `BASE_PATH`; for a standalone frontend build from the shell, use `PORT=20576 BASE_PATH=/ pnpm --filter @workspace/bp-studio run build`.
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
 - Required env: `DATABASE_URL` — Postgres connection string
+- Import setup: the connected development database was empty. Its schema was initialized using the existing Drizzle configuration, then the API loaded its built-in reference/example data. This does not restore records from the original project's database.
+- The imported `OPEN_ACCESS=true` setting remains enabled for testing. Visitors have Test Admin access; do not enter confidential data. Before real use, disable open access and designate an authenticated initial administrator as described below.
+- Logo uploads require App Storage configuration (`PRIVATE_OBJECT_DIR` and `PUBLIC_OBJECT_SEARCH_PATHS`), which was not present during import setup. Dashboard/API startup does not require those settings.
 
 ## Stack
 
